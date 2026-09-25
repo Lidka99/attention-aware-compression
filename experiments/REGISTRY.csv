@@ -1,0 +1,5 @@
+experiment_id,protocol_version,status,protocol,config,report
+E000,0.1,draft,experiments/E000_novelty.md,,
+E001,0.1,draft,experiments/E001_baseline.md,configs/E001_baseline.draft.json,
+E002,0.1,draft,experiments/E002_surgery.md,,
+E003,0.1,draft,experiments/E003_criteria.md,configs/E003_criteria.draft.json,

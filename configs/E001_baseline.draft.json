@@ -1,0 +1,40 @@
+{
+  "experiment_id": "E001",
+  "protocol_version": "0.1",
+  "status": "draft",
+  "model": {
+    "implementation": null,
+    "architecture": null,
+    "checkpoint_uri": null,
+    "checkpoint_sha256": null
+  },
+  "data": {
+    "source": null,
+    "version": null,
+    "preprocessing": null,
+    "split_manifest_uri": null,
+    "split_manifest_sha256": null
+  },
+  "environment": {
+    "lockfile": null,
+    "device": null,
+    "precision": null,
+    "deterministic": null
+  },
+  "seeds": {
+    "training": null,
+    "split": null,
+    "calibration": null,
+    "candidates": null,
+    "repair": null
+  },
+  "analysis": {
+    "primary_metric": null,
+    "practical_effect_threshold": null,
+    "numerical_tolerance": null
+  },
+  "budget": {
+    "max_runtime_hours": null,
+    "max_memory_gb": null
+  }
+}
