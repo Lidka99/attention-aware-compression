@@ -1,4 +1,4 @@
-# E-ID — tytuł
+# RRRR-MM-DD_E-ID_krotka_nazwa — tytuł
 
 Status: draft. Wersja: 0.1. Autor: UNSET. Data: UNSET.
 
@@ -34,3 +34,16 @@ UNSET — limit zasobów, go/no-go/inconclusive, zasady wykluczeń i przerwania.
 
 ## Odchylenia i raport
 UNSET — po wykonaniu run-ID, raport, niepowodzenia i zmiany protokołu.
+
+## Wymagania dotyczące 4 GPU i opisu kodu
+
+- Liczba GPU: **4**.
+- Modele GPU i pamięć: UNSET.
+- Podział pracy między GPU (obliczenia rozproszone albo niezależne zadania): UNSET.
+- Komenda jawnie uruchamiająca pracę na czterech GPU: UNSET.
+- Potwierdzenie wykorzystania wszystkich czterech GPU w logach: UNSET.
+- Seedy procesów/zadań oraz agregacja wyników: UNSET.
+- Przy treningu: batch size na GPU, akumulacja gradientów i efektywny globalny batch size: UNSET.
+- Każdy plik kodu: krótki opis celu, wejść i wyjść oraz odnośnik do tego protokołu.
+
+Data utworzenia protokołu (UTC): UNSET. Folder: `RRRR-MM-DD_E-ID_krotka_nazwa/`. Data w nazwie pozostaje stała; daty uruchomień zapisujemy osobno.

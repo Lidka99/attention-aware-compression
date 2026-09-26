@@ -1,36 +1,38 @@
 # Atencja kanałowa i kompresja CNN
 
-Status: projektowanie badań. Nowość niepotwierdzona; eksperymenty nieuruchomione.
-
-Pytanie: czy zachowanie atencji dla różnych wejść wnosi informację przy wyborze kanałów do scalenia ponad podobieństwo aktywacji po atencji?
+Status: przygotowany kod i protokół E001; testy techniczne wykonane. Pełny trening nieuruchomiony. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
-1. Wypełnić [audyt nowości E000](experiments/E000_novelty.md) i [macierz literatury](literature/MATRIX.md).
-2. Wybrać model, checkpoint oraz dane w [rejestrze zasobów](docs/ASSETS.md). Skontrolować prawo dostępu i możliwość udostępnienia instrukcji odtworzenia.
-3. Zamrozić protokół [E001 — model bazowy](experiments/E001_baseline.md) i przygotować rzeczywiste środowisko z dokładnym lockfile. Repo nie zawiera jeszcze implementacji ewaluacji ani zależności ML.
-4. Przejść kolejno przez [E002 — poprawność scalania](experiments/E002_surgery.md) i [E003 — porównanie kryteriów](experiments/E003_criteria.md), zgodnie z ich bramkami wejścia.
-
-Pełny kontekst: [plan badawczy](PLAN_DZIALANIA.md). Zasady odtwarzania: [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
+1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
+2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).
+3. [Zasady organizacji przyszłych eksperymentów](experiments/README.md).
 
 ## Struktura
 
-- `experiments/`: wersjonowane opisy eksperymentów i szablon.
-- `configs/`: konfiguracje; obecne pliki JSON są szkicami, nie konfiguracjami wykonawczymi.
-- `literature/`: audyt nowości i porównanie metod.
-- `docs/`: zasoby, protokół i decyzje.
-- `reports/`: raporty i niewielkie tabele wyników, także negatywnych.
-- `runs/`: lokalne surowe artefakty pojedynczych uruchomień, wyłączone z Git.
-- `data/`, `checkpoints/`: lokalne duże zasoby, wyłączone z Git; ich pochodzenie i hashe zapisujemy osobno.
+- `wyjasnienia/`: cel badań oraz proste objaśnienia, przekazywane też w rozmowie.
+- `experiments/`: w przyszłości osobny folder dla każdego eksperymentu.
+- `experiments/_szablon/`: pusty wzór opisu eksperymentu.
+- `experiments/_szkice/`: zachowane wcześniejsze propozycje, niezatwierdzone do wykonania.
+- `configs/`: wcześniejsze szkice konfiguracji; nie są gotowe do uruchomienia.
+- `literature/`: literatura i analiza nowości.
+- `docs/`: zasady odtwarzania, zasoby, decyzje i kontekst.
+- `reports/`: miejsce na przyszłe zestawienia przekrojowe.
+- `runs/`: lokalne artefakty uruchomień, wyłączone z Git.
+- `data/`, `checkpoints/`: lokalne duże zasoby, wyłączone z Git.
 
-Rejestr etapów: [experiments/REGISTRY.csv](experiments/REGISTRY.csv). Jedno E-ID może mieć wiele run-ID. Protokół zmieniony po wynikach otrzymuje nową wersję i wpis w decyzjach; wyniki poprzedniej wersji pozostają w rejestrze.
+[Wcześniejszy plan badawczy](PLAN_DZIALANIA.md) pozostaje materiałem roboczym. Ustalamy kolejne kroki pojedynczo. [Zasady reprodukowalności](docs/REPRODUCIBILITY.md) wykorzystamy podczas przygotowywania konkretnego eksperymentu.
 
-## Aktualny stan wykonania
+## Git i odtwarzanie
 
-Utworzono dokumentację i lokalne repozytorium. Nie wybrano checkpointu ani podziałów, nie przygotowano lockfile ML, nie wykonano treningu ani ewaluacji. Nie ma jeszcze poprawnej komendy odtwarzającej E001–E003 — jej zapisanie i sprawdzenie jest warunkiem zmiany statusu na `frozen`.
+Repozytorium jest lokalne; zdalna kopia nie jest skonfigurowana. Przed uruchomieniem eksperymentu zapiszemy wersję kodu w commicie oraz dokładne wersje danych, wag, środowiska i konfiguracji. Duże artefakty wymagają trwałego magazynu i identyfikatorów; samo wyłączenie z Git ich nie archiwizuje.
 
-## Git
+## Niezależny projekt — ustalenie 2026-09-26
 
-Przed uruchomieniem zamrożonego eksperymentu zapisać wszystkie zmiany w commicie. Manifest uruchomienia zawiera SHA tego commita. Nie dodawać do Git danych, checkpointów, tokenów ani dużych plików wynikowych. Dla surowych artefaktów wymagany jest trwały magazyn i manifest hashy: samo ignorowanie ich w Git nie stanowi archiwizacji.
+Eksperymenty piszemy od nowa w tym repozytorium. Nie kopiujemy ani nie importujemy kodu, konfiguracji, wag czy wyników z attention_v2 ani attentionv3. Nie tworzymy zależności od tych folderów. Wcześniejsza propozycja użycia lokalnego checkpointu SE jest wycofana.
 
-Repozytorium lokalne nie ma zdalnej kopii, dopóki nie skonfigurujemy remote. Początkowy plan zawierał odnośnik do sąsiedniego katalogu; jego treść kontekstowa jest teraz dołączona do `docs/context/`, aby repo było samodzielne.
+Dobór modelu i danych przeprowadzamy od początku. Możemy korzystać z udokumentowanych bibliotek i znanych architektur. Aktualna decyzja: trenujemy od losowych wag na 4 GPU w środowisku Conda attention, bez publicznych checkpointów.
+
+## E001 — przygotowany pierwszy pilot
+
+[Opis eksperymentu](experiments/2026-09-26_E001_efficientnet_b0_od_zera/OPIS.md) i [instrukcja uruchomienia](experiments/2026-09-26_E001_efficientnet_b0_od_zera/URUCHOMIENIE.md). Używamy Condy attention. Dostępne 4×RTX 2080 Ti 11 GB. Trening od losowych wag; CIFAR-100 jest propozycją roboczą, pełnego treningu nie uruchomiono.

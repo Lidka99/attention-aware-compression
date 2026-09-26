@@ -1,0 +1,21 @@
+{
+  "experiment": "2026-09-26_E001_efficientnet_b0_od_zera",
+  "protocol_version": "0.1-pilot",
+  "dataset": "CIFAR100",
+  "model": "efficientnet_b0",
+  "weights": null,
+  "num_classes": 100,
+  "image_size": 96,
+  "epochs": 200,
+  "batch_per_gpu": 32,
+  "world_size": 4,
+  "workers": 2,
+  "seed": 42,
+  "split_seed": 20260926,
+  "lr": 0.001,
+  "weight_decay": 0.01,
+  "warmup_epochs": 5,
+  "amp": true,
+  "normalization_mean": [0.5, 0.5, 0.5],
+  "normalization_std": [0.5, 0.5, 0.5]
+}

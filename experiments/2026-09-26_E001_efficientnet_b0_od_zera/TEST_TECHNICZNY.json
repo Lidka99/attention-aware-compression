@@ -1,0 +1,21 @@
+{
+  "date_utc": "2026-09-26",
+  "scope": "synthetic infrastructure verification only",
+  "runs": [
+    "20260926T012024Z_e6dfc29_seed42_nDKlnW",
+    "20260926T012039Z_e6dfc29_seed42_vjsfw8",
+    "20260926T012116Z_e6dfc29_seed42_xanUr2"
+  ],
+  "same_final_tensor_hash": true,
+  "same_metrics_excluding_time": true,
+  "resume_matches_uninterrupted": true,
+  "final_model_sha256": "e673fbc78c3846ed078b35844ec8e27516ff87b0a9be9a322cb8c8bb9e00d754",
+  "source_sha256": {
+    "prepare_data.py": "b88178943d2cf30c376562d5c3d695bc96e82ddf269cb3e014bfb0d3a070449c",
+    "train.py": "b4cd8dbcb5b3cacd0350782394960f13f7795d93ab9cc83afe15201f52c83523"
+  },
+  "four_gpu_replicas_equal": true,
+  "artifact_hashes_verified": true,
+  "full_cifar_training_completed": false,
+  "fresh_environment_reproduction_tested": false
+}

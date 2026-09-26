@@ -50,3 +50,12 @@ Przed wynikiem zamrozić próg praktycznej korzyści, tolerancje numeryczne, spo
 Każdy raport w Git wskazuje run-ID i trwały URI artefaktów z checksumami. Ustalić magazyn przed kosztownymi uruchomieniami. Nie publikować danych, których nie wolno redystrybuować; zapisać instrukcję ich uzyskania i odtworzenia splitów.
 
 Przed uznaniem pipeline za odtwarzalny powtórzyć bazowy przebieg z nowego checkoutu i środowiska. Zdefiniować dwa poziomy: identyczność bitowa w kontrolowanym środowisku oraz zgodność metryk w zadeklarowanej tolerancji. Repozytorium z opisami dopiero przygotowuje tę możliwość — nie jest dowodem odtwarzalności wyników.
+
+## Uruchamianie i opis kodu
+
+- Eksperymenty uruchamiamy na 4 GPU. Konfiguracja i komenda odtworzenia muszą jawnie określać użycie czterech GPU. Nie przechodzimy automatycznie na mniejszą liczbę urządzeń; jeśli cztery GPU nie są dostępne, zgłaszamy przeszkodę.
+- Dobieramy sposób podziału pracy do eksperymentu: obliczenia rozproszone lub niezależne zadania na czterech GPU. Samo udostępnienie czterech urządzeń nie oznacza ich wykorzystania. Sposób podziału pracy opisujemy w protokole i sprawdzamy w logach.
+- Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
+- Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
+
+Od 2026-09-26 użytkowniczka upoważniła przygotowanie E001. Tworzymy implementację i sprawdzamy ją technicznie; pełny trening wymaga ustalonego protokołu i danych. Używamy środowiska Conda attention, bez publicznych wag.
