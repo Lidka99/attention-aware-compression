@@ -1,4 +1,6 @@
-# Atencja kanałowa i kompresja CNN
+# attention-aware-compression
+
+Reproducible experiments on attention-aware channel merging and CNN compression.
 
 Status: przygotowany kod i protokół E001; testy techniczne wykonane. Pełny trening nieuruchomiony. Nowość badawcza niepotwierdzona.
 
@@ -25,7 +27,7 @@ Status: przygotowany kod i protokół E001; testy techniczne wykonane. Pełny tr
 
 ## Git i odtwarzanie
 
-Repozytorium jest lokalne; zdalna kopia nie jest skonfigurowana. Przed uruchomieniem eksperymentu zapiszemy wersję kodu w commicie oraz dokładne wersje danych, wag, środowiska i konfiguracji. Duże artefakty wymagają trwałego magazynu i identyfikatorów; samo wyłączenie z Git ich nie archiwizuje.
+Repozytorium GitHub: [Lidka99/attention-aware-compression](https://github.com/Lidka99/attention-aware-compression). Gałąź robocza: main. Przed uruchomieniem eksperymentu zapiszemy wersję kodu w commicie oraz dokładne wersje danych, wag, środowiska i konfiguracji. Duże artefakty wymagają trwałego magazynu i identyfikatorów; samo wyłączenie z Git ich nie archiwizuje.
 
 ## Niezależny projekt — ustalenie 2026-09-26
 
