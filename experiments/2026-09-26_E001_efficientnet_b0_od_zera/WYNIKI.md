@@ -23,3 +23,7 @@ Wcześniejsze trzy próby techniczne z 01:14–01:15 UTC także zachowano w runs
 ## Ograniczenia
 
 To dowód zgodności krótkich przebiegów na syntetycznych danych w tym samym środowisku. Nie sprawdza jeszcze pobierania CIFAR-100, treningu z workerami na rzeczywistych danych, odtworzenia w nowym środowisku ani 200-epokowego treningu. Następnie wybieramy dane, przygotowujemy ich manifest i weryfikujemy rzeczywisty przepływ danych. Wynik nie potwierdza hipotezy o kompresji.
+
+## Start pełnego biegu — 2026-09-26
+
+CIFAR-100 pobrany, zweryfikowany oficjalną sumą MD5, SHA-256 archiwum i plików zapisany w DANE.json. Podział gotowy: 40 000 train, 5 000 dev, 5 000 rezerwy. Zlecono pełny bieg 200 epok; proces i bieżący katalog wyników wskazuje lokalny runs/E001/active.json. Manifest w katalogu biegu jest źródłem jego aktualnego statusu.

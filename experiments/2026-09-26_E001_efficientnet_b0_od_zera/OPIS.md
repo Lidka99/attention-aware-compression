@@ -1,6 +1,6 @@
 # 2026-09-26_E001_efficientnet_b0_od_zera
 
-Status: **draft — gotowy kod pilota, wybór CIFAR-100 roboczy; pełny trening nieuruchomiony**.
+Status: **frozen — użytkowniczka wybrała CIFAR-100 i zleciła pełny trening 200 epok na 4 GPU (2026-09-26)**.
 Wersja protokołu: 0.1-pilot. Data utworzenia: 2026-09-26 UTC.
 
 ## Pytanie i cel
@@ -9,7 +9,7 @@ Czy potrafimy od początku wytrenować EfficientNet-B0 z jego standardową atenc
 
 To eksperyment bazowy, który dostarczy checkpointu do przyszłej analizy atencji i kompresji. Nie testuje jeszcze nowej metody ani przewagi nad literaturą. Hipoteza robocza: trening zmniejszy NLL i zwiększy trafność na niewidzianym podczas uczenia zbiorze dev. Nie ustalamy arbitralnej docelowej accuracy; jakość pilota ocenimy przed wykorzystaniem wag do dalszych badań.
 
-## Ustalony wariant roboczy
+## Ustalony wariant pilota
 
 - Model: torchvision EfficientNet-B0, standardowe SE, `weights=None`, klasyfikator na 100 klas. Bez publicznych wag, bez importów i zasobów z attention_v2/attentionv3.
 - Dane: oficjalny CIFAR-100. Obrazy 32×32 powiększamy do 96×96. To adaptacja pilota, a nie odtworzenie wyników ImageNet ani zmiana obrazu w dane o wyższej rzeczywistej rozdzielczości.
@@ -39,7 +39,7 @@ Wznowienie po zakończonej epoce wymaga identycznego commita, konfiguracji, mani
 - Błąd danych, NaN/Inf, OOM, brak 4 GPU, niezgodne kopie modelu: przerwanie z błędem. Nie zmniejszamy automatycznie batcha, obrazu ani liczby kart.
 - Nie ma automatycznego early stopping ani strojenia hiperparametrów.
 - Czas pełnego treningu i całkowity koszt nie zostały jeszcze zmierzone na CIFAR-100. Pomiar wydajności przeprowadzimy przed długim przebiegiem. Nie wnioskujemy o czasie z testu na sztucznych danych.
-- Warunki przed pełnym biegiem: potwierdzony zbiór danych, zamrożony protokół, przygotowany manifest danych, czysty commit oraz uzgodniona trwała archiwizacja dużych artefaktów. Te elementy nie są wszystkie zamknięte.
+- Start: potwierdzony CIFAR-100, zamrożona konfiguracja, przygotowany i sprawdzony manifest danych oraz czysty commit. Artefakty biegu zapisujemy trwale na lokalnym dysku w runs/E001/. Zewnętrzna kopia zapasowa nie jest jeszcze skonfigurowana; lokalny zapis nie chroni przed awarią tego dysku. Uruchomienie pełnego pilota zostało bezpośrednio zlecone przez użytkowniczkę.
 
 ## Reprodukowalność
 

@@ -11,3 +11,7 @@ Najpierw uczymy sieć rozpoznawać obrazy. Dopiero później spróbujemy ją zmn
 7. **Reprodukowalność:** zapisujemy kod, środowisko Conda attention, wszystkie ustawienia, konkretne ID danych, losowość, logi, metryki i wagi. Osobny test sprawdza, czy powtórzony krótki przebieg daje identyczny model.
 
 Test syntetyczny sprawdza wyłącznie kod, nie zdolność rozpoznawania rzeczywistych obrazów. Nie uznajemy go za wykonanie właściwego eksperymentu. Nie badamy jeszcze kompresji ani innowacyjności. Następny krok po zatwierdzeniu danych to przygotowanie ich podziału i krótka weryfikacja działania na rzeczywistych obrazach przed długim treningiem.
+
+## Decyzja o pełnym treningu
+
+2026-09-26: wybrano CIFAR-100 i zlecono pełne 200 epok. Uruchomienie na 4 GPU tworzy jeden model. Postęp śledzimy w stdout.log i metrics.jsonl, a zapis best.pt/last.pt pozwala zachować wynik i kontynuować trening po awarii.

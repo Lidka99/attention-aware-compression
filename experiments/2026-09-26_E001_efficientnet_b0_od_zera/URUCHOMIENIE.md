@@ -1,6 +1,6 @@
 # Uruchomienie E001 krok po kroku
 
-Na razie przygotowany jest pilot CIFAR-100; pełny trening nie został uruchomiony. Najpierw potwierdzamy dane i zamrażamy [protokół](OPIS.md). Test syntetyczny można wykonać bez pobierania danych.
+Wybrano CIFAR-100 i zamrożono [protokół](OPIS.md) pełnego pilota. Dane są przygotowane lokalnie. Test syntetyczny nadal można wykonać bez pobierania danych. Bieżący status pełnego treningu sprawdzaj w runs/E001/active.json oraz wskazanym manifeście.
 
 ## 1. Wejdź do repo i aktywuj istniejącą Condę
 
