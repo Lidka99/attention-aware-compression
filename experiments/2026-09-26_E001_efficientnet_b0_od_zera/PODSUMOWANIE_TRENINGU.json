@@ -1,0 +1,81 @@
+{
+  "run_id": "20260926T013203Z_7cc3f46_seed42_qHKULg",
+  "manifest": {
+    "argv": [
+      "/home/users/s224574/attention/badania_atencja_cnn/experiments/2026-09-26_E001_efficientnet_b0_od_zera/train.py",
+      "--run-dir",
+      "/home/users/s224574/attention/badania_atencja_cnn/runs/E001/20260926T013203Z_7cc3f46_seed42_qHKULg",
+      "--data-root",
+      "data/cifar100"
+    ],
+    "config_sha256": "545613e02d9dfd094b8d14b148d65438201c3b923ee0b34d89814c8557a0a685",
+    "cwd": "/home/users/s224574/attention/badania_atencja_cnn",
+    "dirty": false,
+    "exit_code": 0,
+    "experiment": "2026-09-26_E001_efficientnet_b0_od_zera",
+    "finished_utc": "2026-09-26T04:15:52.524119+00:00",
+    "git_sha": "7cc3f46667990ff45686f7499c5dfd00d6d57649",
+    "resume": null,
+    "run_id": "20260926T013203Z_7cc3f46_seed42_qHKULg",
+    "smoke": false,
+    "source_sha256": {
+      "prepare_data.py": "b88178943d2cf30c376562d5c3d695bc96e82ddf269cb3e014bfb0d3a070449c",
+      "train.py": "b4cd8dbcb5b3cacd0350782394960f13f7795d93ab9cc83afe15201f52c83523"
+    },
+    "started_utc": "2026-09-26T01:32:10.865934+00:00",
+    "status": "completed"
+  },
+  "best_epoch": {
+    "epoch": 177,
+    "lr": 3.428195309457888e-05,
+    "train_nll": 0.0023792893804896334,
+    "train_correct": 39904,
+    "train_count": 39936,
+    "dev_nll": 2.4950394832244323,
+    "dev_correct": 3342,
+    "dev_count": 5000,
+    "dev_top1": 0.6684,
+    "elapsed_seconds": 48.83072231290862
+  },
+  "last_epoch": {
+    "epoch": 200,
+    "lr": 0.0,
+    "train_nll": 0.0016310839579464533,
+    "train_correct": 39918,
+    "train_count": 39936,
+    "dev_nll": 2.4903387841214575,
+    "dev_correct": 3327,
+    "dev_count": 5000,
+    "dev_top1": 0.6654,
+    "elapsed_seconds": 48.576544740004465
+  },
+  "metrics": {
+    "best_dev_top1": 0.6684,
+    "final_model_sha256": "ec7014630a6e8dd5c38702f131c56cd9b3919acff08d07f1762442b4c12cf5d4",
+    "gpu_results": [
+      {
+        "model_sha256": "ec7014630a6e8dd5c38702f131c56cd9b3919acff08d07f1762442b4c12cf5d4",
+        "peak_memory_bytes": 438132736,
+        "rank": 0
+      },
+      {
+        "model_sha256": "ec7014630a6e8dd5c38702f131c56cd9b3919acff08d07f1762442b4c12cf5d4",
+        "peak_memory_bytes": 438132736,
+        "rank": 1
+      },
+      {
+        "model_sha256": "ec7014630a6e8dd5c38702f131c56cd9b3919acff08d07f1762442b4c12cf5d4",
+        "peak_memory_bytes": 438132736,
+        "rank": 2
+      },
+      {
+        "model_sha256": "ec7014630a6e8dd5c38702f131c56cd9b3919acff08d07f1762442b4c12cf5d4",
+        "peak_memory_bytes": 438132736,
+        "rank": 3
+      }
+    ],
+    "initial_model_sha256": "801e60bc14eea70b22941dadb53bfe44381eb4ce8eca1bf906e0c8d2c3929bbc",
+    "official_test_used": false
+  },
+  "artifact_hashes_verified_on": "2026-09-28"
+}

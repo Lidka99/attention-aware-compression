@@ -15,3 +15,7 @@ Test syntetyczny sprawdza wyłącznie kod, nie zdolność rozpoznawania rzeczywi
 ## Decyzja o pełnym treningu
 
 2026-09-26: wybrano CIFAR-100 i zlecono pełne 200 epok. Uruchomienie na 4 GPU tworzy jeden model. Postęp śledzimy w stdout.log i metrics.jsonl, a zapis best.pt/last.pt pozwala zachować wynik i kontynuować trening po awarii.
+
+## Co oznacza wynik? — 2026-09-28
+
+Model zakończył 200 epok. W najlepszej epoce poprawnie rozpoznał 3342 z 5000 obrazów walidacyjnych, czyli 66,84%. Walidacja służyła do wyboru checkpointu, więc nie jest niezależnym testem końcowym. Na danych treningowych pod koniec trafność wynosiła około 99,95%: model znacznie lepiej radzi sobie z obrazami używanymi do nauki niż z nowymi. To oznaka przeuczenia. Mamy wytrenowany punkt odniesienia, ale nie dowód skuteczności kompresji ani powtarzalności pełnego treningu na innych seedach. Kolejny krok to przegląd krzywych uczenia i sprawdzenie zapisanego najlepszego modelu; nie rozpoczynamy automatycznie nowych treningów.
