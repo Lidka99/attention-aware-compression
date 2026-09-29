@@ -1,0 +1,48 @@
+{
+  "dev_count": 5000,
+  "epoki_lacznie": 200,
+  "experiment": "2026-09-26_E001_efficientnet_b0_od_zera",
+  "metryki_sciezka": "/home/users/s224574/attention/badania_atencja_cnn/runs/E001/20260926T013203Z_7cc3f46_seed42_qHKULg/metrics.jsonl",
+  "metryki_sha256": "a5910ae927271f0d3b1b7087e385f2f9a432a646bb6b258a8aa6f615dc158e2e",
+  "min_dev_nll": {
+    "epoka": 24,
+    "wartosc": 1.5924171508550644
+  },
+  "najlepszy_dev_top1": {
+    "dev_correct": 3342,
+    "epoka": 177,
+    "reguła_remisu": "pierwsze maksimum",
+    "wartosc": 0.6684
+  },
+  "ostatnia_epoka": {
+    "dev_correct": 3327,
+    "dev_nll": 2.4903387841214575,
+    "dev_top1": 0.6654,
+    "epoka": 200,
+    "train_nll": 0.0016310839579464533,
+    "train_top1": 0.9995492788461539
+  },
+  "pierwsza_epoka": {
+    "dev_correct": 236,
+    "dev_nll": 4.590844600677491,
+    "dev_top1": 0.0472,
+    "epoka": 1,
+    "train_nll": 4.645315206967867,
+    "train_top1": 0.02123397435897436
+  },
+  "pliki_wyjściowe": [
+    "loss.png",
+    "loss.pdf",
+    "accuracy.png",
+    "accuracy.pdf",
+    "curve_summary.json",
+    "KRZYWE.md"
+  ],
+  "pomiar": "Uwaga: train mierzony online na obrazach augmentowanych w trybie train() z AMP; dev to ocena zamrożonego po epoce modelu w eval() w FP32. Warunki pomiaru nie są identyczne.",
+  "protokol": "AUDYT_OPIS_v1.md",
+  "skrypt_sciezka": "/home/users/s224574/attention/badania_atencja_cnn/experiments/2026-09-26_E001_efficientnet_b0_od_zera/plot_metrics.py",
+  "skrypt_sha256": "8493b34ee9d68b508ea68147e166528043c7389ecd005fbc36e73f06a27e0f85",
+  "train_count": 39936,
+  "utworzono_utc": "2026-09-29T02:55:32.658656+00:00",
+  "uwaga": "Analiza istniejących metryk E001 na CPU; brak nowej inferencji i brak zmiany wag. Dev służył do wyboru checkpointu, nie jest niezależnym testem."
+}

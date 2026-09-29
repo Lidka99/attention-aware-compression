@@ -1,10 +1,10 @@
 # Eksperymenty
 
-E001 zakończono: 200 epok treningu. Obecnie kontrolujemy jego checkpoint i przebieg uczenia.
+E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zakończony pozytywnie 2026-09-29.
 
 | Eksperyment | Stan | Dokumentacja |
 |---|---|---|
-| E001 — EfficientNet-B0 od zera | Trening zakończony; audyt przygotowany | [Wyniki](2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md), [protokół audytu](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_OPIS_v1.md) |
+| E001 — EfficientNet-B0 od zera | Trening i audyt zakończone | [Wyniki](2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md), [protokół audytu](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_OPIS_v1.md), [raport i wykresy](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md) |
 
 Audyt i wykresy pozostają przy E001. Kolejny numer oznacza nową próbę badawczą,
 nie nowy wykres. [Zasady dokumentowania](../docs/DOKUMENTOWANIE.md).
