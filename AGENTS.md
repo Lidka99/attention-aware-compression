@@ -2,6 +2,8 @@
 
 Pracujemy krok po kroku. Wyjaśnienia przekazujemy po polsku zarówno w rozmowie, jak i w plikach Markdown. Każdy konkretny eksperyment ma osobny folder w experiments/ z opisem i instrukcją odtworzenia.
 
+Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w jego folderze. Nowy numer E oznacza nową próbę badawczą; kolejne uruchomienia/audyty mają unikalne katalogi wyników pod runs/<E-ID>/. Zobacz docs/DOKUMENTOWANIE.md. Do drobnych, ograniczonych zadań używaj podagenta general-flash; bez równoległych zmian tych samych plików i konkurencyjnych zadań GPU.
+
 ## Uruchamianie i opis kodu
 
 - Eksperymenty uruchamiamy na 4 GPU. Konfiguracja i komenda odtworzenia muszą jawnie określać użycie czterech GPU. Nie przechodzimy automatycznie na mniejszą liczbę urządzeń; jeśli cztery GPU nie są dostępne, zgłaszamy przeszkodę.
@@ -9,7 +11,7 @@ Pracujemy krok po kroku. Wyjaśnienia przekazujemy po polsku zarówno w rozmowie
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-Od 2026-09-26 użytkowniczka upoważniła przygotowanie E001. Tworzymy implementację i sprawdzamy ją technicznie; pełny trening wymaga ustalonego protokołu i danych. Używamy środowiska Conda attention, bez publicznych wag.
+E001 ukończono (200 epok); aktualny etap to audyt modelu i przebiegu uczenia, bez kolejnego treningu. Używamy środowiska Conda attention, bez publicznych wag. Bieżący status: AKTUALNY_PLAN.md.
 
 ## Daty w nazwach eksperymentów
 

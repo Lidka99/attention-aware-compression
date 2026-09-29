@@ -1,6 +1,13 @@
 # Eksperymenty
 
-Przygotowano pierwszy protokół i kod. Pełny trening nie został uruchomiony.
+E001 zakończono: 200 epok treningu. Obecnie kontrolujemy jego checkpoint i przebieg uczenia.
+
+| Eksperyment | Stan | Dokumentacja |
+|---|---|---|
+| E001 — EfficientNet-B0 od zera | Trening zakończony; audyt przygotowany | [Wyniki](2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md), [protokół audytu](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_OPIS_v1.md) |
+
+Audyt i wykresy pozostają przy E001. Kolejny numer oznacza nową próbę badawczą,
+nie nowy wykres. [Zasady dokumentowania](../docs/DOKUMENTOWANIE.md).
 
 - [_szablon/OPIS.md](_szablon/OPIS.md): pusty wzór opisu do wykorzystania później.
 - [_szkice/](_szkice/): wcześniejsze propozycje i ich historyczny rejestr; nie są zatwierdzonym harmonogramem ani wykonanymi eksperymentami.
@@ -23,7 +30,7 @@ Pliki powstają w miarę pracy. Duże dane i wagi pozostają w katalogach zasob�
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-Od 2026-09-26 użytkowniczka upoważniła przygotowanie E001. Tworzymy implementację i sprawdzamy ją technicznie; pełny trening wymaga ustalonego protokołu i danych. Używamy środowiska Conda attention, bez publicznych wag.
+E001 wytrenowano od losowych wag w środowisku Conda attention. Ukończony protokół i artefakty zachowujemy; późniejsze analizy dokumentujemy osobno w jego folderze.
 
 ## Daty w nazwach eksperymentów
 
@@ -31,4 +38,4 @@ Folder każdego nowego eksperymentu nazywamy `RRRR-MM-DD_E001_krotka_nazwa`, np.
 
 ## Pierwszy eksperyment
 
-[E001 — trening EfficientNet-B0 od zera](2026-09-26_E001_efficientnet_b0_od_zera/OPIS.md), [instrukcja](2026-09-26_E001_efficientnet_b0_od_zera/URUCHOMIENIE.md). Status: draft; CIFAR-100 to roboczy wybór pilota.
+[E001 — trening EfficientNet-B0 od zera](2026-09-26_E001_efficientnet_b0_od_zera/OPIS.md), [instrukcja](2026-09-26_E001_efficientnet_b0_od_zera/URUCHOMIENIE.md). Protokół zamrożony; trening na CIFAR-100 zakończony. Szczegóły wykonania zawiera raport wyników.

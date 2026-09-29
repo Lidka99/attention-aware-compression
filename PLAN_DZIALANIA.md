@@ -1,5 +1,7 @@
 # Plan badań: atencja kanałowa a scalanie kanałów CNN
 
+> **Wcześniejszy szkic z 2026-09-25 — materiał historyczny.** Bieżący status i kolejność prac określa [AKTUALNY_PLAN.md](AKTUALNY_PLAN.md). Poniższe propozycje użycia dostępnego checkpointu i stwierdzenia o nieuruchomionych eksperymentach nie są aktualnymi ustaleniami. E001 wytrenowano od losowych wag; obecnie audytujemy zapisany model. Zachowujemy treść szkicu jako zapis wcześniejszego rozumowania.
+
 Data: 25 września 2026 r.
 Status: propozycja pilota i audytu nowości. Nie potwierdzono luki badawczej ani skuteczności proponowanej metody. Nie przeprowadzono nowych eksperymentów w ramach tej notatki.
 
