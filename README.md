@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: trening bazowy E001 zakończony (200 epok). Etap 2 zakończony: audyt odtworzył 3342/5000 dev, bez różnic predykcji. Etap 3 jeszcze nie rozpoczęty. Nowość badawcza niepotwierdzona.
+Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. Etap 3: kod i zamrożony protokół E002 przygotowane — obserwacja kanałów i SE w jednym bloku, pomiar jeszcze nieuruchomiony. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -11,6 +11,8 @@ Status: trening bazowy E001 zakończony (200 epok). Etap 2 zakończony: audyt od
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 
 **[Raport audytu i wykresy E001](experiments/2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md)** — zgodność checkpointu, przebieg uczenia i ograniczenia.
+
+[E002 — protokół i uruchomienie pierwszej obserwacji SE](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [proste wyjaśnienie](experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md). Bez treningu i kompresji; brak jeszcze wyników pomiaru.
 
 1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
 2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).

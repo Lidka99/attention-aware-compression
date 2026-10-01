@@ -11,7 +11,7 @@ Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w je
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-E001 ukończono (200 epok); aktualny etap to audyt modelu i przebiegu uczenia, bez kolejnego treningu. Używamy środowiska Conda attention, bez publicznych wag. Bieżący status: AKTUALNY_PLAN.md.
+E001 i jego audyt ukończono; aktualny etap to przygotowanie E002, obserwacji kanałów i SE w jednym bloku, bez kolejnego treningu. Używamy środowiska Conda attention, bez publicznych wag. Bieżący status: AKTUALNY_PLAN.md.
 
 ## Daty w nazwach eksperymentów
 

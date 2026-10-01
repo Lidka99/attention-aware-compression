@@ -1,0 +1,31 @@
+{
+  "checkpoint_used": false,
+  "checks": [
+    "direct_pair_formulas",
+    "zero_channel_policy",
+    "variable_scaling",
+    "constant_ratio",
+    "selection_ties",
+    "hook_shapes_identity",
+    "hook_output_unchanged",
+    "duplicate_hook_rejected",
+    "model_state_unchanged"
+  ],
+  "config_sha256": "be754fce82823dade502ab780269f43597927779e1bd09b21c2aa05d501d3dbd",
+  "created_utc": "2026-10-01T05:08:27.632277+00:00",
+  "device": "CPU",
+  "hook_max_identity_error": 0.0,
+  "prototype_cosine_after": 0.2195121951219512,
+  "prototype_cosine_before": 0.9999999999999998,
+  "real_images_used": false,
+  "source_sha256": {
+    "analyze.py": "e8e0ccd95b11b64f7285eac4bd3293c365b95cb6fb8a495aff6ef86a690da7a7",
+    "check_cpu.py": "763a4fb2050669ed69ada2e429d05755abc7059dc1406a4743143a7446d88e9d",
+    "collect.py": "6d956709d4489cd3f2a38ddd987e1fc479768a60e8e5ff9e40f5a4a9e8884761",
+    "common.py": "20a4afbf097e84eb50d5b9c829cbeb943f5430ebe42755cacdbda8f34ac6f491",
+    "launch.py": "7165bb2deb3274ac7903133a5a9491f64e7d7f2bcbbb298453846e76a8972afa",
+    "pair_metrics.py": "b8203b84453292a5901376d41246f0a6f8f644589540dd0684eba2f67fc5c8b3",
+    "prepare_inputs.py": "cce605becbfe13744a52617aed8210eced3ca21510714667fbd671b108e77714"
+  },
+  "status": "passed"
+}

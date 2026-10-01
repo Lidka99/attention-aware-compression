@@ -113,3 +113,82 @@ Eksperymenty piszemy od nowa w tym repozytorium. Nie kopiujemy ani nie importuje
 Dobór modelu i danych przeprowadzamy od początku. Możemy korzystać z udokumentowanych bibliotek i publicznych wag po ustaleniu ich źródła i wersji; pisanie nowych eksperymentów nie oznacza automatycznie konieczności trenowania modelu od zera. Decyzja o źródle wag pozostaje otwarta.
 
 Następny mały krok: ustalić jeden model z atencją i jeden zbiór danych dla nowego projektu. Pierwszy eksperyment sprawdzi działanie modelu przed kompresją, aby późniejsze zmiany miały wiarygodny punkt odniesienia. Nadal obowiązują 4 GPU, daty w nazwach, osobne foldery eksperymentów, opisy w kodzie oraz instrukcje odtworzenia.
+
+## 2026-09-30 — gdzie jesteśmy i co dalej
+
+Powyższe wpisy są historią wcześniejszych ustaleń. Obecnie źródło wag nie jest
+otwarte: obowiązuje trening od losowych wag, bez publicznych checkpointów.
+
+**Zakończyliśmy etap 2.** E001 dostarczył EfficientNet-B0 z SE, wytrenowany
+od zera przez 200 epok. Audyt best.pt odtworzył 3342/5000 odpowiedzi dev
+(66,84%, epoka 177), bez różnic predykcji ani NLL. Cztery GPU oceniły po
+1250 rozłącznych obrazów; wagi i bufory pozostały niezmienione. Raport:
+[AUDYT_WYNIKI.md](../experiments/2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md).
+
+Krzywe pokazują mocne oznaki przeuczenia: minimum dev NLL w epoce 24,
+późniejszy wzrost tej straty i prawie 100% trafności treningowej. To nie
+jest powód do automatycznego treningu kolejnego modelu. Nie odtworzyliśmy
+pełnego treningu, nie ocenialiśmy testu ani rezerwy, nie potwierdziliśmy
+korzyści atencji dla kompresji.
+
+**Najbliższy mały krok: przygotowanie protokołu etapu 3**, bez wykonywania
+pomiaru w tej notatce. Pytanie: czy pary kanałów podobne przed SE są różnie
+ważone zależnie od obrazu i czy różnice zmieniają ich podobieństwo po SE?
+
+Proponowany zakres: jeden blok SE, zweryfikowany best.pt i niewielki,
+zapisany podzbiór train. Dobór bloku opiszemy na podstawie budowy sieci,
+przed obejrzeniem wyników kanałów. Podzbiór train ma służyć diagnostyce;
+nie nazywamy go niezależną walidacją. Dokładna liczba obrazów, ID, seed,
+reprezentacja aktywacji, miary i reguła wyboru par wymagają ustalenia
+w protokole przed pomiarem. Cztery GPU mają przetwarzać rozłączne części
+tej samej listy obrazów.
+
+Zapiszemy h (mapy przed SE), a (wagi SE) i z=a*h (mapy po SE), a następnie
+porównamy podobieństwo przed i po atencji oraz różnice wag między obrazami.
+Ważna pułapka: cosinus map na pojedynczym obrazie nie zmienia się po
+dodatnim przeskalowaniu kanałów. Dlatego taki pomiar sam nie wykryje
+wpływu SE; potrzebna będzie jawna miara uwzględniająca skalę lub wspólna
+reprezentacja wielu obrazów. Normy aktywacji i zerowe kanały też wymagają kontroli.
+
+Wynik tej obserwacji może uzasadnić późniejsze próby łączenia, ale nie dowodzi
+jeszcze ich bezpieczeństwa ani przewagi nowej metody. Kontrola oparta na
+aktywacjach po SE pozostaje konieczna. Audyt i wykresy pozostają przy E001;
+nowa próba obserwacyjna otrzyma własną kartę eksperymentu po określeniu zakresu.
+Na razie nie uruchomiono etapu 3, kompresji ani kolejnego treningu.
+
+Do małych zadań, takich jak przegląd dokumentacji lub kontrola punktów
+odczytu aktywacji, używamy general-flash. Plan naukowy i weryfikacja wyników
+pozostają odpowiedzialnością głównego agenta.
+
+## 2026-10-01 — szkic pierwszej obserwacji SE
+
+Przygotowano [E002](../experiments/2026-10-01_E002_obserwacja_se/OPIS.md),
+wersja 0.1-draft. Wybrany blok: features.4.1, 480 kanałów wewnętrznych,
+mapy 6×6 i SE 480→20→480. Wybór oparto na strukturze biblioteki, nie na
+wynikach kanałów wytrenowanego modelu.
+
+Proponujemy 1000 obrazów train (po 10/klasę), dwie rozłączne połowy A/B.
+Na A wybierzemy 100 najbardziej podobnych par przed SE, a na B sprawdzimy
+te same pary. Zapiszemy pełną tabelę wszystkich 114960 par, różnice siły
+aktywacji oraz zmienność wag i ich stosunku. Nie użyjemy testu, rezerwy ani dev.
+Szczegóły i prosty przykład: [WYJASNIENIE.md](../experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md).
+
+Przegląd general-flash i przykłady algebraiczne NumPy na CPU potwierdziły,
+że wspólna reprezentacja wielu obrazów może wykryć zmienne skalowanie,
+którego nie widzi cosinus pojedynczych map. Nie wykonano obserwacji
+checkpointu na obrazach CIFAR. To kontrola sposobu pomiaru, nie wynik hipotezy.
+
+Następny krok: kod odczytu h/a/z, jego kontrole i zamrożenie protokołu.
+Pomiar E002 pozostaje nieuruchomiony; nie rozpoczęto kompresji ani treningu.
+
+## 2026-10-01 — E002 przygotowane do wykonania
+
+Na prośbę użytkowniczki przygotowano odczyt SE na dokładnie 4 GPU i analizę
+CPU. Zamrożona wersja: [PROTOKOL_v1.md](../experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md).
+Listy A/B zapisano przed inferencją. Miary, zerowe kanały, reguły remisów,
+kształty i niezmienność hooków sprawdzono na sztucznych danych CPU;
+wynik TESTY_CPU_v1.json to passed. Nie jest to obserwacja realnego modelu.
+Główny agent odpowiada za odczyt i integrację; general-flash przygotował
+czyste miary par i przejrzał kod. Teraz uruchomimy 4 rozłączne części po
+250 obrazów, bez treningu, dev, rezerwy i testu. Status wykonania będzie
+potwierdzony w manifestach i raporcie, także w przypadku błędu.
