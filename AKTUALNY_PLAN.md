@@ -1,6 +1,6 @@
 # Aktualny plan doktoratu
 
-Aktualizacja: 2026-10-01. Pracujemy po jednym etapie.
+Aktualizacja: 2026-10-02. Pracujemy po jednym etapie.
 
 ## Cel
 
@@ -16,6 +16,6 @@ Sprawdzić, czy zachowanie atencji kanałowej pomaga wybierać kanały do połą
 
 ## Najbliższy krok
 
-Ustalić krótką uzupełniającą analizę E002: sprawdzić, czy wysoki cosinus wybranych 19 kanałów nie wynika głównie ze wspólnej składowej stałej, wykorzystując już zapisane aktywacje. Jeszcze jej nie wykonano. Audyt i wykresy treningu pozostają w E001; E002 ma własne wyniki. Test, rezerwa i dev nie były użyte w E002. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
+Wykonać [uzupełniającą analizę stałego tła E002](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/OPIS.md): protokół, kod i kontrole CPU przygotowane, rzeczywiste aktywacje jeszcze nieprzeliczone. Te same 19 kanałów i 100 par, bez nowego rankingu, osobno składowa stała, zmienność średniej między obrazami i szczegóły przestrzenne. Analiza CPU na mapach wcześniej odczytanych na 4 GPU, bez nowej inferencji. Test, rezerwa i dev nie są używane. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.

@@ -209,3 +209,20 @@ general-flash sprawdził artefakty i przeliczył bezpośrednio trzy pary.
 Proponujemy teraz sprawdzić, czy wysoki cosinus tej grupy nie wynika ze
 wspólnej składowej stałej, na już zapisanych aktywacjach. To dalsza analiza
 E002, jeszcze nie wykonana; nie przechodzimy do scalenia ani treningu.
+
+## 2026-10-02 — kontrola stałego tła, przygotowanie
+
+Przygotowano [dodatkową analizę E002](../experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/OPIS.md).
+Rozdzielimy stałą średnią kanału, średnią zmienną między obrazami i wzory
+przestrzenne wewnątrz map. Dwa kanały z mapami [9,11] i [11,9] mają
+surowy cosinus około 0,98, ale po odjęciu tła 10 są przeciwne (cosinus -1).
+To przykład syntetyczny, nie wynik wytrenowanego modelu.
+
+General-flash sprawdził wzory i przygotował czyste miary NumPy; kontrole
+CPU potwierdziły rozkład energii, centrowanie i obsługę kanałów zerowych.
+Zastosujemy je do tych samych zapisanych map i par, bez nowego rankingu.
+To analiza post hoc po obejrzeniu E002; nie niezależne potwierdzenie.
+Wyłącznie CPU, bez checkpointu i nowych obrazów. Źródłowy odczyt nadal
+pochodzi z czterech GPU, nie deklarujemy nowego wykorzystania kart.
+Dotychczasowych artefaktów nie zmieniamy. Wynik tej analizy jeszcze
+nie został obliczony, nie wykonujemy też kompresji ani treningu.

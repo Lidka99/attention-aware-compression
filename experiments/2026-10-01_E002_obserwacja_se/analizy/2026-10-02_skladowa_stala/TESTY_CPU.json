@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "shared_background_opposite_patterns",
+    "orthogonal_energy",
+    "direct_cosines",
+    "constant_spatial_maps",
+    "zero_channels",
+    "near_constant_flags",
+    "input_unchanged"
+  ],
+  "config_sha256": "82ebb000ba74e42447be93d3f451ab7daf6d1d30e87c3bbdfb1f805996b2d336",
+  "created_utc": "2026-10-02T05:41:03.177582+00:00",
+  "device": "CPU",
+  "prototype_centered_cosine": -1.0,
+  "prototype_raw_cosine": 0.9801980198019801,
+  "random_max_energy_relative_error": 2.549861082045197e-16,
+  "real_activations_used": false,
+  "source_sha256": {
+    "analyze.py": "7188d329afbccd2b16ee52566fbf91d4b17f4d796c3b514eb498023166d482ca",
+    "check_cpu.py": "5ddadd5d6c610e18fd4fbd9f674041a726db10454631651cc987e96ee0296ab6",
+    "launch.py": "e57eb757f11b7d5d391371c01aa8ca6b0755c8820e6d22cbd3916e77c5022966",
+    "metrics.py": "86b9a82b669ccdddda2d484c9a41ca6006d20edd1240f18efe266cb9cf11d005"
+  },
+  "status": "passed",
+  "test_seed": 20261002
+}
