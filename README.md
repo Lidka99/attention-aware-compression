@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. Etap 3: kod i zamrożony protokół E002 przygotowane — obserwacja kanałów i SE w jednym bloku, pomiar jeszcze nieuruchomiony. Nowość badawcza niepotwierdzona.
+Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. Etap 3: E002 wykonane na 4 GPU — obserwacja kanałów i SE w jednym bloku. Nie wykonano kompresji; nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -12,7 +12,7 @@ Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev b
 
 **[Raport audytu i wykresy E001](experiments/2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md)** — zgodność checkpointu, przebieg uczenia i ograniczenia.
 
-[E002 — protokół i uruchomienie pierwszej obserwacji SE](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [proste wyjaśnienie](experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md). Bez treningu i kompresji; brak jeszcze wyników pomiaru.
+[E002 — wyniki i wykresy pierwszej obserwacji SE](experiments/2026-10-01_E002_obserwacja_se/WYNIKI.md), [protokół i uruchomienie](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [proste wyjaśnienie](experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md). 1000 obrazów train, bez zmiany wag: wybrane podobne pary mają zmienne wagi SE, ale pozostają bardzo podobne po SE. To obserwacja, nie dowód korzyści kompresji.
 
 1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
 2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).

@@ -1,6 +1,7 @@
 # E002 — co chcemy teraz zobaczyć?
 
-Data: 2026-10-01. Protokół i kod przygotowane; status pomiaru podaje manifest biegu.
+Data: 2026-10-01. **Pomiar zakończony**, wyniki: [WYNIKI.md](WYNIKI.md).
+Poniższy opis przygotowania zachowuje rozumowanie sprzed uruchomienia.
 
 Mamy sprawdzony model. Teraz zajrzymy do jednego bloku w jego środku:
 `features.4.1`. Atencja SE waży tam 480 kanałów. Wybraliśmy go na podstawie
@@ -68,3 +69,22 @@ na 4 GPU i jest już zakończony. Nowego treningu nie potrzebujemy do tej
 obserwacji; jego ewentualny cel i protokół wymagałyby osobnego uzasadnienia.
 Kod sprawdzono przed pomiarem; wynik rzeczywistego odczytu dokumentuje
 osobny raport i manifest, nie samo istnienie skryptu.
+
+## Co zobaczyliśmy w wykonanym pomiarze?
+
+Wszystkie 4 GPU pracowały: po 250 innych obrazów, łącznie 1000. Model
+pozostał niezmieniony, nie użyto dev, testu ani rezerwy.
+
+100 par wybranych na A nadal jest bardzo podobnych na B: mediana cosinusa
+przed SE to 0,9462, a po SE 0,9579. Względne wagi atencji tych par
+zmieniają się między obrazami, ale nie oznacza to, że ich aktywacje stają
+się przez SE mniej podobne. Typowa zmiana cosinusa jest nawet dodatnia.
+
+To ważny wynik również wtedy, gdy nie pasuje do mocniejszego oczekiwania
+o rozdzielaniu podobnych kanałów przez SE. Nie udowodniliśmy, że atencja
+pomaga wybierać kanały do scalenia. Pary obejmują tylko 19 kanałów i są
+ze sobą powiązane, więc nie uogólniamy wyniku na całą sieć.
+
+Proponowany kolejny mały krok: sprawdzić na zapisanych mapach tych 19
+kanałów, czy wysoki cosinus nie wynika głównie ze wspólnej składowej stałej.
+Tę uzupełniającą analizę najpierw opiszemy; jeszcze jej nie wykonano.

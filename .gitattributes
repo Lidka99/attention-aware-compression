@@ -1,0 +1,3 @@
+# E002: zachowaj bajty archiwalnego CSV (standardowe CRLF) zgodnie z hashami.
+# Protokół: experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md.
+experiments/2026-10-01_E002_obserwacja_se/wykresy/*/selected_pairs.csv -text whitespace=cr-at-eol

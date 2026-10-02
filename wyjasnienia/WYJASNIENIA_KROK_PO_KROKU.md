@@ -192,3 +192,20 @@ Główny agent odpowiada za odczyt i integrację; general-flash przygotował
 czyste miary par i przejrzał kod. Teraz uruchomimy 4 rozłączne części po
 250 obrazów, bez treningu, dev, rezerwy i testu. Status wykonania będzie
 potwierdzony w manifestach i raporcie, także w przypadku błędu.
+
+## 2026-10-01 — wynik pierwszego pomiaru E002
+
+Pomiar zakończony: run-ID `20261001T051649Z_e0b3121_seed42_a8l9uuks`,
+1000 unikalnych ID i cztery GPU po 250 obrazów, model niezmieniony.
+Dowody i wykresy: [WYNIKI.md](../experiments/2026-10-01_E002_obserwacja_se/WYNIKI.md).
+
+Na B mediana podobieństwa 100 wybranych par wynosi 0,9462 przed SE i
+0,9579 po SE. Względne wagi są zmienne, lecz typowa zmiana cosinusa jest
+dodatnia. Nie potwierdzamy więc scenariusza typowego rozdzielania tych
+par przez SE ani przydatności wag atencji do kompresji. Wybrane pary
+obejmują tylko 19 kanałów z 480. Kontrole ID, hashy i hooków przeszły;
+general-flash sprawdził artefakty i przeliczył bezpośrednio trzy pary.
+
+Proponujemy teraz sprawdzić, czy wysoki cosinus tej grupy nie wynika ze
+wspólnej składowej stałej, na już zapisanych aktywacjach. To dalsza analiza
+E002, jeszcze nie wykonana; nie przechodzimy do scalenia ani treningu.

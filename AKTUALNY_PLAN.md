@@ -10,12 +10,12 @@ Sprawdzić, czy zachowanie atencji kanałowej pomaga wybierać kanały do połą
 
 1. **Model bazowy — wykonany:** EfficientNet-B0 z SE, od losowych wag, CIFAR-100, seed 42, 200 epok, jeden trening rozproszony na 4 GPU. Zapisany wynik: 3342/5000 dev (66,84%), epoka 177. [Wyniki E001](experiments/2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md).
 2. **Kontrola checkpointu i przebiegu uczenia — zakończona.** [Audyt E001](experiments/2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md): 3342/5000, zero różnic predykcji i NLL, cztery GPU po 1250 unikalnych obrazów. Wykresy potwierdzają silne oznaki przeuczenia.
-3. **Obserwacja podobieństwa kanałów oraz zachowania atencji — jesteśmy tutaj.** [E002, zamrożony protokół](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md): jeden blok SE, 1000 obrazów train, dwie rozłączne połowy. Kod i kontrole CPU przygotowane; pomiar jeszcze nieuruchomiony.
+3. **Obserwacja podobieństwa kanałów oraz zachowania atencji — jesteśmy tutaj.** [E002 wykonane](experiments/2026-10-01_E002_obserwacja_se/WYNIKI.md): jeden blok SE, 1000 obrazów train na 4 GPU. Wybrane pary pozostają bardzo podobne po SE mimo zmiennych wag; obejmują tylko 19 kanałów. To nie dowód skuteczności kompresji.
 4. Kontrolowane próby łączenia i pomiar rzeczywistej straty jakości.
 5. Opracowanie i porównanie nowego kryterium, jeżeli wyniki to uzasadnią.
 
 ## Najbliższy krok
 
-Wykonać pomiar E002 na 4 GPU, sprawdzić dokładne pokrycie ID i niezmienność modelu, przygotować wykresy oraz opis obserwacji. Audyt i wykresy treningu pozostają w folderze E001; E002 ma własne wyniki. Test i rezerwa nie są oceniane. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
+Ustalić krótką uzupełniającą analizę E002: sprawdzić, czy wysoki cosinus wybranych 19 kanałów nie wynika głównie ze wspólnej składowej stałej, wykorzystując już zapisane aktywacje. Jeszcze jej nie wykonano. Audyt i wykresy treningu pozostają w E001; E002 ma własne wyniki. Test, rezerwa i dev nie były użyte w E002. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.
