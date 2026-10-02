@@ -226,3 +226,20 @@ Wyłącznie CPU, bez checkpointu i nowych obrazów. Źródłowy odczyt nadal
 pochodzi z czterech GPU, nie deklarujemy nowego wykorzystania kart.
 Dotychczasowych artefaktów nie zmieniamy. Wynik tej analizy jeszcze
 nie został obliczony, nie wykonujemy też kompresji ani treningu.
+
+## 2026-10-02 — wynik kontroli stałej średniej
+
+Analiza CPU zakończona: [raport](../experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md),
+run-ID `20261002T055900Z_9dc2720_constant_kc4jiyub`. Na B dla 100 par
+cosinus przed SE: surowy 0,9462, po odjęciu stałej średniej 0,9476,
+po odjęciu średniej każdej mapy 0,9469. Udział stałej średniej przed SE
+to medianowo tylko 0,61% energii wybranych 19 kanałów. Po SE stała ma
+jeszcze mniejszy udział, a podobieństwo również utrzymuje się.
+
+Nie ma więc potwierdzenia, że wysoki cosinus tej grupy wynika głównie ze
+wspólnej średniej. Nie jest to jednak kontrola stałego przestrzennego
+szablonu, który mógłby powtarzać się między obrazami. Tę różnicę zaznaczamy
+w raporcie i proponujemy jako następny mały krok na istniejących mapach.
+Nie wykonano nowej inferencji ani scalenia. Zachowano źródłowe aktywacje
+i ich hashe; general-flash niezależnie sprawdził pierwsze trzy pary oraz
+rozkład energii jednego kanału. Ta analiza post hoc nie dowodzi kompresji.

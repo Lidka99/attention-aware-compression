@@ -14,7 +14,7 @@ Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev b
 
 [E002 — wyniki i wykresy pierwszej obserwacji SE](experiments/2026-10-01_E002_obserwacja_se/WYNIKI.md), [protokół i uruchomienie](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [proste wyjaśnienie](experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md). 1000 obrazów train, bez zmiany wag: wybrane podobne pary mają zmienne wagi SE, ale pozostają bardzo podobne po SE. To obserwacja, nie dowód korzyści kompresji.
 
-[Dodatkowa analiza E002: kontrola stałego tła](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/OPIS.md) — przygotowany protokół i kod CPU, bez nowych obrazów i inferencji; wynik jeszcze nieobliczony.
+[Dodatkowa analiza E002: wynik kontroli stałej średniej](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md) — wykonana na CPU bez nowej inferencji. Podobieństwo utrzymuje się po centrowaniu; stała średnia wybranych kanałów ma mały udział energii. Nie sprawdzono jeszcze stałego przestrzennego szablonu między obrazami.
 
 1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
 2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).

@@ -44,3 +44,20 @@ nie będzie dowód bezpieczeństwa połączenia ani skuteczności nowej metody.
 Jest to analiza post hoc: pytanie sformułowaliśmy po obejrzeniu E002.
 
 Protokół i dokładna komenda: [OPIS.md](OPIS.md).
+
+## Wynik — analiza wykonana 2026-10-02
+
+Raport i wykresy: [WYNIKI.md](WYNIKI.md). Stała średnia nie jest głównym
+wyjaśnieniem wysokiego podobieństwa badanej grupy: przed SE ma medianowo
+0,61% energii kanałów, po SE około 0,016%. Po odjęciu tej średniej
+cosinus nadal jest wysoki: mediana 0,9476 przed SE i 0,9588 po SE.
+Po odjęciu średniej każdej mapy też nie następuje załamanie podobieństwa.
+
+Nie zmieniliśmy map, wag ani wyboru par; źródłowe pliki E002 zachowały
+wszystkie hashe. Analizę wykonano na CPU, bez nowej inferencji.
+
+Granica tej kontroli: odejmowaliśmy średnie, nie całą średnią mapę
+przestrzenną po obrazach. Podobny wzór może powtarzać się niezależnie od
+obrazu. Proponowany następny krok to oddzielenie takiego szablonu od zmian
+odpowiedzi między obrazami, na tych samych zapisanych liczbach. Jeszcze
+go nie wykonano. Wciąż nie jest to dowód bezpieczeństwa scalenia.
