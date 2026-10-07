@@ -16,6 +16,8 @@ Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev b
 
 [Dodatkowa analiza E002: wynik kontroli stałej średniej](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md) — wykonana na CPU bez nowej inferencji. Podobieństwo utrzymuje się po centrowaniu; stała średnia wybranych kanałów ma mały udział energii. Nie sprawdzono jeszcze stałego przestrzennego szablonu między obrazami.
 
+[Kontrola szablonu przestrzennego E002](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/OPIS.md), [wyjaśnienie CPU/GPU](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYJASNIENIE.md) — protokół i kod przygotowane, wyniki jeszcze nieobliczone.
+
 1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
 2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).
 3. [Zasady organizacji przyszłych eksperymentów](experiments/README.md).

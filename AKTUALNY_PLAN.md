@@ -1,6 +1,6 @@
 # Aktualny plan doktoratu
 
-Aktualizacja: 2026-10-02. Pracujemy po jednym etapie.
+Aktualizacja: 2026-10-07. Pracujemy po jednym etapie.
 
 ## Cel
 
@@ -16,6 +16,6 @@ Sprawdzić, czy zachowanie atencji kanałowej pomaga wybierać kanały do połą
 
 ## Najbliższy krok
 
-Ustalić jedną uzupełniającą kontrolę E002: czy podobne wzory przestrzenne zmieniają się podobnie między obrazami, czy są głównie wspólnym powtarzalnym szablonem. Oddzielić średnią mapę po obrazach od odchyleń, na tych samych zapisanych aktywacjach i parach, bez nowego rankingu. Jeszcze jej nie wykonano. Analiza CPU na mapach wcześniej odczytanych na 4 GPU, bez nowej inferencji. Test, rezerwa i dev nie są używane. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
+Wykonać [kontrolę przestrzennego szablonu E002](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/OPIS.md): kod i kontrole CPU przygotowane, rzeczywiste wyniki jeszcze nieobliczone. Oddzielić średnią mapę po obrazach od odchyleń, na tych samych zapisanych aktywacjach i parach, bez nowego rankingu. Analiza CPU na mapach wcześniej odczytanych na 4 GPU, bez nowej inferencji. Test, rezerwa i dev nie są używane. Nie rozpoczynamy jeszcze łączenia kanałów ani kolejnego treningu.
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.

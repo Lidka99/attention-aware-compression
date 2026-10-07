@@ -243,3 +243,20 @@ w raporcie i proponujemy jako następny mały krok na istniejących mapach.
 Nie wykonano nowej inferencji ani scalenia. Zachowano źródłowe aktywacje
 i ich hashe; general-flash niezależnie sprawdził pierwsze trzy pary oraz
 rozkład energii jednego kanału. Ta analiza post hoc nie dowodzi kompresji.
+
+## 2026-10-07 — kontrola całego szablonu przestrzennego
+
+Przygotowano [protokół i kod](../experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/OPIS.md)
+odjęcia średniej mapy po obrazach. Użyjemy tych samych map h/z i 100 par.
+Rozkład rozróżnia stałą średnią, zmienną średnią obrazu, stały wzór
+przestrzenny i zmiany wzoru zależne od obrazu. Wzory i kod sprawdził
+general-flash; kontrole na sztucznych mapach CPU przeszły.
+
+Wyjaśnienie komunikatu „no model, no GPU”: dotyczy kontroli technicznej
+na sztucznych tablicach. Rzeczywiste aktywacje pochodzą z E002 wykonanego
+na czterech GPU, po 250 obrazów. Teraz porównamy zapisane mapy na CPU;
+nie trzeba ponownie wczytywać modelu ani przepuszczać obrazów przez sieć.
+Nie oznacza to braku kart. Dowód kontroli kodu nie jest wynikiem badania
+modelu; wyniki na rzeczywistych mapach powstaną po tej kontroli.
+Nie wykonujemy nowej inferencji ani treningu. Po tej analizie zatrzymamy
+się przed etapem 4 i zaproponujemy przygotowanie jednej próby scalenia.

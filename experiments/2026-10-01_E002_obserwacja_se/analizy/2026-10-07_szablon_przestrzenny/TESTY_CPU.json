@@ -1,0 +1,34 @@
+{
+  "checks": [
+    "shared_template_opposite_changes",
+    "zero_residual",
+    "image_only",
+    "zero_channels",
+    "direct_energy_formulas",
+    "direct_cosines",
+    "factor_N",
+    "near_zero_flag",
+    "input_unchanged"
+  ],
+  "config_sha256": "1d6734af6c354a879f703f1b76246c2d1492102e75d9639a54565753c53f4dbc",
+  "created_utc": "2026-10-07T14:00:15.241126+00:00",
+  "device": "CPU",
+  "prototype_dynamic_cosine": -1.0,
+  "prototype_raw_cosine": 0.9801980198019802,
+  "random_max_energy_relative_error": 1.366687197959876e-16,
+  "real_activations_used": false,
+  "source_sha256": {
+    "dependencies": {
+      "experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/analyze.py": "7188d329afbccd2b16ee52566fbf91d4b17f4d796c3b514eb498023166d482ca",
+      "experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/metrics.py": "86b9a82b669ccdddda2d484c9a41ca6006d20edd1240f18efe266cb9cf11d005"
+    },
+    "local": {
+      "analyze_template.py": "5ea516e50d1386725a704c5a276d241008e26d9ec2f724481342cd944b2a7ac8",
+      "check_cpu.py": "5f8fb455cba9e33e1100fc93f59aaa405b1ea7417e8fc5693ef93bd14066af95",
+      "launch.py": "a9e688a023b88113f18684088ab6b23c755a880e1f01d07778114fe0ba46e6b1",
+      "template_metrics.py": "5139f70d5e1981a3877685c460835424ecbbda13404c129a4fa57385399c8ea6"
+    }
+  },
+  "status": "passed",
+  "test_seed": 20261007
+}
