@@ -9,6 +9,8 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 
 Uzupełnienie E002, 2026-10-02: [kontrola stałej średniej, wynik i wykresy](2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md), completed. CPU na istniejących mapach, bez nowego odczytu modelu.
 
+Uzupełnienie E002, 2026-10-07: [kontrola szablonu i zmian odpowiedzi, wynik i wykresy](2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYNIKI.md), completed. Kontrole E002 domknięte, etap 4 jeszcze nieuruchomiony.
+
 Audyt i wykresy pozostają przy E001. Kolejny numer oznacza nową próbę badawczą,
 nie nowy wykres. [Zasady dokumentowania](../docs/DOKUMENTOWANIE.md).
 

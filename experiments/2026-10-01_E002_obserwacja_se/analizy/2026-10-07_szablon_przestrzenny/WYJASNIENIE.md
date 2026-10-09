@@ -38,3 +38,22 @@ pierwszej kontrolowanej próby scalenia i pomiaru skutków. Samo wysokie
 podobieństwo zmian nie gwarantuje bezpieczeństwa połączenia.
 
 Protokół i dokładna komenda: [OPIS.md](OPIS.md).
+
+## Wynik na rzeczywistych zapisanych mapach — 2026-10-07
+
+[Raport i wykresy](WYNIKI.md). Szablon ma medianowo 4,07% energii
+wybranych kanałów przed SE i 1,72% po SE. Pozostała część map zmienia
+się między obrazami. Po odjęciu całej średniej mapy podobieństwo tych
+zmian nadal jest wysokie: mediana cosinusa 0,9520 przed SE i 0,9591 po SE.
+Także same zmiany wzorów przestrzennych pozostają bardzo podobne.
+
+To przemawia przeciw dominacji stałego szablonu w wysokim podobieństwie
+tej grupy. Kanały podobnie zmieniają odpowiedzi na badanych obrazach.
+Nie oznacza to jeszcze, że można je połączyć bez straty jakości.
+Nie wykazaliśmy dodatkowej korzyści wag atencji ponad aktywacje po SE.
+
+Domykamy te kontrole E002. Proponowany następny krok to **przygotowanie
+protokołu jednej rzeczywistej próby scalenia** wraz z kontrolą zależnych
+warstw i pomiarem skutków. Nie wykonano jej tutaj. Źródłowe E002 było
+na 4 GPU; ta analiza na CPU wykorzystała zapisane aktywacje, bez nowych
+obrazów, wczytywania modelu i aktualizacji jego wag.

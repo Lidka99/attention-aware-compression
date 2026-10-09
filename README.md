@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. Etap 3: E002 wykonane na 4 GPU — obserwacja kanałów i SE w jednym bloku. Nie wykonano kompresji; nowość badawcza niepotwierdzona.
+Status: E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. E002 i kontrole średniej/szablonu zakończone: podobieństwo kanałów utrzymuje się w zmianach odpowiedzi na obrazy. Następny krok: protokół jednej kontrolowanej próby scalenia. Kompresji jeszcze nie wykonano; nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -14,9 +14,9 @@ Status: trening bazowy E001 i jego audyt zakończone; odtworzono 3342/5000 dev b
 
 [E002 — wyniki i wykresy pierwszej obserwacji SE](experiments/2026-10-01_E002_obserwacja_se/WYNIKI.md), [protokół i uruchomienie](experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [proste wyjaśnienie](experiments/2026-10-01_E002_obserwacja_se/WYJASNIENIE.md). 1000 obrazów train, bez zmiany wag: wybrane podobne pary mają zmienne wagi SE, ale pozostają bardzo podobne po SE. To obserwacja, nie dowód korzyści kompresji.
 
-[Dodatkowa analiza E002: wynik kontroli stałej średniej](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md) — wykonana na CPU bez nowej inferencji. Podobieństwo utrzymuje się po centrowaniu; stała średnia wybranych kanałów ma mały udział energii. Nie sprawdzono jeszcze stałego przestrzennego szablonu między obrazami.
+[Dodatkowa analiza E002: wynik kontroli stałej średniej](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md) — wykonana na CPU bez nowej inferencji. Podobieństwo utrzymuje się po centrowaniu; stała średnia wybranych kanałów ma mały udział energii.
 
-[Kontrola szablonu przestrzennego E002](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/OPIS.md), [wyjaśnienie CPU/GPU](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYJASNIENIE.md) — protokół i kod przygotowane, wyniki jeszcze nieobliczone.
+[Wynik kontroli szablonu przestrzennego E002](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYNIKI.md), [wyjaśnienie CPU/GPU](experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYJASNIENIE.md) — podobieństwo utrzymuje się po odjęciu średniej mapy (mediana 0,952 przed SE i 0,959 po SE). Szablon nie dominuje w energii wybranych kanałów. Bez nowej inferencji i bez dowodu bezpieczeństwa scalenia.
 
 1. [Cel badań — do czego dążymy](wyjasnienia/CEL_BADAN.md).
 2. [Wyjaśnienia krok po kroku](wyjasnienia/WYJASNIENIA_KROK_PO_KROKU.md).

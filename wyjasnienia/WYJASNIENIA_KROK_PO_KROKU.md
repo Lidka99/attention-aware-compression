@@ -260,3 +260,21 @@ Nie oznacza to braku kart. Dowód kontroli kodu nie jest wynikiem badania
 modelu; wyniki na rzeczywistych mapach powstaną po tej kontroli.
 Nie wykonujemy nowej inferencji ani treningu. Po tej analizie zatrzymamy
 się przed etapem 4 i zaproponujemy przygotowanie jednej próby scalenia.
+
+## 2026-10-07 — wynik kontroli szablonu i domknięcie E002
+
+Analiza rzeczywistych zapisanych map zakończona: [raport](../experiments/2026-10-01_E002_obserwacja_se/analizy/2026-10-07_szablon_przestrzenny/WYNIKI.md),
+run-ID `20261007T140917Z_7388d23_template_qwki6pnw`. Na B mediana energii
+szablonu wybranych kanałów wynosi 4,07% przed SE i 1,72% po SE.
+Po odjęciu całej średniej mapy cosinus zmian odpowiedzi nadal jest wysoki:
+0,9520 przed SE i 0,9591 po SE. Kontrole średniej i szablonu przemawiają
+przeciw ich dominacji w podobieństwie tej grupy. To współzmienność na
+badanych obrazach, nie dowód znaczenia dla klasyfikacji lub bezpiecznego scalenia.
+
+Analiza na CPU po odczycie źródłowym na 4 GPU; bez nowego forwardu i bez
+zmiany wag. Źródło i poprzednia analiza zachowały hashe. General-flash
+sprawdził niezależnie pierwsze trzy pary i energie jednego kanału.
+Domykamy zaplanowane kontrole E002; następny krok to przygotowanie
+protokołu fizycznego scalenia jednej pary i pomiaru jego skutków.
+Etapu 4 jeszcze nieuruchomiono, nie projektujemy nowego kryterium na
+podstawie samych różnic wag atencji.
