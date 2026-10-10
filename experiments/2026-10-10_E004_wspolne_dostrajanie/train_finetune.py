@@ -180,7 +180,7 @@ def finetune_variant(run, cfg, variant, base, images, labels, train_recs, dev_re
                             pin_memory=True)
         ddp.train()
         stats = torch.zeros(3, dtype=torch.float64, device=device)
-        for x, y in loader:
+        for x, y, _ in loader:
             x, y = x.to(device, non_blocking=True), y.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
             with torch.autocast('cuda', dtype=torch.float16, enabled=cfg['amp']):
