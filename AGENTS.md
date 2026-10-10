@@ -11,7 +11,7 @@ Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w je
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-E001, E002 i E003 ukończono. E003 wykonało rzeczywistą kompresję10,0159% parametrów całej sieci (4 135 648→3 721 424) i porównało PRE/POST/RANDOM bez dostrajania: 54,94%/55,24%/49,48% wobec BASE66,84%; brak wyraźnej przewagi POST. Od 2026-10-10 użytkowniczka zatwierdziła następny etap: **E004 — wspólne gradientowe dostrajanie wszystkich czterech wariantów**, także BASE, z równym budżetem z literatury CIFAR (120 epok; adaptacja GReg, ICLR2021). Trening E004 jeszcze nieuruchomiony. Używamy środowiska Conda attention, bez publicznych wag i bez zmiany wcześniejszych wyników. Bieżący status: AKTUALNY_PLAN.md.
+E001–E004 ukończono. E003 skompresowało10,0159% parametrów (4 135 648→3 721 424); E004 dostroiło wszystkie warianty równo przez120 epok: BASE67,62%, PRE66,96%, POST67,32%, RANDOM67,30%. **Wybór kanałów (atencja przed/po SE ani losowy) nie dał przewagi po naprawie** — wynik kontrolny na tym budżecie. Następny krok czeka na decyzję użytkowniczki (AKTUALNY_PLAN.md). Używamy środowiska Conda attention, bez publicznych wag i bez zmiany wcześniejszych wyników.
 
 ## Daty w nazwach eksperymentów
 

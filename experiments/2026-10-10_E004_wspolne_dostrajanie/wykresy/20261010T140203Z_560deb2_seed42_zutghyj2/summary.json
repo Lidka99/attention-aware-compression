@@ -1,0 +1,139 @@
+{
+  "comparisons": {
+    "POST_minus_PRE": {
+      "both_correct": 3216,
+      "both_wrong": 1502,
+      "ci95_correct": [
+        -15,
+        51
+      ],
+      "ci95_top1": [
+        -0.003,
+        0.0102
+      ],
+      "confidence": 0.95,
+      "delta_correct": 18,
+      "delta_top1": 0.0036000000000000476,
+      "per_class": 50,
+      "post_only": 150,
+      "pre_only": 132,
+      "repetitions": 2000,
+      "scope": "one_checkpoint_not_generalization",
+      "seed": 20261009,
+      "stratified_by": "class"
+    },
+    "POST_minus_RANDOM": {
+      "both_correct": 3171,
+      "both_wrong": 1440,
+      "ci95_correct": [
+        -36,
+        39
+      ],
+      "ci95_top1": [
+        -0.0072,
+        0.0078
+      ],
+      "confidence": 0.95,
+      "delta_correct": 1,
+      "delta_top1": 0.00019999999999997797,
+      "per_class": 50,
+      "post_only": 195,
+      "pre_only": 194,
+      "repetitions": 2000,
+      "scope": "one_checkpoint_not_generalization",
+      "seed": 20261009,
+      "stratified_by": "class"
+    },
+    "PRE_minus_RANDOM": {
+      "both_correct": 3178,
+      "both_wrong": 1465,
+      "ci95_correct": [
+        -54,
+        18
+      ],
+      "ci95_top1": [
+        -0.0108,
+        0.0036
+      ],
+      "confidence": 0.95,
+      "delta_correct": -17,
+      "delta_top1": -0.0034000000000000696,
+      "per_class": 50,
+      "post_only": 170,
+      "pre_only": 187,
+      "repetitions": 2000,
+      "scope": "one_checkpoint_not_generalization",
+      "seed": 20261009,
+      "stratified_by": "class"
+    }
+  },
+  "created_utc": "2026-10-10T17:37:54.156524+00:00",
+  "epochs": 120,
+  "experiment": "2026-10-10_E004_wspolne_dostrajanie",
+  "limitations": [
+    "Wyniki dotyczą jednego modelu bazowego E001 (seed 42) i jednego wspólnego dostrojenia; nie są niezależnym testem generalizacji ani dowodem przewagi metody.",
+    "Dev wybierał checkpoint E001 i był używany w E002/E003; nie jest niezależnym testem. Bootstrap opisuje zmienność obrazów przy jednym modelu, nie zmienność między treningami.",
+    "Budżet 120 epok zaadaptowano z protokołu GReg (ICLR 2021) dla VGG/ResNet na CIFAR; to adaptacja, nie reprodukcja ani twierdzenie o optymalności dla EfficientNet-B0.",
+    "Wynik główny to epoka 120 (ostatnia), wspólna dla wszystkich wariantów; epoka najlepsza na dev jest wyłącznie diagnostyką. Brak wczesnego zatrzymania i wyboru po fakcie.",
+    "Cztery warianty to jeden przebieg sekwencyjny na 4 GPU, nie cztery niezależne modele."
+  ],
+  "plots_sha256": {
+    "dev_nll_curves.pdf": "e347eb6881bdfa9d82e8b797c6897db1b18fc591142819bbf32375a252debe77",
+    "dev_nll_curves.png": "32e01142e6fe6e25312be41677af0ac235c107ebcb6220cce5989a235994a815",
+    "dev_top1_curves.pdf": "1ef94bc0accb04ff3fef9347bc752f16f0b1214db92dbe89ea119155570fdbec",
+    "dev_top1_curves.png": "06ad7f92158ab6d0b587444ec2f0ca3911283c398c28bf188e07e3a7cac8a209",
+    "metrics_final.csv": "e695cbb807c1f3bdbb718c4bfb68938bac7e41e3bf8a61af19d4121961c33247",
+    "post_minus_pre_curve.pdf": "c587dc01e3b9eb7dde0475ec45dc56d69347dbffdd1d6d8567489d9ba37cdf46",
+    "post_minus_pre_curve.png": "021845cca226b5f3dc7f319a5552e86b0e6b4f0382f1982e2cb6f9ac0a3f6207"
+  },
+  "run_id": "20261010T140203Z_560deb2_seed42_zutghyj2",
+  "start_after_E003_top1": {
+    "BASE": 0.6684,
+    "POST": 0.5524,
+    "PRE": 0.5494,
+    "RANDOM": 0.4948
+  },
+  "status": "completed",
+  "variants": {
+    "BASE": {
+      "best_dev_epoch_diagnostic": 23,
+      "best_dev_top1_diagnostic": 0.6782,
+      "final_correct": 3381,
+      "final_epoch": 120,
+      "final_nll": 1.3928979801177979,
+      "final_top1": 0.6762,
+      "gain_vs_E003_pp": 0.7800000000000029,
+      "start_top1_after_E003": 0.6684
+    },
+    "POST": {
+      "best_dev_epoch_diagnostic": 92,
+      "best_dev_top1_diagnostic": 0.6756,
+      "final_correct": 3366,
+      "final_epoch": 120,
+      "final_nll": 1.4583735122680663,
+      "final_top1": 0.6732,
+      "gain_vs_E003_pp": 12.080000000000002,
+      "start_top1_after_E003": 0.5524
+    },
+    "PRE": {
+      "best_dev_epoch_diagnostic": 68,
+      "best_dev_top1_diagnostic": 0.6734,
+      "final_correct": 3348,
+      "final_epoch": 120,
+      "final_nll": 1.4497834190368653,
+      "final_top1": 0.6696,
+      "gain_vs_E003_pp": 12.019999999999998,
+      "start_top1_after_E003": 0.5494
+    },
+    "RANDOM": {
+      "best_dev_epoch_diagnostic": 74,
+      "best_dev_top1_diagnostic": 0.6754,
+      "final_correct": 3365,
+      "final_epoch": 120,
+      "final_nll": 1.4496177742004395,
+      "final_top1": 0.673,
+      "gain_vs_E003_pp": 17.820000000000004,
+      "start_top1_after_E003": 0.4948
+    }
+  }
+}

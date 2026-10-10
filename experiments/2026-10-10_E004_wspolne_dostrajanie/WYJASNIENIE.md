@@ -47,3 +47,16 @@ na wniosek o nowej metodzie.
 
 Czas: cztery treningi po120 epok. Zmierzymy i zapiszemy zamiast zgadywać.
 Trening rozpocznie się dopiero po implementacji i kontrolach CPU protokołu.
+
+## Wynik — 2026-10-10
+
+[Raport](WYNIKI.md), run `20261010T140203Z_560deb2_seed42_zutghyj2`.
+Po 120 epokach równego dostrajania: BASE67,62%, PRE66,96%, POST67,32%,
+RANDOM67,30%. POST−PRE +0,36pp, przedział[−0,30;+1,02]pp — brak
+wiarygodnej przewagi. Wybór losowy dorównał atencyjnemu, a wszystkie
+skompresowane modele odzyskały jakość sprzed kompresji (start:49–55%).
+
+Wniosek: przy 10% redukcji naprawa niweluje różnice między sposobami
+wyboru kanałów. To ważny wynik kontrolny, nie porażka techniczna.
+Następny ruch należy do użytkowniczki: większa redukcja (20–30%),
+porównanie bez dostrajania, albo zamknięcie wątku na tym pilocie.

@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001, E002 i E003 zakończone. E003 skompresowało całą sieć o 10,0159% parametrów (4 135 648→3 721 424) i porównało PRE/POST/RANDOM bez dostrajania: 54,94%/55,24%/49,48% wobec BASE 66,84%. Trwa przygotowanie E004: wspólne dostrajanie wszystkich czterech wariantów z równym budżetem. Nowość badawcza niepotwierdzona.
+Status: E001–E004 zakończone. E004: po równym dostrajaniu 120 epok wszystkie warianty ~67% (BASE 67,62%, PRE 66,96%, POST 67,32%, RANDOM 67,30%) — wybór kanałów do scalenia nie dał przewagi; wybór losowy dorównał. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -13,9 +13,10 @@ Status: E001, E002 i E003 zakończone. E003 skompresowało całą sieć o 10,015
 [wyjaśnienie](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md).
 Fizyczne modele 3 721 424 parametry; duża utrata jakości bez naprawy; POST−PRE +0,30 pp (przedział obejmuje brak różnicy).
 
-**[E004 — szkic wspólnego dostrajania](experiments/2026-10-10_E004_wspolne_dostrajanie/OPIS.md)**,
+**[E004 — wynik wspólnego dostrajania](experiments/2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md)**,
+[protokół](experiments/2026-10-10_E004_wspolne_dostrajanie/PROTOKOL_v1.md),
 [wyjaśnienie](experiments/2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md).
-Równy budżet 120 epok (adaptacja GReg, ICLR 2021) dla BASE/PRE/POST/RANDOM; trening nieuruchomiony.
+Po 120 epokach SGD wszystkie warianty ~67%; POST−PRE +0,36 pp, przedział [−0,30; +1,02] pp; wybór losowy dorównał.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

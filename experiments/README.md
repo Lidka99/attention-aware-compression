@@ -7,7 +7,7 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 | E001 — EfficientNet-B0 od zera | Trening i audyt zakończone | [Wyniki](2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md), [protokół audytu](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_OPIS_v1.md), [raport i wykresy](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md) |
 | E002 — obserwacja SE w jednym bloku | Completed; 1000 obrazów train, 4 GPU, model niezmieniony | [Wyniki i wykresy](2026-10-01_E002_obserwacja_se/WYNIKI.md), [protokół](2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md), [wyjaśnienie](2026-10-01_E002_obserwacja_se/WYJASNIENIE.md) |
 | E003 — kompresja 10% parametrów całej sieci | Completed bez dostrajania; 3 721 424 param./model | [Wyniki i wykresy](2026-10-09_E003_kompresja_10proc_parametrow/WYNIKI.md), [protokół](2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md), [wyjaśnienie](2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md) |
-| E004 — wspólne dostrajanie po kompresji | Draft; budżet 120 epok z literatury, trening nieuruchomiony | [Projekt](2026-10-10_E004_wspolne_dostrajanie/OPIS.md), [wyjaśnienie](2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md) |
+| E004 — wspólne dostrajanie po kompresji | Completed; wszystkie warianty ~67%, brak przewagi selekcji | [Wyniki](2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md), [protokół](2026-10-10_E004_wspolne_dostrajanie/PROTOKOL_v1.md), [wyjaśnienie](2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md) |
 
 Uzupełnienie E002, 2026-10-02: [kontrola stałej średniej, wynik i wykresy](2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md), completed. CPU na istniejących mapach, bez nowego odczytu modelu.
 

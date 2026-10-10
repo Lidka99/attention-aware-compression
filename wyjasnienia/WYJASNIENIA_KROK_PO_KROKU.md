@@ -351,3 +351,20 @@ i96×96, nie kopia eksperymentu VGG/ResNet. Wynikiem podstawowym będzie
 ostatnia epoka, bez wybierania najlepszej po fakcie. Nie zmieniamy
 selekcji ani szerokości z E003 i nie nadpisujemy jego wyników.
 Trening E004 jeszcze nieuruchomiony; najpierw implementacja i kontrole CPU.
+
+## 2026-10-10 — wynik E004: naprawa wyrównuje wybór kanałów
+
+E004 zakończone: [raport](../experiments/2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md),
+run `20261010T140203Z_560deb2_seed42_zutghyj2`, 3h36min na4GPU.
+Po identycznych120 epokach dostrajania: BASE67,62%, PRE66,96%,
+POST67,32%, RANDOM67,30%. POST−PRE +0,36pp, przedział[−0,30;+1,02]pp.
+**Wybór losowy dorównał wyborowi opartemu na atencji; różnice z E003
+zniknęły po wspólnej naprawie.**
+
+Dla hipotezy to wynik kontrolny i negatywny przy 10% redukcji:
+o końcowej jakości decydowało dostrojenie, nie kryterium selekcji.
+Duże spadki z E003 były odwracalne. Nowe kryterium attention-aware
+wymagałoby nowego uzasadnienia — naturalny kierunek to większa redukcja
+(np.20–30%), gdzie selekcja może zacząć mieć znaczenie. Decyzję o dalszym
+kierunku podejmuje użytkowniczka; nic nie uruchamiamy automatycznie.
+E003/E004 pozostają niezmienione, test i rezerwa nieużywane.
