@@ -1,0 +1,101 @@
+{
+  "amp": true,
+  "base_parameters": 4135648,
+  "batch_per_gpu": 64,
+  "bootstrap_confidence": 0.95,
+  "bootstrap_repetitions": 2000,
+  "bootstrap_seed": 20261009,
+  "checkpoint": "runs/E001/20260926T013203Z_7cc3f46_seed42_qHKULg/best.pt",
+  "checkpoint_sha256": "f2ac9c3fddd140c0d45f2c244c78b432cbdd164b46dff32d00be956202ec5be8",
+  "compressed_parameters": 3721424,
+  "data": {
+    "dev_count": 5000,
+    "train_count": 40000
+  },
+  "eval_batch_per_gpu": 64,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-10_E004_wspolne_dostrajanie",
+  "fine_tune": {
+    "adaptation_note": "EfficientNet-B0, CIFAR-100, 96x96, augmentation from E001; adaptation, not a reproduction of VGG/ResNet",
+    "amp": true,
+    "batch_per_gpu": 64,
+    "checkpoint_selection": "primary_last_epoch_120_secondary_best_dev_diagnostic",
+    "early_stopping": false,
+    "epochs": 120,
+    "global_batch": 256,
+    "gradient_accumulation": false,
+    "literature_anchor": "GReg, Wang et al., ICLR 2021, arXiv:2012.09243, Tab.5",
+    "lr_initial": 0.01,
+    "lr_steps": [
+      {
+        "epoch": 60,
+        "lr": 0.001
+      },
+      {
+        "epoch": 90,
+        "lr": 0.0001
+      }
+    ],
+    "momentum": 0.9,
+    "optimizer": "SGD",
+    "variants_sequential_order": [
+      "BASE",
+      "PRE",
+      "POST",
+      "RANDOM"
+    ],
+    "weight_decay": 0.0005
+  },
+  "image_size": 96,
+  "normalization_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "normalization_std": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "primary_comparison": "POST_minus_PRE_dev_top1_paired_at_epoch120",
+  "protocol_version": "1.0",
+  "reference_start_accuracy": {
+    "BASE": 0.6684,
+    "POST": 0.5524,
+    "PRE": 0.5494,
+    "RANDOM": 0.4948
+  },
+  "seed": 42,
+  "source_experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "source_model_files": {
+    "BASE": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/BASE.pt",
+      "sha256": "44c44691acd501caffdbbe359ecc3892163cbd3cee6a50500b8abea6393a2817"
+    },
+    "POST": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/POST.pt",
+      "sha256": "9f4e94ddafdc6986a5bfcb6551e988b1dcc4a4e262047a00f51e23c95a9c2b8d"
+    },
+    "PRE": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/PRE.pt",
+      "sha256": "8186ff8155b3f9fca8a79aeebb15b65cb7b0816abcb3b943255939a992011882"
+    },
+    "RANDOM": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/RANDOM.pt",
+      "sha256": "c4ba8b4fec2fa00cff76f87a80a9a74e4cfe95504a23119979b1c4182c89002e"
+    }
+  },
+  "source_run": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk",
+  "splits_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+  "status": "frozen",
+  "train_file_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "training_executed": false,
+  "training_git_sha": "7cc3f46667990ff45686f7499c5dfd00d6d57649",
+  "workers": 2,
+  "world_size": 4
+}

@@ -1,0 +1,38 @@
+{
+  "checks": [
+    "load_BASE_strict_params_forward_digest",
+    "load_PRE_strict_params_forward_digest",
+    "load_POST_strict_params_forward_digest",
+    "load_RANDOM_strict_params_forward_digest",
+    "training_smoke_backward_step",
+    "base_state_unchanged",
+    "bootstrap_identity"
+  ],
+  "config_sha256": "eef1814142034c25bab979b5aa74dbe4b264abaefd90142fe954ec7e77effbb2",
+  "created_utc": "2026-10-10T12:31:28.616231+00:00",
+  "device": "CPU",
+  "real_images_used": false,
+  "seed": 42,
+  "source_sha256": {
+    "dependencies": {
+      "experiments/2026-10-01_E002_obserwacja_se/common.py": "20a4afbf097e84eb50d5b9c829cbeb943f5430ebe42755cacdbda8f34ac6f491",
+      "experiments/2026-10-09_E003_kompresja_10proc_parametrow/folding.py": "90c0c8f3b1b975d2526e0fb2a1f03c7af0d5953447bcc9ecb7477d5f20a117c6",
+      "experiments/2026-10-09_E003_kompresja_10proc_parametrow/summarize.py": "8007f0aa76bfce8a72f7b2c4095d357e0e32cc339c09a426e1ff0c39bf8e8719",
+      "experiments/2026-10-09_E003_kompresja_10proc_parametrow/support.py": "e3fa1ee1d0a33c4455bffc702cfc50bbd25734f768659729947c1b17e5c8d97d"
+    },
+    "local": {
+      "check_pipeline_cpu.py": "6427a48a73541cbf386589ca428a4359c7d2e7f50e78e9a002a1d0407c090978",
+      "launch_finetune.py": "ac076badb250753fb567e08ce8df941362fc5966bec0509643fcb6af6b99fde2",
+      "summarize_finetune.py": "cf1b1765bb7a36edcb9877efc5156fa7b5622d885955ea0f295e659a602098f7",
+      "support_e004.py": "d3fa4c871771929e57011046602da6a8e80301beeed40e3c5bf351db942e4a5c",
+      "train_finetune.py": "5fd82506fb216a0eb2a6b24c3d1bccd68fcd6a6fd8e6371437a7ef1601580768"
+    }
+  },
+  "status": "passed",
+  "training_performed": false,
+  "versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130"
+  }
+}
