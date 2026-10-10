@@ -7,6 +7,7 @@ batch 64/GPU; bez zmiany selekcji/szerokości, bez testu i rezerwy.
 """
 import argparse
 import copy
+import json
 import os
 import random
 import sys
