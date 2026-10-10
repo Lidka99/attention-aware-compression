@@ -208,7 +208,7 @@ def finetune_variant(run, cfg, variant, base, images, labels, train_recs, dev_re
                 merged = {k: v[order] for k, v in merged.items()}
                 expected_ids = [r['id'] for r in dev_recs]
                 require(merged['ids'].tolist() == expected_ids
-                        and len(set(merged['ids'].tolist())) == cfg['dev_count'], 'Dev coverage mismatch')
+                        and len(set(merged['ids'].tolist())) == cfg['data']['dev_count'], 'Dev coverage mismatch')
                 require(merged['targets'].tolist() == [r['target'] for r in dev_recs],
                         'Dev target mismatch')
                 np.savez_compressed(run / f'dev_final_{variant}.npz', **merged)

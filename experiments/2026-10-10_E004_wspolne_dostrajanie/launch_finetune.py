@@ -28,7 +28,8 @@ def main():
             and checks['source_sha256'] == code_hashes(), 'Code/config changed after CPU checks')
     env_vars = {'CUDA_VISIBLE_DEVICES': '0,1,2,3', 'CUBLAS_WORKSPACE_CONFIG': ':4096:8',
                 'PYTHONHASHSEED': '42', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1',
-                'OPENBLAS_NUM_THREADS': '1', 'PYTHONDONTWRITEBYTECODE': '1'}
+                'OPENBLAS_NUM_THREADS': '1', 'PYTHONDONTWRITEBYTECODE': '1',
+                'PYTHONFAULTHANDLER': '1'}
     os.environ.update(env_vars)
     import torch
     require(torch.cuda.is_available() and torch.cuda.device_count() == 4,
