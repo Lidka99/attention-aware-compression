@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-10-10T11:59:47.986829+00:00",
+  "experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "nowe_obliczenia_naukowe": false,
+  "plot_sha256": {
+    "accuracy_by_mode": {
+      "pdf": {
+        "path": "accuracy_by_mode.pdf",
+        "sha256": "091774bf7a2e3532c0dd514e03a0ea9e6b32360a4c16e930adace027ab36fcff"
+      },
+      "png": {
+        "path": "accuracy_by_mode.png",
+        "sha256": "8320b30eccc20cbabfba4841febdc4292361b93cb1fe9f238385fe29cccc5de0"
+      }
+    },
+    "branch_error_heatmap": {
+      "pdf": {
+        "path": "branch_error_heatmap.pdf",
+        "sha256": "3e22d0216808e1273eda70ba599dbc9b5fe39c3a08609230272956a332178cd1"
+      },
+      "png": {
+        "path": "branch_error_heatmap.png",
+        "sha256": "2cc168df2773e06248186ccb87515ac3f0f41da5af346d8e20fb4040f7f9d529"
+      }
+    },
+    "latency_by_gpu_mode": {
+      "pdf": {
+        "path": "latency_by_gpu_mode.pdf",
+        "sha256": "2832edc83644552a3dfe73332aa166a131d819ad2be5873ee00d9a9e1e8ef6e1"
+      },
+      "png": {
+        "path": "latency_by_gpu_mode.png",
+        "sha256": "9d9cf01bb9097821e3fb72fd761e3d4f4621fe44ff7ecc1cf897e97485758b8b"
+      }
+    },
+    "parameters_and_filesize": {
+      "pdf": {
+        "path": "parameters_and_filesize.pdf",
+        "sha256": "0543481f8346bffb5f3e4558f40bebaac46cdc5cc6795832a4a38698d967f0f4"
+      },
+      "png": {
+        "path": "parameters_and_filesize.png",
+        "sha256": "4fcca7b2283e15f3b9771f5ed243f3f2b824bae2769a4ae588ec2abad2440b8f"
+      }
+    }
+  },
+  "plots": [
+    "accuracy_by_mode",
+    "branch_error_heatmap",
+    "latency_by_gpu_mode",
+    "parameters_and_filesize"
+  ],
+  "run_id": "20261010T095706Z_5a2f233_seed42__0o_uckk",
+  "script_path": "/home/users/s224574/attention/badania_atencja_cnn/experiments/2026-10-09_E003_kompresja_10proc_parametrow/analizy/2026-10-10_rysunki_raportu/plot_report.py",
+  "script_sha256": "1a44ccf2f79a536960941bd05bf0627ea3a59241f72c40851701b2b62538a88b",
+  "source_path": "/home/users/s224574/attention/badania_atencja_cnn/experiments/2026-10-09_E003_kompresja_10proc_parametrow/wykresy/20261010T095706Z_5a2f233_seed42__0o_uckk/summary.json",
+  "source_sha256": "ceeddb6ae36d488be5295c63cc60e686c087b194147e238d61af358f6b0759ad",
+  "uwaga": "Skrypt tylko odczytuje summary.json i rysuje wykresy; nie wykonuje nowych obliczeń naukowych, pomiarów ani treningu (CPU, bez modelu)."
+}

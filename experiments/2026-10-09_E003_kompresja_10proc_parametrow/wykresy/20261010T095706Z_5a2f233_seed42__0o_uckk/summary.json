@@ -1,0 +1,520 @@
+{
+  "analysis_scope": "existing_run_inputs_only",
+  "block_errors": {
+    "POST": {
+      "features.2.0": {
+        "block_relative_mse": 0.0294227682877339,
+        "branch_relative_mse": 0.0294227682877339
+      },
+      "features.2.1": {
+        "block_relative_mse": 0.013215421266193145,
+        "branch_relative_mse": 0.06340456313631099
+      },
+      "features.3.0": {
+        "block_relative_mse": 0.03220265372370168,
+        "branch_relative_mse": 0.03220265372370168
+      },
+      "features.3.1": {
+        "block_relative_mse": 0.0045151531928042995,
+        "branch_relative_mse": 0.03823896441363277
+      },
+      "features.4.0": {
+        "block_relative_mse": 0.034358957525721365,
+        "branch_relative_mse": 0.034358957525721365
+      },
+      "features.4.1": {
+        "block_relative_mse": 0.004225184785048743,
+        "branch_relative_mse": 0.028758376960921074
+      },
+      "features.4.2": {
+        "block_relative_mse": 0.0015322162978422856,
+        "branch_relative_mse": 0.010410180244870232
+      },
+      "features.5.0": {
+        "block_relative_mse": 0.05919569846819277,
+        "branch_relative_mse": 0.05919569846819277
+      },
+      "features.5.1": {
+        "block_relative_mse": 0.0021476681505032597,
+        "branch_relative_mse": 0.013158286586030417
+      },
+      "features.5.2": {
+        "block_relative_mse": 0.0004708275573840965,
+        "branch_relative_mse": 0.0032532979768309833
+      },
+      "features.6.0": {
+        "block_relative_mse": 0.07497464323607163,
+        "branch_relative_mse": 0.07497464323607163
+      },
+      "features.6.1": {
+        "block_relative_mse": 0.009155254062183437,
+        "branch_relative_mse": 0.05415665560038669
+      },
+      "features.6.2": {
+        "block_relative_mse": 0.002070971388239517,
+        "branch_relative_mse": 0.015668514168632047
+      },
+      "features.6.3": {
+        "block_relative_mse": 0.0016106396728847497,
+        "branch_relative_mse": 0.011563058062124173
+      },
+      "features.7.0": {
+        "block_relative_mse": 0.11632635553769884,
+        "branch_relative_mse": 0.11632635553769884
+      }
+    },
+    "PRE": {
+      "features.2.0": {
+        "block_relative_mse": 0.030727605528574047,
+        "branch_relative_mse": 0.030727605528574047
+      },
+      "features.2.1": {
+        "block_relative_mse": 0.005529171107280273,
+        "branch_relative_mse": 0.026527696069976292
+      },
+      "features.3.0": {
+        "block_relative_mse": 0.03408926219068506,
+        "branch_relative_mse": 0.03408926219068506
+      },
+      "features.3.1": {
+        "block_relative_mse": 0.004604578629493232,
+        "branch_relative_mse": 0.03899631105758453
+      },
+      "features.4.0": {
+        "block_relative_mse": 0.03358288013615117,
+        "branch_relative_mse": 0.03358288013615117
+      },
+      "features.4.1": {
+        "block_relative_mse": 0.003966121864332145,
+        "branch_relative_mse": 0.02699508622991299
+      },
+      "features.4.2": {
+        "block_relative_mse": 0.0015285389432376372,
+        "branch_relative_mse": 0.010385195487317858
+      },
+      "features.5.0": {
+        "block_relative_mse": 0.06332862537700935,
+        "branch_relative_mse": 0.06332862537700935
+      },
+      "features.5.1": {
+        "block_relative_mse": 0.0017250018627615249,
+        "branch_relative_mse": 0.010568704003098485
+      },
+      "features.5.2": {
+        "block_relative_mse": 0.0005913680017480254,
+        "branch_relative_mse": 0.00408620182035337
+      },
+      "features.6.0": {
+        "block_relative_mse": 0.06532368195478888,
+        "branch_relative_mse": 0.06532368195478888
+      },
+      "features.6.1": {
+        "block_relative_mse": 0.006762687289624946,
+        "branch_relative_mse": 0.040003753711684326
+      },
+      "features.6.2": {
+        "block_relative_mse": 0.004860946385698201,
+        "branch_relative_mse": 0.03677685136948597
+      },
+      "features.6.3": {
+        "block_relative_mse": 0.006865580041420743,
+        "branch_relative_mse": 0.049289175508717156
+      },
+      "features.7.0": {
+        "block_relative_mse": 0.08006613984776445,
+        "branch_relative_mse": 0.08006613984776445
+      }
+    },
+    "RANDOM": {
+      "features.2.0": {
+        "block_relative_mse": 0.036287998139531444,
+        "branch_relative_mse": 0.036287998139531444
+      },
+      "features.2.1": {
+        "block_relative_mse": 0.010438267020377229,
+        "branch_relative_mse": 0.050080413414388465
+      },
+      "features.3.0": {
+        "block_relative_mse": 0.0556536490199449,
+        "branch_relative_mse": 0.0556536490199449
+      },
+      "features.3.1": {
+        "block_relative_mse": 0.005668427895090945,
+        "branch_relative_mse": 0.04800608153155021
+      },
+      "features.4.0": {
+        "block_relative_mse": 0.056824266860621246,
+        "branch_relative_mse": 0.056824266860621246
+      },
+      "features.4.1": {
+        "block_relative_mse": 0.0054180632184839764,
+        "branch_relative_mse": 0.036877607129969146
+      },
+      "features.4.2": {
+        "block_relative_mse": 0.0048598880357580915,
+        "branch_relative_mse": 0.03301903909429805
+      },
+      "features.5.0": {
+        "block_relative_mse": 0.06305696043876037,
+        "branch_relative_mse": 0.06305696043876037
+      },
+      "features.5.1": {
+        "block_relative_mse": 0.0029162317443675906,
+        "branch_relative_mse": 0.017867105318776857
+      },
+      "features.5.2": {
+        "block_relative_mse": 0.001645969298216384,
+        "branch_relative_mse": 0.011373226809476234
+      },
+      "features.6.0": {
+        "block_relative_mse": 0.08070186077191721,
+        "branch_relative_mse": 0.08070186077191721
+      },
+      "features.6.1": {
+        "block_relative_mse": 0.008456350806379779,
+        "branch_relative_mse": 0.050022388838033
+      },
+      "features.6.2": {
+        "block_relative_mse": 0.0039831530565667345,
+        "branch_relative_mse": 0.0301356600116559
+      },
+      "features.6.3": {
+        "block_relative_mse": 0.002876385281316966,
+        "branch_relative_mse": 0.020650062941290487
+      },
+      "features.7.0": {
+        "block_relative_mse": 0.09440532919955763,
+        "branch_relative_mse": 0.09440532919955763
+      }
+    }
+  },
+  "bootstrap": {
+    "confidence": 0.95,
+    "per_class": 50,
+    "repetitions": 2000,
+    "seed": 20261009,
+    "stratified_by": "class"
+  },
+  "checks": {
+    "baseline_correct_3342": true,
+    "block_errors": {
+      "blocks": 15,
+      "defined_values": 90,
+      "modes": [
+        "PRE",
+        "POST",
+        "RANDOM"
+      ],
+      "undefined_none": 0
+    },
+    "class_balanced_50": true,
+    "compressed_same_budget": true,
+    "latency": {
+      "entries": 16,
+      "measurements_per_entry": 50,
+      "ranks": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "parameters_match_plan": true,
+    "predictions": {
+      "baseline_correct": 3342,
+      "class_balance": {
+        "max": 50,
+        "min": 50,
+        "per_class": 50
+      },
+      "count": 5000,
+      "logits_finite": {
+        "BASE": true,
+        "POST": true,
+        "PRE": true,
+        "RANDOM": true
+      },
+      "predictions_match_raw": {
+        "BASE": true,
+        "POST": true,
+        "PRE": true,
+        "RANDOM": true
+      },
+      "top1_match_raw": {
+        "BASE": [
+          0.6684,
+          0.6684
+        ],
+        "POST": [
+          0.5524,
+          0.5524
+        ],
+        "PRE": [
+          0.5494,
+          0.5494
+        ],
+        "RANDOM": [
+          0.4948,
+          0.4948
+        ]
+      },
+      "unique_ids": 5000
+    },
+    "raw_metrics": {
+      "baseline_correct": 3342,
+      "baseline_reproduced": true,
+      "compressed_same_budget": true,
+      "count": 5000,
+      "model_files_present": true,
+      "parameters": {
+        "BASE": 4135648,
+        "POST": 3721424,
+        "PRE": 3721424,
+        "RANDOM": 3721424
+      },
+      "unique_ids": 5000
+    },
+    "unique_ids_5000": true
+  },
+  "created_utc": "2026-10-10T09:57:46.951650+00:00",
+  "experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "latency_by_rank": [
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.166383743286133,
+      "mode": "BASE",
+      "q25_ms": 10.602832078933716,
+      "q75_ms": 11.818920135498047,
+      "rank": 0
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 10.98140811920166,
+      "mode": "PRE",
+      "q25_ms": 10.707655668258667,
+      "q75_ms": 11.61676025390625,
+      "rank": 0
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 10.479615688323975,
+      "mode": "POST",
+      "q25_ms": 10.188184022903442,
+      "q75_ms": 10.688495635986328,
+      "rank": 0
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 10.552192211151123,
+      "mode": "RANDOM",
+      "q25_ms": 10.265151977539062,
+      "q75_ms": 10.783959865570068,
+      "rank": 0
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 10.746319770812988,
+      "mode": "BASE",
+      "q25_ms": 10.347599744796753,
+      "q75_ms": 11.352088212966919,
+      "rank": 1
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.213664054870605,
+      "mode": "PRE",
+      "q25_ms": 10.404832124710083,
+      "q75_ms": 11.868776082992554,
+      "rank": 1
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 10.743375778198242,
+      "mode": "POST",
+      "q25_ms": 10.409104108810425,
+      "q75_ms": 11.844800233840942,
+      "rank": 1
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.057744026184082,
+      "mode": "RANDOM",
+      "q25_ms": 10.485151767730713,
+      "q75_ms": 11.925032138824463,
+      "rank": 1
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 14.69700813293457,
+      "mode": "BASE",
+      "q25_ms": 14.209632158279419,
+      "q75_ms": 15.821832180023193,
+      "rank": 2
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 13.497663974761963,
+      "mode": "PRE",
+      "q25_ms": 11.812895774841309,
+      "q75_ms": 14.513271808624268,
+      "rank": 2
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 12.383519649505615,
+      "mode": "POST",
+      "q25_ms": 11.472440004348755,
+      "q75_ms": 14.186775922775269,
+      "rank": 2
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.571455955505371,
+      "mode": "RANDOM",
+      "q25_ms": 10.939608097076416,
+      "q75_ms": 12.494807958602905,
+      "rank": 2
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.54201602935791,
+      "mode": "BASE",
+      "q25_ms": 11.25648045539856,
+      "q75_ms": 11.882856130599976,
+      "rank": 3
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 12.286144256591797,
+      "mode": "PRE",
+      "q25_ms": 11.739456176757812,
+      "q75_ms": 13.105376243591309,
+      "rank": 3
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.839312076568604,
+      "mode": "POST",
+      "q25_ms": 11.359632015228271,
+      "q75_ms": 12.741079807281494,
+      "rank": 3
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "measurements": 50,
+      "median_ms": 11.605408191680908,
+      "mode": "RANDOM",
+      "q25_ms": 11.114239692687988,
+      "q75_ms": 12.5103120803833,
+      "rank": 3
+    }
+  ],
+  "limitations": [
+    "Wyniki dotyczą jednego checkpointu E001 (seed 42); nie są niezależnym testem generalizacji ani dowodem przewagi metody.",
+    "Dev brał udział w wyborze checkpointu E001, więc nie jest niezależnym zbiorem testowym; bootstrap opisuje zmienność obrazów przy jednym modelu, a nie zmienność między treningami.",
+    "POST−PRE to różnica przy jednym wspólnym budżecie i jednym operatorze; samo wystąpienie różnicy nie dowodzi korzyści kryterium po SE.",
+    "Cztery GPU to cztery procesy oceny tych samych modeli, nie cztery niezależne modele ani niezależne seedy.",
+    "Analiza obejmuje wyłącznie pliki przekazane w --run-dir; skrypt nie wykonuje kompresji ani inferencji i nie potwierdza samodzielnie przebiegu eksperymentu.",
+    "Zapis nie jest końcową interpretacją naukową; raport WYNIKI.md tworzy agent główny na podstawie tego podsumowania."
+  ],
+  "model_files": {
+    "BASE": {
+      "bytes": 16818789,
+      "model_sha256": "0ce0a309b9108d0d4b0db6af3ebd207c7c91b7107009df469ed2c2f08917f4ea",
+      "sha256": "44c44691acd501caffdbbe359ecc3892163cbd3cee6a50500b8abea6393a2817"
+    },
+    "POST": {
+      "bytes": 15149797,
+      "model_sha256": "8ca2e68ee54fa537c235cf23b8f091e2b737293b2a8bc3c0e3845492ba7a6b1a",
+      "sha256": "9f4e94ddafdc6986a5bfcb6551e988b1dcc4a4e262047a00f51e23c95a9c2b8d"
+    },
+    "PRE": {
+      "bytes": 15149431,
+      "model_sha256": "55d842d31549ca827bd6965ad932e36da592c72c9d7eb90ed758b0d06682762c",
+      "sha256": "8186ff8155b3f9fca8a79aeebb15b65cb7b0816abcb3b943255939a992011882"
+    },
+    "RANDOM": {
+      "bytes": 15156993,
+      "model_sha256": "0e64b6c28b6a4af4584f453ab830014aada52ebf44fa76e8fc9ccfd568f1aaf3",
+      "sha256": "c4ba8b4fec2fa00cff76f87a80a9a74e4cfe95504a23119979b1c4182c89002e"
+    }
+  },
+  "modes": {
+    "BASE": {
+      "correct": 3342,
+      "count": 5000,
+      "model_sha256": "0ce0a309b9108d0d4b0db6af3ebd207c7c91b7107009df469ed2c2f08917f4ea",
+      "nll": 2.4950394832244323,
+      "parameters": 4135648,
+      "top1": 0.6684
+    },
+    "POST": {
+      "correct": 2762,
+      "count": 5000,
+      "model_sha256": "8ca2e68ee54fa537c235cf23b8f091e2b737293b2a8bc3c0e3845492ba7a6b1a",
+      "nll": 2.811399666227028,
+      "parameters": 3721424,
+      "top1": 0.5524
+    },
+    "PRE": {
+      "correct": 2747,
+      "count": 5000,
+      "model_sha256": "55d842d31549ca827bd6965ad932e36da592c72c9d7eb90ed758b0d06682762c",
+      "nll": 2.841055015503615,
+      "parameters": 3721424,
+      "top1": 0.5494
+    },
+    "RANDOM": {
+      "correct": 2474,
+      "count": 5000,
+      "model_sha256": "0e64b6c28b6a4af4584f453ab830014aada52ebf44fa76e8fc9ccfd568f1aaf3",
+      "nll": 3.1936534229340032,
+      "parameters": 3721424,
+      "top1": 0.4948
+    }
+  },
+  "paired_post_pre": {
+    "both_correct": 2451,
+    "both_wrong": 1942,
+    "ci95_correct": [
+      -30,
+      61
+    ],
+    "ci95_top1": [
+      -0.006,
+      0.0122
+    ],
+    "confidence": 0.95,
+    "delta_correct": 15,
+    "delta_top1": 0.0030000000000000027,
+    "per_class": 50,
+    "post_only": 311,
+    "pre_only": 296,
+    "repetitions": 2000,
+    "scope": "one_checkpoint_not_generalization",
+    "seed": 20261009,
+    "stratified_by": "class"
+  },
+  "plots": [
+    "accuracy_by_mode",
+    "latency_by_gpu_mode",
+    "branch_error_heatmap",
+    "parameters_and_filesize"
+  ],
+  "status": "completed"
+}

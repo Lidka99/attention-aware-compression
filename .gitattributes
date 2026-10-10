@@ -1,3 +1,6 @@
 # E002: zachowaj bajty archiwalnych CSV (LF lub CRLF) zgodnie z hashami.
 # Protokół: experiments/2026-10-01_E002_obserwacja_se/PROTOKOL_v1.md.
 experiments/2026-10-01_E002_obserwacja_se/wykresy/*/*.csv -text whitespace=cr-at-eol
+# E003: to samo dla CSV wyników dostrajania/oceny.
+# Protokół: experiments/2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md.
+experiments/2026-10-09_E003_kompresja_10proc_parametrow/wykresy/*/*.csv -text whitespace=cr-at-eol

@@ -2,17 +2,20 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001 i E002 zakończone. Kod i zamrożony protokół E003 przygotowane: kompresja całego modelu o co najmniej 10% parametrów, PRE/POST/RANDOM ze wspólnym operatorem. Kontrole syntetyczne przeszły, wyniki na rzeczywistych danych jeszcze niezmierzone. Nowość badawcza niepotwierdzona.
+Status: E001, E002 i E003 zakończone. E003 skompresowało całą sieć o 10,0159% parametrów (4 135 648→3 721 424) i porównało PRE/POST/RANDOM bez dostrajania: 54,94%/55,24%/49,48% wobec BASE 66,84%. Trwa przygotowanie E004: wspólne dostrajanie wszystkich czterech wariantów z równym budżetem. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
 **[Aktualny plan i najbliższy krok](AKTUALNY_PLAN.md)** — bieżący punkt odniesienia.
 
-**[E003 — projekt badania kompresji 10% całej sieci](experiments/2026-10-09_E003_kompresja_10proc_parametrow/OPIS.md)**,
-[proste wyjaśnienie](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md).
-Plan 4 135 648→3 721 424 parametrów jest utrwalony; nie jest jeszcze wykonanym wynikiem.
+**[E003 — wynik kompresji 10% całej sieci](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYNIKI.md)**,
+[protokół](experiments/2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md),
+[wyjaśnienie](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md).
+Fizyczne modele 3 721 424 parametry; duża utrata jakości bez naprawy; POST−PRE +0,30 pp (przedział obejmuje brak różnicy).
 
-[E003 — zamrożony protokół i uruchomienie na 4 GPU](experiments/2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md).
+**[E004 — szkic wspólnego dostrajania](experiments/2026-10-10_E004_wspolne_dostrajanie/OPIS.md)**,
+[wyjaśnienie](experiments/2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md).
+Równy budżet 120 epok (adaptacja GReg, ICLR 2021) dla BASE/PRE/POST/RANDOM; trening nieuruchomiony.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

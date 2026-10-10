@@ -327,3 +327,27 @@ ocenia125A,125B i1250dev, bez powielania. CPU służy kontroli kodu,
 sumomFP64/wyborowi par i raportowi; bezczynność kart w tych fazach nie
 oznacza braku czterech GPU. Teraz wykonujemy właściwe E003, bez treningu,
 testu i rezerwy oraz bez zmiany źródłowego checkpointu.
+
+## 2026-10-10 — wynik E003 i plan wspólnego dostrajania
+
+E003 zakończone na4GPU: [raport](../experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYNIKI.md),
+run `20261010T095706Z_5a2f233_seed42__0o_uckk`. Powstały trzy modele
+fizycznie mniejsze o10,0159% parametrów (3721424 wobec4135648). Dev:
+BASE66,84%, PRE54,94%, POST55,24%, RANDOM49,48%. POST−PRE to15trafień
+(0,30pp), przedział[−0,60;+1,22]pp — brak wyraźnej przewagi. Utrata
+jakości bez naprawy jest duża, więc metoda nie jest jeszcze wynikiem
+potwierdzającym nowy artykuł.
+
+W E003 **nie było epok ani dostrajania**: dopasowano tylko analitycznie
+alpha/beta na500obrazach, a modele oceniono w eval. Trening gradientowy
+będzie osobnym etapem z równym budżetem dla wszystkich wariantów — także
+BASE — aby oddzielić efekt kompresji od efektu dodatkowego uczenia.
+
+[E004](../experiments/2026-10-10_E004_wspolne_dostrajanie/OPIS.md)
+przyjmuje opublikowany budżet CIFAR-100 z GReg (ICLR2021):120epok
+finetuningu, SGD momentum0,9, weight decay5e-4, LR0,01 z redukcją
+po60 i90epokach, batch256. To jawna adaptacja do naszego EfficientNet-B0
+i96×96, nie kopia eksperymentu VGG/ResNet. Wynikiem podstawowym będzie
+ostatnia epoka, bez wybierania najlepszej po fakcie. Nie zmieniamy
+selekcji ani szerokości z E003 i nie nadpisujemy jego wyników.
+Trening E004 jeszcze nieuruchomiony; najpierw implementacja i kontrole CPU.

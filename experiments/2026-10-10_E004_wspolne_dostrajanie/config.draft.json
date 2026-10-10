@@ -1,0 +1,67 @@
+{
+  "experiment": "2026-10-10_E004_wspolne_dostrajanie",
+  "protocol_version": "0.1-draft",
+  "status": "draft",
+  "training_executed": false,
+  "source_experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "source_run": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk",
+  "source_model_files": {
+    "BASE": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/BASE.pt",
+      "sha256": "44c44691acd501caffdbbe359ecc3892163cbd3cee6a50500b8abea6393a2817"
+    },
+    "PRE": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/PRE.pt",
+      "sha256": "8186ff8155b3f9fca8a79aeebb15b65cb7b0816abcb3b943255939a992011882"
+    },
+    "POST": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/POST.pt",
+      "sha256": "9f4e94ddafdc6986a5bfcb6551e988b1dcc4a4e262047a00f51e23c95a9c2b8d"
+    },
+    "RANDOM": {
+      "path": "runs/E003/20261010T095706Z_5a2f233_seed42__0o_uckk/models/RANDOM.pt",
+      "sha256": "c4ba8b4fec2fa00cff76f87a80a9a74e4cfe95504a23119979b1c4182c89002e"
+    }
+  },
+  "reference_start_accuracy": {"BASE": 0.6684, "PRE": 0.5494, "POST": 0.5524, "RANDOM": 0.4948},
+  "base_parameters": 4135648,
+  "compressed_parameters": 3721424,
+  "fine_tune": {
+    "literature_anchor": "GReg, Wang et al., ICLR 2021, arXiv:2012.09243, Tab.5",
+    "adaptation_note": "EfficientNet-B0, CIFAR-100, 96x96, augmentation from E001; not a reproduction of VGG/ResNet settings",
+    "epochs": 120,
+    "optimizer": "SGD",
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "lr_initial": 0.01,
+    "lr_schedule": {"type": "multi_step", "milestones": {"60": 0.001, "90": 0.0001}},
+    "batch_per_gpu": 64,
+    "global_batch": 256,
+    "gradient_accumulation": false,
+    "amp": true,
+    "world_size": 4,
+    "workers": 2,
+    "seeds": {"process": "42+rank", "loader_epoch": "42+rank+10000*epoch", "shared_across_variants": true},
+    "variants_sequential_order": ["BASE", "PRE", "POST", "RANDOM"],
+    "early_stopping": false,
+    "checkpoint_selection": "primary_last_epoch_120; secondary_best_dev_diagnostic_same_rule_all_variants"
+  },
+  "data": {
+    "train_count": 40000,
+    "dev_count": 5000,
+    "splits_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+    "train_file_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+    "official_test_used": false,
+    "reserve_used": false
+  },
+  "primary_comparison": "POST_minus_PRE_dev_top1_paired_at_epoch120",
+  "bootstrap_repetitions": 2000,
+  "bootstrap_seed": 20261009,
+  "bootstrap_confidence": 0.95,
+  "expected_versions": {
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130",
+    "numpy": "2.4.6"
+  }
+}
