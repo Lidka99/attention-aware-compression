@@ -1,0 +1,88 @@
+{
+  "base_parameters": 4135648,
+  "base_state_unchanged": true,
+  "checkpoint_used": false,
+  "checks": [
+    "full_budget_3721424_parameters",
+    "forward_100_finite",
+    "base_state_unchanged",
+    "base_conv_bn_attributes_preserved",
+    "duplicated_path_block_forward",
+    "proportional_subsystem_alpha2_beta4",
+    "materialize_strict_load_no_refold",
+    "partial_row_width_479",
+    "double_fold_rejected",
+    "already_compressed_rejected",
+    "overlapping_pairs_rejected",
+    "pair_count_mismatch_rejected",
+    "sync_batchnorm_preserved"
+  ],
+  "created_utc": "2026-10-10T08:39:01.358411+00:00",
+  "device": "CPU",
+  "duplicate_block": {
+    "c": 4,
+    "d": 418,
+    "input_shape": [
+      2,
+      80,
+      6,
+      6
+    ],
+    "max_abs_error": 4.440892098500626e-16
+  },
+  "expected_compressed_parameters": 3721424,
+  "experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "full_budget": {
+    "attributes_preserved": true,
+    "compressed_parameters": 3721424,
+    "forward_max_abs": 1.7046772522212594e-13,
+    "forward_passes": 100,
+    "removed_parameters": 414224
+  },
+  "gpu_used": false,
+  "partial_row": {
+    "base_width": 480,
+    "block": "features.4.1",
+    "new_channels": 479,
+    "parameters": 4135434
+  },
+  "plan_sha256": "fdfa35242201b9544afa47838a83f1683aa35482f9164555910b90ed225cab74",
+  "proportional_subsystem": {
+    "alpha": 2.0,
+    "beta": 4.0,
+    "c": 4,
+    "d": 418,
+    "max_abs_error": 3.552713678800501e-15
+  },
+  "real_images_used": false,
+  "rejections": {
+    "already_compressed_flag": true,
+    "double_fold": true,
+    "overlapping_pairs": true,
+    "pair_count_mismatch": true
+  },
+  "seed": 20261010,
+  "serialization": {
+    "prediction_identical": true,
+    "state_dict_hash_matches": true,
+    "strict_load": true
+  },
+  "source_sha256": {
+    "check_folding_cpu.py": "04a8cfdd67dd27e855700cb0a8b3ebb08d58fc90100d1bce5b8a1b00e754c98d",
+    "folding.py": "90c0c8f3b1b975d2526e0fb2a1f03c7af0d5953447bcc9ecb7477d5f20a117c6"
+  },
+  "status": "passed",
+  "sync_batchnorm": {
+    "channels": 95,
+    "classes": [
+      "SyncBatchNorm"
+    ]
+  },
+  "torch_num_threads": 1,
+  "versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  }
+}

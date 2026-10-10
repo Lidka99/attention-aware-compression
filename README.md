@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001 i E002 zakończone. Przygotowujemy E003: rzeczywistą kompresję całego modelu o co najmniej 10% parametrów, porównując wybór PRE/POST/RANDOM przy wspólnym operatorze. Kompresji jeszcze nie wykonano; nowość badawcza niepotwierdzona.
+Status: E001 i E002 zakończone. Kod i zamrożony protokół E003 przygotowane: kompresja całego modelu o co najmniej 10% parametrów, PRE/POST/RANDOM ze wspólnym operatorem. Kontrole syntetyczne przeszły, wyniki na rzeczywistych danych jeszcze niezmierzone. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -11,6 +11,8 @@ Status: E001 i E002 zakończone. Przygotowujemy E003: rzeczywistą kompresję ca
 **[E003 — projekt badania kompresji 10% całej sieci](experiments/2026-10-09_E003_kompresja_10proc_parametrow/OPIS.md)**,
 [proste wyjaśnienie](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md).
 Plan 4 135 648→3 721 424 parametrów jest utrwalony; nie jest jeszcze wykonanym wynikiem.
+
+[E003 — zamrożony protokół i uruchomienie na 4 GPU](experiments/2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md).
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

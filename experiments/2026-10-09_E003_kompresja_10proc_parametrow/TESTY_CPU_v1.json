@@ -1,0 +1,62 @@
+{
+  "bootstrap_identical_result": {
+    "both_correct": 5000,
+    "both_wrong": 0,
+    "ci95_correct": [
+      0,
+      0
+    ],
+    "ci95_top1": [
+      0.0,
+      0.0
+    ],
+    "confidence": 0.95,
+    "delta_correct": 0,
+    "delta_top1": 0.0,
+    "per_class": 50,
+    "post_only": 0,
+    "pre_only": 0,
+    "repetitions": 20,
+    "scope": "one_checkpoint_not_generalization",
+    "seed": 20261010,
+    "stratified_by": "class"
+  },
+  "checkpoint_used": false,
+  "checks": [
+    "syntax",
+    "frozen_equals_draft",
+    "folding_evidence",
+    "physical_graph_budget",
+    "capture_shapes",
+    "GAP_value",
+    "hooks_do_not_change_predictions",
+    "branch_clone_before_residual",
+    "source_state_unchanged",
+    "disjoint_groups",
+    "least_squares_coefficients",
+    "bootstrap_identical_predictions"
+  ],
+  "config_sha256": "ce7d8937d27488607e4cbc145f423ef271f97b511686801c1d9366f6124c7a82",
+  "created_utc": "2026-10-10T09:16:57.645364+00:00",
+  "device": "CPU",
+  "folding_evidence_sha256": "7fb7cb712280e02fc40c7cf238cf556768fea8655deb91fc1682f5206dd634ef",
+  "real_images_used": false,
+  "seed": 20261010,
+  "source_sha256": {
+    "dependencies": {
+      "experiments/2026-10-01_E002_obserwacja_se/common.py": "20a4afbf097e84eb50d5b9c829cbeb943f5430ebe42755cacdbda8f34ac6f491"
+    },
+    "local": {
+      "check_folding_cpu.py": "04a8cfdd67dd27e855700cb0a8b3ebb08d58fc90100d1bce5b8a1b00e754c98d",
+      "check_pipeline_cpu.py": "d1da03e312577a16cb4d849ad3c14e5374348f67f452fa322fa1b1d9a8fc770a",
+      "folding.py": "90c0c8f3b1b975d2526e0fb2a1f03c7af0d5953447bcc9ecb7477d5f20a117c6",
+      "launch.py": "78ade6432d7642f7da7723572a933356cb66dbb2bb6bf4cbacb189913e493e98",
+      "plan_structure.py": "9c4367957b4cbc114f605055afa16942b2d9c83c3aa30939631fba5965f2fc74",
+      "selection.py": "53d2c251e0324332c0f31513ef5d08a8b73df399e33c215fbed6b8eff33196cc",
+      "study.py": "cff1a4b5278caad2235a59c7f9660a978ff0547dcecaa1de4651a8c032785a89",
+      "summarize.py": "8007f0aa76bfce8a72f7b2c4095d357e0e32cc339c09a426e1ff0c39bf8e8719",
+      "support.py": "e3fa1ee1d0a33c4455bffc702cfc50bbd25734f768659729947c1b17e5c8d97d"
+    }
+  },
+  "status": "passed"
+}

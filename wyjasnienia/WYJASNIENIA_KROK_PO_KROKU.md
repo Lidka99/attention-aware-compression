@@ -304,3 +304,26 @@ Przegląd general-flash potwierdził budżet i strukturę operatora. Następny
 krok: implementacja, kontrole kodu i uruchomienie E003 po zamrożeniu
 działającego protokołu. Nie wracamy teraz do kolejnych analiz E002 ani
 do treningu. Użytkowniczka upoważniła lokalne commity projektu/kodu/raportu E003.
+
+## 2026-10-10 — wykonanie E003 przygotowane, GPU przywrócone
+
+Po autoaktualizacji CUDA nie widziała kart z powodu rozjazdu sterownika
+i NVML. Użytkowniczka naprawiła środowisko; potwierdzono 4×RTX2080Ti,
+CUDA=True i driver580.178.04. Zmianę względem E001 zapisze manifest.
+
+SE (Squeeze-and-Excitation) wylicza zależne od obrazu wagi kanałów
+z ich uśrednionych map i mnoży przez nie całe mapy. 10% parametrów jest
+umiarkowaną redukcją; w tym planie to414224 wag mniej, ale nie gwarancja
+10% przyspieszenia. Rzeczywisty czas i jakość będą zmierzone.
+
+Operator i pipeline są zaimplementowane. Kontrole syntetyczne CPU
+potwierdziły fizyczną liczbę3721424, przypadki dokładnego foldingu,
+niezmienność BASE, odtworzenie grafu/strictload, odczyt g/h/z i kopię
+gałęzi przed inplace residual. To nie są jeszcze wyniki na CIFAR.
+[Zamrożony protokół](../experiments/2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md).
+
+Cała kalibracja/ocena/pomiar forwardu będzie używać4GPU. Każdy proces
+ocenia125A,125B i1250dev, bez powielania. CPU służy kontroli kodu,
+sumomFP64/wyborowi par i raportowi; bezczynność kart w tych fazach nie
+oznacza braku czterech GPU. Teraz wykonujemy właściwe E003, bez treningu,
+testu i rezerwy oraz bez zmiany źródłowego checkpointu.

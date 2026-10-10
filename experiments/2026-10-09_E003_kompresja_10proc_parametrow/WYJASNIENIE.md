@@ -69,3 +69,30 @@ Nie dokładamy teraz kolejnych analiz E002 ani kolejnego treningu.
 
 Szczegóły: [OPIS.md](OPIS.md), [PLAN_STRUKTURY.json](PLAN_STRUKTURY.json),
 [config.draft.json](config.draft.json).
+
+## Co oznacza SE i czy 10% to dużo? (2026-10-10)
+
+SE to **Squeeze-and-Excitation**, moduł atencji kanałowej. Najpierw
+uśrednia mapę każdego kanału po pozycjach przestrzennych (squeeze),
+potem mała sieć wylicza wagę [0,1] dla każdego kanału (excitation).
+Cała mapa danego kanału jest mnożona przez tę wagę. Wagi zależą od obrazu
+i od reakcji wielu kanałów. Nie są bezpośrednim dowodem znaczenia dla
+klasyfikacji ani możliwością pominięcia już wykonanej konwolucji.
+
+10% parametrów jest **umiarkowaną, zauważalną redukcją**, nie skrajną
+kompresją. W naszym planie znika 414224 parametrów z około 4,14 mln.
+To około 1,66 MB samych danych wag FP32, bez buforów/metadanych pliku.
+Rzeczywisty rozmiar zapisanych modeli zmierzymy. Redukcja parametrów
+nie oznacza automatycznie takiej samej redukcji czasu czy kosztu forwardu,
+bo warstwy pracują na różnych rozmiarach map i mają różne implementacje.
+
+Do wniosków badawczych liczy się strata jakości i porównanie metod przy
+tym samym budżecie, nie sam procent. E003 odpowie na pytanie PRE/POST
+przy 10,0159%; nie dowodzi jeszcze nowości lub przewagi w innych budżetach.
+
+Wykonanie: [PROTOKOL_v1.md](PROTOKOL_v1.md). Po naprawie środowiska
+potwierdzono CUDA=True i **4×RTX2080Ti**. Kontrole kodu są na CPU,
+forwardy badania na wszystkich czterech GPU, po jednym procesie na kartę.
+Wczytywanie plików, sumy FP64 i raport nie wymagają ponownej pracy modelu
+na GPU. Karty mogą być bez obciążenia podczas przygotowania, co nie
+oznacza przejścia na mniejszą liczbę GPU w eksperymencie.

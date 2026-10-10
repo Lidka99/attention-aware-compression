@@ -1,5 +1,9 @@
 # E003 — rzeczywista kompresja całego EfficientNet-B0 o 10% parametrów
 
+> Zachowany szkic v0.1. Działający protokół wykonania:
+> [PROTOKOL_v1.md](PROTOKOL_v1.md), [config.json](config.json).
+> Stwierdzenia o brakującym kodzie poniżej opisują historyczny stan szkicu.
+
 Data: 2026-10-09 UTC. Wersja protokołu: **0.1-draft**.
 Eksperyment: `2026-10-09_E003_kompresja_10proc_parametrow`.
 Status: **projekt rzeczywistego eksperymentu, kompresja jeszcze nieuruchomiona**.
