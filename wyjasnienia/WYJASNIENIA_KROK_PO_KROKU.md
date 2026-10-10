@@ -278,3 +278,29 @@ Domykamy zaplanowane kontrole E002; następny krok to przygotowanie
 protokołu fizycznego scalenia jednej pary i pomiaru jego skutków.
 Etapu 4 jeszcze nieuruchomiono, nie projektujemy nowego kryterium na
 podstawie samych różnic wag atencji.
+
+## 2026-10-09 — rzeczywisty eksperyment kompresji całej sieci
+
+Użytkowniczka wybrała **10% parametrów całego modelu**, a nie redukcję
+jednego kanału. Poprzednia propozycja pojedynczej pary staje się jedynie
+wewnętrznym testem implementacji. Nie tworzymy dla niej osobnego wyniku badawczego.
+
+[E003](../experiments/2026-10-09_E003_kompresja_10proc_parametrow/OPIS.md)
+ma porównać jakość rzeczywistych mniejszych modeli przy wspólnym budżecie:
+wybór par przed SE, po SE i losowy. Statycznie wyznaczono 15 szerokości,
+usunięcie 1016 kanałów i 414224 parametrów: 4 135 648→3 721 424,
+czyli 10,0159% mniej całej sieci. Budżet nie korzysta z jakości modelu.
+To plan architektury, **nie wykonana jeszcze kompresja wytrenowanych wag**.
+
+Wszystkie metody użyją tej samej kalibracji A, wspólnego operatora i zera
+optymalizacji/rekalibracji BN. Dopasowanie alpha dotyczy wejścia avgpool
+SE, beta pełnej mapy po SE; rzeczywisty moduł atencji działa po zmianie.
+Nie deklarujemy nowej metody ani przewagi osobnych wag atencji. Następny
+wynik ma obejmować top-1/NLL na dev, rozmiar i czas forwardu mniejszych sieci.
+Forwardy i ewaluacja na dokładnie 4 GPU; statystyki i analiza mogą działać
+na CPU. Nie używamy rezerwy ani testu; źródłowy checkpoint pozostaje niezmieniony.
+
+Przegląd general-flash potwierdził budżet i strukturę operatora. Następny
+krok: implementacja, kontrole kodu i uruchomienie E003 po zamrożeniu
+działającego protokołu. Nie wracamy teraz do kolejnych analiz E002 ani
+do treningu. Użytkowniczka upoważniła lokalne commity projektu/kodu/raportu E003.

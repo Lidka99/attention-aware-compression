@@ -2,11 +2,15 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001 i jego audyt zakończone; odtworzono 3342/5000 dev bez różnic predykcji. E002 i kontrole średniej/szablonu zakończone: podobieństwo kanałów utrzymuje się w zmianach odpowiedzi na obrazy. Następny krok: protokół jednej kontrolowanej próby scalenia. Kompresji jeszcze nie wykonano; nowość badawcza niepotwierdzona.
+Status: E001 i E002 zakończone. Przygotowujemy E003: rzeczywistą kompresję całego modelu o co najmniej 10% parametrów, porównując wybór PRE/POST/RANDOM przy wspólnym operatorze. Kompresji jeszcze nie wykonano; nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
 **[Aktualny plan i najbliższy krok](AKTUALNY_PLAN.md)** — bieżący punkt odniesienia.
+
+**[E003 — projekt badania kompresji 10% całej sieci](experiments/2026-10-09_E003_kompresja_10proc_parametrow/OPIS.md)**,
+[proste wyjaśnienie](experiments/2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md).
+Plan 4 135 648→3 721 424 parametrów jest utrwalony; nie jest jeszcze wykonanym wynikiem.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

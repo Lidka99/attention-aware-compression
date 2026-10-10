@@ -11,7 +11,7 @@ Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w je
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-E001, jego audyt oraz E002 z kontrolami średniej/szablonu ukończono; następny krok to protokół pierwszej kontrolowanej próby scalenia. Nie wykonano kompresji ani kolejnego treningu. Używamy środowiska Conda attention, bez publicznych wag. Bieżący status: AKTUALNY_PLAN.md.
+E001 i E002 ukończono. Od 2026-10-09 użytkowniczka wybrała rzeczywistą kompresję co najmniej 10% parametrów całej sieci (E003), nie wynik oparty na jednym kanale lub jednym bloku. Pojedynczy kanał służy tylko kontroli implementacji. Przygotowany projekt E003 porównuje PRE/POST/RANDOM ze wspólnym budżetem i operatorem; kompresji jeszcze nie wykonano. Używamy środowiska Conda attention, bez publicznych wag. Bieżący status: AKTUALNY_PLAN.md.
 
 ## Daty w nazwach eksperymentów
 

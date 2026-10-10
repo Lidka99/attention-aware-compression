@@ -1,0 +1,312 @@
+{
+  "allocation_steps": 127,
+  "allocation_uses_activations_or_quality": false,
+  "base_parameters": 4135648,
+  "blocks": [
+    {
+      "block": "features.2.0",
+      "expanded_channels": 96,
+      "in_channels": 16,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 88,
+      "out_channels": 24,
+      "parameters_per_removed_channel": 62,
+      "remove_count": 8,
+      "saved_parameters": 496,
+      "squeeze_channels": 4,
+      "stride": [
+        2,
+        2
+      ]
+    },
+    {
+      "block": "features.2.1",
+      "expanded_channels": 144,
+      "in_channels": 24,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 128,
+      "out_channels": 24,
+      "parameters_per_removed_channel": 74,
+      "remove_count": 16,
+      "saved_parameters": 1184,
+      "squeeze_channels": 6,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.3.0",
+      "expanded_channels": 144,
+      "in_channels": 24,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 128,
+      "out_channels": 40,
+      "parameters_per_removed_channel": 106,
+      "remove_count": 16,
+      "saved_parameters": 1696,
+      "squeeze_channels": 6,
+      "stride": [
+        2,
+        2
+      ]
+    },
+    {
+      "block": "features.3.1",
+      "expanded_channels": 240,
+      "in_channels": 40,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 216,
+      "out_channels": 40,
+      "parameters_per_removed_channel": 130,
+      "remove_count": 24,
+      "saved_parameters": 3120,
+      "squeeze_channels": 10,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.4.0",
+      "expanded_channels": 240,
+      "in_channels": 40,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 216,
+      "out_channels": 80,
+      "parameters_per_removed_channel": 154,
+      "remove_count": 24,
+      "saved_parameters": 3696,
+      "squeeze_channels": 10,
+      "stride": [
+        2,
+        2
+      ]
+    },
+    {
+      "block": "features.4.1",
+      "expanded_channels": 480,
+      "in_channels": 80,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 424,
+      "out_channels": 80,
+      "parameters_per_removed_channel": 214,
+      "remove_count": 56,
+      "saved_parameters": 11984,
+      "squeeze_channels": 20,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.4.2",
+      "expanded_channels": 480,
+      "in_channels": 80,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 424,
+      "out_channels": 80,
+      "parameters_per_removed_channel": 214,
+      "remove_count": 56,
+      "saved_parameters": 11984,
+      "squeeze_channels": 20,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.5.0",
+      "expanded_channels": 480,
+      "in_channels": 80,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 424,
+      "out_channels": 112,
+      "parameters_per_removed_channel": 262,
+      "remove_count": 56,
+      "saved_parameters": 14672,
+      "squeeze_channels": 20,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.5.1",
+      "expanded_channels": 672,
+      "in_channels": 112,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 600,
+      "out_channels": 112,
+      "parameters_per_removed_channel": 310,
+      "remove_count": 72,
+      "saved_parameters": 22320,
+      "squeeze_channels": 28,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.5.2",
+      "expanded_channels": 672,
+      "in_channels": 112,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 600,
+      "out_channels": 112,
+      "parameters_per_removed_channel": 310,
+      "remove_count": 72,
+      "saved_parameters": 22320,
+      "squeeze_channels": 28,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.6.0",
+      "expanded_channels": 672,
+      "in_channels": 112,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 600,
+      "out_channels": 192,
+      "parameters_per_removed_channel": 390,
+      "remove_count": 72,
+      "saved_parameters": 28080,
+      "squeeze_channels": 28,
+      "stride": [
+        2,
+        2
+      ]
+    },
+    {
+      "block": "features.6.1",
+      "expanded_channels": 1152,
+      "in_channels": 192,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 1016,
+      "out_channels": 192,
+      "parameters_per_removed_channel": 510,
+      "remove_count": 136,
+      "saved_parameters": 69360,
+      "squeeze_channels": 48,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.6.2",
+      "expanded_channels": 1152,
+      "in_channels": 192,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 1016,
+      "out_channels": 192,
+      "parameters_per_removed_channel": 510,
+      "remove_count": 136,
+      "saved_parameters": 69360,
+      "squeeze_channels": 48,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.6.3",
+      "expanded_channels": 1152,
+      "in_channels": 192,
+      "kernel": [
+        5,
+        5
+      ],
+      "new_channels": 1016,
+      "out_channels": 192,
+      "parameters_per_removed_channel": 510,
+      "remove_count": 136,
+      "saved_parameters": 69360,
+      "squeeze_channels": 48,
+      "stride": [
+        1,
+        1
+      ]
+    },
+    {
+      "block": "features.7.0",
+      "expanded_channels": 1152,
+      "in_channels": 192,
+      "kernel": [
+        3,
+        3
+      ],
+      "new_channels": 1016,
+      "out_channels": 320,
+      "parameters_per_removed_channel": 622,
+      "remove_count": 136,
+      "saved_parameters": 84592,
+      "squeeze_channels": 48,
+      "stride": [
+        1,
+        1
+      ]
+    }
+  ],
+  "created_utc": "2026-10-09T09:31:30.169407+00:00",
+  "device": "CPU",
+  "expected_compressed_parameters": 3721424,
+  "expected_reduction_percent": 10.015939460998615,
+  "expected_removed_parameters": 414224,
+  "experiment": "2026-10-09_E003_kompresja_10proc_parametrow",
+  "forward_performed": false,
+  "last_step": {
+    "block": "features.7.0",
+    "remove_count": 136,
+    "saved_total": 414224
+  },
+  "python": "3.11.15",
+  "removed_channels": 1016,
+  "source_sha256": "9c4367957b4cbc114f605055afa16942b2d9c83c3aa30939631fba5965f2fc74",
+  "status": "structure_plan_only",
+  "target_removed_parameters": 413565,
+  "torch": "2.12.0+cu130",
+  "torchvision": "0.27.0+cu130",
+  "trained_model_compressed": false
+}
