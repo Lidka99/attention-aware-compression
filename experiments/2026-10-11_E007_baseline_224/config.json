@@ -1,0 +1,60 @@
+{
+  "amp": true,
+  "batch_per_gpu": 32,
+  "checkpoint_every": 5,
+  "color_jitter": {
+    "brightness": 0.15,
+    "contrast": 0.15,
+    "hue": 0.05,
+    "saturation": 0.15
+  },
+  "dataset": "TinyImageNet",
+  "epochs": 100,
+  "eval_batch_per_gpu": 64,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-11_E007_baseline_224",
+  "grad_clip": 1.0,
+  "image_size": 224,
+  "interpolation": "bicubic",
+  "label_smoothing": 0.1,
+  "literature_anchor": "Shahriar 2026 (arXiv:2607.01984): EfficientNet-B0 od zera, Tiny ImageNet 224x224, 100 epok cosine, scratch 100ep = 60,54%; tu adaptacja na 4 GPU: batch globalny 128, wd 0,01, warmup 5, bez early stoppingu",
+  "lr": 0.0003,
+  "min_lr": 3e-06,
+  "normalization_mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "normalization_std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "num_classes": 200,
+  "official_test_used": false,
+  "optimizer": "AdamW",
+  "protocol_version": "1.0",
+  "reserve_used": false,
+  "rrc_ratio": [
+    0.9,
+    1.1
+  ],
+  "rrc_scale": [
+    0.8,
+    1.0
+  ],
+  "seed": 42,
+  "split_seed": 20261010,
+  "status": "frozen",
+  "tf32": false,
+  "training_executed": false,
+  "warmup_epochs": 5,
+  "weight_decay": 0.01,
+  "workers": 3,
+  "world_size": 4
+}
