@@ -1,0 +1,47 @@
+{
+  "amp": true,
+  "batch_per_gpu": 32,
+  "dataset": "TinyImageNet",
+  "epochs": 100,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-10_E005_tiny_imagenet_od_zera",
+  "image_size": 96,
+  "literature_anchor": "Shahriar 2026 (arXiv:2607.01984): EfficientNet-B0 od zera, 100 epok, cosine, 90k/10k split, 224x224; tu adaptacja na 96x96",
+  "lr": 0.001,
+  "normalization_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "normalization_std": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "num_classes": 200,
+  "official_test_used": false,
+  "protocol_version": "1.0",
+  "reserve_used": false,
+  "rrc_ratio": [
+    0.75,
+    1.3333333333333333
+  ],
+  "rrc_scale": [
+    0.6,
+    1.0
+  ],
+  "seed": 42,
+  "split_seed": 20261010,
+  "status": "frozen",
+  "tf32": false,
+  "training_executed": false,
+  "warmup_epochs": 5,
+  "weight_decay": 0.01,
+  "workers": 2,
+  "world_size": 4
+}
