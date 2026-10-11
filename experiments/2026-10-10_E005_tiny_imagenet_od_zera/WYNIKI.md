@@ -68,6 +68,14 @@ Jeden seed; dev z tego samego zbioru (oficjalny val nietknięty);
 przeuczenie obecne (ogranicza „sufit" dev); brak porównania z literaturą
 1:1 (adaptacja rozdzielczości). Nie oceniano testu ani rezerwy.
 
+**Uwaga o losowości (wykryta w przeglądzie po biegu):** w
+[train_tiny.py](train_tiny.py) inicjalizacja modelu (linia ~141) następuje
+przed `seed_all(cfg['seed'] + rank)` (linia ~147), a seed bazowy nie jest
+ustawiony przed budową sieci. Zapisany `last.pt` jest zweryfikowany
+hashem i w pełni wystarcza jako baseline do E006, ale **nie twierdzimy,
+że ponowny trening z seed=42 odtworzy identyczne wagi**. Kolejny baseline
+(224×224) naprawi kolejność seedowania; zakończonego E005 nie zmieniamy.
+
 ## Następny krok
 
 [E006 — badanie predykcyjne kryterium z bramek SE](../2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md),
