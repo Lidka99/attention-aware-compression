@@ -17,6 +17,6 @@ Sprawdzić, czy zachowanie atencji kanałowej pomaga wybierać kanały do połą
 
 ## Najbliższy krok
 
-Decyzja użytkowniczki, co dalej po wyniku kontrolnym E004. Możliwe kierunki (żadnego nie uruchamiam automatycznie): (a) ten sam protokół przy większej redukcji, np. 20–30%, gdzie wybór kanałów może zacząć odgrywać rolę; (b) porównanie przy braku dostrajania, gdzie widać sam efekt selekcji; (c) świadome zamknięcie wątku attention-aware na tym pilocie. E003 i E004 pozostają niezmienione. Rezerwy ani testu nie używamy.
+Użytkowniczka wybrała: test 30% redukcji oraz nowy baseline na Tiny ImageNet (E005, trwa). Ustalenie 2026-10-11: cel ogólny to **publikacja**, więc po E005 planujemy (a) szybki test 30% na obecnym baseline — sygnał, czy selekcja w ogóle zaczyna mieć znaczenie, oraz (b) docelowo baseline **224×224 z mocniejszą recepturą przeciw przeuczeniu** (mixup/cutmix, random erasing, label smoothing) do wyników porównywalnych z literaturą. Właściwa kontrybucja wymaga jeszcze nowego kryterium opartego na bramkach SE (zależnych od obrazu) i wygranej z kontrolą po z; decyzja o kolejności należy do użytkowniczki. E003/E004 pozostają niezmienione, rezerwy i testu nie używamy. [Rejestr decyzji](docs/DECISIONS.md).
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.
