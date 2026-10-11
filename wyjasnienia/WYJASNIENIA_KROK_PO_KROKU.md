@@ -368,3 +368,20 @@ wymagałoby nowego uzasadnienia — naturalny kierunek to większa redukcja
 (np.20–30%), gdzie selekcja może zacząć mieć znaczenie. Decyzję o dalszym
 kierunku podejmuje użytkowniczka; nic nie uruchamiamy automatycznie.
 E003/E004 pozostają niezmienione, test i rezerwa nieużywane.
+
+## 2026-10-11 — wynik E005 i decyzja o nowym kryterium
+
+E005 zakończony: [raport](../experiments/2026-10-10_E005_tiny_imagenet_od_zera/WYNIKI.md),
+run `20261011T002030Z_3c93ed8_seed42_w7hggu4o`. EfficientNet-B0 od zera
+na Tiny ImageNet, 96×96, 100 epok, 4 GPU, 3h10min: **dev top-1 51,53%**,
+train 98,5% — przeuczenie nadal obecne, ale baseline jest użyteczny.
+Literatura przy 224×224 osiąga ~60%; nasza rozdzielczość to adaptacja.
+
+Użytkowniczka potwierdziła cel **publikacyjny** i wybrała: zamiast testu
+30% od razu zaprojektować **nowe kryterium z bramek SE** (E006). Szkic:
+[OPIS E006](../experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md) —
+najpierw tanie badanie predykcyjne (czy sygnały z zachowania bramek
+przewidują rzeczywistą szkodę scalenia lepiej niż kontrola po z), potem
+dopiero ewentualna pełna kompresja. Pod publikację planowany jest osobny
+baseline 224×224 z mocniejszą recepturą (mixup/cutmix, random erasing,
+label smoothing) — wpis w docs/DECISIONS.md. Rezerwa i test nieużywane.
