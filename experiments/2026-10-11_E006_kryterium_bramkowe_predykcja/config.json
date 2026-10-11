@@ -22,6 +22,7 @@
   "image_size": 96,
   "official_test_used": false,
   "pairs": {
+    "binning": "quantile",
     "bins": 5,
     "count": 150,
     "per_bin": 30,
@@ -29,7 +30,7 @@
   },
   "primary_damage": "block_relative_mse",
   "primary_signal": "g_pert",
-  "protocol_version": "1.0",
+  "protocol_version": "1.1",
   "reserve_used": false,
   "sample_seed": 20261012,
   "seed": 42,

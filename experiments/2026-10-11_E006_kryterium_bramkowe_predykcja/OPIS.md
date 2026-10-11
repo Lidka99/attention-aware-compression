@@ -1,7 +1,8 @@
 # 2026-10-11_E006_kryterium_bramkowe_predykcja
 
-Wersja protokołu: **0.2-draft** (po przeglądzie krytycznym; v0.1 zachowane
-w historii Git). Status: projekt; nic nieuruchomione.
+Wersja wykonania: **1.1** (zamrożona; config `protocol_version` 1.1).
+Historia: 0.1 → 0.2-draft → 1.0 (pierwszy bieg nieudany) → **1.1**;
+szczegóły w sekcji „Historia wersji". Status wykonania podaje manifest biegu.
 
 Badanie **predykcyjne** (bez pełnej kompresji): czy zachowanie bramek SE
 przewiduje rzeczywistą szkodę scalenia pary kanałów **ponad** podobieństwo
@@ -31,11 +32,17 @@ sygnału ponad z i zostanie zaraportowany.
 - **K = 150 par rozłącznych** (300 z 480 kanałów; reszta nieużywana) —
   rozłączność usuwa główną zależność między parami, więc bootstrap po
   parach jest uprawniony; pokrycie kanałów raportujemy.
-- Losowanie deterministyczne (seed 20261012) z **kubełków `s_post`**
-  (5 kubełków równoszerokich × 30 par) — `s_post` liczone na A dla
-  wszystkich par; ma dawać spektrum od par mało do bardzo podobnych.
-  Deklaracja: kubełki po `s_post` (kontrola główna), nie po h, żeby
-  wewnątrz kubełka zmienność bramek nie była tylko proxy `s_post`.
+- Losowanie deterministyczne (seed 20261012) z **kubełków kwantylowych
+  `s_post`** (5 kubełków równej liczności × 30 par) — podział po randze
+  `s_post` liczonego na A dla wszystkich par; ma dawać spektrum od par
+  mało do bardzo podobnych. Deklaracja: kubełki po `s_post` (kontrola
+  główna), nie po h, żeby wewnątrz kubełka zmienność bramek nie była
+  tylko proxy `s_post`. **Korekta 1.1:** wersja 1.0 używała kubełków
+  równych szerokości; rozkład `s_post` jest skrajnie skupiony (mediana
+  0,0076; 110 216 z 114 960 par w jednym kubełku) i w najwyższym kubełku
+  było 276 par na 24 kanałach (maks. 12 par rozłącznych przy wymaganych
+  30) — bieg 1.0 nie mógł się udać. Zmiana jest wymuszona wykonalnością,
+  nie wynikiem: w biegu 1.0 żadna szkoda nie została policzona.
 
 ## Szkoda rzeczywista (ground truth, na B)
 
@@ -105,3 +112,18 @@ budżety, dostrajanie jak w E004). Porażka zamyka kierunek bramek.
    (hashe baseline'u i danych wpisane przed uruchomieniem).
 3. Uruchomienie, weryfikacja artefaktów, raport WYNIKI.md z jedną
    decyzją o dalszym kierunku.
+
+## Historia wersji
+
+- **1.0** (config `protocol_version` 1.0, commit dc7b47f): pierwsze
+  uruchomienie `runs/E006/20261011T051120Z_dc7b47f_seed42_tl2bv200`
+  **nieudane** — `sample_disjoint_pairs` zgłosił niedobór par w kubełkach
+  równych szerokości `[3, 4]` (osiągnięto `[30, 30, 30, 10, 4]`); żadna
+  szkoda nie została policzona; run zachowany jako failed.
+- **1.1**: kubełki kwantylowe (równej liczności) zamiast równoszerokich,
+  K=150 i kryterium oceny bez zmian; `pairs.binning = "quantile"` w
+  configu; skrócony timeout NCCL (30→10 min, tylko szybsze sprzątanie po
+  błędzie). Weryfikacja na zapisanych aktywacjach nieudanego biegu: każdy
+  kubełek ma ~22 992 kandydatów i pojemność ~230 par rozłącznych;
+  symulacja algorytmu daje 5×30 = 150 par i 300 kanałów. Decyzja
+  zapisana w [docs/DECISIONS.md](../../docs/DECISIONS.md).

@@ -13,8 +13,8 @@ Modul daje deterministyczne, czyste funkcje CPU do:
 
 1. policzenia cosinusow wszystkich par kanalow ``c < d`` na globalnie
    sklejonych wektorach kanalow (``all_pair_cosines``);
-2. wyboru rozlacznych par rozlozonych po kubelkach ``s_post``
-   (``sample_disjoint_pairs``);
+2. wyboru rozlacznych par rozlozonych po kubelkach kwantylowych
+   (rownej liczności) ``s_post`` (``sample_disjoint_pairs``);
 3. dopasowania wspolczynnikow scalenia ``alpha``, ``beta`` (``fit_alpha_beta``);
 4. policzenia sygnalow par: pierwszorzednego ``g_pert`` i wtornych
    ``s_post``, ``s_pre``, ``g_corr``, ``g_lstd``, ``g_flip``, ``g_amp``
@@ -166,15 +166,21 @@ def all_pair_cosines(maps_a):
 # --------------------------------------------------------------------------- #
 # 2) Rozlaczne pary po kubelkach s_post
 # --------------------------------------------------------------------------- #
-def sample_disjoint_pairs(ci, di, s_post, bins=5, per_bin=30, seed=20261012):
-    """Wybor par rozlacznych kanalowo z kubelkow rownoszerokich po ``s_post``.
+def sample_disjoint_pairs(ci, di, s_post, bins=5, per_bin=30, seed=20261012,
+                          binning="quantile"):
+    """Wybor par rozlacznych kanalowo z kubelkow kwantylowych po ``s_post``.
 
-    Kubełki maja rowne szerokosci miedzy ``min(s_post)`` i ``max(s_post)``.
-    W kazdym kubelku kandydaci sa tasowani RNG z ``seed`` i przyjmowani
-    zachlannie, o ile zaden z kanalow nie jest juz uzyty (globalny zbior
-    ``used``). Pary ``s_post = NaN`` sa pomijane. Wynik (``K, 2``, ``int64``)
-    jest posortowany po ``(c, d)``. Gdy w jakimkolwiek kubelku nie udalo sie
-    zebrac ``per_bin`` par, podnoszony jest ``ValueError`` z licznikami.
+    Podzial na ``bins`` kubelkow **rownej liczności** (kwantyle = rangi):
+    pary sa sortowane po ``s_post`` i dzielone na rowne czesci. Wersja 1.0
+    uzywala kubelkow rownych szerokosci i nie mogla zebrac ``per_bin`` par
+    rozlacznych w skrajnych kubelkach, bo rozklad ``s_post`` jest silnie
+    skosny (nieudany bieg E006 1.0). W kazdym kubelku kandydaci sa tasowani
+    RNG z ``seed`` i przyjmowani zachlannie, o ile zaden z kanalow nie jest
+    juz uzyty (globalny zbior ``used``). Pary ``s_post = NaN`` sa pomijane.
+    Wynik (``K, 2``, ``int64``) jest posortowany po ``(c, d)``. Gdy w
+    jakimkolwiek kubelku nie udalo sie zebrac ``per_bin`` par, podnoszony
+    jest ``ValueError`` z licznikami. ``binning``: obslugiwane tylko
+    ``"quantile"``.
     """
     ci = np.asarray(ci, dtype=np.int64).ravel()
     di = np.asarray(di, dtype=np.int64).ravel()
@@ -187,19 +193,19 @@ def sample_disjoint_pairs(ci, di, s_post, bins=5, per_bin=30, seed=20261012):
     per_bin = int(per_bin)
     if bins < 1 or per_bin < 1:
         raise ValueError("bins i per_bin musza byc >= 1")
+    if binning != "quantile":
+        raise ValueError('binning: obslugiwane tylko "quantile", jest %r' % (binning,))
 
     finite = np.isfinite(s)
-    if not np.any(finite):
+    n_finite = int(np.count_nonzero(finite))
+    if n_finite == 0:
         raise ValueError("s_post: brak skonczonych wartosci do kubelkowania")
-    s_f = s[finite]
-    lo = float(s_f.min())
-    hi = float(s_f.max())
-    if hi <= lo:
-        bin_of = np.zeros(ci.size, dtype=np.int64)
-    else:
-        scaled = (s - lo) / (hi - lo) * bins
-        bin_of = np.minimum(np.floor(scaled).astype(np.int64), bins - 1)
-        bin_of = np.where(finite, bin_of, -1)
+    finite_idx = np.flatnonzero(finite)
+    sorted_idx = finite_idx[np.argsort(s[finite_idx], kind="mergesort")]
+    ranks = np.empty(n_finite, dtype=np.int64)
+    ranks[sorted_idx] = np.arange(n_finite, dtype=np.int64)
+    bin_of = np.full(ci.size, -1, dtype=np.int64)
+    bin_of[finite_idx] = np.minimum(ranks * bins // n_finite, bins - 1)
 
     order = np.lexsort((di, ci))
     rng = np.random.default_rng(seed)
@@ -227,7 +233,7 @@ def sample_disjoint_pairs(ci, di, s_post, bins=5, per_bin=30, seed=20261012):
         raise ValueError(
             "sample_disjoint_pairs: niedobor par w kubelkach "
             f"{short}; osiagnieto {achieved} przy per_bin={per_bin}, "
-            f"bins={bins}, seed={seed}"
+            f"bins={bins}, seed={seed}, binning={binning}"
         )
     selected.sort(key=lambda pair: (pair[0], pair[1]))
     return np.asarray(selected, dtype=np.int64)
@@ -639,7 +645,9 @@ def self_test():
     Sprawdza: (a) folding zduplikowanego kanalu z ``alpha=beta=1`` zachowuje
     wyjscie bloku; (b) ``g_pert`` analityczne = numeryczna zmiana preaktywacji
     fc1 po foldzie; (c) ``spearman`` rosnacy = 1; (d) bootstrap identycznych
-    sygnalow daje ``delta=0``; (e) zerowe normy daja ``NaN``. Zwraca slownik
+    sygnalow daje ``delta=0``; (e) zerowe normy daja ``NaN``; (f) skosny
+    ``s_post`` jak w nieudanym biegu 1.0 daje 5x30 par rozlacznych przy
+    kubelkach kwantylowych. Zwraca slownik
     liczb; podnosi ``AssertionError`` przy niepowodzeniu.
     """
     from torchvision.models import efficientnet_b0
@@ -669,6 +677,21 @@ def self_test():
     assert np.all(np.isfinite(cos[~touched])), "(e) poprawna para dala NaN"
     nums["zero_norm_nan_pairs"] = int(np.count_nonzero(touched))
     nums["zero_norm_finite_pairs"] = int(np.count_nonzero(~touched))
+
+    n_ch = 480
+    ci_t, di_t = np.triu_indices(n_ch, k=1)
+    s_t = 0.02 * rng.standard_normal(ci_t.size)
+    clique = np.sort(rng.permutation(n_ch)[:24])
+    in_clique = np.isin(ci_t, clique) & np.isin(di_t, clique)
+    s_t[in_clique] = 0.9 + 0.05 * rng.standard_normal(int(in_clique.sum()))
+    pairs_t = sample_disjoint_pairs(ci_t, di_t, s_t, bins=5, per_bin=30, seed=20261012)
+    used_t = np.unique(pairs_t)
+    assert pairs_t.shape == (150, 2), f"(f) rozlaczne pary = {pairs_t.shape}"
+    assert used_t.size == 300, f"(f) uzyte kanaly = {used_t.size}"
+    assert np.all(pairs_t[:, 0] < pairs_t[:, 1]), "(f) pary bez c < d"
+    assert np.all(np.diff(pairs_t[:, 0] * n_ch + pairs_t[:, 1]) > 0), "(f) kolejnosc par"
+    nums["quantile_skew_pairs"] = int(pairs_t.shape[0])
+    nums["quantile_skew_channels"] = int(used_t.size)
 
     base = efficientnet_b0(weights=None, num_classes=200)
     in_ch = base.features[4][1].block[0][0].in_channels
@@ -743,12 +766,15 @@ def self_test():
     )
     print(
         "  spearman_increasing={si:.1f}  bootstrap_delta={bd:.1f}  "
-        "ci95=[{lo:.1f}, {hi:.1f}]  zero_norm_nan_pairs={zn}".format(
+        "ci95=[{lo:.1f}, {hi:.1f}]  zero_norm_nan_pairs={zn}  "
+        "quantile_skew_pairs={qp}  quantile_skew_channels={qc}".format(
             si=nums["spearman_increasing"],
             bd=nums["bootstrap_delta"],
             lo=nums["bootstrap_ci95_low"],
             hi=nums["bootstrap_ci95_high"],
             zn=nums["zero_norm_nan_pairs"],
+            qp=nums["quantile_skew_pairs"],
+            qc=nums["quantile_skew_channels"],
         )
     )
     return nums

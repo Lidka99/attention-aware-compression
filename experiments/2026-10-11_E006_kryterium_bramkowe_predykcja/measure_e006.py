@@ -150,12 +150,12 @@ def main():
     torch.backends.cudnn.deterministic = True
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
-    dist.init_process_group('nccl', timeout=timedelta(minutes=30), device_id=device)
+    dist.init_process_group('nccl', timeout=timedelta(minutes=10), device_id=device)
     run = args.run_dir.resolve()
     require(run.is_dir() and not (run / 'result.json').exists(), 'Fresh run directory required')
     try:
         cfg = json.loads(args.config.read_text())
-        require(cfg['status'] == 'frozen' and cfg['protocol_version'] == '1.0', 'Unfrozen config')
+        require(cfg['status'] == 'frozen' and cfg['protocol_version'] == '1.1', 'Unfrozen config')
         baseline = ROOT / cfg['baseline']['path']
         if rank == 0:
             require(digest(baseline) == cfg['baseline']['sha256'], 'Baseline hash mismatch')
@@ -217,7 +217,8 @@ def main():
             np.savez_compressed(run / 'b_merged.npz', block_in=merged_b['block_in'])
             ci, di, s_post_all = all_pair_cosines(merged_a['z'])
             pairs = sample_disjoint_pairs(ci, di, s_post_all, bins=cfg['pairs']['bins'],
-                                          per_bin=cfg['pairs']['per_bin'], seed=cfg['pairs']['seed'])
+                                          per_bin=cfg['pairs']['per_bin'], seed=cfg['pairs']['seed'],
+                                          binning=cfg['pairs']['binning'])
             require(pairs.shape == (cfg['pairs']['count'], 2), 'Pair count mismatch')
             h_a, z_a, a_a = merged_a['h'], merged_a['z'], merged_a['a']
             g_a = h_a.mean(axis=(2, 3))

@@ -39,7 +39,7 @@ def main():
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit code/protocol before launch')
     cfg = json.loads((HERE / 'config.json').read_text())
-    if cfg['status'] != 'frozen' or cfg['protocol_version'] != '1.0':
+    if cfg['status'] != 'frozen' or cfg['protocol_version'] != '1.1':
         raise RuntimeError('Unfrozen config')
     baseline = ROOT / cfg['baseline']['path']
     if digest(baseline) != cfg['baseline']['sha256']:

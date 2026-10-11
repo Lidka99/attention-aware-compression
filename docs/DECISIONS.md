@@ -39,3 +39,29 @@ Konsekwencje:
   od razu baseline 224 z mocniejszą recepturą) zostaje otwarta i wymaga
   wyboru użytkowniczki.
 - Nie zmieniamy zamrożonego E005 w trakcie jego trwania.
+
+## 2026-10-11 — E006: poprawka losowania par po nieudanym biegu 1.0
+
+Kontekst: bieg `runs/E006/20261011T051120Z_dc7b47f_seed42_tl2bv200`
+(protokół 1.0, commit dc7b47f) zakończył się niepowodzeniem na rank 0:
+`sample_disjoint_pairs: niedobor par w kubelkach [3, 4]; osiagnieto
+[30, 30, 30, 10, 4]`. Żadna szkoda nie została policzona — bieg padł przed
+pomiarem, więc zmiana nie może być zależna od wyników.
+
+Dowód z zapisanych aktywacji tego biegu (1000 obrazów A, ten sam seed):
+`sample_disjoint_pairs` używał kubełków **równych szerokości**, a rozkład
+`s_post` jest skrajnie skupiony (mediana 0,0076; 110 216 z 114 960 par
+w jednym kubełku). Najwyższy kubełek miał 276 par na 24 kanałach — maks.
+12 par rozłącznych przy wymaganych 30. Schemat był niewykonalny, nie jest
+to problem danych ani modelu.
+
+Decyzja (za zgodą użytkowniczki, rozmowa 2026-10-11): kubełki
+**kwantylowe** (równej liczności, 5×30 par), K=150 i kryterium oceny bez
+zmian; `pairs.binning = "quantile"` w configu, protokół 1.1. Na tych samych
+aktywacjach każdy kubełek ma ~22 992 kandydatów i pojemność ~230 par
+rozłącznych; symulacja algorytmu daje 5×30 = 150 par i 300 kanałów.
+Skrócono też timeout NCCL (30→10 min) — tylko szybsze sprzątanie po
+błędzie, bez wpływu na wynik.
+
+Bieg 1.0 pozostaje udokumentowany jako failed. Ponowny pomiar: nowy katalog
+w `runs/E006`, ten sam baseline i te same seedy.
