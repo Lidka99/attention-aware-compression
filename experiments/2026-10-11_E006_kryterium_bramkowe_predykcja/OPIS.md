@@ -63,7 +63,8 @@ Pierwszorzędny (jeden, pre-registrowany):
 Wtórne (eksploracja, oznaczone jawnie, bez wybierania po wyniku):
 `s_post` (kontrola), `s_pre`, `g_corr` (cosinus profili a_c,a_d),
 `g_lstd` (std log-stosunku wag), `g_flip` (częstość zmiany znaku
-a_c−a_d), `g_amp` (korelacja a_c,a_d ważona h), `random` (seed stały).
+a_c−a_d), `g_amp` (cosinus h ważony min(mean a_c, mean a_d) — stała
+reguła), `random` (seed stały).
 
 ## Kryterium oceny (ustalone przed uruchomieniem)
 
@@ -78,8 +79,8 @@ a_c−a_d), `g_amp` (korelacja a_c,a_d ważona h), `random` (seed stały).
    (rodzina wtórna, kontrola FWER w przybliżeniu); bez wpływu na decyzję.
 
 Moc: przy K=150 par dolna granica wykrywalnej różnicy korelacji to
-~0,15–0,20 (CI). Minimalny efekt wykrywalny raportujemy po symulacji
-CPU w protokole freeze; nie dobieramy progu po wynikach.
+~0,15–0,20. Minimalny efekt wykrywalny raportujemy po biegu z szerokości
+przedziału bootstrapu; nie dobieramy progu po wynikach.
 
 ## Cztery GPU
 

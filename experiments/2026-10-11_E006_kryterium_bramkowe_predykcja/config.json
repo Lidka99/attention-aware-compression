@@ -1,0 +1,40 @@
+{
+  "a_per_class": 5,
+  "baseline": {
+    "classes": 200,
+    "path": "runs/E005/20261011T002030Z_3c93ed8_seed42_w7hggu4o/last.pt",
+    "sha256": "eb03bb9b9709265134abddceec724243f6a96d2426a30683e2939e0a4531f415"
+  },
+  "block": "features.4.1",
+  "bootstrap": {
+    "reps": 10000,
+    "seed": 20261013
+  },
+  "dev_used": false,
+  "eval_batch_per_gpu": 64,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-11_E006_kryterium_bramkowe_predykcja",
+  "image_size": 96,
+  "official_test_used": false,
+  "pairs": {
+    "bins": 5,
+    "count": 150,
+    "per_bin": 30,
+    "seed": 20261012
+  },
+  "primary_damage": "block_relative_mse",
+  "primary_signal": "g_pert",
+  "protocol_version": "1.0",
+  "reserve_used": false,
+  "sample_seed": 20261012,
+  "seed": 42,
+  "splits_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+  "status": "frozen",
+  "workers": 2,
+  "world_size": 4
+}

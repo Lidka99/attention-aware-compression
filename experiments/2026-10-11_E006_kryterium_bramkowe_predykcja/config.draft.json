@@ -1,0 +1,32 @@
+{
+  "experiment": "2026-10-11_E006_kryterium_bramkowe_predykcja",
+  "protocol_version": "0.1-draft",
+  "status": "draft",
+  "baseline": {
+    "path": "runs/E005/20261011T002030Z_3c93ed8_seed42_w7hggu4o/last.pt",
+    "sha256": "eb03bb9b9709265134abddceec724243f6a96d2426a30683e2939e0a4531f415",
+    "classes": 200
+  },
+  "splits_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+  "block": "features.4.1",
+  "image_size": 96,
+  "a_per_class": 5,
+  "sample_seed": 20261012,
+  "pairs": {"count": 150, "bins": 5, "per_bin": 30, "seed": 20261012},
+  "bootstrap": {"reps": 10000, "seed": 20261013},
+  "primary_signal": "g_pert",
+  "primary_damage": "block_relative_mse",
+  "eval_batch_per_gpu": 64,
+  "workers": 2,
+  "world_size": 4,
+  "seed": 42,
+  "official_test_used": false,
+  "reserve_used": false,
+  "dev_used": false,
+  "expected_versions": {
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130",
+    "numpy": "2.4.6"
+  }
+}
