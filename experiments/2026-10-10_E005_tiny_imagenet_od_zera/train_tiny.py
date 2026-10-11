@@ -114,8 +114,8 @@ def main():
     torch.backends.cudnn.allow_tf32 = False
     dist.init_process_group('nccl', timeout=timedelta_minutes(), device_id=device)
     run = args.run_dir.resolve()
-    require(run.is_dir() and not (run / 'manifest.json').exists(),
-            'Use a fresh empty run directory')
+    require(run.is_dir() and not (run / 'metrics.jsonl').exists(),
+            'Use a fresh run directory without previous metrics')
     try:
         cfg = json.loads(args.config.read_text())
         if args.epochs:
