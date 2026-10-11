@@ -9,7 +9,9 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 | E003 — kompresja 10% parametrów całej sieci | Completed bez dostrajania; 3 721 424 param./model | [Wyniki i wykresy](2026-10-09_E003_kompresja_10proc_parametrow/WYNIKI.md), [protokół](2026-10-09_E003_kompresja_10proc_parametrow/PROTOKOL_v1.md), [wyjaśnienie](2026-10-09_E003_kompresja_10proc_parametrow/WYJASNIENIE.md) |
 | E004 — wspólne dostrajanie po kompresji | Completed; wszystkie warianty ~67%, brak przewagi selekcji | [Wyniki](2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md), [protokół](2026-10-10_E004_wspolne_dostrajanie/PROTOKOL_v1.md), [wyjaśnienie](2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md) |
 | E005 — Tiny ImageNet od zera | Completed; dev 51,53% (96×96, 100 epok) | [Wyniki](2026-10-10_E005_tiny_imagenet_od_zera/WYNIKI.md), [protokół](2026-10-10_E005_tiny_imagenet_od_zera/PROTOKOL_v1.md) |
-| E006 — kryterium z bramek SE (predykcja) | Draft; nieuruchomiony | [Projekt](2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md) |
+| E006 — kryterium z bramek SE (predykcja) | Completed; wynik negatywny (g_pert ≈ 0 ponad s_post) | [Wyniki](2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md), [protokół](2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md) |
+
+Uzupełnienie E006, 2026-10-11: [kontrola FWER sygnałów wtórnych (analiza na zamrożonym pairs.csv)](2026-10-11_E006_kryterium_bramkowe_predykcja/analizy/2026-10-11_kontrola_FWER_wtornych/WYNIKI.md), completed; bez wpływu na decyzję pierwszorzędną.
 
 Uzupełnienie E002, 2026-10-02: [kontrola stałej średniej, wynik i wykresy](2026-10-01_E002_obserwacja_se/analizy/2026-10-02_skladowa_stala/WYNIKI.md), completed. CPU na istniejących mapach, bez nowego odczytu modelu.
 

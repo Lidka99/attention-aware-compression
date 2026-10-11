@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001–E005 zakończone. E004: po równym dostrajaniu wybór kanałów nie dał przewagi (wszystkie warianty ~67%, RANDOM dorównał). E005: nowy baseline Tiny ImageNet od zera — dev 51,53% przy 96×96. Trwa projekt E006: badanie kryterium z bramek SE. Nowość badawcza niepotwierdzona.
+Status: E001–E006 zakończone. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005: baseline Tiny ImageNet od zera — dev 51,53% przy 96×96. E006: sygnał z bramek SE nie przewiduje szkody scalenia ponad podobieństwo po SE (primary_passed=false); wątek zamknięty. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -22,7 +22,9 @@ Po 120 epokach SGD wszystkie warianty ~67%; POST−PRE +0,36 pp, przedział [−
 [protokół](experiments/2026-10-10_E005_tiny_imagenet_od_zera/PROTOKOL_v1.md).
 Dev top-1 51,53% (100 epok, 3h10min na 4 GPU); przeuczenie obecne; pod publikację planowany trening 224×224 z mocniejszą recepturą.
 
-**[E006 — projekt badania kryterium z bramek SE](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md)** (draft, nieuruchomiony).
+**[E006 — wynik badania kryterium z bramek SE](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md)**,
+[protokół](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md).
+Wynik negatywny: g_pert ≈ 0 ponad s_post; wątek bramek zamknięty.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

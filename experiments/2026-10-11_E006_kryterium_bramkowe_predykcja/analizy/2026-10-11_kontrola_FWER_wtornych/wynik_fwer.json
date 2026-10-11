@@ -1,0 +1,31 @@
+{
+  "damage": "block_relative_mse",
+  "experiment": "2026-10-11_E006_kryterium_bramkowe_predykcja",
+  "max_statistic_observed": 0.18708920396462064,
+  "max_statistic_p_fwer": 0.0805919408059194,
+  "note": "rodzina wtorna; kontrola FWER w przyblizeniu; bez wplywu na decyzje",
+  "observed_spearman": {
+    "g_amp": -0.16767500777812347,
+    "g_corr": 0.15989155073558825,
+    "g_flip": 0.020536480214863175,
+    "g_lstd": -0.18708920396462064,
+    "s_pre": -0.16867771900973377
+  },
+  "permutation_p_two_sided": {
+    "g_amp": 0.038896110388961104,
+    "g_corr": 0.0461953804619538,
+    "g_flip": 0.8015198480151985,
+    "g_lstd": 0.022097790220977902,
+    "s_pre": 0.038396160383961604
+  },
+  "reps": 10000,
+  "run_id": "20261011T053842Z_eb6b660_seed42_c5gen8pp",
+  "seed": 20261014,
+  "signals": [
+    "s_pre",
+    "g_corr",
+    "g_lstd",
+    "g_flip",
+    "g_amp"
+  ]
+}

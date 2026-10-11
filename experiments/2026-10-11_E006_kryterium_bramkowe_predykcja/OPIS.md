@@ -127,3 +127,9 @@ budżety, dostrajanie jak w E004). Porażka zamyka kierunek bramek.
   kubełek ma ~22 992 kandydatów i pojemność ~230 par rozłącznych;
   symulacja algorytmu daje 5×30 = 150 par i 300 kanałów. Decyzja
   zapisana w [docs/DECISIONS.md](../../docs/DECISIONS.md).
+
+## Wynik
+
+**Negatywny (2026-10-11):** [WYNIKI.md](WYNIKI.md) — `g_pert` nie
+przewiduje szkody ponad `s_post` (`primary_passed = false`); wątek bramek
+zamknięty zgodnie z protokołem.

@@ -65,3 +65,22 @@ błędzie, bez wpływu na wynik.
 
 Bieg 1.0 pozostaje udokumentowany jako failed. Ponowny pomiar: nowy katalog
 w `runs/E006`, ten sam baseline i te same seedy.
+
+## 2026-10-11 — E006 zakończony: wynik negatywny dla kryterium bramek SE
+
+Bieg `runs/E006/20261011T053842Z_eb6b660_seed42_c5gen8pp` (protokół 1.1,
+commit eb6b660, 150 par / 300 kanałów, bez dev/rezerwy/testu): kontrola
+dodatnia ρ(`s_post`, szkoda) = −0,155 (kierunek zgodny), ρ(`g_pert`) =
++0,044, Δρ = +0,199 z CI [−0,020; +0,411] → `primary_passed = false`;
+korelacja cząstkowa `g_pert` po `s_post` = +0,047. Sygnały wtórne na
+poziomie szumu (kontrola FWER p = 0,081).
+
+Konsekwencja zgodna z protokołem: **wątek bramek SE jako sygnału ponad
+`s_post` zostaje zamknięty**; brak podstaw do pełnej kompresji E007 z
+kryterium bramkowym. Dalszy kierunek — (a) szybki test 30% redukcji na
+obecnym baseline vs (b) baseline 224×224 pod publikację — pozostaje
+decyzją użytkowniczki (zapisana w AKTUALNY_PLAN.md).
+
+Dokumentacja: [WYNIKI.md](../experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md).
+Przebieg: nieudany bieg 1.0 `...051120Z`, przerwany start techniczny
+`...053110Z` (oba zachowane), bieg końcowy `...053842Z`.
