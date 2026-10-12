@@ -50,7 +50,7 @@ def fig_e001_curve():
     ax.set_ylim(0, 100)
     ax.legend(loc='center right')
     ax.grid(alpha=0.3)
-    save(fig, 'fig_e001_curve.png')
+    save(fig, 'fig_baseline_cifar.png')
 
 
 def fig_e005_e007_curves():
@@ -67,7 +67,7 @@ def fig_e005_e007_curves():
     ax.set_ylim(0, 65)
     ax.legend(loc='lower right')
     ax.grid(alpha=0.3)
-    save(fig, 'fig_e005_e007_curves.png')
+    save(fig, 'fig_baselines_tiny.png')
 
 
 def fig_e003_raw():
@@ -82,7 +82,7 @@ def fig_e003_raw():
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(0, 75)
     ax.grid(axis='y', alpha=0.3)
-    save(fig, 'fig_e003_raw.png')
+    save(fig, 'fig_kompresja_10_cifar.png')
 
 
 def fig_repair():
@@ -100,7 +100,7 @@ def fig_repair():
     ax.annotate('RANDOM dorownal: POST-PRE +0,36 pp,\nCI [-0,30; +1,02]',
                 xy=(0.5, 0.05), xycoords='axes fraction', ha='center', fontsize=9,
                 bbox=dict(boxstyle='round', fc='#fff7e6', ec='#cc9900'))
-    save(fig, 'fig_repair.png')
+    save(fig, 'fig_dostrajanie_cifar.png')
 
 
 def fig_e006():
@@ -126,7 +126,7 @@ def fig_e006():
     ax.set_xlim(-0.15, 0.5)
     ax.set_title('E006: test glowny (95% CI) - dolna granica < 0')
     ax.grid(axis='x', alpha=0.3)
-    save(fig, 'fig_e006.png')
+    save(fig, 'fig_bramki_se.png')
 
 
 def fig_e008_stage1():
@@ -145,7 +145,7 @@ def fig_e008_stage1():
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(0, 68)
     ax.grid(axis='y', alpha=0.3)
-    save(fig, 'fig_e008_stage1.png')
+    save(fig, 'fig_kompresja_224_etap1.png')
 
 
 def fig_e008_stage2_base():
@@ -161,7 +161,7 @@ def fig_e008_stage2_base():
     ax.set_ylim(50, 62)
     ax.legend(loc='lower right', fontsize=9)
     ax.grid(alpha=0.3)
-    save(fig, 'fig_e008_base_partial.png')
+    save(fig, 'fig_etap2_w_toku.png')
 
 
 if __name__ == '__main__':

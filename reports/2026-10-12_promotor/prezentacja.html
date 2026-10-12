@@ -12,7 +12,7 @@
   .sub{color:#555;font-size:15px;margin-bottom:12px}
   ul{font-size:17px;line-height:1.5;margin:8px 0 0 0;padding-left:22px}
   li{margin:7px 0}
-  table{border-collapse:collapse;font-size:14.5px;width:100%;margin-top:8px}
+  table{border-collapse:collapse;font-size:14px;width:100%;margin-top:8px}
   th,td{border:1px solid #bbb;padding:6px 8px;text-align:left;vertical-align:top}
   th{background:#f1f3f6}
   img{width:100%;max-width:980px;display:block;margin:12px auto 4px auto}
@@ -20,6 +20,7 @@
   .row img{flex:1 1 420px;max-width:520px;margin:0}
   .row ul{flex:1 1 420px}
   .note{background:#fff7e6;border-left:5px solid #cc9900;padding:10px 14px;font-size:15px;margin-top:12px}
+  .lit{background:#eef3fb;border-left:5px solid #0b3d91;padding:10px 14px;font-size:15px;margin-top:12px}
   .bad{background:#fdeaea;border-left:5px solid #c0392b;padding:10px 14px;font-size:15px;margin-top:12px}
   .good{background:#eaf6ec;border-left:5px solid #2e7d32;padding:10px 14px;font-size:15px;margin-top:12px}
   .small{font-size:13.5px;color:#555}
@@ -30,216 +31,296 @@
 <body>
 
 <section class="slide">
-  <h1>Kompresja CNN a zachowanie atencji kanałowej</h1>
-  <p class="sub">Podsumowanie badań E001–E008 · stan na 12.10.2026 · prezentacja dla promotora</p>
+  <h1>Kompresja sieci CNN a zachowanie atencji kanałowej</h1>
+  <p class="sub">Podsumowanie badań 2026 · prezentacja dla promotora · stan na 12.10.2026</p>
   <ul>
     <li>Autorka: Lidia Cichońska</li>
+    <li>Obiekt badań: EfficientNet-B0 z blokami Squeeze-and-Excitation (SE), trenowany od losowych wag</li>
+    <li>Środowisko: 4×RTX 2080 Ti (DDP), pomiary deterministyczne; Tiny ImageNet i CIFAR-100</li>
     <li>Repozytorium: <span class="small">github.com/Lidka99/attention-aware-compression</span></li>
-    <li>Środowisko: EfficientNet-B0 z SE, od losowych wag, 4×RTX 2080&nbsp;Ti (DDP), deterministycznie</li>
-    <li>Prezentacja odtwarzalna skryptem <span class="small">reports/2026-10-12_promotor/generuj_wykresy.py</span></li>
   </ul>
-  <div class="note">Uwaga: bieg E008 (etap 2) trwa w chwili tworzenia slajdów — slajd 12 pokazuje stan na godzinę 04:58 UTC.</div>
+  <div class="note">Trwa ostatni bieg (kompresja 10% i 30% na baseline 224 — etap naprawy);
+    slajd „Etap 2 w toku" pokazuje stan na 12.10, 05:08 UTC.</div>
 </section>
 
 <section class="slide">
-  <h2>Pytanie badawcze i wymagania metodologiczne</h2>
+  <h2>Co chcieliśmy osiągnąć</h2>
   <ul>
-    <li><b>Hipoteza:</b> kanały podobne przed atencją (SE) mogą być różnie ważone dla różnych obrazów,
-        więc zachowanie bramek SE mogłoby poprawiać wybór kanałów do scalenia (kompresji).</li>
-    <li><b>Wymagana kontrola:</b> porównanie oparte na aktywacjach <b>po SE</b> (POST) wobec <b>przed SE</b> (PRE)
-        i <b>losowego</b> wyboru (RANDOM), przy wspólnym operatorze scalenia i <b>równym budżecie</b>
-        kompresji oraz naprawy.</li>
-    <li><b>Wynik zerowy lub negatywny jest pełnoprawnym wynikiem</b>; progi ustalane przed biegiem,
-        bez dobierania po wynikach.</li>
-    <li>Cel nadrzędny: <b>publikowalny wynik</b> — także w formie uczciwej pracy negatywno-analitycznej.</li>
+    <li><b>Cel nadrzędny:</b> sprawdzić, czy <b>zachowanie atencji kanałowej</b> (bramki SE, zależne od obrazu)
+        dostarcza informacji, która pozwala <b>lepiej wybierać kanały do scalenia</b> przy kompresji sieci —
+        tak, by przy tym samym budżecie kompresji i naprawy tracić mniej jakości niż przy wyborze
+        „przed atencją" lub losowym.</li>
+    <li><b>Droga do celu:</b> od rzetelnych baseline'ów trenowanych od zera, przez pomiar realnej szkody
+        scalenia, do decydującego porównania <b>po równym dostrojeniu</b> (bo ono rozstrzyga o użyteczności).</li>
+    <li><b>Cel metodologiczny:</b> odtwarzalny pipeline na 4 GPU, wyniki z przedziałami ufności,
+        progi ustalone przed biegiem; <b>wynik negatywny jest pełnoprawnym wynikiem</b>.</li>
+    <li><b>Cel praktyczny:</b> doprowadzić do <b>publikowalnego wyniku</b> (pozytywnego albo uczciwie
+        udokumentowanego negatywnego) i wybrać dalszy kierunek doktoratu na podstawie danych.</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>Przebieg badań: E001–E008</h2>
+  <h2>Punkt wyjścia: literatura i hipoteza</h2>
+  <ul>
+    <li><b>Atencja kanałowa (SE)</b> — Hu, Shen, Sun 2018 (<span class="small">arXiv:1709.01507</span>):
+        bramki mówią, które kanały są ważne <i>dla danego obrazu</i>; warianty: ECA-Net
+        (<span class="small">arXiv:1910.03151</span>) i in.</li>
+    <li><b>Rodzina scalania/przycinania kanałów:</b> Neuron Merging (<span class="small">arXiv:2010.13160</span>),
+        Pick-or-Mix (<span class="small">arXiv:2406.10935</span>), Cut Less Fold More
+        (<span class="small">arXiv:2602.18116</span>) — pokazują, że <b>to, co się scala, ma znaczenie</b>.
+        Analiza nowości wobec tych prac: macierz nowości w repozytorium (w toku).</li>
+    <li><b>Hipoteza:</b> kanały podobne przed SE mogą być różnie ważone dla różnych obrazów,
+        więc zachowanie bramek SE mogłoby poprawiać dobór par kanałów do scalenia ponad zwykłe
+        podobieństwo aktywacji.</li>
+    <li><b>Warunek weryfikacji (kontrola po atencji):</b> porównanie kryterium <b>po SE</b> (POST)
+        z kryterium <b>przed SE</b> (PRE) i <b>wyborem losowym</b> (RANDOM), wspólny operator,
+        równy budżet kompresji i naprawy.</li>
+    <li><b>Kotwica dla baseline'ów:</b> Shahriar 2026 (<span class="small">arXiv:2607.01984</span>) —
+        kontrolowane badanie lekkich CNN; EfficientNet-B0 od zera na Tiny ImageNet 224×224:
+        20 epok = 57,43%, <b>100 epok = 60,54%</b>.</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Plan badań — co, po co i z jakim wynikiem</h2>
   <table>
-    <tr><th>ID</th><th>Pytanie</th><th>Ustawienie</th><th>Wynik</th><th>Status</th></tr>
-    <tr><td>E001</td><td>baseline</td><td>CIFAR-100, 96×96, od zera, 200 ep.</td>
-        <td>dev 66,84% (best); silne przeuczenie (train ≈99%)</td><td>ukończony</td></tr>
-    <tr><td>E002</td><td>obserwacja SE</td><td>1000 obr., 1 blok, wagi niezmienione</td>
-        <td>podobieństwo utrzymuje się po SE; średnia/szablon go nie tłumaczą</td><td>ukończony</td></tr>
-    <tr><td>E003</td><td>kompresja 10%</td><td>CIFAR-100, PRE/POST/RANDOM, bez naprawy</td>
-        <td>POST−PRE +0,30 pp, CI obejmuje 0; każda selekcja lepsza od losowej</td><td>ukończony</td></tr>
-    <tr><td>E004</td><td>naprawa</td><td>równe dostrajanie 120 ep.</td>
-        <td>wszystkie warianty ≈67%; RANDOM dorównał</td><td>ukończony</td></tr>
-    <tr><td>E005</td><td>baseline 96</td><td>Tiny ImageNet, 100 ep.</td><td>dev 51,53%</td><td>ukończony</td></tr>
-    <tr><td>E006</td><td>bramki SE</td><td>150 par, predykcja szkody scalenia</td>
-        <td>g_pert ≈ 0 ponad s_post; primary_passed = false</td><td>ukończony (negatywny)</td></tr>
-    <tr><td>E007</td><td>baseline 224</td><td>Tiny ImageNet 224, 100 ep., 4 h 37 min</td>
-        <td>dev <b>58,49%</b>; jakościowo zgodny z literaturą (60,54%)</td><td>ukończony — nowy baseline</td></tr>
-    <tr><td>E008</td><td>kompresja 224</td><td>10% i 30% bez naprawy + równe dostrajanie 30%</td>
-        <td>etap 1 ukończony; etap 2 w toku</td><td>w toku</td></tr>
+    <tr><th>Badanie</th><th>Po co</th><th>Wynik</th><th>Status</th></tr>
+    <tr><td><b>Baseline CIFAR-100</b><br><span class="small">od zera, 200 epok</span></td>
+        <td>punkt odniesienia do pierwszych testów kompresji</td>
+        <td>dev 66,84%; silne przeuczenie (train ≈99%)</td><td>ukończone</td></tr>
+    <tr><td><b>Obserwacja bloków SE</b><br><span class="small">1000 obrazów, wagi niezmienione</span></td>
+        <td>czy podobieństwo kanałów i zmienność bramek w ogóle pozwalają myśleć o selektywnym scalaniu</td>
+        <td>podobieństwo utrzymuje się po SE; stała średnia i szablon go nie tłumaczą</td><td>ukończone</td></tr>
+    <tr><td><b>Pierwsza kompresja: 10%</b><br><span class="small">CIFAR-100, bez naprawy</span></td>
+        <td>czy kryterium po atencji bije kryterium przed atencją i losowe</td>
+        <td>POST≈PRE; obie selekcje lepsze od losowej surowo</td><td>ukończone</td></tr>
+    <tr><td><b>Równe dostrajanie po kompresji</b><br><span class="small">120 epok, identyczny budżet</span></td>
+        <td>czy różnice między kryteriami przetrwają naprawę</td>
+        <td>różnice zniknęły; wybór losowy dorównał atencyjnemu</td><td>ukończone</td></tr>
+    <tr><td><b>Baseline Tiny ImageNet 96×96</b></td>
+        <td>mniej przeuczony punkt odniesienia niż CIFAR-100</td>
+        <td>dev 51,53%</td><td>ukończone</td></tr>
+    <tr><td><b>Predykcja szkody z bramek SE</b><br><span class="small">150 par kanałów</span></td>
+        <td>czy zachowanie bramek przewiduje szkodę scalenia ponad podobieństwo po SE</td>
+        <td>brak wartości predykcyjnej — wynik negatywny</td><td>ukończone</td></tr>
+    <tr><td><b>Baseline Tiny ImageNet 224×224</b><br><span class="small">receptura literaturowa</span></td>
+        <td>jakość porównywalna z literaturą pod publikację</td>
+        <td>dev 58,49% (literatura: 60,54%; warunki oceny inne)</td><td>ukończone</td></tr>
+    <tr><td><b>Kompresja 10% i 30% na baseline 224</b></td>
+        <td>czy przy głębszej redukcji selekcja — zwłaszcza po atencji — zaczyna mieć znaczenie po naprawie</td>
+        <td>etap 1: wybór bije losowy surowo, ale POST słabszy od PRE; etap 2 w toku</td><td>w toku</td></tr>
   </table>
 </section>
 
 <section class="slide">
-  <h2>E001 — baseline CIFAR-100</h2>
+  <h2>Baseline CIFAR-100 — punkt wyjścia i jego ograniczenie</h2>
   <div class="row">
-    <img src="wykresy/fig_e001_curve.png" alt="E001">
+    <img src="wykresy/fig_baseline_cifar.png" alt="Baseline CIFAR-100">
     <ul>
-      <li>EfficientNet-B0 z SE od losowych wag, 200 epok, jeden trening na 4 GPU.</li>
-      <li>dev top-1: <b>66,84%</b> (best, ep. 177), 66,54% (ep. 200); train ≈99%.</li>
-      <li>Silne przeuczenie — świadomie używany jako punkt odniesienia w E002–E004.</li>
-      <li>Audyt checkpointu i krzywych: raport w folderze E001.</li>
+      <li>EfficientNet-B0 z SE od losowych wag, 200 epok; dev 66,84% (best).</li>
+      <li>Train ≈99% vs dev 66,84% — <b>silne przeuczenie</b>: model „zapamiętuje" zbiór treningowy,
+          co utrudnia uczciwą ocenę kompresji (nadmiarowe kanały łatwo usuwać).</li>
+      <li>Stąd decyzja: kolejne badania na <b>Tiny ImageNet</b> (200 klas, prawdziwe zdjęcia,
+          mniejsza przepustowość klas) z recepturą z literatury.</li>
+      <li>Wniosek metodologiczny: baseline musi być mocny i mało przeuczony, inaczej testy kompresji
+          mierzą głównie nadmiarowość przeuczonego modelu.</li>
     </ul>
   </div>
 </section>
 
 <section class="slide">
-  <h2>E002 — obserwacja: podobieństwo kanałów a atencja</h2>
+  <h2>Obserwacja bloków SE — czy jest na czym budować?</h2>
   <ul>
-    <li>1000 obrazów train, jeden blok SE (<span class="small">features.4.1</span>), wagi niezmienione.</li>
+    <li>1000 obrazów treningowych, jeden blok SE, <b>wagi niezmienione</b> (czysta obserwacja).</li>
     <li>Pary kanałów bardzo podobne przed SE pozostają bardzo podobne po SE
-        (mediana cosinusa 0,952 → 0,959).</li>
-    <li>Kontrole: odjęcie stałej średniej oraz szablonu przestrzennego <b>nie tłumaczy</b> podobieństwa —
+        (mediana cosinusa 0,952 → 0,959) — podobieństwo nie jest dziełem atencji.</li>
+    <li>Kontrole: odjęcie stałej średniej i szablonu przestrzennego <b>nie tłumaczy</b> podobieństwa —
         dotyczy ono zmian odpowiedzi między obrazami.</li>
     <li>Wagi bramek SE zmieniają się między obrazami, ale <b>nie wykazano</b>, że to pomaga w wyborze
-        kanałów do scalenia (obserwacja, nie dowód korzyści).</li>
+        kanałów do scalenia. To była przesłanka do dalszych, rozstrzygających testów.</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>E003 — pierwsza kompresja: 10% parametrów bez naprawy</h2>
+  <h2>Pierwsza kompresja: redukcja 10% bez naprawy</h2>
   <div class="row">
-    <img src="wykresy/fig_e003_raw.png" alt="E003">
+    <img src="wykresy/fig_kompresja_10_cifar.png" alt="Pierwsza kompresja 10%">
     <ul>
-      <li>Fizyczna redukcja 10% parametrów (4 135 648 → 3 721 424; 1016 kanałów w 15 blokach).</li>
-      <li>Wspólny operator scalenia; α/β dopasowane na 500 obrazach; trzy kryteria wyboru.</li>
-      <li>Bez naprawy: PRE 54,94% · POST 55,24% · RANDOM 49,48% (BASE 66,84%).</li>
-      <li>Test główny <b>POST−PRE = +0,30 pp</b>, CI [−0,60; +1,22] — brak przewagi kryterium po SE.</li>
-      <li>Obie metody selekcji <b>wyraźnie lepsze od losowej</b> surowo (o ~6 pp).</li>
+      <li>Fizyczna redukcja 10% parametrów (4 135 648 → 3 721 424; 1016 kanałów w 15 blokach);
+          wspólny operator scalenia dla wszystkich kryteriów.</li>
+      <li>Bez naprawy: kryterium po SE 55,24% · przed SE 54,94% · losowe 49,48% (baseline 66,84%).</li>
+      <li>Test główny (po SE minus przed SE): <b>+0,30 pp</b>, CI [−0,60; +1,22] — <b>brak przewagi</b>.</li>
+      <li>Obie metody selekcji <b>wyraźnie lepsze od losowej</b> surowo (o ~6 pp) — wybór kanałów
+          faktycznie ma znaczenie, tylko nie widać w nim roli atencji.</li>
+    </ul>
+  </div>
+  <div class="lit">Na tle literatury: rodzina metod scalania/przycinania (Neuron Merging, Pick-or-Mix)
+    również opiera dobór na podobieństwie/wadze kanałów; nasz wynik pokazuje, że <b>informacja po SE
+    nie dodaje przewagi ponad podobieństwo przed SE</b> przy tym budżecie.</div>
+</section>
+
+<section class="slide">
+  <h2>Równe dostrajanie — co zostaje po naprawie?</h2>
+  <div class="row">
+    <img src="wykresy/fig_dostrajanie_cifar.png" alt="Równe dostrajanie">
+    <ul>
+      <li>Wszystkie warianty dostrajane identycznie (120 epok, ten sam budżet i receptura) —
+          to jedyne uczciwe porównanie końcowej jakości.</li>
+      <li>Po naprawie: baseline 67,62% · przed SE 66,96% · po SE 67,32% · losowe 67,30%.</li>
+      <li><b>Różnice między kryteriami zniknęły</b>; wybór losowy dorównał atencyjnemu
+          (+0,36 pp dla po-SE, CI [−0,30; +1,02]).</li>
+      <li>Wniosek: przy 10% redukcji o wyniku decyduje <b>naprawa</b>, nie kryterium wyboru —
+          ważna lekcja dla oceny metod scalania kanałów.</li>
     </ul>
   </div>
 </section>
 
 <section class="slide">
-  <h2>E004 — równe dostrajanie po kompresji</h2>
+  <h2>Czy bramki SE przewidują szkodę scalenia?</h2>
   <div class="row">
-    <img src="wykresy/fig_repair.png" alt="E004">
+    <img src="wykresy/fig_bramki_se.png" alt="Predykcja z bramek SE">
     <ul>
-      <li>Wszystkie warianty dostrajane identycznie (120 epok, ta sama receptura i budżet).</li>
-      <li>Po naprawie: BASE 67,62% · PRE 66,96% · POST 67,32% · RANDOM 67,30%.</li>
-      <li><b>Różnice między metodami wyboru zniknęły</b> — wybór losowy dorównał atencyjnemu
-          (POST−PRE +0,36 pp, CI [−0,30; +1,02]).</li>
-      <li>Wniosek: przy 10% redukcji o wyniku decyduje naprawa, nie selekcja kanałów.</li>
+      <li>Test predykcyjny: 150 par kanałów dobranych bez wiedzy o szkodzie; kontrola: podobieństwo
+          po SE (s_post).</li>
+      <li>Kontrola działa kierunkowo: podobniejsze pary → mniejsza szkoda (ρ = −0,155).</li>
+      <li>Sygnał z bramek: ρ = +0,044; różnica <b>+0,199, CI [−0,020; +0,411]</b> — kryterium
+          sukcesu (dolna granica &gt; 0) nie spełnione; korelacja cząstkowa +0,047;
+          sygnały wtórne na poziomie szumu (kontrola FWER p = 0,081).</li>
+      <li><b>Wątek bramek SE jako sygnału ponad podobieństwo po SE zamknięty</b> — zgodnie z protokołem.</li>
+    </ul>
+  </div>
+  <div class="lit">Motywacja literaturowa była naturalna: SE (Hu i in. 2018) wskazuje kanały ważne
+    „dla tego obrazu". Test pokazał, że ta informacja <b>nie przekłada się</b> na przewidywanie szkody
+    scalenia lepiej niż samo podobieństwo aktywacji.</div>
+</section>
+
+<section class="slide">
+  <h2>Nowe baseline'y Tiny ImageNet — zgodność z literaturą</h2>
+  <div class="row">
+    <img src="wykresy/fig_baselines_tiny.png" alt="Baseline'y Tiny ImageNet">
+    <ul>
+      <li><b>96×96, 100 epok:</b> dev 51,53% (3 h 10 min).</li>
+      <li><b>224×224, 100 epok:</b> dev <b>58,49%</b> (4 h 37 min); receptura wg Shahriar 2026
+          (AdamW 3e-4, weight decay 0,01, label smoothing 0,1, RandomResizedCrop 0,8–1,0 + color jitter).</li>
+      <li><b>Porównanie z literaturą:</b> Shahriar 2026 raportuje 60,54% dla EfficientNet-B0
+          od zera (Tiny ImageNet 224, 100 epok; 20 epok = 57,43%). Nasze 58,49% jest w tym samym
+          rejonie; różnica wynika m.in. z innego zbioru oceny (ich oficjalny val, nasz dev),
+          innego batcha i warmupu — porównanie jakościowe.</li>
+      <li>+6,96 pp względem wersji 96×96. <b>Ten baseline jest podstawą ostatniego eksperymentu.</b></li>
     </ul>
   </div>
 </section>
 
 <section class="slide">
-  <h2>E006 — czy bramki SE przewidują szkodę scalenia?</h2>
-  <div class="row">
-    <img src="wykresy/fig_e006.png" alt="E006">
-    <ul>
-      <li>150 rozłącznych par (Tiny ImageNet 96), sygnał g_pert z wag po kompensacji,
-          kontrola główna s_post.</li>
-      <li>Kontrola działa kierunkowo: ρ(s_post, szkoda) = −0,155 (podobniejsze → mniejsza szkoda).</li>
-      <li>Sygnał bramkowy: ρ(g_pert) = +0,044; <b>Δρ = +0,199, CI [−0,020; +0,411]</b> →
-          kryterium sukcesu (dolna granica &gt; 0) <b>nie spełnione</b>.</li>
-      <li>Korelacja cząstkowa po s_post: +0,047; sygnały wtórne na poziomie szumu
-          (kontrola FWER: p = 0,081).</li>
-      <li><b>Wątek bramek SE jako sygnału ponad s_post zamknięty</b> zgodnie z protokołem.</li>
-    </ul>
-  </div>
-</section>
-
-<section class="slide">
-  <h2>E005 i E007 — nowe baseline'y (Tiny ImageNet)</h2>
-  <div class="row">
-    <img src="wykresy/fig_e005_e007_curves.png" alt="E005/E007">
-    <ul>
-      <li>E005: 96×96, 100 epok — dev 51,53% (3 h 10 min).</li>
-      <li>E007: 224×224, receptura z pracy Shahriar&nbsp;2026 (AdamW 3e-4, LS 0,1,
-          RRC 0,8–1,0 + color jitter), 100 epok — dev <b>58,49%</b> (4 h 37 min).</li>
-      <li>+6,96 pp względem E005; wynik jakościowo zgodny z literaturą
-          (60,54%; inny zbiór oceny i batch).</li>
-      <li><b>E007 odtąd główny baseline</b> do badań kompresji (E008).</li>
-    </ul>
-  </div>
-</section>
-
-<section class="slide">
-  <h2>E008 — kompresja na baseline 224: pytanie i protokół</h2>
+  <h2>Kompresja 10% i 30% na baseline 224 — pytanie i protokół</h2>
   <ul>
-    <li><b>Etap 1 (bez naprawy):</b> szkoda redukcji <b>10%</b> i <b>30%</b> parametrów
-        dla PRE / POST / RANDOM (α/β na 1000 obrazach; ten sam operator co E003).</li>
-    <li><b>Etap 2 (naprawa przy 30%):</b> równe dostrajanie 60 epok dla
-        BASE + PRE + POST + RANDOM (identyczna receptura i budżet).</li>
-    <li><b>Kryterium główne:</b> POST−PRE po naprawie, sparowany bootstrap po obrazach
-        (10 000 powtórzeń, stratyfikacja po klasach); sukces = dolna granica 95% CI &gt; 0.</li>
-    <li>Pytanie: czy na mocniejszym (mniej przeuczonym) modelu i przy głębszej szkodzie
-        selekcja — a zwłaszcza „attention-aware" POST — zaczyna mieć znaczenie po naprawie.</li>
+    <li><b>Etap 1 (bez naprawy):</b> zmierzyć szkodę redukcji <b>10%</b> i <b>30%</b> parametrów
+        dla trzech kryteriów wyboru kanałów: po SE, przed SE i losowego (wspólny operator,
+        współczynniki scalenia dopasowane na 1000 obrazach).</li>
+    <li><b>Etap 2 (naprawa przy 30%):</b> równe dostrajanie (identyczna receptura i budżet 60 epok)
+        dla baseline'u i trzech wariantów skompresowanych.</li>
+    <li><b>Kryterium główne:</b> różnica „po SE minus przed SE" po naprawie, sparowany bootstrap
+        po obrazach (10 000 powtórzeń, stratyfikacja po klasach); sukces = dolna granica 95% CI &gt; 0.</li>
+    <li><b>Po co:</b> przy 10% redukcji naprawa zacierała różnice na przeuczonym modelu;
+        pytanie brzmi, czy przy <b>głębszej szkodzie</b> (30%) i mocniejszym baseline
+        selekcja — a zwłaszcza informacja po atencji — zaczyna decydować o jakości.</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h2>E008 etap 1 — ukończony: wybór pomaga surowo, POST słabszy od PRE</h2>
+  <h2>Etap 1 — wybór kanałów pomaga surowo, ale nie po atencji</h2>
   <div class="row">
-    <img src="wykresy/fig_e008_stage1.png" alt="E008 stage 1">
+    <img src="wykresy/fig_kompresja_224_etap1.png" alt="Kompresja 224 etap 1">
     <ul>
-      <li>10%: PRE <b>47,4%</b> · POST 47,1% · RANDOM 40,8% (BASE 58,5%).</li>
-      <li>30%: PRE <b>9,7%</b> · POST 6,7% · RANDOM 1,0% — bez naprawy model praktycznie się rozpada.</li>
-      <li>Selekcja oparta na podobieństwie bije losową o <b>+5,7 do +6,6 pp</b>.</li>
-      <li>Ale <b>POST (po SE) &lt; PRE (przed SE)</b> przy obu budżetach — odwrotnie niż na CIFAR-100
-          w E003; „uwzględnienie atencji" nie pomaga.</li>
-      <li>Bramka odtworzenia baseline'u E007: dev 5849/10000, NLL zgodny — pomiar wiarygodny.</li>
+      <li><b>10% redukcji:</b> przed SE <b>47,4%</b> · po SE 47,1% · losowo 40,8% (baseline 58,5%).</li>
+      <li><b>30% redukcji:</b> przed SE <b>9,7%</b>, po SE 6,7%, losowo 1,0% — bez naprawy
+          model praktycznie się rozpada; widać surową wartość dobrego wyboru kanałów.</li>
+      <li>Selekcja oparta na podobieństwie bije losową o <b>+5,7 do +8,7 pp</b> przy obu budżetach.</li>
+      <li>Ale <b>kryterium po SE wypada gorzej niż przed SE</b> przy obu budżetach —
+          przeciwnie niż w pierwszej kompresji na CIFAR-100. „Uwzględnienie atencji" nie pomaga.</li>
+      <li>Kontrola wiarygodności: baseline odtworzony co do obrazu (5849/10000 poprawnych).</li>
     </ul>
   </div>
 </section>
 
 <section class="slide">
-  <h2>E008 etap 2 — w toku (stan 12.10, 04:58 UTC)</h2>
+  <h2>Etap 2 — równe dostrajanie (w toku, stan 12.10, 05:08 UTC)</h2>
   <div class="row">
-    <img src="wykresy/fig_e008_base_partial.png" alt="E008 stage 2 base">
+    <img src="wykresy/fig_etap2_w_toku.png" alt="Etap 2 w toku">
     <ul>
-      <li>Dostrajane sekwencyjnie: BASE (teraz), potem PRE, POST, RANDOM — każdy 60 epok.</li>
-      <li>Początkowy spadek dev po restarcie LR (warmup/cosine) — oczekiwany;
-          porównanie liczy się na końcu, przy równym budżecie.</li>
-      <li>Szacowany koniec całości: <b>~16:30–17:00 UTC</b>; potem automatyczne
-          podsumowanie z bootstrapem (POST−PRE).</li>
-      <li>Decyzja o dalszym kierunku po wyniku etapu 2.</li>
+      <li>Dostrajane sekwencyjnie: baseline, potem „przed SE", „po SE", „losowo" — każdy 60 epok,
+          identyczna receptura.</li>
+      <li>Bieżący wariant: baseline, epoka <b>12/60</b>; początkowy spadek dev po restarcie
+          współczynnika uczenia — oczekiwany; porównanie liczy się na końcu, przy równym budżecie.</li>
+      <li>Szacowany koniec całości: <b>~16:50 UTC</b>; potem automatyczne podsumowanie z bootstrapem
+          („po SE minus przed SE").</li>
+      <li>Na tej podstawie: decyzja o dalszym kierunku (patrz ostatni slajd).</li>
     </ul>
   </div>
 </section>
 
 <section class="slide">
-  <h2>Wnioski — stan na 12.10.2026</h2>
-  <ul>
-    <li><b>Attention-aware (POST) nie wygrywa z PRE</b> ani na CIFAR-100 (E003, różnica zerowa),
-        ani surowo na Tiny 224 (E008 etap 1 — POST wyraźnie słabszy).</li>
-    <li><b>Bramki SE nie przewidują szkody scalenia</b> ponad podobieństwo po SE (E006) — wątek zamknięty.</li>
-    <li><b>Przy 10% redukcji po równej naprawie różnice selekcji znikają</b> na przeuczonym baseline
-        (E004); E008 sprawdza, czy to samo dotyczy 30% na mocniejszym modelu.</li>
-    <li><b>Selekcja oparta na podobieństwie</b> (PRE/POST) jest surowo lepsza od losowej —
-        potencjalny materiał na „jak wybierać kanały do scalenia", ale bez atencji.</li>
-    <li>Mamy <b>solidny baseline 224</b> (58,5%, zgodny z literaturą) i odtwarzalny pipeline.</li>
-    <li><b>Nowość badawcza wciąż niepotwierdzona</b> — uczciwy wynik negatywny jest rozważaną opcją publikacyjną.</li>
-  </ul>
-</section>
-
-<section class="slide">
-  <h2>Plan dalszy i pytania do promotora</h2>
-  <ul>
-    <li><b>Dziś:</b> dokończyć E008 (etap 2 + podsumowanie), napisać raport WYNIKI.md.</li>
-    <li><b>Scenariusz A (różnice znikają po naprawie):</b> zamknięcie wątku selekcji
-        „attention-aware" przy testowanych budżetach → decyzja między pracą negatywno-analityczną
-        a zmianą pytania (większe kompresje, kwantyzacja, inne mechanizmy).</li>
-    <li><b>Scenariusz B (różnice zostają po naprawie):</b> ścieżka publikacyjna na baseline 224
-        (pełna kompresja, więcej kryteriów, dodatkowe seedy).</li>
-    <li><b>Pytania do promotora:</b>
+  <h2>Co wyszło, a co nie wyszło</h2>
+  <div class="row">
+    <div class="good" style="flex:1 1 430px">
+      <b>Wyszło:</b>
       <ul>
-        <li>Czy praca negatywno-analityczna jest akceptowalnym kierunkiem publikacji?</li>
-        <li>Priorytet: dalsze budżety kompresji vs inne mechanizmy atencji vs rozszerzenie na nowe architektury?</li>
-        <li>Oczekiwania co do liczby seedów i niezależnych powtórzeń przed publikacją.</li>
+        <li>Rzetelne baseline'y od zera na 4 GPU: CIFAR-100 <b>66,84%</b>; Tiny ImageNet 96×96
+            <b>51,53%</b>; Tiny ImageNet 224×224 <b>58,49%</b> — jakościowo zgodny z literaturą
+            (Shahriar 2026: 60,54%).</li>
+        <li>Kontrolowany pipeline kompresji: fizyczna redukcja parametrów, wspólny operator,
+            dopasowane współczynniki, wyniki z przedziałami ufności.</li>
+        <li><b>Wybór kanałów oparty na podobieństwie działa surowo:</b> +5,5–6 pp nad losowym
+            (10%, CIFAR-100) oraz +5,7–8,7 pp (30%, Tiny 224) — jest realny sygnał.</li>
+        <li>Bramki SE przetestowane rzetelnie i <b>uczciwie zamknięte</b> (wynik negatywny,
+            z kontrolą FWER).</li>
+        <li>Trwa decydujący test: <b>naprawa przy 30%</b> na baseline 224.</li>
+      </ul>
+    </div>
+    <div class="bad" style="flex:1 1 430px">
+      <b>Nie wyszło:</b>
+      <ul>
+        <li><b>Hipoteza „attention-aware" niepotwierdzona:</b> kryterium po SE nie przewyższa
+            przed SE — ani po naprawie (10%, CIFAR-100), ani surowo na Tiny 224
+            (po SE wręcz słabsze).</li>
+        <li><b>Bramki SE nie przewidują</b> szkody scalenia ponad podobieństwo po SE
+            (dolna granica przedziału &lt; 0).</li>
+        <li>Po równym dostrojeniu przy 10% <b>różnice między kryteriami znikają</b> —
+            wybór losowy dorównuje (na przeuczonym baseline).</li>
+        <li><b>Nowość badawcza wciąż niepotwierdzona</b> — brak pozytywnego wyniku
+            publikacyjnego w obecnej formie.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Otwarta kwestia rozstrzyga się dziś: czy przy 30% i równym dostrojeniu różnice
+    zostają (ścieżka publikacyjna) czy znikają (zamknięcie wątku selekcji „attention-aware").</div>
+</section>
+
+<section class="slide">
+  <h2>Wnioski i plan dalszy</h2>
+  <ul>
+    <li><b>Czego się dowiedzieliśmy:</b>
+      <ul>
+        <li>kryterium „po atencji" (SE) <b>nie wygrywa</b> z kryterium „przed atencją":
+            na CIFAR-100 różnica zerowa, surowo na Tiny 224 — nawet słabsze;</li>
+        <li>bramki SE <b>nie przewidują</b> szkody scalenia ponad samo podobieństwo aktywacji;</li>
+        <li>przy 10% redukcji <b>naprawa zaciera różnice</b> między kryteriami (losowy dorównuje);</li>
+        <li>wybór kanałów oparty na podobieństwie jest <b>surowo lepszy od losowego</b> — jest sygnał,
+            tylko nie atencyjny;</li>
+        <li>mamy baseline 224×224 <b>zgodny z literaturą</b> (58,5% vs 60,5% przy innych warunkach oceny).</li>
       </ul>
     </li>
+    <li><b>Dziś:</b> dokończyć etap naprawy przy 30% i napisać raport z wynikiem głównym.</li>
+    <li><b>Scenariusz A — różnice znikają po naprawie:</b> zamykamy wątek selekcji „attention-aware"
+        przy badanych budżetach; decyzja: praca negatywno-analityczna vs zmiana pytania
+        (większe kompresje, kwantyzacja, inne mechanizmy uwagi).</li>
+    <li><b>Scenariusz B — różnice zostają po naprawie:</b> ścieżka publikacyjna na baseline 224
+        (pełna kompresja, więcej kryteriów, dodatkowe seedy).</li>
+    <li><b>Pytania do promotora:</b> czy praca negatywno-analityczna jest akceptowalna?
+        Priorytet dalszych badań? Wymagania co do liczby seedów i powtórzeń przed publikacją?</li>
   </ul>
-  <p class="small">Źródła liczb: foldery E001–E008 i raporty WYNIKI.md w repozytorium; wykresy generowane skryptem w tym folderze.</p>
+  <p class="small">Wszystkie liczby pochodzą z raportów i plików wynikowych w repozytorium;
+    wykresy odtwarza skrypt w tym folderze.</p>
 </section>
 
 </body>

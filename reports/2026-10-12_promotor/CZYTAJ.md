@@ -13,9 +13,9 @@ Podsumowanie badań E001–E008 w formie prezentacji.
 
 ## Uwagi
 
-- Bieg E008 (etap 2) trwa; slajd „E008 etap 2" pokazuje stan częściowy
-  (BASE, epoka 10/60 na 04:58 UTC). Po zakończeniu biegu wystarczy ponownie uruchomić
-  generator i ewentualnie dopisać wyniki etapu 2:
+- Trwa ostatni etap badań (naprawa przy 30%); slajd „Etap 2 w toku" pokazuje stan częściowy
+  (baseline, epoka 12/60 na 05:08 UTC). Po zakończeniu biegu wystarczy ponownie uruchomić
+  generator i dopisać wyniki etapu 2:
 
 ```bash
 cd reports/2026-10-12_promotor && conda run --no-capture-output -n attention python generuj_wykresy.py
