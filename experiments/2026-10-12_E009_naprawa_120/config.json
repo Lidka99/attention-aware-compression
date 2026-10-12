@@ -1,0 +1,100 @@
+{
+  "amp": true,
+  "base_parameters": 4263748,
+  "baseline": {
+    "epoch": 100,
+    "parameters": 4263748,
+    "run": "runs/E007/20261011T061825Z_4de51b3_seed42_24mzpz80",
+    "sha256": "718bbb2621c1b136094749c3a7e5527839066d8b9e7a25bfccbc388bb3744408"
+  },
+  "bootstrap": {
+    "reps": 10000,
+    "seed": 20261017
+  },
+  "color_jitter": {
+    "brightness": 0.15,
+    "contrast": 0.15,
+    "hue": 0.05,
+    "saturation": 0.15
+  },
+  "data": {
+    "a_per_class": 5,
+    "cache_train_sha256": "90642db970cc6f83745e569e19f0659a726acfe62612908f1ee63331df23fa8a",
+    "cache_val_sha256": "fd0c5fc8e45cff072f45f878b60a33d8f0e0af6340fc11d8f937e1c6c75bf07b",
+    "dev_count": 10000,
+    "sample_seed": 20261015,
+    "splits_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd"
+  },
+  "eval_batch_per_gpu": 64,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-12_E009_naprawa_120",
+  "image_size": 224,
+  "input": {
+    "e008_run": "runs/E008/20261012T042932Z_0fd9962_seed42_tn1zlyim",
+    "folding_e008_sha256": "2ab8c90b9b98129e34d9a2b104b74a605ca568d4e102ed04a3ddf94ba29f4012",
+    "sha256": {
+      "candidate_manifest_30.json": "1bd0c4127903e49c497295680e41d8b1dcaa9507b5eaec81a9415261b7ad9809",
+      "model_files.json": "24c09ed6a7f530bd09eb104661a7edb99222c961f6e5d6dcced4625e961df0d7",
+      "models/30_POST.pt": "8e41d3fd7ff7e5939e5fe751dad500bd987cf4bd0e34a47f11a0ac51b09b15c8",
+      "models/30_PRE.pt": "fa9bfc5751b7329261e9a0e80b9c117f861dc976df222571e6b507aa5d0299b1",
+      "models/30_RANDOM.pt": "03ccb85ff9dcf2ac2067dfd8e82da9355db43c4bc0a4891bba900407ff2e8289",
+      "models/BASE.pt": "19c5d571896ed421ab9fa5be0c8a7177afcb29a8710b8b5b64081c4ca5c6bc26",
+      "stage1_metrics.json": "1385a2d0852750419b915d12ccc7e4042da19191f5c18ce61bf82a85020f5684"
+    },
+    "support_e008_sha256": "c32689fedd27a465976009490bf7fc232df43dbe633d05af853fecd2f5660f31"
+  },
+  "normalization_mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "normalization_std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "num_classes": 200,
+  "official_test_used": false,
+  "protocol_version": "1.0",
+  "repair": {
+    "amp": true,
+    "batch_per_gpu": 32,
+    "budget": "30",
+    "epochs": 120,
+    "eval_batch_per_gpu": 64,
+    "grad_clip": 1.0,
+    "label_smoothing": 0.1,
+    "lr": 0.0003,
+    "min_lr": 3e-06,
+    "variants": [
+      "BASE",
+      "PRE",
+      "POST",
+      "RANDOM"
+    ],
+    "warmup_epochs": 3,
+    "weight_decay": 0.01,
+    "workers": 3
+  },
+  "reserve_used": false,
+  "rrc_ratio": [
+    0.9,
+    1.1
+  ],
+  "rrc_scale": [
+    0.8,
+    1.0
+  ],
+  "seed": 42,
+  "status": "frozen",
+  "summarize_py_sha256": "8007f0aa76bfce8a72f7b2c4095d357e0e32cc339c09a426e1ff0c39bf8e8719",
+  "tf32": false,
+  "training_executed": false,
+  "workers": 3,
+  "world_size": 4
+}

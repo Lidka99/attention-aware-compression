@@ -1,0 +1,11 @@
+{
+  "experiment": "2026-10-12_E009_naprawa_120",
+  "numbers": {
+    "30_POST_parameters": 2981828,
+    "30_PRE_parameters": 2981828,
+    "30_RANDOM_parameters": 2981828,
+    "BASE_parameters": 4263748,
+    "base_parameters": 4263748
+  },
+  "status": "passed"
+}
