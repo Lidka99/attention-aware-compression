@@ -1,8 +1,8 @@
 # 2026-10-11_E007_baseline_224
 
 Wersja wykonania: **1.0** (zamrożona; config `protocol_version` 1.0;
-szczegóły: [PROTOKOL_v1.md](PROTOKOL_v1.md)). Status: smoke techniczny
-wykonany; pełny bieg uruchamiany po zamrożeniu (status w manifeście biegu).
+szczegóły: [PROTOKOL_v1.md](PROTOKOL_v1.md)). Status: **pełny bieg
+zakończony 2026-10-12 (completed, exit 0)** — [WYNIKI.md](WYNIKI.md).
 
 Nowy, mocniejszy baseline 224×224 pod publikację: EfficientNet-B0 z SE od
 zera na Tiny ImageNet, w recepturze opartej na kontrolowanym badaniu

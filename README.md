@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001–E006 zakończone. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005: baseline Tiny ImageNet od zera — dev 51,53% przy 96×96. E006: sygnał z bramek SE nie przewiduje szkody scalenia ponad podobieństwo po SE (primary_passed=false); wątek zamknięty. Nowość badawcza niepotwierdzona.
+Status: E001–E007 zakończone. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005: baseline Tiny ImageNet od zera — dev 51,53% przy 96×96. E006: sygnał z bramek SE nie przewiduje szkody scalenia ponad podobieństwo po SE (primary_passed=false); wątek zamknięty. E007: baseline 224×224 pod publikację — dev 58,49% przy 100 epokach od zera. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -25,6 +25,10 @@ Dev top-1 51,53% (100 epok, 3h10min na 4 GPU); przeuczenie obecne; pod publikacj
 **[E006 — wynik badania kryterium z bramek SE](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md)**,
 [protokół](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md).
 Wynik negatywny: g_pert ≈ 0 ponad s_post; wątek bramek zamknięty.
+
+**[E007 — baseline 224×224 pod publikację](experiments/2026-10-11_E007_baseline_224/WYNIKI.md)**,
+[protokół](experiments/2026-10-11_E007_baseline_224/PROTOKOL_v1.md).
+100 epok od zera na 4 GPU (run `4de51b3`); dev top-1 58,49% (epoka 100), train 99,50%, dev NLL 2,0001. Zastępuje E005 jako główny punkt odniesienia.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

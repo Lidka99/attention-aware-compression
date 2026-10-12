@@ -84,3 +84,32 @@ decyzją użytkowniczki (zapisana w AKTUALNY_PLAN.md).
 Dokumentacja: [WYNIKI.md](../experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md).
 Przebieg: nieudany bieg 1.0 `...051120Z`, przerwany start techniczny
 `...053110Z` (oba zachowane), bieg końcowy `...053842Z`.
+
+## 2026-10-12 — E007 zakończony: baseline 224×224
+
+Kontekst (dostępne wyniki): E005 dał baseline 96×96 na 51,53% dev, z
+przeuczeniem (train ~98,5%). Zgodnie z celem publikacyjnym (uzgodnienia
+2026-10-11) uruchomiono E007 — mocniejszy baseline 224×224, receptura
+oparta na Shahriar 2026 (arXiv:2607.01984; ich scratch 100 ep = 60,54%),
+zaadaptowana do 4 GPU.
+
+Wynik biegu `runs/E007/20261011T061825Z_4de51b3_seed42_24mzpz80`
+(protokół 1.0, commit `4de51b3`, status completed, exit 0; start
+2026-10-11T06:18:25Z, koniec 10:55:32Z, ~4h37m, ~165 s/epokę): 100/100
+epok, wynik główny = `last.pt` (epoka 100) dev top-1 **58,49%**
+(5849/10000); najlepszy dev 58,58% (epoka 98); train top-1 99,50%
+(89531/89984); dev NLL 2,0001. Powyżej E005 (51,53%), poniżej kotwicy
+Shahriar 2026 (60,54%; porównanie jakościowe — ich ocena na oficjalnym
+val, nasza na dev).
+
+Decyzja/konsekwencje:
+- Otrzymaliśmy docelowy **baseline 224×224 pod publikację** i punkt
+  odniesienia do badań kompresji; E005 pozostaje jako baseline pomocniczy
+  96×96.
+- **Decyzja o kolejności dalszych prac nadal należy do użytkowniczki**:
+  (a) szybki test 30% redukcji na tym baseline (kandydat E008) vs
+  (b) inne warianty (mocniejsza receptura, dodatkowe seedy).
+- Zamrożone protokoły E001–E006 pozostają bez zmian; rezerwy i testu nie
+  używamy.
+
+Dokumentacja: [WYNIKI.md](../experiments/2026-10-11_E007_baseline_224/WYNIKI.md).

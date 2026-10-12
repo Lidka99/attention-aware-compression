@@ -1,6 +1,6 @@
 # Aktualny plan doktoratu
 
-Aktualizacja: 2026-10-11. Pracujemy po jednym etapie.
+Aktualizacja: 2026-10-12. Pracujemy po jednym etapie.
 
 ## Cel
 
@@ -15,9 +15,15 @@ Sprawdzić, czy zachowanie atencji kanałowej pomaga wybierać kanały do połą
 6. **Nowy baseline Tiny ImageNet — wykonany (E005).** [Wyniki](experiments/2026-10-10_E005_tiny_imagenet_od_zera/WYNIKI.md): 100 epok od zera, dev top-1 51,53% (3h10min na 4 GPU), nadal obecne przeuczenie (train 98,5%). Baseline wystarczający do E006; pod publikację planowany osobny trening 224×224 z mocniejszą recepturą.
 5. **Wspólne dostrajanie po kompresji — wykonane.** [E004, wyniki](experiments/2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md): po 120 epokach równego dostrajania BASE 67,62%, PRE 66,96%, POST 67,32%, RANDOM 67,30%. POST−PRE +0,36 pp, przedział [−0,30; +1,02] pp. **Różnice między metodami wyboru zniknęły; wybór losowy dorównał atencyjnemu.** Przy 10% redukcji o wyniku decyduje naprawa, nie selekcja.
 6. **Kryterium z bramek SE — E006 zakończony (2026-10-11, wynik negatywny).** [Wyniki](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md): kontrola `s_post` działa kierunkowo (ρ = −0,155), ale `g_pert` nie przewiduje szkody ponad `s_post` (Δρ = +0,199, przedział [−0,020; +0,411]; cząstkowa +0,047). Wątek bramek jako sygnału ponad z zamknięty zgodnie z protokołem.
+7. **Nowy baseline 224×224 — E007 zakończony (2026-10-12).** [Wyniki](experiments/2026-10-11_E007_baseline_224/WYNIKI.md): 100 epok od zera na 4 GPU, run `runs/E007/20261011T061825Z_4de51b3_seed42_24mzpz80` (commit `4de51b3`, protokół 1.0, ~4h37m, ~165 s/epokę). Dev top-1 (epoka 100, wynik główny) **58,49%** (5849/10000); najlepszy dev 58,58% (epoka 98); train 99,50%; dev NLL 2,0001. Powyżej E005 (51,53% przy 96×96), poniżej kotwicy Shahriar 2026 (60,54%; porównanie jakościowe, ich ocena na oficjalnym val, nasza na dev). Zastępuje E005 w roli głównego punktu odniesienia do badań kompresji.
 
 ## Najbliższy krok
 
-E006 zakończony: kryterium z bramek SE nie przewiduje szkody ponad `s_post` (wynik negatywny, [WYNIKI](experiments/2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md)); wątek zamknięty. Cel ogólny to **publikacja**, więc na stole są: (a) szybki test **30% redukcji** na obecnym baseline — sygnał, czy selekcja kanałów w ogóle zaczyna mieć znaczenie (E003/E004 testowały tylko 10%) oraz (b) baseline **224×224 z mocniejszą recepturą przeciw przeuczeniu** (mixup/cutmix, random erasing, label smoothing) do wyników porównywalnych z literaturą. Decyzja o kolejności należy do użytkowniczki. E003/E004/E006 pozostają niezmienione, rezerwy i testu nie używamy. [Rejestr decyzji](docs/DECISIONS.md).
+E007 zakończony: mamy baseline **224×224 pod publikację** (dev 58,49%, [WYNIKI](experiments/2026-10-11_E007_baseline_224/WYNIKI.md)). Kolejny krok pozostaje **decyzją użytkowniczki**:
+
+- (a) **szybki test 30% redukcji** na tym baseline (kandydat E008) — E003/E004 testowały tylko 10% na CIFAR-100 i po równym dostrajaniu różnice między metodami wyboru zniknęły; 30% to sygnał, czy selekcja kanałów zaczyna mieć znaczenie;
+- (b) **inne warianty**, np. mocniejsza receptura przeciw przeuczeniu, dodatkowe seedy.
+
+Otwieramy ją jako otwartą decyzję, bez przesądzania. E003/E004/E006/E007 pozostają niezmienione, rezerwy i testu nie używamy. [Rejestr decyzji](docs/DECISIONS.md).
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.

@@ -10,6 +10,9 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 | E004 — wspólne dostrajanie po kompresji | Completed; wszystkie warianty ~67%, brak przewagi selekcji | [Wyniki](2026-10-10_E004_wspolne_dostrajanie/WYNIKI.md), [protokół](2026-10-10_E004_wspolne_dostrajanie/PROTOKOL_v1.md), [wyjaśnienie](2026-10-10_E004_wspolne_dostrajanie/WYJASNIENIE.md) |
 | E005 — Tiny ImageNet od zera | Completed; dev 51,53% (96×96, 100 epok) | [Wyniki](2026-10-10_E005_tiny_imagenet_od_zera/WYNIKI.md), [protokół](2026-10-10_E005_tiny_imagenet_od_zera/PROTOKOL_v1.md) |
 | E006 — kryterium z bramek SE (predykcja) | Completed; wynik negatywny (g_pert ≈ 0 ponad s_post) | [Wyniki](2026-10-11_E006_kryterium_bramkowe_predykcja/WYNIKI.md), [protokół](2026-10-11_E006_kryterium_bramkowe_predykcja/OPIS.md) |
+| E007 — baseline 224×224 (Tiny ImageNet) | Completed; dev 58,49% (224×224, 100 epok) | [Wyniki](2026-10-11_E007_baseline_224/WYNIKI.md), [protokół](2026-10-11_E007_baseline_224/PROTOKOL_v1.md) |
+
+E007, 2026-10-12: [baseline 224×224 pod publikację](2026-10-11_E007_baseline_224/WYNIKI.md), completed. 100 epok od zera na 4 GPU (run 4de51b3), dev top-1 58,49% (epoka 100); zastępuje E005 jako główny punkt odniesienia do badań kompresji.
 
 Uzupełnienie E006, 2026-10-11: [kontrola FWER sygnałów wtórnych (analiza na zamrożonym pairs.csv)](2026-10-11_E006_kryterium_bramkowe_predykcja/analizy/2026-10-11_kontrola_FWER_wtornych/WYNIKI.md), completed; bez wpływu na decyzję pierwszorzędną.
 
