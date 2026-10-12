@@ -1,0 +1,106 @@
+{
+  "amp": true,
+  "b_batch_per_gpu": 32,
+  "base_parameters": 4263748,
+  "baseline": {
+    "epoch": 100,
+    "parameters": 4263748,
+    "run": "runs/E007/20261011T061825Z_4de51b3_seed42_24mzpz80",
+    "sha256": "718bbb2621c1b136094749c3a7e5527839066d8b9e7a25bfccbc388bb3744408"
+  },
+  "baseline_gate": {
+    "correct": 5849,
+    "nll": 2.000118622112274,
+    "nll_atol": 1e-05
+  },
+  "bootstrap": {
+    "reps": 10000,
+    "seed": 20261016
+  },
+  "budgets": ["10", "30"],
+  "calibration_batch_per_gpu": 32,
+  "color_jitter": {
+    "brightness": 0.15,
+    "contrast": 0.15,
+    "hue": 0.05,
+    "saturation": 0.15
+  },
+  "data": {
+    "a_per_class": 5,
+    "cache_train_sha256": "90642db970cc6f83745e569e19f0659a726acfe62612908f1ee63331df23fa8a",
+    "cache_val_sha256": "fd0c5fc8e45cff072f45f878b60a33d8f0e0af6340fc11d8f937e1c6c75bf07b",
+    "dev_count": 10000,
+    "sample_seed": 20261015,
+    "splits_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd"
+  },
+  "eval_batch_per_gpu": 64,
+  "expected_versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "torch": "2.12.0+cu130",
+    "torchvision": "0.27.0+cu130"
+  },
+  "experiment": "2026-10-12_E008_kompresja_224",
+  "image_size": 224,
+  "modes": ["PRE", "POST", "RANDOM"],
+  "normalization_mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "normalization_std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "norm_zero_threshold": 1e-12,
+  "num_classes": 200,
+  "official_test_used": false,
+  "plans": {
+    "10": {
+      "compressed_parameters": 3837364,
+      "file": "PLAN_STRUKTURY_10.json",
+      "sha256": "1c23aad99530cb5750ddf53b1c262377793b9bd004cbfc021c927d04e15c9bd7"
+    },
+    "30": {
+      "compressed_parameters": 2981828,
+      "file": "PLAN_STRUKTURY_30.json",
+      "sha256": "fa08dbcde47b0db768d2fb2df2f16b3e60a4d35a92321679a48025b519a2f340"
+    }
+  },
+  "protocol_version": "0.1-draft",
+  "random_block_seed_stride": 1000,
+  "random_selection_seed": 20261015,
+  "reserve_used": false,
+  "rrc_ratio": [
+    0.9,
+    1.1
+  ],
+  "rrc_scale": [
+    0.8,
+    1.0
+  ],
+  "seed": 42,
+  "selection_py_sha256": "53d2c251e0324332c0f31513ef5d08a8b73df399e33c215fbed6b8eff33196cc",
+  "summarize_py_sha256": "8007f0aa76bfce8a72f7b2c4095d357e0e32cc339c09a426e1ff0c39bf8e8719",
+  "stage2": {
+    "amp": true,
+    "batch_per_gpu": 32,
+    "budget": "30",
+    "epochs": 60,
+    "eval_batch_per_gpu": 64,
+    "grad_clip": 1.0,
+    "label_smoothing": 0.1,
+    "lr": 0.0003,
+    "min_lr": 3e-06,
+    "variants": ["BASE", "PRE", "POST", "RANDOM"],
+    "warmup_epochs": 3,
+    "weight_decay": 0.01,
+    "workers": 3
+  },
+  "status": "draft",
+  "tf32": false,
+  "training_executed": false,
+  "workers": 3,
+  "world_size": 4
+}

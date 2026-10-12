@@ -1,0 +1,27 @@
+{
+  "experiment": "2026-10-12_E008_kompresja_224",
+  "numbers": {
+    "base_parameters": 4263748,
+    "cache_train_sha256": "90642db970cc6f83745e569e19f0659a726acfe62612908f1ee63331df23fa8a",
+    "cache_val_sha256": "fd0c5fc8e45cff072f45f878b60a33d8f0e0af6340fc11d8f937e1c6c75bf07b",
+    "calibration_A": 1000,
+    "calibration_B": 1000,
+    "dev": 10000,
+    "folded_10_parameters": 3837364,
+    "folded_30_parameters": 2981828,
+    "plan_10_compressed": 3837364,
+    "plan_10_removed_channels": 1048,
+    "plan_30_compressed": 2981828,
+    "plan_30_removed_channels": 3168,
+    "selection_10_POST_pairs": 1048,
+    "selection_10_PRE_pairs": 1048,
+    "selection_10_RANDOM_pairs": 1048,
+    "selection_10_settings_seed": 20261015,
+    "selection_30_POST_pairs": 3168,
+    "selection_30_PRE_pairs": 3168,
+    "selection_30_RANDOM_pairs": 3168,
+    "selection_30_settings_seed": 20261015,
+    "splits_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd"
+  },
+  "status": "passed"
+}
