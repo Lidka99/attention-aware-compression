@@ -44,7 +44,7 @@ def fig_e001_curve():
             color='#999999', label='train top-1')
     ax.annotate('dev 66,84% (best, ep. 177)', xy=(177, 66.84), xytext=(100, 82),
                 arrowprops=dict(arrowstyle='->', color='#333333'), fontsize=9)
-    ax.set_title('E001: CIFAR-100, 96x96, 200 epok')
+    ax.set_title('Baseline CIFAR-100, 96x96, 200 epok')
     ax.set_xlabel('epoka')
     ax.set_ylabel('top-1 [%]')
     ax.set_ylim(0, 100)
@@ -57,8 +57,8 @@ def fig_e005_e007_curves():
     e5 = rows(E005)
     e7 = rows(E007)
     fig, ax = plt.subplots(figsize=(6.6, 4.4))
-    for data, label, color in ((e5, 'E005: 96x96 -> dev 51,53%', '#1f77b4'),
-                               (e7, 'E007: 224x224 -> dev 58,49%', '#d62728')):
+    for data, label, color in ((e5, 'baseline 96x96 -> dev 51,53%', '#1f77b4'),
+                               (e7, 'baseline 224x224 -> dev 58,49%', '#d62728')):
         ax.plot([r['epoch'] for r in data], [100 * r['dev_top1'] for r in data],
                 color=color, label=label)
     ax.set_title('Tiny ImageNet: baseline 96 vs 224 (100 epok)')
@@ -78,7 +78,7 @@ def fig_e003_raw():
     for bar, value in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, value + 0.8, f'{value:.2f}',
                 ha='center', fontsize=10)
-    ax.set_title('E003: CIFAR-100, redukcja 10%, bez naprawy')
+    ax.set_title('Kompresja 10% na CIFAR-100, bez naprawy')
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(0, 75)
     ax.grid(axis='y', alpha=0.3)
@@ -93,7 +93,7 @@ def fig_repair():
     for bar, value in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, value + 0.03, f'{value:.2f}',
                 ha='center', fontsize=10)
-    ax.set_title('E004: CIFAR-100 po rownym dostrajaniu (120 epok)')
+    ax.set_title('CIFAR-100 po rownym dostrajaniu (120 epok)')
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(64, 69)
     ax.grid(axis='y', alpha=0.3)
@@ -116,7 +116,7 @@ def fig_e006():
                 va='center', ha='left' if value >= 0 else 'right', fontsize=9)
     ax.axvline(0, color='black', linewidth=0.8)
     ax.set_xlim(-0.25, 0.22)
-    ax.set_title('E006: korelacje rangowe (150 par, Tiny 96)')
+    ax.set_title('Korelacje rangowe (150 par, Tiny 96)')
     ax.grid(axis='x', alpha=0.3)
     ax = axes[1]
     ax.barh(['Delta rho = rho(g_pert) - rho(s_post)'], [0.199],
@@ -124,7 +124,7 @@ def fig_e006():
             error_kw=dict(ecolor='black', capsize=8))
     ax.axvline(0, color='black', linewidth=0.8)
     ax.set_xlim(-0.15, 0.5)
-    ax.set_title('E006: test glowny (95% CI) - dolna granica < 0')
+    ax.set_title('Test glowny (95% CI) - dolna granica < 0')
     ax.grid(axis='x', alpha=0.3)
     save(fig, 'fig_bramki_se.png')
 
@@ -141,7 +141,7 @@ def fig_e008_stage1():
                 ha='center', fontsize=9)
     ax.set_xticks(range(len(ticks)))
     ax.set_xticklabels(ticks, rotation=30, ha='right')
-    ax.set_title('E008 etap 1: Tiny ImageNet 224, 10% i 30%, bez naprawy')
+    ax.set_title('Tiny ImageNet 224: redukcja 10% i 30%, bez naprawy')
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(0, 68)
     ax.grid(axis='y', alpha=0.3)
@@ -153,15 +153,45 @@ def fig_e008_stage2_base():
     fig, ax = plt.subplots(figsize=(6.6, 4.0))
     epochs = [r['epoch'] for r in base]
     ax.plot(epochs, [100 * r['dev_top1'] for r in base], marker='o', color='#444444',
-            label='BASE (dostrajanie)')
-    ax.axhline(58.49, color='#999999', linestyle='--', label='E007 (przed dostrajaniem): 58,49%')
-    ax.set_title(f'E008 etap 2 w toku: BASE, epoka {epochs[-1]}/60 (12.10.2026)')
+            label='baseline (dostrajanie)')
+    ax.axhline(58.49, color='#999999', linestyle='--',
+               label='baseline przed dostrajaniem: 58,49%')
+    finished = (E008_RUN / 'stage2/stage2_metrics.json').exists()
+    state = 'zakonczony' if finished else 'w toku'
+    ax.set_title(f'Etap 2 ({state}): baseline, epoka {epochs[-1]}/60 (12.10.2026)')
     ax.set_xlabel('epoka')
     ax.set_ylabel('dev top-1 [%]')
     ax.set_ylim(50, 62)
     ax.legend(loc='lower right', fontsize=9)
     ax.grid(alpha=0.3)
     save(fig, 'fig_etap2_w_toku.png')
+
+
+def fig_etap2_wyniki():
+    metrics_path = E008_RUN / 'stage2/stage2_metrics.json'
+    if not metrics_path.exists():
+        print('skip fig_etap2_wyniki: brak stage2_metrics.json (bieg w toku)')
+        return
+    metrics = json.loads(metrics_path.read_text())['variants']
+    names = ['BASE', 'PRE', 'POST', 'RANDOM']
+    values = [100 * metrics[name]['last_row']['dev_top1'] for name in names]
+    fig, ax = plt.subplots(figsize=(6.8, 4.4))
+    bars = ax.bar(names, values, color=[COLORS[n] for n in names], width=0.62)
+    for bar, value in zip(bars, values):
+        ax.text(bar.get_x() + bar.get_width() / 2, value + 0.15, f'{value:.2f}',
+                ha='center', fontsize=10)
+    ax.set_title('Kompresja 30% po rownym dostrajaniu (60 epok)')
+    ax.set_ylabel('dev top-1 [%]')
+    ax.set_ylim(min(values) - 2, max(values) + 2)
+    ax.grid(axis='y', alpha=0.3)
+    summary_path = E008_RUN / 'summary.json'
+    if summary_path.exists():
+        primary = json.loads(summary_path.read_text())['primary']
+        ax.annotate('POST - PRE = %+.3f, CI [%.3f; %.3f]' % (
+            primary['delta_top1'], primary['ci95_top1'][0], primary['ci95_top1'][1]),
+            xy=(0.5, 0.03), xycoords='axes fraction', ha='center', fontsize=9,
+            bbox=dict(boxstyle='round', fc='#eef3fb', ec='#0b3d91'))
+    save(fig, 'fig_etap2_wyniki.png')
 
 
 if __name__ == '__main__':
@@ -174,4 +204,5 @@ if __name__ == '__main__':
     fig_e006()
     fig_e008_stage1()
     fig_e008_stage2_base()
+    fig_etap2_wyniki()
     print('E008_PROMOTOR_FIGURES=done')
