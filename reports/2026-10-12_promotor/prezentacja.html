@@ -39,8 +39,8 @@
     <li>Środowisko: 4×RTX 2080 Ti (DDP), pomiary deterministyczne; Tiny ImageNet i CIFAR-100</li>
     <li>Repozytorium: <span class="small">github.com/Lidka99/attention-aware-compression</span></li>
   </ul>
-  <div class="note">Trwa ostatni bieg (kompresja 10% i 30% na baseline 224 — etap naprawy);
-    slajd „Etap 2 w toku" pokazuje stan na 12.10, 05:08 UTC.</div>
+  <div class="note">E008 zakończony (60 epok równej naprawy) — wyniki na slajdzie „Etap 2 — wynik".
+    Trwa E009: naprawa 120 epok (stan 13.10, 07:10 UTC).</div>
 </section>
 
 <section class="slide">
@@ -244,19 +244,36 @@
 </section>
 
 <section class="slide">
-  <h2>Etap 2 — równe dostrajanie (w toku, stan 12.10, 05:08 UTC)</h2>
+  <h2>Etap 2 — wynik po 60 epokach równego dostrajania (30% redukcji)</h2>
   <div class="row">
-    <img src="wykresy/fig_etap2_w_toku.png" alt="Etap 2 w toku">
+    <img src="wykresy/fig_etap2_wyniki.png" alt="Etap 2 wynik">
     <ul>
-      <li>Dostrajane sekwencyjnie: baseline, potem „przed SE", „po SE", „losowo" — każdy 60 epok,
-          identyczna receptura.</li>
-      <li>Bieżący wariant: baseline, epoka <b>12/60</b>; początkowy spadek dev po restarcie
-          współczynnika uczenia — oczekiwany; porównanie liczy się na końcu, przy równym budżecie.</li>
-      <li>Szacowany koniec całości: <b>~16:50 UTC</b>; potem automatyczne podsumowanie z bootstrapem
-          („po SE minus przed SE").</li>
-      <li>Na tej podstawie: decyzja o dalszym kierunku (patrz ostatni slajd).</li>
+      <li>Po naprawie: baseline <b>59,45%</b> · po SE <b>58,32%</b> · przed SE 57,81% ·
+          losowo 57,55%.</li>
+      <li>Test główny (po SE minus przed SE): <b>+0,51 pp, CI [−0,18; +1,19]</b> —
+          próg (dolna granica &gt; 0) <b>nieprzekroczony</b>.</li>
+      <li>Po SE minus losowo: <b>+0,77 pp, CI [+0,03; +1,50]</b> — jedyna istotna przewaga
+          nad losowaniem, na granicy.</li>
+      <li>Wszystkie skompresowane modele poniżej baseline'u o 1,13–1,90 pp — kompresja 30%
+          nadal kosztuje istotnie.</li>
+      <li>Wniosek: „po atencji" nie przebija „przed atencją"; sygnał wyboru jest bardzo słaby.</li>
     </ul>
   </div>
+</section>
+
+<section class="slide">
+  <h2>Dłuższy budżet naprawy — E009 (120 epok) w toku</h2>
+  <ul>
+    <li>E008 odpowiada dla 60 epok; pytanie: czy dłuższa naprawa zmienia obraz różnic?
+        Osobny, zamrożony eksperyment: <b>120 epok, jeden ciągły cosine</b>, te same modele
+        startowe (identyczna kompresja i selekcja).</li>
+    <li>Start: 2026-10-12 15:59 UTC (automatycznie po E008); koniec: ~13.10 ~14:00 UTC.</li>
+    <li>Stan na 13.10, 07:10 UTC: baseline <b>60,04%</b> i przed SE <b>59,18%</b> po pełnych
+        120 epokach (oba powyżej wyników 60-epokowych); po SE w trakcie (~59%),
+        losowo w kolejce.</li>
+    <li>E009 rozstrzyga decyzję: zamknięcie wątku selekcji albo ścieżka publikacyjna
+        na baseline 224.</li>
+  </ul>
 </section>
 
 <section class="slide">
@@ -274,15 +291,17 @@
             (10%, CIFAR-100) oraz +5,7–8,7 pp (30%, Tiny 224) — jest realny sygnał.</li>
         <li>Bramki SE przetestowane rzetelnie i <b>uczciwie zamknięte</b> (wynik negatywny,
             z kontrolą FWER).</li>
-        <li>Trwa decydujący test: <b>naprawa przy 30%</b> na baseline 224.</li>
+        <li>E008: po 60 epokach naprawy <b>POST jedyny (o włos) istotnie ponad losowaniem</b>;
+            baseline po naprawie poprawiony do 59,45%.</li>
+        <li>Trwa E009 (120 epok naprawy) — odpowie, czy dłuższy budżet zmienia obraz.</li>
       </ul>
     </div>
     <div class="bad" style="flex:1 1 430px">
       <b>Nie wyszło:</b>
       <ul>
         <li><b>Hipoteza „attention-aware" niepotwierdzona:</b> kryterium po SE nie przewyższa
-            przed SE — ani po naprawie (10%, CIFAR-100), ani surowo na Tiny 224
-            (po SE wręcz słabsze).</li>
+            przed SE — ani po naprawie (10%, CIFAR-100), ani surowo na Tiny 224;
+            w E008 po 60 epokach naprawy POST−PRE +0,51 pp, CI obejmuje 0.</li>
         <li><b>Bramki SE nie przewidują</b> szkody scalenia ponad podobieństwo po SE
             (dolna granica przedziału &lt; 0).</li>
         <li>Po równym dostrojeniu przy 10% <b>różnice między kryteriami znikają</b> —
@@ -292,8 +311,8 @@
       </ul>
     </div>
   </div>
-  <div class="note">Otwarta kwestia rozstrzyga się dziś: czy przy 30% i równym dostrojeniu różnice
-    zostają (ścieżka publikacyjna) czy znikają (zamknięcie wątku selekcji „attention-aware").</div>
+  <div class="note">E008 (60 epok): próg nieprzekroczony. E009 (120 epok, w toku) rozstrzyga dziś
+    po południu: trwała przewaga (ścieżka publikacyjna) czy brak różnic (zamknięcie wątku selekcji).</div>
 </section>
 
 <section class="slide">
@@ -307,10 +326,13 @@
         <li>przy 10% redukcji <b>naprawa zaciera różnice</b> między kryteriami (losowy dorównuje);</li>
         <li>wybór kanałów oparty na podobieństwie jest <b>surowo lepszy od losowego</b> — jest sygnał,
             tylko nie atencyjny;</li>
-        <li>mamy baseline 224×224 <b>zgodny z literaturą</b> (58,5% vs 60,5% przy innych warunkach oceny).</li>
+        <li>mamy baseline 224×224 <b>zgodny z literaturą</b> (58,5% vs 60,5% przy innych warunkach oceny);</li>
+        <li>E008 po 60 epokach naprawy (30%): próg POST−PRE nieprzekroczony (+0,51 pp, CI [−0,18; +1,19]);
+            POST jedyny (o włos) istotnie ponad losowaniem; kompresja 30% kosztuje 1,13–1,90 pp.</li>
       </ul>
     </li>
-    <li><b>Dziś:</b> dokończyć etap naprawy przy 30% i napisać raport z wynikiem głównym.</li>
+    <li><b>Dziś:</b> E008 zakończony i udokumentowany; po południu kończy się E009 (120 epok naprawy) —
+        decyzja o kierunku po jego wyniku.</li>
     <li><b>Scenariusz A — różnice znikają po naprawie:</b> zamykamy wątek selekcji „attention-aware"
         przy badanych budżetach; decyzja: praca negatywno-analityczna vs zmiana pytania
         (większe kompresje, kwantyzacja, inne mechanizmy uwagi).</li>

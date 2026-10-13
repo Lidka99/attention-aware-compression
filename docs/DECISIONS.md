@@ -113,3 +113,11 @@ Decyzja/konsekwencje:
   używamy.
 
 Dokumentacja: [WYNIKI.md](../experiments/2026-10-11_E007_baseline_224/WYNIKI.md).
+
+## 2026-10-13 — E008 zakończony; E009 (120 epok naprawy) w toku
+
+Bieg runs/E008/20261012T042932Z_0fd9962_seed42_tn1zlyim (protokół 1.1, commit 0fd9962) zakończony 2026-10-12 15:57 UTC (exit 0). Etap 1 bez naprawy: 10% → PRE 47,42 / POST 47,07 / RANDOM 40,79; 30% → PRE 9,67 / POST 6,65 / RANDOM 0,99 (BASE 58,49, bramka odtworzona); selekcja > losowa, ale POST < PRE (odwrotnie niż na CIFAR-100). Etap 2 po 60 epokach równej naprawy: BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp, CI [−0,18; +1,19] → kryterium pierwszorzędne nieprzekroczone; POST−RANDOM +0,77 pp, CI [+0,03; +1,50] — jedyna istotna przewaga nad losowaniem, na granicy; wszystkie skompresowane poniżej BASE (o 1,13–1,90 pp).
+
+Decyzja użytkowniczki (2026-10-12): dłuższy budżet naprawy jako osobny eksperyment — E009: 120 epok, jeden ciągły cosine, te same modele startowe (etap 1 E008), cztery warianty równo. Bieg runs/E009/20261012T155859Z_fef2836_seed42_jsagnut2 wystartował automatycznie 2026-10-12 15:59 UTC (launcher wymaga ukończonego E008); koniec ~13.10 ~14:00.
+
+Dokumentacja: [WYNIKI.md E008](../experiments/2026-10-12_E008_kompresja_224/WYNIKI.md); [PROTOKOL_v1.md E009](../experiments/2026-10-12_E009_naprawa_120/PROTOKOL_v1.md).

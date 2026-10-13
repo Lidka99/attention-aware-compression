@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001–E007 zakończone. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005: baseline Tiny ImageNet od zera — dev 51,53% przy 96×96. E006: sygnał z bramek SE nie przewiduje szkody scalenia ponad podobieństwo po SE (primary_passed=false); wątek zamknięty. E007: baseline 224×224 pod publikację — dev 58,49% przy 100 epokach od zera. Nowość badawcza niepotwierdzona.
+Status: E001–E008 zakończone; E009 w toku. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005/E007: baseline'y Tiny ImageNet 96×96 (51,53%) i 224×224 (58,49%). E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E008: po 60 epokach równej naprawy POST−PRE +0,51 pp (CI obejmuje 0), POST na granicy istotnie ponad RANDOM; startował E009 (120 epok naprawy). Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -29,6 +29,10 @@ Wynik negatywny: g_pert ≈ 0 ponad s_post; wątek bramek zamknięty.
 **[E007 — baseline 224×224 pod publikację](experiments/2026-10-11_E007_baseline_224/WYNIKI.md)**,
 [protokół](experiments/2026-10-11_E007_baseline_224/PROTOKOL_v1.md).
 100 epok od zera na 4 GPU (run `4de51b3`); dev top-1 58,49% (epoka 100), train 99,50%, dev NLL 2,0001. Zastępuje E005 jako główny punkt odniesienia.
+
+**[E008 — wynik kompresji na baseline 224](experiments/2026-10-12_E008_kompresja_224/WYNIKI.md)**,
+[protokół](experiments/2026-10-12_E008_kompresja_224/PROTOKOL_v1.md).
+Etap 1 bez naprawy: 10% → PRE 47,4 / POST 47,1 / RANDOM 40,8; 30% → 9,7 / 6,7 / 1,0. Etap 2 (60 epok): BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp (CI [−0,18; +1,19]); POST−RANDOM na granicy istotności. Trwa E009 (120 epok naprawy).
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

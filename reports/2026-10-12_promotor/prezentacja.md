@@ -1,8 +1,8 @@
 # Kompresja sieci CNN a zachowanie atencji kanałowej — podsumowanie badań
 
-Prezentacja dla promotora · stan na 12.10.2026 · Lidia Cichońska
+Prezentacja dla promotora · stan na 13.10.2026 · Lidia Cichońska
 Wersja HTML (slajdy, druk do PDF): [prezentacja.html](prezentacja.html).
-Trwa ostatni bieg (naprawa przy 30%); sekcja „Etap 2 w toku" pokazuje stan na 05:08 UTC.
+E008 zakończony (wynik w sekcji 12); trwa E009 — naprawa 120 epok (stan 13.10, 07:10 UTC).
 
 ---
 
@@ -117,15 +117,27 @@ Trwa ostatni bieg (naprawa przy 30%); sekcja „Etap 2 w toku" pokazuje stan na 
   (przeciwnie niż na CIFAR-100).
 - Kontrola: baseline odtworzony co do obrazu (5849/10000).
 
-## 12. Etap 2 — równe dostrajanie (w toku; stan 12.10, 05:08 UTC)
+## 12. Etap 2 — wynik po 60 epokach równego dostrajania (30% redukcji)
 
-![Etap 2](wykresy/fig_etap2_w_toku.png)
+![Etap 2 wynik](wykresy/fig_etap2_wyniki.png)
 
-- Sekwencyjnie: baseline (epoka 12/60), potem przed SE, po SE, losowo — po 60 epok.
-- Początkowy spadek dev po restarcie LR — oczekiwany; porównanie na końcu, przy równym budżecie.
-- Koniec ~16:50 UTC; potem automatyczne podsumowanie z bootstrapem.
+- Po naprawie: baseline **59,45%** · po SE **58,32%** · przed SE 57,81% · losowo 57,55%.
+- Test główny (po SE minus przed SE): **+0,51 pp, CI [−0,18; +1,19]** — próg nieprzekroczony.
+- Po SE minus losowo: **+0,77 pp, CI [+0,03; +1,50]** — jedyna istotna przewaga nad losowaniem,
+  na granicy.
+- Wszystkie skompresowane modele poniżej baseline'u o 1,13–1,90 pp; kompresja 30% nadal kosztuje.
+- Wniosek: „po atencji" nie przebija „przed atencją"; sygnał wyboru jest bardzo słaby.
 
-## 13. Co wyszło, a co nie wyszło
+## 13. Dłuższy budżet naprawy — E009 (120 epok) w toku
+
+- Osobny, zamrożony eksperyment: **120 epok, jeden ciągły cosine**, te same modele startowe
+  (identyczna kompresja i selekcja co w E008).
+- Start: 2026-10-12 15:59 UTC (automatycznie po E008); koniec: ~13.10 ~14:00 UTC.
+- Stan 13.10, 07:10 UTC: baseline **60,04%** i przed SE **59,18%** po pełnych 120 epokach
+  (oba powyżej wyników 60-epokowych); po SE w trakcie (~59%), losowo w kolejce.
+- E009 rozstrzyga: zamknięcie wątku selekcji albo ścieżka publikacyjna na baseline 224.
+
+## 14. Co wyszło, a co nie wyszło
 
 **Wyszło:**
 
@@ -136,23 +148,27 @@ Trwa ostatni bieg (naprawa przy 30%); sekcja „Etap 2 w toku" pokazuje stan na 
 - **Wybór kanałów oparty na podobieństwie działa surowo:** +5,5–6 pp nad losowym (10%, CIFAR-100)
   oraz +5,7–8,7 pp (30%, Tiny 224) — jest realny sygnał.
 - Bramki SE przetestowane rzetelnie i **uczciwie zamknięte** (wynik negatywny, kontrola FWER).
-- Trwa decydujący test: naprawa przy 30% na baseline 224.
+- E008: po 60 epokach naprawy **POST jedyny (o włos) istotnie ponad losowaniem**; baseline
+  po naprawie poprawiony do 59,45%.
+- Trwa E009 (120 epok naprawy) — odpowie, czy dłuższy budżet zmienia obraz.
 
 **Nie wyszło:**
 
 - **Hipoteza „attention-aware" niepotwierdzona:** kryterium po SE nie przewyższa przed SE —
-  ani po naprawie (10%, CIFAR-100), ani surowo na Tiny 224 (po SE wręcz słabsze).
+  ani po naprawie (10%, CIFAR-100), ani surowo na Tiny 224; w E008 po 60 epokach naprawy
+  POST−PRE +0,51 pp, CI obejmuje 0.
 - **Bramki SE nie przewidują** szkody scalenia ponad podobieństwo po SE (dolna granica CI < 0).
 - Po równym dostrojeniu przy 10% różnice między kryteriami znikają — wybór losowy dorównuje
   (na przeuczonym baseline).
 - **Nowość badawcza wciąż niepotwierdzona** — brak pozytywnego wyniku publikacyjnego w obecnej formie.
 
-Otwarta kwestia rozstrzyga się dziś: czy przy 30% po naprawie różnice zostają (ścieżka publikacyjna)
-czy znikają (zamknięcie wątku).
+E008 (60 epok): próg nieprzekroczony. E009 (120 epok, w toku) rozstrzyga dziś po południu:
+trwała przewaga (ścieżka publikacyjna) czy brak różnic (zamknięcie wątku selekcji).
 
-## 14. Wnioski i plan dalszy
+## 15. Wnioski i plan dalszy
 
-- Dziś: dokończyć etap naprawy przy 30% i napisać raport z wynikiem głównym.
+- Dziś: E008 zakończony i udokumentowany; po południu kończy się E009 (120 epok naprawy) —
+  decyzja o kierunku po jego wyniku.
 - Scenariusz A (różnice znikają): zamknięcie wątku przy badanych budżetach; decyzja między pracą
   negatywno-analityczną a zmianą pytania (większe kompresje, kwantyzacja, inne mechanizmy uwagi).
 - Scenariusz B (różnice zostają): ścieżka publikacyjna na baseline 224 (pełna kompresja,
