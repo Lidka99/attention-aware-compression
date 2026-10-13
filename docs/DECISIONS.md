@@ -121,3 +121,21 @@ Bieg runs/E008/20261012T042932Z_0fd9962_seed42_tn1zlyim (protokół 1.1, commit 
 Decyzja użytkowniczki (2026-10-12): dłuższy budżet naprawy jako osobny eksperyment — E009: 120 epok, jeden ciągły cosine, te same modele startowe (etap 1 E008), cztery warianty równo. Bieg runs/E009/20261012T155859Z_fef2836_seed42_jsagnut2 wystartował automatycznie 2026-10-12 15:59 UTC (launcher wymaga ukończonego E008); koniec ~13.10 ~14:00.
 
 Dokumentacja: [WYNIKI.md E008](../experiments/2026-10-12_E008_kompresja_224/WYNIKI.md); [PROTOKOL_v1.md E009](../experiments/2026-10-12_E009_naprawa_120/PROTOKOL_v1.md).
+
+## 2026-10-13 — E009 przerwany awarią maszyny; pełne powtórzenie
+
+Bieg `runs/E009/20261012T155859Z_fef2836_seed42_jsagnut2` (protokół 1.0, commit
+`fef2836`) został przerwany awaryjnym wyłączeniem maszyny 2026-10-13 ok. 09:18 UTC
+(sygnał 1) w trakcie ostatniego wariantu RANDOM (epoka 11/120). Stan dowodowy:
+BASE 60,04 / PRE 59,18 / POST 59,46 po 120/120 epok (kompletne metryki i predykcje
+dev), RANDOM nieukończony, brak `summary.json`. Manifest biegu oznaczono jako
+`failed`; żadne liczby z tego biegu nie wchodzą do analizy.
+
+Decyzja użytkowniczki (2026-10-13, rozmowa): pełne powtórzenie E009 w nowym katalogu,
+ten sam zamrożony protokół 1.0, ten sam kod i wejścia; bez zmian protokołu, rezerwy
+i testu nie używano. Powtórzenie: bieg
+`runs/E009/20261013T172339Z_954ece0_seed42_nh02g2l8` (commit 954ece0) wystartował
+2026-10-13 17:23 UTC; pierwsza epoka BASE odtworzyła wartości przerwanego biegu
+(train NLL, dev NLL i dev top-1 identyczne); oczekiwany koniec ~2026-10-14 ~17:00 UTC.
+
+Dokumentacja: [PROTOKOL_v1.md](../experiments/2026-10-12_E009_naprawa_120/PROTOKOL_v1.md).
