@@ -2,7 +2,7 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001–E008 zakończone; E009 w toku. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005/E007: baseline'y Tiny ImageNet 96×96 (51,53%) i 224×224 (58,49%). E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E008: po 60 epokach równej naprawy POST−PRE +0,51 pp (CI obejmuje 0), POST na granicy istotnie ponad RANDOM; startował E009 (120 epok naprawy). Nowość badawcza niepotwierdzona.
+Status: E001–E008 zakończone; E009 w toku. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005/E007: baseline'y Tiny ImageNet 96×96 (51,53%) i 224×224 (58,49%). E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E008: po 60 epokach równej naprawy POST−PRE +0,51 pp (CI obejmuje 0), POST na granicy istotnie ponad RANDOM; E009 (120 epok naprawy) wznowiony 13.10 po awarii maszyny; wynik ~14.10. Nowość badawcza niepotwierdzona.
 
 ## Od czego zacząć
 
@@ -32,7 +32,7 @@ Wynik negatywny: g_pert ≈ 0 ponad s_post; wątek bramek zamknięty.
 
 **[E008 — wynik kompresji na baseline 224](experiments/2026-10-12_E008_kompresja_224/WYNIKI.md)**,
 [protokół](experiments/2026-10-12_E008_kompresja_224/PROTOKOL_v1.md).
-Etap 1 bez naprawy: 10% → PRE 47,4 / POST 47,1 / RANDOM 40,8; 30% → 9,7 / 6,7 / 1,0. Etap 2 (60 epok): BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp (CI [−0,18; +1,19]); POST−RANDOM na granicy istotności. Trwa E009 (120 epok naprawy).
+Etap 1 bez naprawy: 10% → PRE 47,4 / POST 47,1 / RANDOM 40,8; 30% → 9,7 / 6,7 / 1,0. Etap 2 (60 epok): BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp (CI [−0,18; +1,19]); POST−RANDOM na granicy istotności. E009 (120 epok naprawy): pierwszy bieg przerwany awarią 13.10, pełne powtórzenie w toku; wynik ~14.10 UTC.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 

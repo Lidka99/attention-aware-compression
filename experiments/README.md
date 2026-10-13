@@ -15,7 +15,7 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 
 E007, 2026-10-12: [baseline 224×224 pod publikację](2026-10-11_E007_baseline_224/WYNIKI.md), completed. 100 epok od zera na 4 GPU (run 4de51b3), dev top-1 58,49% (epoka 100); zastępuje E005 jako główny punkt odniesienia do badań kompresji.
 
-E008, 2026-10-13: [wynik kompresji i naprawy 60 epok](2026-10-12_E008_kompresja_224/WYNIKI.md), completed. Etap 1 bez naprawy: selekcja > losowa, POST < PRE; etap 2: POST−PRE +0,51 pp (próg nieprzekroczony), POST istotnie ponad RANDOM na granicy. Trwa E009 — naprawa 120 epok (start 2026-10-12 15:59 UTC).
+E008, 2026-10-13: [wynik kompresji i naprawy 60 epok](2026-10-12_E008_kompresja_224/WYNIKI.md), completed. Etap 1 bez naprawy: selekcja > losowa, POST < PRE; etap 2: POST−PRE +0,51 pp (próg nieprzekroczony), POST istotnie ponad RANDOM na granicy. E009 — naprawa 120 epok: pierwszy bieg przerwany awarią maszyny 13.10; pełne powtórzenie od 2026-10-13 17:23 UTC, wynik ~14.10.
 
 Uzupełnienie E006, 2026-10-11: [kontrola FWER sygnałów wtórnych (analiza na zamrożonym pairs.csv)](2026-10-11_E006_kryterium_bramkowe_predykcja/analizy/2026-10-11_kontrola_FWER_wtornych/WYNIKI.md), completed; bez wpływu na decyzję pierwszorzędną.
 
