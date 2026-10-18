@@ -1,0 +1,71 @@
+{
+  "checks": {
+    "bootstrap_vs_E003": {
+      "detail": {
+        "E003_ci": [
+          -0.006,
+          0.0122
+        ],
+        "E008_ci": [
+          -0.0018,
+          0.0119
+        ]
+      },
+      "seconds": 55.49335718154907,
+      "status": "passed"
+    },
+    "criteria_groups": {
+      "detail": {
+        "group_files_checked": 15
+      },
+      "seconds": 285.882276058197,
+      "status": "passed"
+    },
+    "folding_equivalence": {
+      "detail": {
+        "models_checked": 9
+      },
+      "seconds": 3.23217511177063,
+      "status": "passed"
+    },
+    "input_hashes": {
+      "detail": {
+        "datasets": [
+          "tiny",
+          "cifar100"
+        ],
+        "verified": true
+      },
+      "seconds": 7.052606821060181,
+      "status": "passed"
+    },
+    "py_compile": {
+      "detail": {
+        "modules": [
+          "check_cpu_e010.py",
+          "criteria_e010.py",
+          "folding_e010.py",
+          "launch_e010.py",
+          "merge_e010.py",
+          "repair_e010.py",
+          "stats_e010.py",
+          "summarize_e010.py",
+          "support_e010.py"
+        ]
+      },
+      "seconds": 0.02621293067932129,
+      "status": "passed"
+    }
+  },
+  "config": "experiments/2026-10-18_E010_benchmark_kryteriow/config.json",
+  "config_sha256": "46e17f4d798096a3ec809ed4107ffa339ad1d91f2eaf29de50656fc2aeaa8178",
+  "created_utc": "2026-10-18T22:38:08.448882+00:00",
+  "experiment": "2026-10-18_E010_benchmark_kryteriow",
+  "seconds": 351.6912667751312,
+  "status": "passed",
+  "versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15 (main, Mar 11 2026, 17:20:07) [GCC 14.3.0]",
+    "torch": "2.12.0+cu130"
+  }
+}
