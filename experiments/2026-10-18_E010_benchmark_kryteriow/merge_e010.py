@@ -186,14 +186,16 @@ def main():
                 total = len(targets)
                 row = {'dataset': key, 'name': name, 'correct': int(correct.sum()),
                        'count': int(total), 'nll': nll, 'top1': float(correct.mean())}
-                criterion = name.split('_', 2)[2]
-                ratio = name.split('_')[1]
                 if name.endswith('_BASE'):
                     ref = reference['BASE']
-                elif criterion in ds['criteria']['reused']:
-                    ref = reference[f'{ratio}_{criterion}'] if key == 'tiny' else reference[criterion]
                 else:
-                    ref = None
+                    criterion = name.split('_', 2)[2]
+                    ratio = name.split('_')[1]
+                    if criterion in ds['criteria']['reused']:
+                        ref = (reference[f'{ratio}_{criterion}']
+                               if key == 'tiny' else reference[criterion])
+                    else:
+                        ref = None
                 if ref is not None:
                     require(int(correct.sum()) == int(ref['correct']),
                             f'{name}: top-1 does not reproduce reference')

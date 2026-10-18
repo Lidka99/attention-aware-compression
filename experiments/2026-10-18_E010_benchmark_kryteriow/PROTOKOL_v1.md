@@ -15,6 +15,11 @@ przepisano na wersję bez barrierów: każdy rank ocenia niezależnie, a rank0
 scala pliki po zakończeniu rang. Zmiana wyłącznie techniczna; protokół
 naukowy bez zmian. Bieg powtórzony w nowym katalogu.
 
+W pierwszym uruchomieniu wersji 1.1 wykryto `IndexError` przy scalaniu
+`tiny_BASE` (parsowanie nazwy komórki bez kryterium); poprawiono obsługę
+`BASE` i bieg powtórzono w kolejnym nowym katalogu. Zmiana wyłącznie
+techniczna, bez wpływu na protokół naukowy.
+
 ## Cel i pytanie
 
 Czy któreś ze standardowych kryteriów wyboru kanałów do scalenia daje po

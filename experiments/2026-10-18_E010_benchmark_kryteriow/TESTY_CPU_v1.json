@@ -11,21 +11,21 @@
           0.0119
         ]
       },
-      "seconds": 56.216819286346436,
+      "seconds": 54.366058349609375,
       "status": "passed"
     },
     "criteria_groups": {
       "detail": {
         "group_files_checked": 15
       },
-      "seconds": 285.6033914089203,
+      "seconds": 278.89905619621277,
       "status": "passed"
     },
     "folding_equivalence": {
       "detail": {
         "models_checked": 9
       },
-      "seconds": 3.2541730403900146,
+      "seconds": 3.117314100265503,
       "status": "passed"
     },
     "input_hashes": {
@@ -36,7 +36,7 @@
         ],
         "verified": true
       },
-      "seconds": 6.697199106216431,
+      "seconds": 6.534707307815552,
       "status": "passed"
     },
     "py_compile": {
@@ -53,15 +53,15 @@
           "support_e010.py"
         ]
       },
-      "seconds": 0.02558422088623047,
+      "seconds": 0.029924392700195312,
       "status": "passed"
     }
   },
   "config": "experiments/2026-10-18_E010_benchmark_kryteriow/config.json",
-  "config_sha256": "9e85d524a2f2a1b2c6a4899e73e70acf3f5641d7d517450ab6c84e4b6b48fac0",
-  "created_utc": "2026-10-18T23:31:56.412416+00:00",
+  "config_sha256": "6c1bc0e250fcfb2f89da87a8895aa7fa2d239eb199e5e33517a0dc100ebd5723",
+  "created_utc": "2026-10-18T23:45:38.876992+00:00",
   "experiment": "2026-10-18_E010_benchmark_kryteriow",
-  "seconds": 351.8015434741974,
+  "seconds": 342.95144748687744,
   "status": "passed",
   "versions": {
     "numpy": "2.4.6",
