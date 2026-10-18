@@ -43,7 +43,7 @@ def main():
     if not config_path.exists():
         raise RuntimeError('Missing frozen config.json')
     cfg = json.loads(config_path.read_text())
-    if cfg['status'] != 'frozen' or cfg['protocol_version'] != '1.0':
+    if cfg['status'] != 'frozen' or cfg['protocol_version'] not in ('1.0', '1.1'):
         raise RuntimeError('Unfrozen config')
     from support_e010 import verify_inputs
     inputs = verify_inputs(cfg)
