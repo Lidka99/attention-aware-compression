@@ -1,20 +1,22 @@
-"""E010: scalanie nowych kryteriow i zero-shot dev na 4 GPU.
+"""E010: scalanie nowych kryteriow i zero-shot dev na 4 GPU (bez barrierow).
 
-Eksperyment: 2026-10-18_E010_benchmark_kryteriow; protokol: OPIS.md i PROTOKOL_v1.md.
-Wejscia: config frozen, model bazowy, plany per ratio, grupy z criteria_e010.py,
-modele etapu 1 E008/E003 (reuzyte).
+Eksperyment: 2026-10-18_E010_benchmark_kryteriow; protokol: OPIS.md i PROTOKOL_v1.md
+(wersja 1.1). Wejscia: config frozen, model bazowy, plany per ratio, grupy
+z criteria_e010.py, modele etapu 1 E008/E003 (reuzyte).
 Wyjscia: merge/models/<dataset>_<ratio>_<kryterium>.pt, merge/dev/*.npz,
-merge/zero_metrics.json. Bramki: parametry, pokrycie dev, odtworzenie
-top-1/NLL modeli reuzytych i BASE (top-1 dokladnie, |dNLL| <= 1e-5).
+merge/zero_metrics.json. Kazdy rank ocenia swoja czesc dev niezaleznie i
+zapisuje plik *_rank<r>.npz; rank0 po zakonczeniu czeka na pliki rang i scala
+je bez NCCL. Bramki: parametry, pokrycie dev, odtworzenie top-1/NLL modeli
+reuzytych i BASE (top-1 dokladnie, |dNLL| <= 1e-5).
 """
 import argparse
+import os
 import time
-from datetime import timedelta
+import traceback
 from pathlib import Path
 
 import numpy as np
 import torch
-import torch.distributed as dist
 from torch import nn
 
 from support_e010 import (dataset_cfg, plan_rows, plan_spec, base_model, load_dataset,
@@ -46,6 +48,22 @@ def evaluate(model, data_loader, records, rank, device):
                    'logits': np.concatenate(logits)}
 
 
+def log(path, text):
+    with Path(path).open('a') as stream:
+        stream.write(time.strftime('%H:%M:%S ') + text + '\n')
+        stream.flush()
+
+
+def wait_for(paths, timeout=1800, interval=0.5):
+    started = time.time()
+    while True:
+        if all(path.exists() for path in paths):
+            return
+        if time.time() - started > timeout:
+            raise RuntimeError(f'Timeout waiting for rank files: {paths}')
+        time.sleep(interval)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, required=True)
@@ -55,9 +73,9 @@ def main():
     run = args.run_dir.resolve()
     (run / 'merge' / 'models').mkdir(parents=True, exist_ok=True)
     (run / 'merge' / 'dev').mkdir(parents=True, exist_ok=True)
-    rank = int(__import__('os').environ['RANK'])
-    local_rank = int(__import__('os').environ['LOCAL_RANK'])
-    require(int(__import__('os').environ['WORLD_SIZE']) == 4 and torch.cuda.device_count() == 4,
+    rank = int(os.environ['RANK'])
+    local_rank = int(os.environ['LOCAL_RANK'])
+    require(int(os.environ['WORLD_SIZE']) == 4 and torch.cuda.device_count() == 4,
             'Exactly 4 GPUs/processes required')
     torch.cuda.set_device(local_rank)
     device = torch.device('cuda', local_rank)
@@ -67,110 +85,131 @@ def main():
     torch.backends.cudnn.deterministic = True
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
-    dist.init_process_group('nccl', timeout=timedelta(minutes=30), device_id=device)
-    zero_metrics = {}
+    progress = run / 'merge' / f'progress_rank{rank}.log'
+    log(progress, f'start rank={rank} local_rank={local_rank}')
+    cell_names = {}
+    dev_records = {}
     try:
         for key in DATASET_KEYS:
             ds = dataset_cfg(cfg, key)
             images, labels, records, _train = load_dataset(ds)
+            dev_records[key] = records['dev']
             base = base_model(ds)
-            if key == 'tiny':
-                reference = read_json(Path(ds['run']['file']) / 'stage1' / 'stage1_metrics.json')['modes']
-                ref_base = reference['BASE']
-            else:
-                reference = read_json(Path(ds['run']['file']) / 'raw_metrics.json')['modes']
-                ref_base = reference['BASE']
             dev_batch = int(ds['repair']['eval_batch_per_gpu'])
-
-            def run_cell(name, model, ref=None):
-                model = model.to(device).eval()
-                started = time.time()
-                stats, preds = evaluate(model, loader(images, labels, records['dev'], ds, rank, dev_batch),
-                                        records['dev'], rank, device)
-                np.savez_compressed(run / 'merge' / 'dev' / f'{name}_rank{rank}.npz', **preds)
-                dist.barrier()
-                if rank == 0:
-                    merged = []
-                    for r in range(4):
-                        with np.load(run / 'merge' / 'dev' / f'{name}_rank{r}.npz',
-                                     allow_pickle=False) as f:
-                            merged.append({k: f[k].copy() for k in f.files})
-                    joined = {k: np.concatenate([v[k] for v in merged]) for k in merged[0]}
-                    order = np.argsort(joined['ids'])
-                    joined = {k: v[order] for k, v in joined.items()}
-                    require(joined['ids'].tolist() == [r['id'] for r in records['dev']]
-                            and len(np.unique(joined['ids'])) == int(ds['data']['dev_count']),
-                            f'Global dev coverage mismatch for {name}')
-                    np.savez_compressed(run / 'merge' / 'dev' / f'{name}.npz', **joined)
-                    total = stats[2]
-                    row = {'dataset': key, 'name': name, 'correct': int(stats[1]),
-                           'count': int(total), 'nll': float(stats[0] / total),
-                           'top1': float(stats[1] / total), 'seconds': time.time() - started}
-                    if ref is not None:
-                        require(int(stats[1]) == int(ref['correct']),
-                                f'{name}: top-1 does not reproduce reference')
-                        require(abs(float(stats[0] / total) - float(ref['nll'])) <= 1e-5,
-                                f'{name}: NLL does not reproduce reference')
-                        row['reference_top1'] = float(ref['top1'])
-                    zero_metrics[name] = row
-                    print(f'E010_ZERO={name} top1={row["top1"]:.4f} '
-                          f'nll={row["nll"]:.4f}', flush=True)
-                dist.barrier()
-                return model
-
+            cell_names[key] = []
             for ratio, spec in ds['criteria']['ratios'].items():
                 rows = plan_rows(ds, ratio)
                 plan = plan_spec(ds, ratio)
                 for criterion in spec['criteria']:
                     name = f'{key}_{ratio}_{criterion}'
+                    cell_names[key].append(name)
+                    log(progress, f'build {name}')
                     if criterion in ds['criteria']['reused']:
                         entry = ds['models'][f'{ratio}_{criterion}']
                         payload = torch.load(Path(entry['file']), map_location='cpu',
                                              weights_only=True)
                         model = materialize_model(base, rows, int(plan['base_parameters']))
                         model.load_state_dict(payload['state_dict'], strict=True)
-                        require(count_parameters(model) == int(plan['compressed_parameters']),
-                                f'{name}: parameter budget mismatch')
-                        if rank == 0:
-                            torch.save({'variant': name, 'dataset': key, 'ratio': ratio,
-                                        'criterion': criterion, 'compression_applied': True,
-                                        'structure_rows': rows,
-                                        'groups_sha256': ds['candidate_manifest']['sha256'],
-                                        'parameters': count_parameters(model),
-                                        'model_sha256': model_digest(model),
-                                        'state_dict': model.state_dict()},
-                                       run / 'merge' / 'models' / f'{name}.pt')
-                        dist.barrier()
-                        run_cell(name, model, reference[f'{ratio}_{criterion}']
-                                 if key == 'tiny' else reference[criterion])
+                        groups_sha = ds['candidate_manifest']['sha256']
                     else:
                         groups = read_json(run / 'groups' / f'{key}_{ratio}_{criterion}.json')
                         model = fold_model(base, rows, groups['groups'],
                                            int(plan['base_parameters']))
-                        require(count_parameters(model) == int(plan['compressed_parameters']),
-                                f'{name}: parameter budget mismatch')
-                        if rank == 0:
-                            payload = {'variant': name, 'dataset': key, 'ratio': ratio,
-                                       'criterion': criterion, 'compression_applied': True,
-                                       'structure_rows': rows,
-                                       'groups_sha256': digest(
-                                           run / 'groups' / f'{key}_{ratio}_{criterion}.json'),
-                                       'parameters': count_parameters(model),
-                                       'model_sha256': model_digest(model),
-                                       'state_dict': model.state_dict()}
-                            torch.save(payload, run / 'merge' / 'models' / f'{name}.pt')
-                        dist.barrier()
-                        run_cell(name, model)
+                        groups_sha = digest(run / 'groups' / f'{key}_{ratio}_{criterion}.json')
+                    require(count_parameters(model) == int(plan['compressed_parameters']),
+                            f'{name}: parameter budget mismatch')
+                    if rank == 0:
+                        torch.save({'variant': name, 'dataset': key, 'ratio': ratio,
+                                    'criterion': criterion, 'compression_applied': True,
+                                    'structure_rows': rows, 'groups_sha256': groups_sha,
+                                    'parameters': count_parameters(model),
+                                    'model_sha256': model_digest(model),
+                                    'state_dict': model.state_dict()},
+                                   run / 'merge' / 'models' / f'{name}.pt')
+                    model = model.to(device).eval()
+                    log(progress, f'eval {name}')
+                    _stats, preds = evaluate(
+                        model, loader(images, labels, records['dev'], ds, rank, dev_batch),
+                        records['dev'], rank, device)
+                    np.savez_compressed(run / 'merge' / 'dev' / f'{name}_rank{rank}.npz', **preds)
+                    log(progress, f'done {name}')
                     del model
                     torch.cuda.empty_cache()
-            run_cell(f'{key}_BASE', base, ref_base)
+            name = f'{key}_BASE'
+            cell_names[key].append(name)
+            log(progress, f'eval {name}')
+            base = base.to(device).eval()
+            _stats, preds = evaluate(
+                base, loader(images, labels, records['dev'], ds, rank, dev_batch),
+                records['dev'], rank, device)
+            np.savez_compressed(run / 'merge' / 'dev' / f'{name}_rank{rank}.npz', **preds)
+            log(progress, f'done {name}')
             del base
             torch.cuda.empty_cache()
-        if rank == 0:
-            write_json(run / 'merge' / 'zero_metrics.json', zero_metrics)
-            print('E010_ZERO_METRICS=' + str(len(zero_metrics)), flush=True)
-    finally:
-        dist.destroy_process_group()
+    except Exception:
+        (run / 'merge' / f'error_rank{rank}.txt').write_text(traceback.format_exc())
+        log(progress, 'ERROR')
+        raise
+    if rank != 0:
+        log(progress, 'exit (non-zero rank)')
+        return
+    try:
+        zero_metrics = {}
+        for key in DATASET_KEYS:
+            ds = dataset_cfg(cfg, key)
+            if key == 'tiny':
+                reference = read_json(Path(ds['run']['file']) / 'stage1' / 'stage1_metrics.json')['modes']
+            else:
+                reference = read_json(Path(ds['run']['file']) / 'raw_metrics.json')['modes']
+            for name in cell_names[key]:
+                paths = [run / 'merge' / 'dev' / f'{name}_rank{r}.npz' for r in range(4)]
+                log(progress, f'wait merge {name}')
+                wait_for(paths)
+                merged = []
+                for path in paths:
+                    with np.load(path, allow_pickle=False) as archive:
+                        merged.append({field: archive[field].copy() for field in archive.files})
+                joined = {field: np.concatenate([item[field] for item in merged])
+                          for field in merged[0]}
+                order = np.argsort(joined['ids'])
+                joined = {field: value[order] for field, value in joined.items()}
+                require(joined['ids'].tolist() == [r['id'] for r in dev_records[key]]
+                        and len(np.unique(joined['ids'])) == int(ds['data']['dev_count']),
+                        f'Global dev coverage mismatch for {name}')
+                np.savez_compressed(run / 'merge' / 'dev' / f'{name}.npz', **joined)
+                targets = joined['targets']
+                logits = joined['logits']
+                correct = logits.argmax(axis=1) == targets
+                maximum = logits.max(axis=1, keepdims=True)
+                lse = maximum[:, 0] + np.log(np.exp(logits - maximum).sum(axis=1))
+                nll = float(np.mean(lse - logits[np.arange(len(targets)), targets]))
+                total = len(targets)
+                row = {'dataset': key, 'name': name, 'correct': int(correct.sum()),
+                       'count': int(total), 'nll': nll, 'top1': float(correct.mean())}
+                criterion = name.split('_', 2)[2]
+                ratio = name.split('_')[1]
+                if name.endswith('_BASE'):
+                    ref = reference['BASE']
+                elif criterion in ds['criteria']['reused']:
+                    ref = reference[f'{ratio}_{criterion}'] if key == 'tiny' else reference[criterion]
+                else:
+                    ref = None
+                if ref is not None:
+                    require(int(correct.sum()) == int(ref['correct']),
+                            f'{name}: top-1 does not reproduce reference')
+                    require(abs(nll - float(ref['nll'])) <= 1e-5,
+                            f'{name}: NLL does not reproduce reference')
+                    row['reference_top1'] = float(ref['top1'])
+                zero_metrics[name] = row
+                print(f'E010_ZERO={name} top1={row["top1"]:.4f} nll={row["nll"]:.4f}', flush=True)
+                log(progress, f'merged {name}')
+        write_json(run / 'merge' / 'zero_metrics.json', zero_metrics)
+        print('E010_ZERO_METRICS=' + str(len(zero_metrics)), flush=True)
+        log(progress, 'exit (rank0 merged all)')
+    except Exception:
+        (run / 'merge' / 'error_rank0.txt').write_text(traceback.format_exc())
+        log(progress, 'ERROR rank0 merge')
+        os._exit(1)
 
 
 if __name__ == '__main__':

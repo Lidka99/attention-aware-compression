@@ -1,10 +1,19 @@
-# E010 — wersja wykonania 1.0 (projekt)
+# E010 — wersja wykonania 1.1 (projekt)
 
 Eksperyment: `2026-10-18_E010_benchmark_kryteriow`.
 Data utworzenia: 2026-10-18 UTC.
-**Status protokołu: frozen (1.0)**. Status wykonania podaje manifest biegu.
+**Status protokołu: frozen (1.1)**. Status wykonania podaje manifest biegu.
 Testy CPU: [TESTY_CPU_v1.json](TESTY_CPU_v1.json) — passed; hashe kodu
 w `config.json`.
+
+## Zmiana 1.1 (2026-10-18)
+
+Start wersji 1.0 (bieg `runs/E010/20261018T225828Z_338dba1_seed42_y97ml4hj`)
+został zatrzymany po pierwszej komórce etapu merge: NCCL barrier zawiesił
+się po zapisaniu wyniku. Żadne dane naukowe nie zostały użyte. `merge_e010.py`
+przepisano na wersję bez barrierów: każdy rank ocenia niezależnie, a rank0
+scala pliki po zakończeniu rang. Zmiana wyłącznie techniczna; protokół
+naukowy bez zmian. Bieg powtórzony w nowym katalogu.
 
 ## Cel i pytanie
 
