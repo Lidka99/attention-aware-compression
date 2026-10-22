@@ -2,8 +2,9 @@
 
 Eksperyment: `2026-10-18_E010_benchmark_kryteriow`.
 Data utworzenia protokołu: 2026-10-18 UTC.
-Status: **frozen** (protokół 1.1, nieuruchomiony). Status wykonania podaje
-manifest biegu; testy CPU: [TESTY_CPU_v1.json](TESTY_CPU_v1.json) — passed.
+Status: **completed** (protokół 1.1; bieg zakończony 2026-10-19 UTC).
+Wyniki: [WYNIKI.md](WYNIKI.md); status wykonania podaje manifest biegu;
+testy CPU: [TESTY_CPU_v1.json](TESTY_CPU_v1.json) — passed.
 Wersja 1.1 to wyłącznie techniczna poprawka synchronizacji etapu merge
 (bez zmian naukowych); szczegóły w [PROTOKOL_v1.md](PROTOKOL_v1.md).
 

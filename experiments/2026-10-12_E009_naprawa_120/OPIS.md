@@ -1,7 +1,8 @@
 # 2026-10-12_E009_naprawa_120
 
-Wersja protokołu: **0.1-draft**. Status: przygotowanie; bieg uruchamiany
-automatycznie po zakończeniu biegu E008 (wejście).
+Wersja protokołu: **1.0 (frozen)**. Status: **completed** (2026-10-14 UTC);
+wyniki: [WYNIKI.md](WYNIKI.md). Bieg uruchamiany automatycznie po zakończeniu
+biegu E008 (wejście).
 
 ## Pytanie i cel
 

@@ -2,9 +2,11 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-Status: E001–E008 zakończone; E009 w toku. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005/E007: baseline'y Tiny ImageNet 96×96 (51,53%) i 224×224 (58,49%). E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E008: po 60 epokach równej naprawy POST−PRE +0,51 pp (CI obejmuje 0), POST na granicy istotnie ponad RANDOM; E009 (120 epok naprawy) wznowiony 13.10 po awarii maszyny; wynik ~14.10. Nowość badawcza niepotwierdzona.
+Status: E001–E010 zakończone. E003/E004: przy 10% redukcji po równym dostrajaniu wybór kanałów nie dał przewagi (RANDOM dorównał). E005/E007: baseline'y Tiny ImageNet 96×96 (51,53%) i 224×224 (58,49%). E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E008: po 60 epokach POST−PRE +0,51 pp (CI obejmuje 0). E009: po 120 epokach POST−PRE +0,28 pp (CI obejmuje 0), różnice między selekcjami znikają. E010: jedyny kandydat TAYLOR (+1,03 pp vs RANDOM na Tiny 30%, T=5) nie zreplikował się na CIFAR-100 → `survivor_not_replicated`. Nowość badawcza niepotwierdzona; następny krok: decyzja o E011.
 
 ## Od czego zacząć
+
+**Bieżący kierunek (2026-10-22): folding bez fine-tuningu.** Najpierw odtworzenie *Cut Less, Fold More* na CIFAR-10/ResNet18, następnie porównanie miar grupowania przy tym samym operatorze i budżecie. [Audyt kodu i plan](literature/AUDYT_CUT_LESS_FOLD_MORE.md). Wcześniejsza propozycja kontynuacji TAYLORA nie jest aktualnym następnym krokiem.
 
 **[Aktualny plan i najbliższy krok](AKTUALNY_PLAN.md)** — bieżący punkt odniesienia.
 
@@ -32,7 +34,15 @@ Wynik negatywny: g_pert ≈ 0 ponad s_post; wątek bramek zamknięty.
 
 **[E008 — wynik kompresji na baseline 224](experiments/2026-10-12_E008_kompresja_224/WYNIKI.md)**,
 [protokół](experiments/2026-10-12_E008_kompresja_224/PROTOKOL_v1.md).
-Etap 1 bez naprawy: 10% → PRE 47,4 / POST 47,1 / RANDOM 40,8; 30% → 9,7 / 6,7 / 1,0. Etap 2 (60 epok): BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp (CI [−0,18; +1,19]); POST−RANDOM na granicy istotności. E009 (120 epok naprawy): pierwszy bieg przerwany awarią 13.10, pełne powtórzenie w toku; wynik ~14.10 UTC.
+Etap 1 bez naprawy: 10% → PRE 47,4 / POST 47,1 / RANDOM 40,8; 30% → 9,7 / 6,7 / 1,0. Etap 2 (60 epok): BASE 59,45 / POST 58,32 / PRE 57,81 / RANDOM 57,55; POST−PRE +0,51 pp (CI [−0,18; +1,19]); POST−RANDOM na granicy istotności.
+
+**[E009 — wynik naprawy 120 epok](experiments/2026-10-12_E009_naprawa_120/WYNIKI.md)**,
+[protokół](experiments/2026-10-12_E009_naprawa_120/PROTOKOL_v1.md).
+BASE 60,04 / POST 59,46 / PRE 59,18 / RANDOM 59,21; POST−PRE +0,28 pp (CI [−0,41; +0,96]) — przewaga atencji nie występuje także przy dłuższym budżecie.
+
+**[E010 — benchmark kryteriów selekcji](experiments/2026-10-18_E010_benchmark_kryteriow/WYNIKI.md)**,
+[protokół](experiments/2026-10-18_E010_benchmark_kryteriow/PROTOKOL_v1.md).
+Jedyny kandydat TAYLOR przeszedł próg primary na Tiny 30%, T=5 (+1,03 pp vs RANDOM, Holm OK), ale nie zreplikował się na CIFAR-100 10% (+0,36 pp, CI obejmuje 0) → `survivor_not_replicated`.
 
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md): audyt i wykresy zostają przy eksperymencie; każde uruchomienie ma osobny katalog wyników.
 
