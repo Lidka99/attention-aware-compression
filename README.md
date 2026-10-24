@@ -6,6 +6,11 @@ Status: E001–E010 zakończone. E003/E004: przy 10% redukcji po równym dostraj
 
 ## Od czego zacząć
 
+**E011 uruchomiony 2026-10-24:** cztery niezależne treningi ResNet18/CIFAR-10
+od zera, 200 epok, GPU0–3, seedy42–45. [Stan i run](experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/STATUS.md).
+[E012 — szkic kontroli foldingu](experiments/2026-10-24_E012_folding_referencja/OPIS.md)
+oczekuje na checkpointy i testy operatora.
+
 **Bieżący kierunek (2026-10-22): folding bez fine-tuningu.** Najpierw odtworzenie *Cut Less, Fold More* na CIFAR-10/ResNet18, następnie porównanie miar grupowania przy tym samym operatorze i budżecie. [Audyt kodu i plan](literature/AUDYT_CUT_LESS_FOLD_MORE.md). Wcześniejsza propozycja kontynuacji TAYLORA nie jest aktualnym następnym krokiem.
 
 **[Aktualny plan i najbliższy krok](AKTUALNY_PLAN.md)** — bieżący punkt odniesienia.

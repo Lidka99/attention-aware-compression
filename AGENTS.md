@@ -6,6 +6,13 @@ Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w je
 
 ## Uruchamianie i opis kodu
 
+Stan 2026-10-24: E011 running, kod `018f3f2`, run
+`runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012`.
+4 niezależne modele ResNet18/CIFAR-10 od zera, GPU0–3, seedy42–45,
+200 epok. Przed jakimkolwiek nowym zadaniem GPU sprawdzić ten bieg.
+E012 ma osobny folder draft; operator niezaimplementowany, brak uruchomienia.
+Szczegóły E011: `experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/STATUS.md`.
+
 - Eksperymenty uruchamiamy na 4 GPU. Konfiguracja i komenda odtworzenia muszą jawnie określać użycie czterech GPU. Nie przechodzimy automatycznie na mniejszą liczbę urządzeń; jeśli cztery GPU nie są dostępne, zgłaszamy przeszkodę.
 - Dobieramy sposób podziału pracy do eksperymentu: obliczenia rozproszone lub niezależne zadania na czterech GPU. Samo udostępnienie czterech urządzeń nie oznacza ich wykorzystania. Sposób podziału pracy opisujemy w protokole i sprawdzamy w logach.
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
