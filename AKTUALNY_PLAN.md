@@ -23,6 +23,14 @@ Sprawdzić, czy zmiana miary podobieństwa i grupowania kanałów poprawia jako�
 
 ## Najbliższy krok
 
+Aktualizacja wykonania 2026-10-24: przygotowano **E011 — cztery checkpointy
+CIFAR-10/ResNet18 od zera** (seed42–45, jeden model na GPU, 200 epok,
+batch128 na model). CPU i smoke 4 GPU passed. To adaptacja wybranego punktu
+siatki autorów z własnym dev, nie dokładne odtworzenie ich checkpointu.
+[Protokół i komendy](experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/OPIS.md).
+Następnie E012: kontrola foldingu bez fine-tuningu; potrzebne ukończone
+wejście E011 i zweryfikowany operator.
+
 **Odtworzenie referencyjnego foldingu na CIFAR-10/ResNet18.** Audyt statyczny kodu wykonany; do ustalenia konkretny checkpoint i środowisko. Repo autorów nie zawiera gotowych wag zwykłego ResNet18/CIFAR-10. Po ustaleniu wejść: testy operatora, zamrożenie protokołu, pomiar bez fine-tuningu przed i po korekcie BN. Następnie porównanie miar grupowania z oryginalnym foldingiem. Potwierdzenie TAYLORA na trzech seedach nie jest obecnie planowanym E011. Publiczne checkpointy pozostają możliwością do jawnego uzgodnienia względem wcześniejszej zasady treningu od zera; audyt nie zmienia tej zasady. [Szczegóły i kolejność](literature/AUDYT_CUT_LESS_FOLD_MORE.md).
 
 [PLAN_DZIALANIA.md](PLAN_DZIALANIA.md) to historyczny szkic, nie bieżąca kolejność działań.

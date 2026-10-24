@@ -1,0 +1,12 @@
+{
+  "status": "frozen",
+  "protocol_version": "1.0",
+  "epochs": 200,
+  "seeds": [42, 43, 44, 45],
+  "batch_size": 128,
+  "split_seed": 20261022,
+  "lr": 0.1,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "num_workers": 2
+}
