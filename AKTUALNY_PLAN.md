@@ -23,6 +23,13 @@ Sprawdzić, czy zmiana miary podobieństwa i grupowania kanałów poprawia jako�
 
 ## Najbliższy krok
 
+**Stan po E012:** E011 ukończony, E012 ukończony. Mamy adaptację operatora
+referencyjnego i wyniki bez fine-tuningu przed/po BN. [Wyniki E012](experiments/2026-10-24_E012_folding_referencja/WYNIKI.md).
+Następny krok: protokół porównania miar grupowania ze wspólnym operatorem
+i zachowaną polityką biasu. Dokładna zgodność end-to-end z kodem autorów
+pozostaje ograniczeniem; nie traktować E012 jako reprodukcji artykułu 1:1.
+Poniżej zapis wcześniejszego przygotowania E011.
+
 Aktualizacja wykonania 2026-10-24: przygotowano **E011 — cztery checkpointy
 CIFAR-10/ResNet18 od zera** (seed42–45, jeden model na GPU, 200 epok,
 batch128 na model). CPU i smoke 4 GPU passed. To adaptacja wybranego punktu

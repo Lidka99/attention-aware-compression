@@ -6,11 +6,14 @@ Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w je
 
 ## Uruchamianie i opis kodu
 
-Stan 2026-10-24: E011 running, kod `018f3f2`, run
+Stan po biegu E012: E011 completed, kod `018f3f2`, run
 `runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012`.
 4 niezależne modele ResNet18/CIFAR-10 od zera, GPU0–3, seedy42–45,
-200 epok. Przed jakimkolwiek nowym zadaniem GPU sprawdzić ten bieg.
-E012 ma osobny folder draft; operator niezaimplementowany, brak uruchomienia.
+200 epok. Dev seed42–45: 95,28/95,60/95,46/95,50%.
+E012 completed, kod `cca3cb2`, run `runs/E012/20261024T235929Z_cca3cb2_a0b9b3f2`.
+Adaptacja referencyjnego foldingu (nie zgodność end-to-end 1:1):
+10/30/50% kanałów -> top1 po BN 94,20/89,30/70,50%; BASE po BN95,48%.
+Bez fine-tuningu. Wyniki i kontrola biasu: folder E012/WYNIKI.md.
 Szczegóły E011: `experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/STATUS.md`.
 
 - Eksperymenty uruchamiamy na 4 GPU. Konfiguracja i komenda odtworzenia muszą jawnie określać użycie czterech GPU. Nie przechodzimy automatycznie na mniejszą liczbę urządzeń; jeśli cztery GPU nie są dostępne, zgłaszamy przeszkodę.

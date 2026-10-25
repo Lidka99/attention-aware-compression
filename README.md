@@ -6,6 +6,12 @@ Status: E001–E010 zakończone. E003/E004: przy 10% redukcji po równym dostraj
 
 ## Od czego zacząć
 
+**Aktualizacja: E011 i E012 zakończone.** E011: cztery checkpointy, średnia
+dev95,46%. E012: folding bez fine-tuningu, po korekcie BN94,20/89,30/70,50%
+dla 10/30/50% usuniętych kanałów; BASE po BN95,48%.
+[Wyniki E012 i ograniczenia adaptacji](experiments/2026-10-24_E012_folding_referencja/WYNIKI.md).
+Następny etap: zamrożone porównanie grupowania przy wspólnym operatorze.
+
 **E011 uruchomiony 2026-10-24:** cztery niezależne treningi ResNet18/CIFAR-10
 od zera, 200 epok, GPU0–3, seedy42–45. [Stan i run](experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/STATUS.md).
 [E012 — szkic kontroli foldingu](experiments/2026-10-24_E012_folding_referencja/OPIS.md)

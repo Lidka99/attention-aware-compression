@@ -1,5 +1,8 @@
 # E011 — stan uruchomienia
 
+Aktualizacja: **completed**, koniec 2026-10-24 20:37 UTC, exit0.
+[Wyniki końcowe](WYNIKI.md). Poniżej historyczny zapis startu.
+
 2026-10-24 19:23 UTC: **running**, cztery procesy treningowe na GPU0–3.
 Bieg główny: `runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012`.
 Commit kodu: `018f3f2`. Launcher PID 266021; workery 266191–266194.
