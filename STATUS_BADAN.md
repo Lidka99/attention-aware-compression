@@ -1,5 +1,7 @@
 # Status badań — 2026-10-27
 
+**Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
+
 ## Cel
 
 Znaleźć metodę kompresji opartą na foldingu, która przy tym samym rozmiarze
