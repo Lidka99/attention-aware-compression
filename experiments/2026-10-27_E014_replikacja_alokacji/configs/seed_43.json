@@ -1,0 +1,21 @@
+{
+  "status": "frozen",
+  "protocol_version": "0.1",
+  "seed": 43,
+  "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_43/last.pt",
+  "checkpoint_sha256": "91423a840233b843d05caa9ed76f2c274139198dcc9e07c64cc66e2f964abab7",
+  "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json",
+  "split_sha256": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+  "budgets": [
+    0.3,
+    0.5,
+    0.7
+  ],
+  "batch_size": 128,
+  "bn_seed": 20261024,
+  "bn_samples": 45000,
+  "num_workers": 2,
+  "baseline_top1": 0.956,
+  "baseline_nll": 0.16483922338485718,
+  "e011_train_sha256": "44c838e56b1c2094df1cbc01ce939657a693fcf16d396bae03d312569e7d736a"
+}
