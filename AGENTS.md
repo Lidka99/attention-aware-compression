@@ -1,31 +1,35 @@
 # Zasady pracy w projekcie
 
+Najpierw czytaj `STATUS_BADAN.md` (jedna strona: cel, wyniki, następny krok).
+Szczegóły otwieraj tylko z `PODSUMOWANIE.md` lub `WYNIKI.md` danego eksperymentu.
+Nie powtarzaj pełnej historii w nowych raportach; nowe podsumowania mają być krótkie.
+
 Pracujemy krok po kroku. Wyjaśnienia przekazujemy po polsku zarówno w rozmowie, jak i w plikach Markdown. Każdy konkretny eksperyment ma osobny folder w experiments/ z opisem i instrukcją odtworzenia.
 
 Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w jego folderze. Nowy numer E oznacza nową próbę badawczą; kolejne uruchomienia/audyty mają unikalne katalogi wyników pod runs/<E-ID>/. Zobacz docs/DOKUMENTOWANIE.md. Do drobnych, ograniczonych zadań używaj podagenta general-flash; bez równoległych zmian tych samych plików i konkurencyjnych zadań GPU.
 
 ## Uruchamianie i opis kodu
 
-Stan po biegu E012: E011 completed, kod `018f3f2`, run
-`runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012`.
-4 niezależne modele ResNet18/CIFAR-10 od zera, GPU0–3, seedy42–45,
-200 epok. Dev seed42–45: 95,28/95,60/95,46/95,50%.
-E012 completed, kod `cca3cb2`, run `runs/E012/20261024T235929Z_cca3cb2_a0b9b3f2`.
-Adaptacja referencyjnego foldingu (nie zgodność end-to-end 1:1):
-10/30/50% kanałów -> top1 po BN 94,20/89,30/70,50%; BASE po BN95,48%.
-Bez fine-tuningu. Wyniki i kontrola biasu: folder E012/WYNIKI.md.
-Szczegóły E011: `experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/STATUS.md`.
+Stan 2026-10-27: E014 completed na 4 seedach E011. TILT+0.30 vs UNIFORM:
+**+0,87 / +3,77 / +11,27 pp** przy 30/50/70% redukcji parametrów, bez
+fine-tuningu; wszystkie 12 różnic seed×budżet dodatnie. To adaptacja
+operatora E012, dev, CIFAR-10; brak drugiego datasetu i niezależnego testu.
+Szczegóły: `STATUS_BADAN.md`, `experiments/2026-10-27_E014_replikacja_alokacji/WYNIKI.md`.
 
 - Eksperymenty uruchamiamy na 4 GPU. Konfiguracja i komenda odtworzenia muszą jawnie określać użycie czterech GPU. Nie przechodzimy automatycznie na mniejszą liczbę urządzeń; jeśli cztery GPU nie są dostępne, zgłaszamy przeszkodę.
 - Dobieramy sposób podziału pracy do eksperymentu: obliczenia rozproszone lub niezależne zadania na czterech GPU. Samo udostępnienie czterech urządzeń nie oznacza ich wykorzystania. Sposób podziału pracy opisujemy w protokole i sprawdzamy w logach.
 - Dla reprodukowalności zapisujemy modele GPU, wersje środowiska, przypisanie zadań lub procesów do GPU, seedy i sposób agregacji wyników. Przy treningu zapisujemy też batch size na GPU i efektywny globalny batch size, uwzględniając akumulację gradientów. Cztery GPU nie oznaczają automatycznie czterech niezależnych powtórzeń.
 - Każdy plik z kodem eksperymentu zaczyna się krótkim komentarzem lub docstringiem: co robi, jakiego eksperymentu dotyczy, jakie dane przyjmuje i jakie wyniki zapisuje. Zawiera też odnośnik do pełnego OPIS.md.
 
-E001–E010 ukończono. E003/E004: przy 10% redukcji wybór kanałów nie dał przewagi po równym dostrajaniu. E005: baseline 96×96, dev 51,53%. E006: bramki SE nie przewidują szkody ponad s_post; wątek zamknięty. E007: baseline 224×224, dev 58,49%. E008 (protokół 1.1): bez naprawy selekcja > losowa, ale POST < PRE; po 60 epokach POST−PRE +0,51 pp (CI [−0,18; +1,19]), BASE 59,45%. E009 (120 epok): BASE 60,04 / POST 59,46 / PRE 59,18 / RANDOM 59,21; POST−PRE +0,28 pp (CI [−0,41; +0,96]) — przewaga nie występuje. E010 (9 kryteriów, 2 datasety): tylko TAYLOR przeszedł primary (Tiny 30%, T=5: +1,03 pp vs RANDOM, Holm OK), ale nie zreplikował się na CIFAR-100 (+0,36 pp, CI obejmuje 0) → `survivor_not_replicated`; następny krok to decyzja o E011. Używamy środowiska Conda attention, bez publicznych wag i bez zmiany wcześniejszych wyników.
+Historia E001–E013: skróty w `STATUS_BADAN.md` i `PODSUMOWANIE.md` każdego eksperymentu. Używamy środowiska Conda attention, bez publicznych wag i bez zmiany wcześniejszych wyników.
 
 ## Daty w nazwach eksperymentów
 
-Aktualizacja kierunku 2026-10-22 (rozmowa z użytkowniczką): następny etap to odtworzenie foldingu z *Cut Less, Fold More*, a potem porównanie grupowania bez fine-tuningu. Nie traktować wcześniejszej propozycji 3 seedów TAYLORA jako uzgodnionego E011. Audyt: `literature/AUDYT_CUT_LESS_FOLD_MORE.md`. Obecnie brak zweryfikowanego checkpointu CIFAR-10/ResNet18; status przygotowania, bez nowego biegu. Brak istotności różnic w E009 nie dowodzi równoważności metod. E010 ma dodatnie wyniki lokalne, bez replikacji głównego kandydata.
+Aktualny kierunek: **alokacja globalnego budżetu foldingu bez fine-tuningu**.
+Najpierw odtworzenie operatora, potem nierówne ratio per grupa. Audyt:
+`literature/AUDYT_CUT_LESS_FOLD_MORE.md`. Nie traktować wcześniejszej
+propozycji 3 seedów TAYLORA jako uzgodnionego kierunku. Brak istotności
+w E009 nie dowodzi równoważności metod.
 
 Folder każdego nowego eksperymentu nazywamy `RRRR-MM-DD_E001_krotka_nazwa`, np. `2026-09-25_E001_nazwa_eksperymentu`. Jest to tylko przykład formatu, nie utworzony eksperyment. Data oznacza dzień utworzenia protokołu (UTC), a E001 jest stałym, kolejnym identyfikatorem. Pełną nazwę umieszczamy też w tytule OPIS.md i w opisie kodu. Nie zmieniamy daty w nazwie przy ponownym uruchomieniu; każde uruchomienie ma osobno zapisany znacznik czasu UTC.
 

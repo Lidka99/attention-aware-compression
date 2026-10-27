@@ -1,6 +1,8 @@
 # Aktualny plan doktoratu
 
-Aktualizacja: 2026-10-22. Pracujemy po jednym etapie.
+**Aktualny stan: [STATUS_BADAN.md](STATUS_BADAN.md).** Poniżej szczegółowa
+historia planu; do codziennej pracy wystarczy strona statusu.
+Aktualizacja: 2026-10-27. Pracujemy po jednym etapie.
 
 ## Cel
 
