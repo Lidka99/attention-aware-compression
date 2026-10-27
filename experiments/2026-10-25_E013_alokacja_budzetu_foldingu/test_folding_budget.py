@@ -193,6 +193,25 @@ class TestFoldingBudgets(unittest.TestCase):
             self.assertTrue(all(
                 0.1 <= value <= 0.9 for value in result['ratios']))
 
+    def test_repair_budget_fills_extreme_gap(self):
+        model = build_model()
+        target = int(round(0.70 * BASE_PARAMS))
+        cases = (
+            ('tilt', {'tilt': 0.30}),
+            ('random', {'sigma': 0.20, 'random_seed': 102}),
+        )
+        for family, kwargs in cases:
+            solved = FB.solve_base_for_budget(
+                model, family, target, **kwargs)
+            self.assertLess(solved['params'], target - 100000)
+            repaired = FB.repair_budget(model, solved['ratios'], target)
+            self.assertTrue(repaired['ok'])
+            self.assertLessEqual(repaired['params'], target)
+            self.assertGreaterEqual(repaired['delta_percent'], -0.5)
+            self.assertGreaterEqual(repaired['repair_steps'], 1)
+            self.assertTrue(all(
+                0.1 <= value <= 0.9 for value in repaired['ratios']))
+
     def test_percent_to_target(self):
         self.assertAlmostEqual(FB.percent_to_target(100, 100), 0.0)
         self.assertAlmostEqual(FB.percent_to_target(101, 100), 1.0)

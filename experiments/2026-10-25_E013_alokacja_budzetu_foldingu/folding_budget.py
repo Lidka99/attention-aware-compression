@@ -212,6 +212,102 @@ def _parameter_count_from_widths(model, widths):
     return int(total)
 
 
+def _n_channels_by_group(model):
+    reference = load_reference_folding()
+    result = []
+    for group in reference.resnet18_groups():
+        params = reference.collect_group_params(model, group)
+        result.append(int(reference.group_n_channels(params, group)))
+    return result
+
+
+def repair_budget(model, ratios, target_params, min_ratio=0.1,
+                  max_ratio=0.9, max_steps=500):
+    """Dociąga alokację do budżetu przez pojedyncze zmiany szerokości grup.
+
+    Solver ``base`` działa na skali globalnej i może przeskoczyć nad celem
+    dużym krokiem (dyskretne szerokości). Tutaj startujemy z jego alokacji
+    i zmieniamy szerokości pojedynczych grup (albo parę: jedna w dół, jedna
+    w górę), minimalizując odległość od ``target_params`` bez przekraczania
+    celu. Zwraca nowe ratios oraz raport zmian.
+    """
+    names = group_names()
+    n_channels = _n_channels_by_group(model)
+    widths = _widths_from_ratios(model, ratios)
+    target = int(target_params)
+    if len(widths) != len(n_channels):
+        raise ValueError('Niezgodna liczba grup i szerokości')
+
+    def score(candidate_widths):
+        params = _parameter_count_from_widths(model, candidate_widths)
+        if params > target:
+            return (10 ** 18 + (params - target), -params, params)
+        return (target - params, -params, params)
+
+    current = list(widths)
+    current_score = score(current)
+    original_params = current_score[2]
+    steps = 0
+    while steps < max_steps:
+        best = None
+        for index, width in enumerate(current):
+            for delta in (-1, 1):
+                candidate_width = width + delta
+                if candidate_width < 1 or candidate_width > n_channels[index]:
+                    continue
+                ratio = 1.0 - candidate_width / n_channels[index]
+                if ratio < min_ratio - 1e-12 or ratio > max_ratio + 1e-12:
+                    continue
+                candidate = list(current)
+                candidate[index] = candidate_width
+                candidate_score = score(candidate)
+                if candidate_score < current_score and (
+                        best is None or candidate_score < best[0]):
+                    best = (candidate_score, candidate)
+        if best is None:
+            # Para: zmniejsz jedną grupę i zwiększ inną (wypełnienie dziury).
+            for down in range(len(current)):
+                if current[down] - 1 < 1:
+                    continue
+                ratio_down = 1.0 - (current[down] - 1) / n_channels[down]
+                if ratio_down > max_ratio + 1e-12:
+                    continue
+                for up in range(len(current)):
+                    if up == down or current[up] + 1 > n_channels[up]:
+                        continue
+                    ratio_up = 1.0 - (current[up] + 1) / n_channels[up]
+                    if ratio_up < min_ratio - 1e-12:
+                        continue
+                    candidate = list(current)
+                    candidate[down] -= 1
+                    candidate[up] += 1
+                    candidate_score = score(candidate)
+                    if candidate_score < current_score and (
+                            best is None or candidate_score < best[0]):
+                        best = (candidate_score, candidate)
+        if best is None:
+            break
+        current_score, current = best
+        steps += 1
+
+    ratios_out = [
+        1.0 - width / n for width, n in zip(current, n_channels)
+    ]
+    params = current_score[2]
+    return {
+        'ratios': [float(value) for value in ratios_out],
+        'widths': [int(value) for value in current],
+        'params': int(params),
+        'target_params': int(target),
+        'delta_params': int(params - target),
+        'delta_percent': percent_to_target(params, target),
+        'original_params': int(original_params),
+        'repair_steps': int(steps),
+        'ok': bool(params <= target),
+        'family': 'repair',
+    }
+
+
 def _base_diagnostics(model, ratios):
     reference = load_reference_folding()
     return {

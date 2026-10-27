@@ -190,8 +190,19 @@ def resolve_allocation(model, spec, target_params):
         sigma=float(spec.get('sigma', 0.0)),
         random_seed=int(spec.get('random_seed', 0)),
     )
+    if family != 'uniform':
+        repaired = folding_budget.repair_budget(
+            model, solved['ratios'], target_params)
+        repaired['solver_params'] = int(solved['params'])
+        repaired['solver_delta_percent'] = float(solved['delta_percent'])
+        repaired['base'] = float(solved['base'])
+        repaired['family'] = family
+        repaired['kind'] = 'folding'
+        repaired['name'] = spec['name']
+        return repaired
     solved['kind'] = 'folding'
     solved['name'] = spec['name']
+    solved['repair_steps'] = 0
     return solved
 
 
