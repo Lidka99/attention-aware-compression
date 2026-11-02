@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "identity_exact": true,
+  "source_unchanged": true,
+  "fold_parameter_counts": true,
+  "residual_forward": true,
+  "merge_formula": true,
+  "real_clustering": true,
+  "split_disjoint": true,
+  "uniform": [
+    45,
+    45,
+    45,
+    90,
+    90,
+    90,
+    180,
+    180,
+    180,
+    361,
+    361,
+    361
+  ],
+  "tilt": [
+    57,
+    57,
+    57,
+    115,
+    115,
+    115,
+    221,
+    207,
+    194,
+    359,
+    331,
+    303
+  ],
+  "target": 5581542,
+  "tilt_params": 5580606,
+  "proposal_count": 58,
+  "split_counts": {
+    "A": 4096,
+    "B": 2048,
+    "C": 2048,
+    "dev": 5000
+  },
+  "protocol_sha256": "562e9211246bb80b7bc0e00e6df0e3d160ef726edccabe4a242f8f533e6c378e",
+  "source_hashes": {
+    "data.py": "512c582c6e399ee8d40cb46381db7a6224ddc31c20994b3ee5c8d55b7a8034dc",
+    "run.py": "8193b00ce9a65ab7d59a77e9193082e52cfeed75228cb86c49ea0f7bf10bc2bb",
+    "analyze.py": "f604998a6dc404984389dc977194d0e822a1dc15dce999445ee5c33d2c75a190",
+    "check.py": "75ea0ae24e351bbaf58bbe08ad9b3e1bb81c6f90e53b819ef4f122dac6db598b",
+    "folding.py": "f09f768b78cd1076a2c0b5a9cf739e37a1b1bf6ac76af3bbc1d9d9a0c426c879",
+    "search.py": "a6683e53b28e54f1124c4ef20c32c5c9e2a30699854b2d46a6d7922434660d90"
+  }
+}
