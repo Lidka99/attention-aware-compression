@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "upstream_commit": "694691556e8314a835178a741938dd3d4d80c171",
+  "plans": {
+    "uniform": [
+      45,
+      45,
+      45,
+      90,
+      90,
+      90,
+      180,
+      180,
+      180,
+      361,
+      361,
+      361
+    ],
+    "tilt": [
+      57,
+      57,
+      57,
+      115,
+      115,
+      115,
+      221,
+      207,
+      193,
+      359,
+      331,
+      304
+    ],
+    "target": 5623142,
+    "tilt_params": 5622878,
+    "ratio": 0.2939453125
+  },
+  "strict_load": true,
+  "axes_identical": true,
+  "all_variants_forward": true,
+  "native_random_bias": true,
+  "augmented_probe": "ba569cef635c7b5ba93b496cafb73f5f224ebc4b13979d383f5aa53c4b3844d5",
+  "inputs": {
+    "experiments/2026-11-01_E029_oficjalny_operator/common.py": "f1174abaed86ce04ac2dffd39ab7e7fee57fcd5764fd07de9b16137ba2052a61",
+    "experiments/2026-11-01_E029_oficjalny_operator/OPIS.md": "81c4d46a5199b03bc8557dc715702699a421052e9d711cc188ccaef800c74ba7",
+    "experiments/2026-11-01_E029_oficjalny_operator/WYNIKI.md": "e732fb61841330d23ecc62ee5ec5a76234499667dc94c624ec24f68ec0d0648c",
+    "runs/E029/20261102T005941Z_064da5c2/manifest.json": "adedd9c983768814febaf4f944610374d86c16aab700def7a6a2287214b26363",
+    "experiments/2026-10-24_E012_folding_referencja/folding.py": "879b5c51a38828c5571d0e44ba4091b88b28a99ee4800db458f99c6e012b228f",
+    "experiments/2026-10-27_E014_replikacja_alokacji/folding_budget.py": "d43a6857bbb9f78b80f3055075d5c3ecf552896d32764e22cf88ebec80536f3f",
+    "experiments/2026-11-01_E025_diagnostyka_bn/common.py": "0940afcd8300e7563bb98f0344e568e733571760b82787c2ce9a40b5092694e9",
+    "experiments/2026-10-29_E019_tinyimagenet_alokacja/data_tiny.py": "54a9e7fa9a44ce6ad18a0bd89d64d7f962e5630ea3250d7764938d152c7ae178",
+    "data/tiny-imagenet/cache_train.npz": "90642db970cc6f83745e569e19f0659a726acfe62612908f1ee63331df23fa8a",
+    "data/tiny-imagenet/splits.json": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+    "runs/E019/fold_20261030T220139Z_cb9ffaf_51bc405f/allocations/seed_42/b50_tilt_p030/summary.json": "eaa450e4c3be163b54f2c7508df2b44f5caa209f09be9b56f61f953087c5da6d",
+    "runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_42/last.pt": "c62680c1ab43c3b80b0add9843898a387bed0aaecaa11a04d24a01d85ae607f5",
+    "runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_43/last.pt": "ed6cfbc5eefe765c1bbd38753a0eb1a11793720705a8f930acac832fcf30448f",
+    "runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_44/last.pt": "4598da30fb82ac453506fdb87472eaff43b060db14fead9b953f2cb006e5e707",
+    "runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_45/last.pt": "39af5fc4a0be696655868e30193d1ce658c03aa7c1bc43a8b2d877242fcdc940"
+  },
+  "protocol_sha256": "29077df3c210a3be37c565c3d7fbc7178ad2f5507771ff331f4f9db4ee0b5b99",
+  "source_hashes": {
+    "run.py": "b6c20f581da87fc0fe01c22d6954ff9a3423d8ec25b533830e8313f5aefa8e47",
+    "analyze.py": "9ddf7719418e060f6b9aa49cc6746c3bd988f16da7f61111622ceff95647b0ce",
+    "common.py": "8e6782ab35bb5583dfbc2066d79a03d1e76bbc43ccef63fab491fef1538f23fc",
+    "check.py": "66870e84be17722d9e30ac05c78bdf942e4188b1b2fa926840421aa675fadfa4",
+    "worker.py": "5f90bb9cd7954cfca5d140799457dc983f72ec1e6136e4b7c5163f8459cc09cb"
+  }
+}
