@@ -2,11 +2,21 @@
 
 **Aktualny stan: [STATUS_BADAN.md](STATUS_BADAN.md).** Poniżej szczegółowa
 historia planu; do codziennej pracy wystarczy strona statusu.
-Aktualizacja: 2026-10-27. Pracujemy po jednym etapie.
+Aktualizacja: 2026-10-28. Pracujemy po jednym etapie.
+
+**Teraz:** E019 completed — Tiny ImageNet potwierdza alokację TILT
+(+3,71/+10,32/+7,60 pp; 12/12). E017/E018 (miary grupowania) zamknięte
+jako negatywne. Następny krok: mechanizm i druga architektura; decyzja
+o publikacji dopiero potem. Bieżące instrukcje:
+[NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
+Poniższy opis wcześniejszych etapów jest historią, nie listą nowych zadań.
 
 ## Cel
 
-Sprawdzić, czy zmiana miary podobieństwa i grupowania kanałów poprawia jakość po **foldingu bez fine-tuningu**, przy tym samym rozmiarze skompresowanej sieci. Punkt odniesienia: *Cut Less, Fold More*. Najpierw odtworzenie referencji, potem zmiana grupowania. Korekta statystyk BN jest osobnym, jednakowym etapem dla porównywanych metod. Atencja pozostaje wcześniejszą hipotezą; nie jest wymogiem nowego kierunku.
+Sprawdzić, czy rozdział budżetu kompresji między grupy poprawia jakość po
+**foldingu bez fine-tuningu**, przy tym samym rozmiarze skompresowanej sieci.
+Operator pozostaje wspólny; zmieniamy alokację. Korekta BN jest jednakowym
+etapem porównywanych metod. Atencja pozostaje wcześniejszą hipotezą.
 
 [Audyt kodu i plan odtworzenia](literature/AUDYT_CUT_LESS_FOLD_MORE.md).
 
@@ -25,11 +35,22 @@ Sprawdzić, czy zmiana miary podobieństwa i grupowania kanałów poprawia jako�
 
 ## Najbliższy krok
 
-**Stan po E012:** E011 ukończony, E012 ukończony. Mamy adaptację operatora
-referencyjnego i wyniki bez fine-tuningu przed/po BN. [Wyniki E012](experiments/2026-10-24_E012_folding_referencja/WYNIKI.md).
-Następny krok: protokół porównania miar grupowania ze wspólnym operatorem
-i zachowaną polityką biasu. Dokładna zgodność end-to-end z kodem autorów
-pozostaje ograniczeniem; nie traktować E012 jako reprodukcji artykułu 1:1.
+**Stan bieżący (2026-10-27):** E014 completed, w tym analiza międzyseedowa:
+TILT+0.30 vs UNIFORM **+0,87 / +3,77 / +11,27 pp** (12/12 dodatnich);
+po wyłączeniu selekcyjnego seed42 seedy 43–45 dają **+0,96 / +3,58 / +11,467 pp**.
+[Raport](experiments/2026-10-27_E014_replikacja_alokacji/RAPORT_ANALIZA_MIEDZYSEEDOWA.md).
+**E015 completed** (ResNet18/CIFAR-100, 4 seedy, folding 48/48):
+TILT+0.30 **+0,81 / +1,96 / +1,60 pp**, 11/12 par dodatnich, ale przy
+50/70% średnie poniżej progu +2,0 pp — **kryterium primary nie spełnione**.
+TILT+0.15 wypadł lepiej (+1,19 / +2,16 / +2,85 pp), lecz jako wariant wtórny
+nie zastępuje primary. [Wyniki](experiments/2026-10-27_E015_cifar100_alokacja/WYNIKI.md).
+
+**Rekomendacja:** najpierw analiza mechanizmu i siły tiltu na istniejących
+wynikach E014/E015; dopiero potem decyzja o kosztownym rozszerzeniu
+(Tiny ImageNet, więcej seedów) i o publikacji. Nie ogłaszamy nowych
+uruchomień. Dokładna zgodność end-to-end z kodem autorów pozostaje
+ograniczeniem; nie traktować E012 jako reprodukcji artykułu 1:1.
+
 Poniżej zapis wcześniejszego przygotowania E011.
 
 Aktualizacja wykonania 2026-10-24: przygotowano **E011 — cztery checkpointy
