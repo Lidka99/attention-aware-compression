@@ -1,0 +1,18 @@
+{
+  "cpu_seconds": 103.46021774108522,
+  "deterministic": true,
+  "dev_loaded": false,
+  "gpu_used": false,
+  "params": {
+    "bn_effective": 2797610,
+    "cosine": 2797610,
+    "random1": 2797610,
+    "random2": 2797610,
+    "random3": 2797610,
+    "reference": 2797610,
+    "standardized": 2797610
+  },
+  "reference_matches_e012": true,
+  "status": "passed",
+  "tasks": 42
+}

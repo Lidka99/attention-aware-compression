@@ -1,0 +1,145 @@
+{
+  "datasets": {
+    "cifar10": {
+      "data_module": "experiments/2026-10-22_E011_cifar10_resnet18_checkpoint/train.py",
+      "dev_count": 5000,
+      "num_classes": 10,
+      "params": 11173962,
+      "seeds": {
+        "42": {
+          "baseline_nll": 0.16766352424621583,
+          "baseline_top1": 0.9528,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_42/last.pt",
+          "checkpoint_sha256": "f74d18ef8906b296c7dcaa9184faead6aec22611d2129f6652c4a149f0813596",
+          "dev_count": 5000,
+          "train_count": 45000
+        },
+        "43": {
+          "baseline_nll": 0.16483922338485718,
+          "baseline_top1": 0.956,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_43/last.pt",
+          "checkpoint_sha256": "91423a840233b843d05caa9ed76f2c274139198dcc9e07c64cc66e2f964abab7",
+          "dev_count": 5000,
+          "train_count": 45000
+        },
+        "44": {
+          "baseline_nll": 0.171179771900177,
+          "baseline_top1": 0.9546,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_44/last.pt",
+          "checkpoint_sha256": "c8ff0efbe3fe39c18ecf14b400d1f4b7e471a856edf43896398600354b69186d",
+          "dev_count": 5000,
+          "train_count": 45000
+        },
+        "45": {
+          "baseline_nll": 0.1709268521308899,
+          "baseline_top1": 0.955,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_45/last.pt",
+          "checkpoint_sha256": "850985a6941c329a2bb9b4dbf06672e2397b05c9f18849e5fb8204b17409e840",
+          "dev_count": 5000,
+          "train_count": 45000
+        }
+      },
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json",
+      "split_sha256": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+      "stem": "cifar_3x3_no_maxpool",
+      "train_count": 45000,
+      "train_run": "runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012"
+    },
+    "cifar100": {
+      "data_module": "experiments/2026-10-27_E015_cifar100_alokacja/data_cifar100.py",
+      "dev_count": 5000,
+      "num_classes": 100,
+      "params": 11220132,
+      "seeds": {
+        "42": {
+          "baseline_nll": 0.9906619615554809,
+          "baseline_top1": 0.7494,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_42/last.pt",
+          "checkpoint_sha256": "ca312df29a70f88597449f7f540a48f97b90f96226163ae0e7182204fa25b386",
+          "dev_count": 5000,
+          "train_count": 40000
+        },
+        "43": {
+          "baseline_nll": 0.9982357983589172,
+          "baseline_top1": 0.751,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_43/last.pt",
+          "checkpoint_sha256": "e528182ef1a261ed471b50c909d4841d728d4eba35a7c081398ea6cef9cbba5e",
+          "dev_count": 5000,
+          "train_count": 40000
+        },
+        "44": {
+          "baseline_nll": 0.9959683525085449,
+          "baseline_top1": 0.7504,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_44/last.pt",
+          "checkpoint_sha256": "bd6414908abbdae600ab2476091f1702fffd3979d3195ffe6625c6275499c16a",
+          "dev_count": 5000,
+          "train_count": 40000
+        },
+        "45": {
+          "baseline_nll": 1.0026853815078736,
+          "baseline_top1": 0.7586,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_45/last.pt",
+          "checkpoint_sha256": "dfd7fde8c46c7239b4556f40a72c5b8ee92770f0e46d291e8fbec939544ddc5f",
+          "dev_count": 5000,
+          "train_count": 40000
+        }
+      },
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/data/cifar100/splits.json",
+      "split_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+      "stem": "cifar_3x3_no_maxpool",
+      "train_count": 40000,
+      "train_run": "runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12"
+    },
+    "tiny": {
+      "data_module": "experiments/2026-10-29_E019_tinyimagenet_alokacja/data_tiny.py",
+      "dev_count": 10000,
+      "num_classes": 200,
+      "params": 11279112,
+      "seeds": {
+        "42": {
+          "baseline_nll": 2.4047402912139892,
+          "baseline_top1": 0.5108,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_42/last.pt",
+          "checkpoint_sha256": "c62680c1ab43c3b80b0add9843898a387bed0aaecaa11a04d24a01d85ae607f5",
+          "dev_count": 10000,
+          "train_count": 90000
+        },
+        "43": {
+          "baseline_nll": 2.4207877113342287,
+          "baseline_top1": 0.506,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_43/last.pt",
+          "checkpoint_sha256": "ed6cfbc5eefe765c1bbd38753a0eb1a11793720705a8f930acac832fcf30448f",
+          "dev_count": 10000,
+          "train_count": 90000
+        },
+        "44": {
+          "baseline_nll": 2.431745594024658,
+          "baseline_top1": 0.5065,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_44/last.pt",
+          "checkpoint_sha256": "4598da30fb82ac453506fdb87472eaff43b060db14fead9b953f2cb006e5e707",
+          "dev_count": 10000,
+          "train_count": 90000
+        },
+        "45": {
+          "baseline_nll": 2.4144695552825928,
+          "baseline_top1": 0.5095,
+          "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_45/last.pt",
+          "checkpoint_sha256": "39af5fc4a0be696655868e30193d1ce658c03aa7c1bc43a8b2d877242fcdc940",
+          "dev_count": 10000,
+          "train_count": 90000
+        }
+      },
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/data/tiny-imagenet/splits.json",
+      "split_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+      "stem": "standard_7x7_maxpool",
+      "train_count": 90000,
+      "train_run": "runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7"
+    }
+  },
+  "experiment": "2026-10-30_E020_mechanizm_alokacji",
+  "official_test_used": false,
+  "opis": "experiments/2026-10-30_E020_mechanizm_alokacji/OPIS.md",
+  "protocol_version": "1.0",
+  "reserve_used": false,
+  "status": "frozen"
+}

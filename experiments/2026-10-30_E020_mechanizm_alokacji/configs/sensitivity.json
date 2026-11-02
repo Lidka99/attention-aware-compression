@@ -1,0 +1,40 @@
+{
+  "baseline_nll": 2.4047402912139892,
+  "baseline_top1": 0.5108,
+  "batch_size": 128,
+  "bn_seed": 20261024,
+  "calibration_samples": 2048,
+  "calibration_seed": 20261027,
+  "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E019/20261030T000950Z_cb9ffaf_seeds42-45_4ef97df7/seed_42/last.pt",
+  "checkpoint_sha256": "c62680c1ab43c3b80b0add9843898a387bed0aaecaa11a04d24a01d85ae607f5",
+  "control_ratio": 0.0,
+  "dataset": "tiny",
+  "dev_count": 10000,
+  "expected_parameters": 11279112,
+  "experiment": "2026-10-30_E020_mechanizm_alokacji",
+  "fold_seed": 42,
+  "gpu_count": 4,
+  "levels": [
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "num_workers": 2,
+  "official_test_used": false,
+  "opis": "experiments/2026-10-30_E020_mechanizm_alokacji/OPIS.md",
+  "protocol_version": "1.0",
+  "reserve_used": false,
+  "seed": 42,
+  "source_sha256": {
+    "E012_evaluate.py": "d0795a0be6b00ffb2628c8e7ae3577d35b43f2332855f144cc2c3e4d5fe1d0f9",
+    "E012_folding.py": "879b5c51a38828c5571d0e44ba4091b88b28a99ee4800db458f99c6e012b228f",
+    "E014_folding_budget.py": "d43a6857bbb9f78b80f3055075d5c3ecf552896d32764e22cf88ebec80536f3f",
+    "E019_data_tiny.py": "54a9e7fa9a44ce6ad18a0bd89d64d7f962e5630ea3250d7764938d152c7ae178",
+    "E020_common.py": null
+  },
+  "split": "/home/users/s224574/attention/badania_atencja_cnn/data/tiny-imagenet/splits.json",
+  "split_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+  "status": "frozen",
+  "train_count": 90000
+}

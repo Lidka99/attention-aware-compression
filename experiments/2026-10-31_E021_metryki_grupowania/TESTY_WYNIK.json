@@ -1,0 +1,18 @@
+{
+  "deterministic_agg_l1": true,
+  "dev_loaded": false,
+  "gpu_used": false,
+  "params": {
+    "agg_correlation": 5584580,
+    "agg_cosine": 5584580,
+    "agg_euclidean": 5584580,
+    "agg_manhattan": 5584580,
+    "official_weights": 5584580,
+    "random_balanced": 5584580,
+    "standardized": 5584580,
+    "ward_euclidean": 5584580
+  },
+  "reference_matches_e012_e014": true,
+  "status": "passed",
+  "tasks": 72
+}

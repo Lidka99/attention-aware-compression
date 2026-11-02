@@ -1,0 +1,45 @@
+{
+  "batch_size": 128,
+  "bn_seed": 20261024,
+  "budget_tolerance_percent": 1.0,
+  "budgets": [
+    0.3,
+    0.5,
+    0.7
+  ],
+  "datasets": [
+    "cifar10",
+    "cifar100",
+    "tiny"
+  ],
+  "experiment": "2026-10-30_E020_mechanizm_alokacji",
+  "fold_seed": 42,
+  "gpu_count": 4,
+  "max_ratio": 0.9,
+  "min_ratio": 0.1,
+  "num_workers": 2,
+  "official_test_used": false,
+  "opis": "experiments/2026-10-30_E020_mechanizm_alokacji/OPIS.md",
+  "protocol_version": "1.0",
+  "reference_baseline_variant": "uniform",
+  "reference_fold_runs": {
+    "cifar10": "runs/E014/20261027T094707Z_267904d_6a0e93eb",
+    "cifar100": "runs/E015/fold_20261027T210324Z_cb9ffaf_36a01249",
+    "tiny": "runs/E019/fold_20261030T220139Z_cb9ffaf_51bc405f"
+  },
+  "reference_variant": "tilt_p030",
+  "reserve_used": false,
+  "seeds": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "status": "frozen",
+  "variant": {
+    "family": "tilt",
+    "name": "antitilt_p030",
+    "role": "ablation",
+    "tilt": -0.3
+  }
+}

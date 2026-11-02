@@ -1,0 +1,52 @@
+{
+  "status": "frozen",
+  "protocol_version": "0.1",
+  "experiment": "2026-10-29_E019_tinyimagenet_alokacja",
+  "dataset": "TinyImageNet",
+  "num_classes": 200,
+  "epochs": 200,
+  "seeds": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "gpu_by_seed": {
+    "42": 0,
+    "43": 1,
+    "44": 2,
+    "45": 3
+  },
+  "batch_size": 128,
+  "gradient_accumulation": 1,
+  "effective_global_batch_per_run": 128,
+  "split_file": "data/tiny-imagenet/splits.json",
+  "split_sha256": "9df906f7ba0b217f779387c9f23c063a30c7a99a0e4376d0fd73119c100efcbd",
+  "split_seed": 20261010,
+  "train_count": 90000,
+  "dev_count": 10000,
+  "reserve_count": 10000,
+  "normalization_mean": [
+    0.48030321444761837,
+    0.4482903024765458,
+    0.3977083882277699
+  ],
+  "normalization_std": [
+    0.2763871312320068,
+    0.2688358266538272,
+    0.28161664632282396
+  ],
+  "lr": 0.1,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "nesterov": false,
+  "schedule": "cosine",
+  "eta_min": 0.0,
+  "warmup_epochs": 0,
+  "amp": false,
+  "label_smoothing": 0.0,
+  "num_workers": 2,
+  "checkpoint_retention": "final last.pt only; atomically written once at the final epoch; no optimizer state",
+  "official_test_used": false,
+  "reserve_used": false
+}

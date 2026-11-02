@@ -1,0 +1,132 @@
+{
+  "status": "frozen",
+  "protocol_version": "1.0",
+  "experiment": "2026-10-29_E018_replikacja_cosine",
+  "opis": "experiments/2026-10-29_E018_replikacja_cosine/OPIS.md",
+  "budgets": [
+    0.3,
+    0.5
+  ],
+  "measures": [
+    {
+      "name": "reference",
+      "kind": "official_weights",
+      "role": "baseline"
+    },
+    {
+      "name": "cosine",
+      "kind": "cosine_weights",
+      "role": "candidate"
+    }
+  ],
+  "datasets": [
+    {
+      "tag": "cifar10_s43",
+      "family": "cifar10",
+      "seed": 43,
+      "num_classes": 10,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_43/last.pt",
+      "checkpoint_sha256": "91423a840233b843d05caa9ed76f2c274139198dcc9e07c64cc66e2f964abab7",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json",
+      "split_sha256": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+      "baseline_top1": 0.956,
+      "baseline_nll": 0.16483922338485718,
+      "expected_params": 11173962
+    },
+    {
+      "tag": "cifar10_s44",
+      "family": "cifar10",
+      "seed": 44,
+      "num_classes": 10,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_44/last.pt",
+      "checkpoint_sha256": "c8ff0efbe3fe39c18ecf14b400d1f4b7e471a856edf43896398600354b69186d",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json",
+      "split_sha256": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+      "baseline_top1": 0.9546,
+      "baseline_nll": 0.171179771900177,
+      "expected_params": 11173962
+    },
+    {
+      "tag": "cifar10_s45",
+      "family": "cifar10",
+      "seed": 45,
+      "num_classes": 10,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/seed_45/last.pt",
+      "checkpoint_sha256": "850985a6941c329a2bb9b4dbf06672e2397b05c9f18849e5fb8204b17409e840",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json",
+      "split_sha256": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+      "baseline_top1": 0.955,
+      "baseline_nll": 0.1709268521308899,
+      "expected_params": 11173962
+    },
+    {
+      "tag": "cifar100_s43",
+      "family": "cifar100",
+      "seed": 43,
+      "num_classes": 100,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_43/last.pt",
+      "checkpoint_sha256": "e528182ef1a261ed471b50c909d4841d728d4eba35a7c081398ea6cef9cbba5e",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/splits.json",
+      "split_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+      "baseline_top1": 0.751,
+      "baseline_nll": 0.9982357983589172,
+      "expected_params": 11220132
+    },
+    {
+      "tag": "cifar100_s44",
+      "family": "cifar100",
+      "seed": 44,
+      "num_classes": 100,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_44/last.pt",
+      "checkpoint_sha256": "bd6414908abbdae600ab2476091f1702fffd3979d3195ffe6625c6275499c16a",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/splits.json",
+      "split_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+      "baseline_top1": 0.7504,
+      "baseline_nll": 0.9959683525085449,
+      "expected_params": 11220132
+    },
+    {
+      "tag": "cifar100_s45",
+      "family": "cifar100",
+      "seed": 45,
+      "num_classes": 100,
+      "checkpoint": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/seed_45/last.pt",
+      "checkpoint_sha256": "dfd7fde8c46c7239b4556f40a72c5b8ee92770f0e46d291e8fbec939544ddc5f",
+      "split": "/home/users/s224574/attention/badania_atencja_cnn/runs/E015/20261027T190911Z_cb9ffaf_seeds42-45_82c98b12/splits.json",
+      "split_sha256": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+      "baseline_top1": 0.7586,
+      "baseline_nll": 1.0026853815078736,
+      "expected_params": 11220132
+    }
+  ],
+  "run": {
+    "fold_seed": 42,
+    "bn_seed": 20261024,
+    "batch_size": 128,
+    "num_workers": 2,
+    "preserve_fc_bias": true,
+    "gpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "dev_count": 5000
+  },
+  "primary": {
+    "dataset_family": "cifar10",
+    "budget": 0.5,
+    "seeds": [
+      43,
+      44,
+      45
+    ],
+    "all_positive": true,
+    "mean_min_pp": 2.0
+  },
+  "specificity": {
+    "dataset_family": "cifar100",
+    "budget": 0.5
+  },
+  "secondary_budget": 0.3
+}

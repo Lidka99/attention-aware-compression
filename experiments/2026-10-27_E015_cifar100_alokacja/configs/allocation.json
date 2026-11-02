@@ -1,0 +1,21 @@
+{
+  "status": "frozen",
+  "protocol_version": "0.1",
+  "experiment": "2026-10-27_E015_cifar100_alokacja",
+  "budgets": [0.30, 0.50, 0.70],
+  "variants": [
+    {"name": "uniform", "family": "uniform", "role": "baseline"},
+    {"name": "tilt_p030", "family": "tilt", "tilt": 0.30, "role": "primary"},
+    {"name": "tilt_p015", "family": "tilt", "tilt": 0.15, "role": "secondary"},
+    {"name": "mag2", "family": "mag2", "role": "comparator"}
+  ],
+  "batch_size": 128,
+  "bn_seed": 20261024,
+  "bn_samples": 40000,
+  "num_workers": 2,
+  "fold_seed": 42,
+  "min_ratio": 0.1,
+  "max_ratio": 0.9,
+  "official_test_used": false,
+  "reserve_used": false
+}

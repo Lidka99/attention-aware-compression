@@ -1,0 +1,12 @@
+{
+  "cpu_seconds": 37.63411743985489,
+  "deterministic": true,
+  "dev_loaded": false,
+  "gpu_used": false,
+  "params": {
+    "cosine": 2797610,
+    "reference": 2797610
+  },
+  "status": "passed",
+  "tasks": 24
+}
