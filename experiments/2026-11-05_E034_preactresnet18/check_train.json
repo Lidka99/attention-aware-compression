@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "utc": "2026-11-05T01:36:40.662078+00:00",
+  "inputs": {
+    "runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
+    "data/cifar100/splits.json": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
+    "data/cifar100/cifar-100-python/train": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+    "data/cifar10/cifar-10-batches-py/data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "data/cifar10/cifar-10-batches-py/data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+    "data/cifar10/cifar-10-batches-py/data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+    "data/cifar10/cifar-10-batches-py/data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+    "data/cifar10/cifar-10-batches-py/data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+    "runs/E029/upstream_6946915/models/preact_resnet.py": "0ac3862a037e0ba179980792fc4e06f5303fa83b2f55795a868a6ea71407ccd1"
+  },
+  "source_hashes": {
+    "train_preact.py": "7955018d61981b21764e29f6b163bdd42fe0b7837f9aad4e8571a7d5313c9e86"
+  },
+  "protocol_sha256": "4e59bf8fc4de734a7b63812cf324d999c109145760103a8dc4fcad99a3784e74",
+  "architecture": "PreActResNet18",
+  "commit": "694691556e8314a835178a741938dd3d4d80c171",
+  "datasets": [
+    "cifar10",
+    "cifar100"
+  ],
+  "params": {
+    "cifar10": 11172170,
+    "cifar100": 11218340
+  }
+}
