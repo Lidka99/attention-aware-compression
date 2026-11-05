@@ -1,4 +1,4 @@
-# Status badań — 2026-11-02
+# Status badań — 2026-11-05
 
 **Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
 
@@ -9,6 +9,41 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 *Cut Less, Fold More* oraz MAG1/MAG2.
 
 ## Najważniejszy wynik
+
+**E033 — prosta hipoteza późnych grup niepotwierdzona.** 432 oceny
++36kontroli,4GPU/exit0,539,07s, bez treningu. EP (TILT na grupach0–8,
+UNIFORM na9–11) vs T na CIFAR-100/b70/CMA: **+0,135pp, 2/4** — primary
+niespełniony; repair_bn +0,950pp,3/4. LC−T −1,855/−1,395pp, eksploracyjne.
+EP−U +1,755/+1,630pp. Na CIFAR-10/Tiny EP−T **−7,135/−5,065pp**,0/4;
+EP nadal bije U. Zgodność LEGACY/UP24/24 (wagi max0, ARI1).
+**Usunięcie dodatkowej kompresji późnych grup przy dopasowanym budżecie
+nie odzyskuje zysku TILT; prosta narracja „CIFAR-100 przez layer4”
+zamknięta jako niewystarczająca.** Profile hybrydowe są sprzężone budżetem
+(EP dociska grupy6–8), więc to nie czysta izolacja.
+[Wyniki E033](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md).
+
+**E032 — replikacja późnej wrażliwości ukończona, H1/H2 spełnione.**
+288 ocen+24kontrole,4GPU/exit0,149,79s, bez treningu. CIFAR-100 po CMA:
+rho głębokość–szkoda0,622–0,629, L−E+16,48 do+17,54pp,4/4seedów;
+kontrolny CIFAR-10 rho−0,224 do+0,077, L−E ujemne4/4.
+Kontrast rho średnio+0,677. Późne grupy tracą20,64pp vs0,96pp.
+**Nie wyjaśnia to rozrzutu zysku TILT:** profile CIFAR-100 bardzo podobne
+(rho między seedami0,958–0,986), L−E vs zysk E031/b70 ma rho0,00 CMA
+i+0,20 repair_bn. Replikacja profilu, nie pełne wyjaśnienie przyczynowe.
+[Wyniki E032](experiments/2026-11-04_E032_replikacja_wrazliwosci/WYNIKI.md).
+
+**E031 — audyt30/70% ukończony, wynik mieszany.** Trzy zbiory,4seedy,
+504 oceny+36kontroli; finalny run `runs/E031/20261104T212951Z_6c3d7356`,
+4GPU/exit0,399+33 reuse i105+3 nowe. LEGACY ma identyczne wagi/partycje
+z upstream; wszystkie24 bramki jakości LEGACY/LOCAL spełnione.
+TILT−UNIFORM przy30/70% **redukcji parametrów** (CMA): CIFAR-10
+**+1,025/+10,910pp**, CIFAR-100 **+0,620/+1,620pp**, Tiny **+3,780/+7,7475pp**.
+Przy repair_bn: **+1,035/+9,260**, **+0,925/+0,680**, **+3,6925/+7,335pp**.
+**Kierunek11/12: CIFAR-100/70%/repair_bn tylko2/4 dodatnie — łączne
+kryterium E031 niespełnione.** CMA przechodzi6/6, ale CIFAR-100 jest słaby;
+przy70% TILT osiąga33,02% CIFAR-100 i16,18% Tiny. Profile TILT bieżącego
+solvera różnią się od historycznych, szczególnie przy30%.
+[Wyniki E031](experiments/2026-11-02_E031_oficjalny_30_70/WYNIKI.md).
 
 **E030 — oficjalny operator na Tiny ukończony, kryteria spełnione.**
 Niezmieniony operator upstream na naszym torchvision ResNet18/Tiny64
@@ -171,6 +206,9 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E028 | transfer reguły E027 na CIFAR-10 | +0,220pp vs TILT (2/4); +4,215pp vs UNIFORM; pułap tylko+0,545pp | completed, transfer nieudany |
 | E029 | oficjalny operator i rozdzielenie BN/biasu | zgodność top1; TILT dodatni na upstream i ich repair_bn,2 zbiory/4seedy/~50% | completed, dodatni audyt |
 | E030 | oficjalny operator na Tiny64 | +9,408/+9,178pp TILT−UNIFORM (CMA/repair_bn),4/4; LEGACY identyczny, LOCAL max0,36pp | completed, dodatni audyt |
+| E031 | oficjalny operator30/70%,3zbiory | zgodność24/24; kierunek11/12, CIFAR-100/70%/repair_bn2/4 dodatnie | completed, wynik mieszany |
+| E032 | profile75% pojedynczej grupy, CIFAR-100 vs CIFAR-10,4seedy | późna wrażliwość replikuje się4/4; nie wyjaśnia seed45/zysku TILT | completed, H1/H2 spełnione |
+| E033 | interakcja wczesne/środkowe vs późne grupy, EP/LC | EP−T CIFAR-100/b70 +0,135pp CMA (2/4), repair_bn+0,95 (3/4); CIFAR-10/Tiny EP−T ujemne4/4 | completed, primary negatywny |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -212,14 +250,23 @@ future work; *Cut Less, Fold More* używa jednolitych ratio.
    limitu, nie stroić progu na użytym dev i nie skalować search na kolejne
    zbiory. Stabilny wkład: alokacja per warstwa + TILT + kontrole negatywne
    + rola BN. **E029 zweryfikował oficjalny operator** na CIFAR-10/100
-   przy~50%; nie stanowi pełnej reprodukcji CLFM ani audytu Tiny/30/70%.
-   Następny krok: protokół drugiej architektury; nowy trening tylko za zgodą.
+   przy~50%; E030 dodał Tiny, a E031 rozszerzył zgodność na30/70%.
+   Kierunek E031 nie przechodzi łącznie: CIFAR-100/70%/repair_bn2/4.
+   Nie jest to pełna reprodukcja CLFM. Następny krok: koszt, przepis
+   i kryteria drugiej architektury; nowy trening tylko za wyraźną zgodą.
    E023/łagodne budżety odłożone.
-   Nie uruchomiono żadnego kolejnego eksperymentu.
+   E031, E032 i E033 zakończone. E032 potwierdził późną wrażliwość CIFAR-100
+   na4seedach, ale nie jej związek z rozrzutem zysku TILT. E033 sprawdził
+   interakcję przy profilach E031: EP−T na CIFAR-100/b70/CMA tylko+0,135pp
+   (2/4), a na CIFAR-10/Tiny ujemne4/4. **Prosta hipoteza „chroń layer4”
+   niepotwierdzona; nie budować na niej nowego alokatora.** Następny krok
+   to koszt, przepis i kryteria drugiej architektury; nowy trening tylko
+   po wyraźnej zgodzie. Nowego treningu nie uruchomiono.
 3. Druga architektura i nowy trening wyłącznie po zgodzie użytkowniczki.
    Decyzja publikacyjna po dalszych kontrolach; nie na podstawie samych tabel.
 4. E016 AUTO50 i miary E017/E018/E021 zamknięte. E015 pozostaje negatywny
-   względem zamrożonego progu. Profile E022 mają jeden seed i ocenę na dev;
+   względem zamrożonego progu. Profile E022 mają jeden seed; E032 rozszerzył
+   diagnostykę75% grupy na4seedy obu CIFAR z poprawioną BN, nadal na dev;
    oficjalny test i rezerwa pozostają nietknięte.
 
 ## Jak czytać dokumentację

@@ -1,4 +1,95 @@
-# Kontynuacja — 2026-11-02
+# Kontynuacja — 2026-11-05
+
+## Najnowsze: E033 — prosta hipoteza późnych grup niepotwierdzona
+
+[WYNIKI E033](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md).
+Run `runs/E033/20261105T010139Z_f193f1d4`, analiza
+`analysis_20261105T011101Z/`, audyt `verification.json`.
+432 oceny+36kontroli,4GPU/exit0,539,07s, bez treningu/testu/rezerwy.
+Profile: U/T dokładnie E031; EP=TILT na grupach0–8, UNIFORM na9–11;
+LC=UNIFORM na0–8, TILT na9–11; wszystkie dopasowane do targetu.
+Zgodność LEGACY/UP dla EP/LC **24/24** (parametry max0, ARI1).
+
+**Primary negatywny:** CIFAR-100/b70/CMA EP−T **+0,135pp, 2/4**;
+repair_bn +0,950pp,3/4 (secondary przechodzi, ale niespójne).
+LC−T −1,855/−1,395pp (eksploracyjne). EP−U +1,755 CMA/+1,630 repair_bn.
+Na CIFAR-10/Tiny/b70 CMA EP−T **−7,135/−5,065pp**,0/4, choć EP bije U
+(+3,775/+2,682). Na CIFAR-100/b30 EP−T≈0.
+
+**Wniosek:** usunięcie dodatkowej kompresji późnych grup przy dopasowanym
+budżecie nie odzyskuje zysku TILT na CIFAR-100 i wyraźnie szkodzi na
+CIFAR-10/Tiny. Prosta hipoteza „CIFAR-100 przez layer4” zamknięta jako
+niewystarczająca; profile hybrydowe są sprzężone budżetem (EP dociska
+grupy6–8), więc nie izolują czysto późnych grup. **Nie budować na tym
+nowego alokatora; nie wracać do search.** Jeden nieudany start
+`20261105T004647Z_83d7735f` (błąd obsługi `diag['groups']`) zachowany
+bez summary i bez wyników naukowych.
+
+**Następna decyzja:** koszt, przepis i kryteria drugiej architektury
+(np.PreActResNet18), nowy trening WYŁĄCZNIE po wyraźnej zgodzie.
+Publikacyjność otwarta; E031 pozostaje wynikiem mieszanym. Starsze wpisy
+poniżej historyczne.
+
+## E032 — późna wrażliwość replikuje się, zysk TILT niewyjaśniony
+
+Po pytaniu o słaby CIFAR-100 wykonano zaakceptowaną kontynuacją diagnostykę
+bez treningu. [WYNIKI E032](experiments/2026-11-04_E032_replikacja_wrazliwosci/WYNIKI.md).
+Run `runs/E032/20261104T235711Z_fc9d5eaa`, analiza
+`analysis_20261105T000640Z/`, niezależny audyt `verification.json`.
+288 ocen+24kontrole,4GPU/exit0,149,79s.12grup osobno75% kanałów,
+CIFAR-100 i kontrolny CIFAR-10,4seedy,LEGACY E012/E014,
+A4096/aug/CMA i oryginalne repair_bn. Modele nasze torchvision.
+
+**H1/H2 spełnione:** CIFAR-100/CMA rho głębokość–szkoda0,622–0,629,
+L−E+16,48 do+17,54pp,4/4 (nowe seedy43–45:3/3). CIFAR-10 rho−0,224
+do+0,077,L−E ujemne4/4. Kontrast rho średnio+0,677. Po BN utrzymuje
+się wysoka szkoda późnych grup CIFAR-100 (20,64pp vs0,96pp CIFAR-10).
+
+**Nie wyjaśniono różnic seedów:** profile CIFAR-100 prawie identyczne
+rangowo (rho par0,958–0,986), a L−E vs zysk TILT E031/b70 ma rho0,00
+CMA/+0,20 repair_bn. Seed45 nie ma mniejszej późnej wrażliwości.
+To opis4punktów, nie dowód braku zależności w populacji. W E032 interakcje
+grup nie były sprawdzone; E033 sprawdził jedną wersję (patrz wyżej).
+Nie wracać do search, ANTI-TILT ani AUTO50 na podstawie samego dodatniego H1.
+
+**Dalsza decyzja:** audyt interakcji wykonano jako E033 (patrz wyżej);
+primary negatywny, prosta hipoteza późnych grup niepotwierdzona.
+Druga architektura wymaga kosztorysu, przepisu, kryteriów i WYRAŹNEJ zgody
+na trening. Publikacyjność nadal nierozstrzygnięta; E031 zachowuje wynik
+mieszany. Test/rezerwa nietknięte, bez nowego treningu. Starsze wpisy
+poniżej historyczne.
+
+## Najnowsze: E031 ukończony — wynik mieszany
+
+**Czytaj najpierw:** [WYNIKI E031](experiments/2026-11-02_E031_oficjalny_30_70/WYNIKI.md).
+Finalny run `runs/E031/20261104T212951Z_6c3d7356`, analiza
+`analysis_20261104T213425Z/`, niezależny audyt `verification.json`.
+504 oceny+36kontroli:399+33 reuse,105+3 nowe;4GPU/exit0,
+209,85s dotyczy wyłącznie kontynuacji.19 kompletnych komórek odzyskano
+z przerwanego `20261104T210033Z_4992f5fd`; jego historyczny `running`
+nie oznacza aktywnego procesu. Wszystkie stare runy zachowane.
+
+Upstream commit6946915 niezmieniony. LEGACY identyczne wagi/partycje,
+LOCAL zgodny jakościowo (max0,34pp),24/24 bramki zgodności.
+TILT−UNIFORM na upstream,30/70% **redukcji** (pozostaje70/30% parametrów):
+- CIFAR-10: CMA **+1,025/+10,910pp**, repair_bn **+1,035/+9,260pp**,4/4.
+- CIFAR-100: CMA **+0,620/+1,620pp**,3/4; repair_bn **+0,925/+0,680pp**,
+  odpowiednio4/4 i**2/4**. Przy70% repair_bn różnice seed42–45:
+  **−1,60/−1,00/+1,10/+4,22pp**.
+- Tiny: CMA **+3,780/+7,7475pp**, repair_bn **+3,6925/+7,335pp**,4/4.
+
+**Łączny kierunek11/12: kryterium E031 niespełnione.** CMA przechodzi6/6,
+ale nie uogólniać stabilnego kierunku na wszystkie warunki BN.
+Tiny używa naszego torchvision ResNet18 z operatorem upstream;
+TILT bieżącego solvera przy30% różni się wyraźnie od dawnych profili.
+Nie jest to replay historycznych tabel ani pełny pipeline CLFM1:1.
+Przy70% jakość CMA TILT:33,02% CIFAR-100 i16,18% Tiny — poważne ograniczenie.
+
+**Następna decyzja:** koszt, przepis i kryteria drugiej architektury
+(np.PreActResNet18), nowy trening WYŁĄCZNIE po wyraźnej zgodzie.
+Decyzja publikacyjna otwarta; nie na podstawie samych tabel.
+Search i miary grupowania pozostają zamknięte. Test/rezerwa nietknięte.
+Poniższe wpisy opisują stan historyczny i nie zmieniają tej kolejności.
 
 ## Najnowsze: E030 — trzeci zbiór na operatorze autorów
 
