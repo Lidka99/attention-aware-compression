@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "utc": "2026-11-05T01:46:08.845746+00:00",
+  "utc": "2026-11-05T22:34:04.859729+00:00",
   "inputs": {
     "runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json": "d364d4501b20e99d63a7fa680480c5e17a76d4a5f977ff7a0eb75a9c5b50ff34",
     "data/cifar100/splits.json": "ecb8804e41fbc4bee7c61fd0585bf1c7dcfc94ac8472333fc283d51dc6460e86",
@@ -15,8 +15,9 @@
     "runs/E029/upstream_6946915/utils/tune_utils.py": "8333e7af56231e967fd5810857f8fd39dec072efe93fb17806a334d43c262a19"
   },
   "source_hashes": {
-    "fold_preact.py": "482b4e4b8b274325d208c1b54c8653473642c026fad6239f8a451720051e7cb8",
-    "train_preact.py": "7955018d61981b21764e29f6b163bdd42fe0b7837f9aad4e8571a7d5313c9e86"
+    "fold_preact.py": "c19155db876933bb98ca90a7ef09198216ae54e8fe954d6f71db92561752e130",
+    "train_preact.py": "7955018d61981b21764e29f6b163bdd42fe0b7837f9aad4e8571a7d5313c9e86",
+    "audit_train.py": "ed9eb53f98e2de65d658bb2a94f12500c31ca2acc76f92a6e85c1ced28691527"
   },
   "protocol_sha256": "4e59bf8fc4de734a7b63812cf324d999c109145760103a8dc4fcad99a3784e74",
   "groups": [

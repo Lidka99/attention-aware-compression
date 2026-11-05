@@ -334,9 +334,9 @@ def analyze(fold_run):
                     for mode in MODES:
                         rows.append(dict(dataset=ds,tag=tag,seed=seed,profile=profile,mode=mode,
                                          top1=100*s['metrics'][arm][mode]['top1'],nll=s['metrics'][arm][mode]['nll']))
-            for seed in SEEDS:
-                c=read(fold_run/f'seed_{seed}'/f'controls_{ds}.json')
-                for mode,val in c['controls'].items():controls.append(dict(dataset=ds,seed=seed,mode=mode,top1=100*val['top1'],nll=val['nll']))
+        for seed in SEEDS:
+            c=read(fold_run/f'seed_{seed}'/f'controls_{ds}.json')
+            for mode,val in c['controls'].items():controls.append(dict(dataset=ds,seed=seed,mode=mode,top1=100*val['top1'],nll=val['nll']))
     assert len(rows)==144 and len(controls)==24
     averages=[];allocation=[];gates=[]
     for ds in DATASETS:
