@@ -2,15 +2,17 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-**Aktualny stan (2026-11-05):** [STATUS_BADAN.md](STATUS_BADAN.md) — jedna strona.
+**Aktualny stan (2026-11-06):** [STATUS_BADAN.md](STATUS_BADAN.md).
 **E031** rozszerzył audyt oficjalnego operatora na 30/70% kompresji:
 zgodność operatorów **24/24**, kierunek TILT **11/12**
 (CIFAR-100/70%/`repair_bn` tylko 2/4 seedów). **E032** potwierdził późną
 wrażliwość CIFAR-100 na 4 seedach, ale nie wyjaśnił różnic zysku TILT.
 **E033** nie potwierdził prostej hipotezy „chroń `layer4`”. **E034**
-(PreActResNet18, CIFAR-10/100) jest w trakcie treningu — bez wyników.
-Najmocniejsze wcześniejsze wyniki alokacji pozostają w E014/E019;
-CIFAR-100 nadal jest słaby i nie deklarujemy publikowalności.
+(PreActResNet18, CIFAR-10/100) ukończony: **primary6/6**, wszystkie4/4 seedy
+dodatnie. CMA TILT−UNIFORM30/50/70%: **+0,985/+4,880/+13,190pp** CIFAR-10
+i **+4,435/+7,225/+23,095pp** CIFAR-100. Transfer na drugą architekturę
+potwierdzony, ale CIFAR-100/70 zachowuje tylko46,52% trafności wobec76,905%
+baseline. Test/rezerwa nietknięte; nie deklarujemy uniwersalności ani publikowalności.
 
 ## Od czego zacząć
 
@@ -21,8 +23,8 @@ CIFAR-100 nadal jest słaby i nie deklarujemy publikowalności.
 - [E031 — oficjalny operator 30/70%](experiments/2026-11-02_E031_oficjalny_30_70/WYNIKI.md).
 - [E029 — oficjalny operator](experiments/2026-11-01_E029_oficjalny_operator/WYNIKI.md)
   i [E030 — Tiny](experiments/2026-11-02_E030_oficjalny_tiny/WYNIKI.md).
-- [E034 — PreActResNet18](experiments/2026-11-05_E034_preactresnet18/OPIS.md)
-  (Phase 1: trening w toku, bez wyników).
+- [E034 — PreActResNet18](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md)
+  (Phase 1 ukończony, kryteria spełnione na obu CIFAR).
 - [E014 — replikacja](experiments/2026-10-27_E014_replikacja_alokacji/WYNIKI.md),
   [E013 — przesiew alokacji](experiments/2026-10-25_E013_alokacja_budzetu_foldingu/WYNIKI.md),
   [E012 — referencyjny folding](experiments/2026-10-24_E012_folding_referencja/WYNIKI.md),
@@ -67,7 +69,7 @@ CIFAR-100 nadal jest słaby i nie deklarujemy publikowalności.
 | E031 | oficjalny operator 30/70% | zgodność 24/24; kierunek 11/12 — [E031](experiments/2026-11-02_E031_oficjalny_30_70/WYNIKI.md) |
 | E032 | replikacja wrażliwości | H1/H2; nie wyjaśnia seed45 — [E032](experiments/2026-11-04_E032_replikacja_wrazliwosci/WYNIKI.md) |
 | E033 | interakcja późnych grup | primary negatywny — [E033](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md) |
-| E034 | PreActResNet18 (druga architektura) | Phase 1: trening w toku, bez wyników — [OPIS](experiments/2026-11-05_E034_preactresnet18/OPIS.md) |
+| E034 | PreActResNet18 (druga architektura) | Phase 1 completed, primary6/6 — [WYNIKI](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md) |
 
 Pełne raporty: `WYNIKI.md` i `OPIS.md` w folderach eksperymentów.
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md).

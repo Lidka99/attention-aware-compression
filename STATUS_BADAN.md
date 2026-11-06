@@ -1,4 +1,4 @@
-# Status badań — 2026-11-05
+# Status badań — 2026-11-06
 
 **Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
 
@@ -9,6 +9,16 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 *Cut Less, Fold More* oraz MAG1/MAG2.
 
 ## Najważniejszy wynik
+
+**E034 Phase 1 ukończony — primary spełniony na obu CIFAR.** PreActResNet18,
+4seedy, baseline95,215/76,905%; trening8/8 po200 epok,4GPU/exit0.
+Folding144 ocen+24kontrole,4GPU/exit0,179,07s; audyt PASS.
+TILT−UNIFORM przy30/50/70%: CIFAR-10 **+0,985/+4,880/+13,190pp** CMA,
+CIFAR-100 **+4,435/+7,225/+23,095pp** CMA; każda komórka4/4 dodatnie.
+Repair_bn: +1,020/+4,920/+13,230 oraz +4,600/+7,175/+23,310pp, także4/4.
+Primary6/6 i secondary6/6. Transfer na drugą architekturę potwierdzony;
+nie dowód uniwersalności ani mechanizmu. CIFAR-100/70 TILT46,52% wobec
+baseline76,905%. [Wyniki E034](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md).
 
 **E033 — prosta hipoteza późnych grup niepotwierdzona.** 432 oceny
 +36kontroli,4GPU/exit0,539,07s, bez treningu. EP (TILT na grupach0–8,
@@ -209,6 +219,7 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E031 | oficjalny operator30/70%,3zbiory | zgodność24/24; kierunek11/12, CIFAR-100/70%/repair_bn2/4 dodatnie | completed, wynik mieszany |
 | E032 | profile75% pojedynczej grupy, CIFAR-100 vs CIFAR-10,4seedy | późna wrażliwość replikuje się4/4; nie wyjaśnia seed45/zysku TILT | completed, H1/H2 spełnione |
 | E033 | interakcja wczesne/środkowe vs późne grupy, EP/LC | EP−T CIFAR-100/b70 +0,135pp CMA (2/4), repair_bn+0,95 (3/4); CIFAR-10/Tiny EP−T ujemne4/4 | completed, primary negatywny |
+| E034 | PreActResNet18, CIFAR-10/100,4seedy | CMA +0,985/+4,880/+13,190 i +4,435/+7,225/+23,095pp; wszystkie4/4 | completed, primary6/6 |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -233,6 +244,13 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 - Analiza: `runs/E016/analizy/20261027T230435Z_s1/analysis.md`.
 
 ## Następny krok
+
+**Aktualizacja po E034 (ma pierwszeństwo nad planem historycznym poniżej):**
+druga architektura ukończona. Zamrozić zakres twierdzeń artykułu i protokół
+niezależnej oceny przed otwarciem testu/rezerwy. E031 pozostaje mieszany,
+E033 negatywny; E034 wzmacnia ogólność kierunku, ale nie rozwiązuje mechanizmu.
+Nie uruchomiono kolejnego treningu. Nowy trening tylko po wyraźnej zgodzie;
+search/AUTO50/miary grupowania/layer4 zamknięte. Poniżej wcześniejszy plan.
 
 **Audyt luki alokacji:** [literature/AUDYT_ALOKACJA_FOLDING.md](literature/AUDYT_ALOKACJA_FOLDING.md)
 — Wang i in. (2025) wprost zostawiają optymalizację sparsity per warstwa jako

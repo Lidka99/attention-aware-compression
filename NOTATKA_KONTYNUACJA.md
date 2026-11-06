@@ -1,4 +1,31 @@
-# Kontynuacja — 2026-11-05
+# Kontynuacja — 2026-11-06
+
+## Najnowsze: E034 Phase 1 ukończony, primary6/6
+
+[WYNIKI E034](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md).
+Trening `runs/E034/train_20261105T014209Z_21b44f52`: completed,8/8,
+200 epok,4GPU/exit0,8503,09s; checkpointy i sanity sprawdzone.
+Folding `runs/E034/fold_20261106T003625Z_9ec4f2ea`:144 ocen+24kontrole,
+4GPU/exit0,179,07s. Analiza `analysis_20261106T004001Z/`, audyt verification.json PASS.
+
+PreActResNet18, baseline CIFAR-10/10095,215/76,905%. TILT−UNIFORM30/50/70:
+- CIFAR-10 CMA **+0,985/+4,880/+13,190pp**, repair+1,020/+4,920/+13,230pp.
+- CIFAR-100 CMA **+4,435/+7,225/+23,095pp**, repair+4,600/+7,175/+23,310pp.
+- Wszystkie komórki4/4 dodatnie; primary6/6 i secondary6/6.
+
+Transfer reguły na drugą architekturę potwierdzony, także CIFAR-100.
+Nie wyjaśnia to mechanizmu ani nie izoluje roli preaktywacji. CIFAR-100/70
+TILT46,52% vs baseline76,905%: nadal duża strata bezwzględna.
+E031 mieszany i E033 negatywny pozostają aktualne. Test/rezerwa nietknięte.
+
+Pierwszy fold `fold_20261105T224040Z_4270a30f` failed: bias FC miał
+requires_grad=True; poprawiono flagę, bez zmiany wartości/uczenia wag.
+Zachowany, nie agregować. Poprawiono też potrójne zliczanie kontroli teacher
+w analyze. OPIS zachowany z hashem; poprawne komendy są w WYNIKI.md.
+
+**Dalej:** zakres twierdzeń i zamrożony protokół niezależnej oceny przed
+testem/rezerwą; nie powtarzać E034. Nowy trening tylko po wyraźnej zgodzie.
+Search/AUTO50/miary grupowania/layer4 zamknięte. Starsze plany poniżej historyczne.
 
 ## Najnowsze: E033 — prosta hipoteza późnych grup niepotwierdzona
 
