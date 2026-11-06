@@ -145,7 +145,7 @@ def official(model,ratio,widths=None):
     result=op.apply().eval().requires_grad_(False)
     assert len(diag)==13
     if hasattr(model,'linear') and hasattr(model.linear,'bias'):
-        result.linear.bias=torch.nn.Parameter(model.linear.bias.detach().clone())
+        result.linear.bias=torch.nn.Parameter(model.linear.bias.detach().clone(),requires_grad=False)
     return result,diag
 
 
