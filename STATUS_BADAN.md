@@ -1,4 +1,4 @@
-# Status badań — 2026-11-06
+# Status badań — 2026-11-07
 
 **Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
 
@@ -9,6 +9,25 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 *Cut Less, Fold More* oraz MAG1/MAG2.
 
 ## Najważniejszy wynik
+
+**E035 ukończony — niezależny test, primary CMA15/15; każda komórka4/4.**
+Pięć par,4seedy,30/50/70%, U/TILT, bez treningu. Oficjalne testy CIFAR10/100
+i val Tiny po10k. Dev360+60 oraz test360+60, po4GPU/exit0,1018,04s;
+dev top1 dokładnie odtworzone przed testem, audyty PASS.
+TILT−U CMA30/50/70 [pp]: ResNet/C10 **+0,8100/+3,4125/+10,9875**,
+ResNet/C100 **+0,8275/+1,3025/+2,0600**, Tiny **+3,5375/+9,3600/+7,4825**;
+PreAct/C10 **+0,9600/+4,9500/+13,5775**, PreAct/C100 **+4,4875/+7,6425/+22,7375**.
+**Osobny próg≥2pp przy50/70:9/10**, wyjątek ResNet/C100/50. Repair14/15:
+ResNet/C100/70 nadal tylko2/4 dodatnie; NLL CMA gorsze TILT przyC100/50/70.
+Przy70 T top1 ResNet/C10032,68%, Tiny15,88%, PreAct/C10045,7425% — duże
+straty bezwzględne. Kierunek potwierdzony, nie uniwersalność/optimum.
+Protokół f42c0b8, kod5a7ec92; run `runs/E035/20261107T183831Z_8b0b14e0`.
+**Testy CIFAR i val Tiny odtąd użyte; rezerwa CIFAR100 nieużyta.** Tiny
+wcześniej otwierano do kształtu E005/E007, bez oceny modeli. Dawne wpisy
+„test/rezerwa nietknięte” poniżej opisują historyczny stan przed E035.
+[Wyniki E035](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md).
+Następny krok: opracowanie zakresu twierdzeń i materiału publikacyjnego;
+nie dostrajać na obejrzanym teście. Nowy trening wymaga osobnej zgody.
 
 **E034 Phase 1 ukończony — primary spełniony na obu CIFAR.** PreActResNet18,
 4seedy, baseline95,215/76,905%; trening8/8 po200 epok,4GPU/exit0.

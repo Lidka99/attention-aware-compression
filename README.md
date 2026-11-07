@@ -2,7 +2,17 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-**Aktualny stan (2026-11-06):** [STATUS_BADAN.md](STATUS_BADAN.md).
+**Aktualny stan (2026-11-07):** [STATUS_BADAN.md](STATUS_BADAN.md).
+**E035 — niezależna ocena ukończona:** primary kierunek CMA **15/15**, każda
+komórka4/4 dodatnie. Oficjalne testy CIFAR10/100 i val Tiny po10k, pięć par
+architektura–zbiór, bez nowego treningu. Osobny próg≥2pp przy50/70: **9/10**;
+wyjątek ResNet18/CIFAR100/50(+1,3025pp). Repair kierunek14/15, CIFAR100/70
+ResNet tylko2/4 dodatnie; NLL CMA pogarsza się przy50/70 na tej parze.
+Dev odtworzony przed testem,360+60 ocen na etap,4GPU/exit0, audyty PASS.
+[Pełne wyniki E035](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md).
+Testy CIFAR i val Tiny są już użyte; rezerwa CIFAR100 pozostaje nieużyta.
+
+Wcześniejsze wyniki na dev:
 **E031** rozszerzył audyt oficjalnego operatora na 30/70% kompresji:
 zgodność operatorów **24/24**, kierunek TILT **11/12**
 (CIFAR-100/70%/`repair_bn` tylko 2/4 seedów). **E032** potwierdził późną
@@ -12,11 +22,13 @@ wrażliwość CIFAR-100 na 4 seedach, ale nie wyjaśnił różnic zysku TILT.
 dodatnie. CMA TILT−UNIFORM30/50/70%: **+0,985/+4,880/+13,190pp** CIFAR-10
 i **+4,435/+7,225/+23,095pp** CIFAR-100. Transfer na drugą architekturę
 potwierdzony, ale CIFAR-100/70 zachowuje tylko46,52% trafności wobec76,905%
-baseline. Test/rezerwa nietknięte; nie deklarujemy uniwersalności ani publikowalności.
+baseline. Nie deklarujemy uniwersalności ani publikowalności.
 
 ## Od czego zacząć
 
 - [STATUS_BADAN.md](STATUS_BADAN.md) — cel, wyniki, następny krok.
+- [E035 — niezależna ocena](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md)
+  (primary15/15, osobny próg wielkości9/10, ograniczenia NLL/repair).
 - [E033 — interakcja późnych grup](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md)
   (wynik negatywny; domyka prostą hipotezę mechanizmu).
 - [E032 — replikacja wrażliwości](experiments/2026-11-04_E032_replikacja_wrazliwosci/WYNIKI.md).
@@ -70,6 +82,7 @@ baseline. Test/rezerwa nietknięte; nie deklarujemy uniwersalności ani publikow
 | E032 | replikacja wrażliwości | H1/H2; nie wyjaśnia seed45 — [E032](experiments/2026-11-04_E032_replikacja_wrazliwosci/WYNIKI.md) |
 | E033 | interakcja późnych grup | primary negatywny — [E033](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md) |
 | E034 | PreActResNet18 (druga architektura) | Phase 1 completed, primary6/6 — [WYNIKI](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md) |
+| E035 | Niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, wielkość9/10 — [WYNIKI](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md) |
 
 Pełne raporty: `WYNIKI.md` i `OPIS.md` w folderach eksperymentów.
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md).

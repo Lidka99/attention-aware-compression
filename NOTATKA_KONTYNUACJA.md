@@ -1,4 +1,39 @@
-# Kontynuacja — 2026-11-06
+# Kontynuacja — 2026-11-07
+
+## Najnowsze: E035 ukończony, niezależny primary15/15
+
+[WYNIKI E035](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md).
+Run `runs/E035/20261107T183831Z_8b0b14e0`, analiza `analysis/analysis.json`,
+audyty `analysis/verification.json` i `analysis/data_verification.json` PASS.
+Dev360+60 i test360+60, po4GPU/exit0,1018,04s. Dev gate top1max0,
+NLLmax1,1921e-7; globalna bramka przed testem. Wszystkie PID zakończone.
+Bez treningu, bez failed runów GPU. Jeden naprawiony CPU check (ścieżka
+indeksów E029→E028/E024), jawnie w DZIENNIK.md. Protokół f42c0b8,
+implementacja i frozen.json5a7ec92; upstream6946915 niezmieniony.
+
+Primary E035=mean>0 i≥3/4 we wszystkich15 CMA: **15/15, każda4/4**.
+Osobny próg≥2pp przy50/70: **9/10**, nie ResNet/CIFAR100/50(+1,3025pp).
+TILT−U30/50/70 CMA [pp]:
+- ResNet/C10 +0,8100/+3,4125/+10,9875;
+- ResNet/C100 +0,8275/+1,3025/+2,0600;
+- ResNet/Tiny +3,5375/+9,3600/+7,4825;
+- PreAct/C10 +0,9600/+4,9500/+13,5775;
+- PreAct/C100 +4,4875/+7,6425/+22,7375.
+Repair kierunek14/15: ResNet/C100/70 +1,165pp,2/4. NLL CMA TILT gorsze
+przy ResNet/C100/50/70. Przy70 T top1 R/C10032,68%, Tiny15,88%, P/C10045,7425%.
+Historyczny mocniejszy primary E034 i mieszany werdykt E031 bez zmian.
+
+**Oficjalne testy CIFAR10/100 i oficjalny val Tiny użyte w E035** (po10k).
+Tiny reserve0..9999 wskazuje osobny cache_val, nie train; wcześniej
+E005/E007 otwierały go do kształtu, bez oceny modeli. CIFAR100 reserve
+pozostaje nieużyta. CIFAR10 test_batch wypakowany ze zweryfikowanego lokalnego
+archiwum; train bez zmian. Audyt potwierdził Tiny10000/10000 JPEG+etykiety,
+hashe źródeł i identyczne stany modeli dev/test.
+
+Dalej: opracować zakres twierdzeń/materiał publikacyjny, nie stroić na teście.
+Nie powtarzać E035 jako nowej niewidzianej walidacji. Brak blokerów.
+Nowy trening tylko po osobnej zgodzie. Poniższe wpisy są historyczne;
+ich „test/rezerwa nietknięte” nie opisuje obecnego stanu.
 
 ## Najnowsze: E034 Phase 1 ukończony, primary6/6
 
