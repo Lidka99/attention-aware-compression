@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "utc": "2026-11-07T18:37:25.117066+00:00",
+  "checks": [
+    {
+      "pair": "resnet_cifar10",
+      "profile": "U",
+      "groups": 12,
+      "params": 5584580
+    },
+    {
+      "pair": "resnet_cifar10",
+      "profile": "T",
+      "groups": 12,
+      "params": 5582548
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "U",
+      "groups": 12,
+      "params": 5581542
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "T",
+      "groups": 12,
+      "params": 5580606
+    },
+    {
+      "pair": "resnet_tiny",
+      "profile": "U",
+      "groups": 12,
+      "params": 5623142
+    },
+    {
+      "pair": "resnet_tiny",
+      "profile": "T",
+      "groups": 12,
+      "params": 5622878
+    },
+    {
+      "pair": "preact_cifar10",
+      "profile": "U",
+      "groups": 13,
+      "params": 5583314
+    },
+    {
+      "pair": "preact_cifar10",
+      "profile": "T",
+      "groups": 13,
+      "params": 5582715
+    },
+    {
+      "pair": "preact_cifar100",
+      "profile": "U",
+      "groups": 13,
+      "params": 5580280
+    },
+    {
+      "pair": "preact_cifar100",
+      "profile": "T",
+      "groups": 13,
+      "params": 5579192
+    }
+  ],
+  "code_hashes": {
+    "experiments/2026-11-07_E035_ocena_niezalezna/experiment.py": "856ba61e402a31541bb00b20d0a6e5d6735d1238c779387ac50adb6abf5b8221",
+    "experiments/2026-11-07_E035_ocena_niezalezna/audit.py": "42f92434756962a9618c0b5f8648c849f62d9026d579d93132da3fab903ba614"
+  },
+  "frozen_sha256": "0069e0126d472212f5cd18352301ef0319cc8875f45a7c50709b4bdab2321b78",
+  "protocol_sha256": "31baf0311e725e76e6a6a87ba9fd44a8757eb930583fa0ffb73bf90f8c74fc5d"
+}
