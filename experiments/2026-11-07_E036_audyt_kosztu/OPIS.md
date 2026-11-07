@@ -49,6 +49,16 @@ samples/s=1000*batch/średni czas zdarzenia. To steady-state device-forward
 throughput z synchronizacją po każdym batchu, bez loadera/transferów,
 nie end-to-end throughput aplikacji. Surowe200 czasów/seria zachowane.
 
+**Poprawka infrastruktury po pierwszym runie:** `runs/E036/20261107T225229Z_1f5b7f3a`
+zatrzymał się, bo warunek `memory_allocated()==0` między modelami nie jest
+osiągalny: cuDNN zostawia trwały blok alokatora (ok.8,5MB), choć po `model.cpu()`
+nie pozostają tensory CUDA. Zmieniono wyłącznie księgowanie: `empty_allocated`
+jest zapisywane przed modelem, a po sprzątaniu wymagany jest powrót w granicach
+32MB (wyłapuje wyciek modelu, toleruje trwały workspace bibliotek).
+`baseline_allocated` liczymy po50 warmupach i przed `reset_peak_memory_stats`;
+delta peak−baseline pozostaje porównywalna między modelami. Nie zmieniono
+modeli, profili, czasów, liczby próbek, kolejności, progów ani kryteriów.
+
 Kolejność dla każdej pary/batch/serii: teacher, potem budżety30/50/70,
 U,T gdy (seed−42+seria) parzyste, inaczej T,U. Kolejność batch1,128.
 Teacher osobno w każdej serii. Żadnych równoczesnych kopii modeli na GPU.

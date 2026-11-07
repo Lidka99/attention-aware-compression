@@ -241,7 +241,6 @@ def telemetry():
 def measure(cpu_model, pair, size, batch):
     gc.collect(); torch.cuda.empty_cache(); torch.cuda.synchronize()
     empty = torch.cuda.memory_allocated()
-    assert empty == 0, empty
     model = cpu_model.to('cuda')
     if pair.startswith('preact'):
         model.normalize.mu = model.normalize.mu.to('cuda')
@@ -277,10 +276,12 @@ def measure(cpu_model, pair, size, batch):
         model.normalize.std = model.normalize.std.cpu()
     del x, xcpu, start, end
     gc.collect(); torch.cuda.empty_cache(); torch.cuda.synchronize()
-    assert torch.cuda.memory_allocated() == 0
+    after = torch.cuda.memory_allocated()
+    assert after - empty <= 32 * 1024**2, (empty, after)
     return dict(times_ms=timings, input_sha256=input_hash, batch=batch,
                 baseline_allocated=baseline, peak_allocated=peak, delta_allocated=peak-baseline,
-                baseline_reserved=reserved, peak_reserved=peak_reserved, empty_allocated=empty)
+                baseline_reserved=reserved, peak_reserved=peak_reserved, empty_allocated=empty,
+                after_allocated=after, allocator_delta=after-empty)
 
 
 def worker(run, gpu):

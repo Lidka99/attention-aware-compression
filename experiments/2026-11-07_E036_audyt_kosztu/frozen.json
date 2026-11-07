@@ -361397,7 +361397,7 @@
     "experiments/2026-11-04_E032_replikacja_wrazliwosci/audit/verify.py": "1b448ecd2465c481d6f5352de7751da116c4d1f0e6a51d4086083f0649a076d5",
     "runs/E035/20261107T183831Z_8b0b14e0/frozen.json": "0069e0126d472212f5cd18352301ef0319cc8875f45a7c50709b4bdab2321b78",
     "experiments/2026-11-07_E035_ocena_niezalezna/experiment.py": "856ba61e402a31541bb00b20d0a6e5d6735d1238c779387ac50adb6abf5b8221",
-    "experiments/2026-11-07_E036_audyt_kosztu/OPIS.md": "9c08732a8ff386d8eed92389eddee399b40f70c9a8d7ba85b4b3a2c9dd7e5f58",
+    "experiments/2026-11-07_E036_audyt_kosztu/OPIS.md": "0992402ad88a24970610ac03f21f85d77d757a767aa49e21894e39144a3831d7",
     "runs/E035/20261107T183831Z_8b0b14e0/test/seed_42/resnet_cifar10/controls.json": "4744192de39fe9a19af58b5d32dca50b234c5bf114faf4cec6d7e0ed086ae18d",
     "runs/E035/20261107T183831Z_8b0b14e0/test/seed_42/resnet_cifar10/b30/summary.json": "de0d2f83b974a12a09ba51d2573dc79f023c3bd1bdd0877d8c868f5f99598da9",
     "runs/E035/20261107T183831Z_8b0b14e0/test/seed_42/resnet_cifar10/b50/summary.json": "4f848c0b5244cdea30af5a090995bec5ff96b458caff5dd1f27aef30cd30d5a6",
@@ -361480,5 +361480,5 @@
     "runs/E035/20261107T183831Z_8b0b14e0/test/seed_45/preact_cifar100/b70/summary.json": "9b58424845fceeb4854259374402b8e9f5f632c15dfc636eb77fd2e2093d38c1"
   },
   "e035_frozen_sha256": "0069e0126d472212f5cd18352301ef0319cc8875f45a7c50709b4bdab2321b78",
-  "created_utc": "2026-11-07T22:43:51.484194+00:00"
+  "created_utc": "2026-11-07T23:05:04.077096+00:00"
 }
