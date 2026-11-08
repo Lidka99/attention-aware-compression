@@ -2,7 +2,13 @@
 
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
-**Aktualny stan (2026-11-07):** [STATUS_BADAN.md](STATUS_BADAN.md).
+**Aktualny stan (2026-11-08):** [STATUS_BADAN.md](STATUS_BADAN.md).
+**E036 — koszt alokacji ukończony:** przy dopasowanych parametrach TILT ma
+**1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948× przepustowości
+batch128**; latencja batch1 w granicach narzutu. To ogranicza twierdzenie do
+stałego budżetu **parametrów**, nie „matched compute”. Bez treningu i danych.
+[Wyniki E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
+
 **E035 — niezależna ocena ukończona:** primary kierunek CMA **15/15**, każda
 komórka4/4 dodatnie. Oficjalne testy CIFAR10/100 i val Tiny po10k, pięć par
 architektura–zbiór, bez nowego treningu. Osobny próg≥2pp przy50/70: **9/10**;
@@ -27,6 +33,8 @@ baseline. Nie deklarujemy uniwersalności ani publikowalności.
 ## Od czego zacząć
 
 - [STATUS_BADAN.md](STATUS_BADAN.md) — cel, wyniki, następny krok.
+- [E036 — koszt alokacji](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md)
+  (MAC/przepustowość/pamięć przy matched params; TILT nie jest darmowy).
 - [E035 — niezależna ocena](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md)
   (primary15/15, osobny próg wielkości9/10, ograniczenia NLL/repair).
 - [E033 — interakcja późnych grup](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md)
@@ -83,6 +91,7 @@ baseline. Nie deklarujemy uniwersalności ani publikowalności.
 | E033 | interakcja późnych grup | primary negatywny — [E033](experiments/2026-11-05_E033_interakcja_pozne_grupy/WYNIKI.md) |
 | E034 | PreActResNet18 (druga architektura) | Phase 1 completed, primary6/6 — [WYNIKI](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md) |
 | E035 | Niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, wielkość9/10 — [WYNIKI](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md) |
+| E036 | koszt MAC/czas/pamięć przy matched params | MAC T/U1,105–1,823; przepustowość b128 0,702–0,948 — [WYNIKI](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md) |
 
 Pełne raporty: `WYNIKI.md` i `OPIS.md` w folderach eksperymentów.
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md).

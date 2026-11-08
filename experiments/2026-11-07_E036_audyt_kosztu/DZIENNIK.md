@@ -10,3 +10,6 @@
   trwały blok alokatora8,5MB; brak tensorów CUDA po `model.cpu()`.
   Poprawiono księgowanie (baseline po warmupie, tolerancja32MB na trwały
   workspace). Run zachowany, bez wyników do agregacji; brak ponownego treningu.
+- Finalny run `20261107T231027Z_27bac186` completed,4×exit0,789,50s;
+  140 modeli,840 plików czasów. Analyze i audit PASS; raporty WYNIKI/
+  PODSUMOWANIE/TABLES oraz STATUS/NOTATKA/README zaktualizowane.

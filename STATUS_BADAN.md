@@ -1,4 +1,4 @@
-# Status badań — 2026-11-07
+# Status badań — 2026-11-08
 
 **Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
 
@@ -9,6 +9,16 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 *Cut Less, Fold More* oraz MAG1/MAG2.
 
 ## Najważniejszy wynik
+
+**E036 ukończony — przewaga TILT nie jest darmowa.** Audyt kosztu na
+istniejących wagach, bez treningu i danych. Przy dopasowanych parametrach
+TILT ma **1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948×
+przepustowości batch128** (−5,2% do−29,8%); latencja batch1 jest w granicach
+narzutu. Peak batch128 na Tiny/50–70% wyższy o68–82%. Run
+`runs/E036/20261107T231027Z_27bac186`:4GPU/exit0,789,50s,840 plików czasów,
+audyt PASS. **Nie wolno pisać „matched FLOPs/compute”**: budżet parametrów
+nie jest budżetem obliczeń. To ogranicza zakres twierdzenia, nie unieważnia
+wyników jakości. [Wyniki E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
 
 **E035 ukończony — niezależny test, primary CMA15/15; każda komórka4/4.**
 Pięć par,4seedy,30/50/70%, U/TILT, bez treningu. Oficjalne testy CIFAR10/100
@@ -239,6 +249,8 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E032 | profile75% pojedynczej grupy, CIFAR-100 vs CIFAR-10,4seedy | późna wrażliwość replikuje się4/4; nie wyjaśnia seed45/zysku TILT | completed, H1/H2 spełnione |
 | E033 | interakcja wczesne/środkowe vs późne grupy, EP/LC | EP−T CIFAR-100/b70 +0,135pp CMA (2/4), repair_bn+0,95 (3/4); CIFAR-10/Tiny EP−T ujemne4/4 | completed, primary negatywny |
 | E034 | PreActResNet18, CIFAR-10/100,4seedy | CMA +0,985/+4,880/+13,190 i +4,435/+7,225/+23,095pp; wszystkie4/4 | completed, primary6/6 |
+| E035 | niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, każda4/4; próg≥2pp9/10 | completed, primary spełniony |
+| E036 | koszt MAC/czas/pamięć przy matched params | MAC T/U1,105–1,823; przepustowość b128 0,702–0,948 | completed, audyt opisowy |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -264,12 +276,15 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 
 ## Następny krok
 
-**Aktualizacja po E034 (ma pierwszeństwo nad planem historycznym poniżej):**
-druga architektura ukończona. Zamrozić zakres twierdzeń artykułu i protokół
-niezależnej oceny przed otwarciem testu/rezerwy. E031 pozostaje mieszany,
-E033 negatywny; E034 wzmacnia ogólność kierunku, ale nie rozwiązuje mechanizmu.
-Nie uruchomiono kolejnego treningu. Nowy trening tylko po wyraźnej zgodzie;
-search/AUTO50/miary grupowania/layer4 zamknięte. Poniżej wcześniejszy plan.
+**Aktualizacja po E036 (ma pierwszeństwo nad planem historycznym poniżej):**
+E034 i E035 potwierdziły jakość na drugiej architekturze i niezależnych
+zbiorach, ale E036 pokazał, że przewaga jest przy stałych **parametrach**,
+nie przy stałych MAC/czasie. Zakres twierdzeń artykułu musi to jawnie
+ograniczać. Kolejny krok: przygotowanie materiału publikacyjnego i decyzja,
+czy raportować TILT jako zamrożoną regułę z kosztem, czy szukać profilu
+lepszego na jednostkę MAC (to wymaga nowego protokołu i zgody).
+Nie uruchomiono nowego treningu. E031 pozostaje mieszany, E033 negatywny;
+search/AUTO50/miary grupowania/layer4 zamknięte. Testy po E035 są użyte.
 
 **Audyt luki alokacji:** [literature/AUDYT_ALOKACJA_FOLDING.md](literature/AUDYT_ALOKACJA_FOLDING.md)
 — Wang i in. (2025) wprost zostawiają optymalizację sparsity per warstwa jako

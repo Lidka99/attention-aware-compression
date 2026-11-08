@@ -1,6 +1,29 @@
-# Kontynuacja — 2026-11-07
+# Kontynuacja — 2026-11-08
 
-## Najnowsze: E035 ukończony, niezależny primary15/15
+## Najnowsze: E036 — koszt alokacji, TILT nie jest darmowy
+
+[WYNIKI E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
+Run `runs/E036/20261107T231027Z_27bac186`:4GPU/exit0,789,50s,140 modeli,
+840 plików czasów, audyt PASS. Bez treningu, danych i nowej oceny jakości.
+
+Przy dopasowanych parametrach TILT vs UNIFORM:
+- MAC **1,105–1,823×** (+10,5% do+82,3%);
+- przepustowość batch128 **0,702–0,948×** (−5,2% do−29,8%);
+- latencja batch1 w granicach narzutu (0,965–1,046);
+- peak batch128 na Tiny/50–70% wyższy o68–82%.
+
+To konsekwencja szerokich wczesnych grup o wysokiej rozdzielczości:
+budżet parametrów nie jest budżetem MAC. **Nie pisać „matched FLOPs/compute”**.
+Wynik ogranicza zakres twierdzenia, nie unieważnia E034/E035. Jakość
+w raporcie to wyłącznie reuse E035. Pierwszy run failed na zbyt silnym
+warunku alokatora; poprawiono tylko księgowanie pamięci. Run zachowany.
+
+Dalej: materiał publikacyjny z jawnym kosztem; decyzja, czy TILT raportować
+jako zamrożoną regułę z kosztem, czy szukać profilu lepszego na jednostkę
+MAC (nowy protokół i zgoda). Testy po E035 są użyte, nie stroić na nich.
+Nowy trening tylko po wyraźnej zgodzie. Starsze wpisy poniżej historyczne.
+
+## E035 ukończony, niezależny primary15/15
 
 [WYNIKI E035](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md).
 Run `runs/E035/20261107T183831Z_8b0b14e0`, analiza `analysis/analysis.json`,
