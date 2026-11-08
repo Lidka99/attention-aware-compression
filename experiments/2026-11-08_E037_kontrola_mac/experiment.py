@@ -424,11 +424,22 @@ def analyze(run):
                         st['gate'] = (st['mean'] >= 2.0 and st['positive'] >= 3) if tag in ('b50', 'b70') else (st['mean'] > 0 and st['positive'] >= 3)
                     allocation.append(st)
     with_seed = [r for r in allocation if r['contrast'] == 'T-Up' and r['mode'] == 'CMA']
-    result = dict(allocation=allocation, rows=rows, controls=controls,
+    averages = []
+    for pair in PAIRS:
+        for tag in TAGS:
+            for mode in MODES:
+                vals = [r for r in rows if r['pair'] == pair and r['tag'] == tag and r['mode'] == mode]
+                for name, key, nkey in (('U', 'U', 'U_nll'), ('T', 'T', 'T_nll'), ('Up', 'Up', 'Up_nll')):
+                    averages.append(dict(pair=pair, tag=tag, mode=mode, name=name,
+                                         top1=float(np.mean([r[key] for r in vals])),
+                                         top1_sd=float(np.std([r[key] for r in vals], ddof=1)),
+                                         nll=float(np.mean([r[nkey] for r in vals])),
+                                         nll_sd=float(np.std([r[nkey] for r in vals], ddof=1))))
+    result = dict(allocation=allocation, averages=averages, rows=rows, controls=controls,
                   primary=with_seed, primary_pass=all(r.get('gate', False) for r in with_seed),
                   note='dev only; U/T reused E035; Uprime evaluated on existing checkpoints',
                   source_hashes={str(p.relative_to(run)): digest(p) for p in run.glob('seed_*/*/*/summary.json')},
-                  wall_seconds=m['wall_seconds'], rows_n=len(rows), controls_n=len(controls))
+                  wall_seconds=m['elapsed_seconds'], rows_n=len(rows), controls_n=len(controls))
     out = run / 'analysis'
     out.mkdir(exist_ok=True)
     (out / 'analysis.json').write_text(json.dumps(result, indent=1) + '\n')

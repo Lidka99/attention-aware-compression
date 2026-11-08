@@ -10,6 +10,19 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 
 ## Najważniejszy wynik
 
+**E037 ukończony — przy dopasowanym MAC przewaga TILT znika.** Kontrola
+na dev, bez treningu i testu. UNIFORM dopasowany do MAC TILT (U') ma
+**1,10–1,82× więcej parametrów**; U' bije U we wszystkich15 komórkach.
+T−U' po CMA jest dodatni tylko **5/15**, a bramkę przechodzi tylko
+R/C10/30 (+0,37pp). Na CIFAR-100/Tiny U' wygrywa do+23,69pp; na CIFAR-10
+TILT pozostaje nieco lepszy przy30/50%, ale ResNet/C10/70 przegrywa
+−2,01pp. Run `runs/E037/20261108T031759Z_855c0b33`:4GPU/exit0,292,28s,
+180 ocen+60kontroli, audyt PASS. **E034/E035 pozostają ważne dla stałego
+budżetu parametrów, ale zysk TILT jest w dużej mierze kosztem MAC;
+nie wolno pisać „compute-matched” ani „darmowa alokacja”.**
+[Wyniki E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
+[Wykresy](reports/2026-11-08_wykresy/README.md).
+
 **E036 ukończony — przewaga TILT nie jest darmowa.** Audyt kosztu na
 istniejących wagach, bez treningu i danych. Przy dopasowanych parametrach
 TILT ma **1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948×
@@ -251,6 +264,7 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E034 | PreActResNet18, CIFAR-10/100,4seedy | CMA +0,985/+4,880/+13,190 i +4,435/+7,225/+23,095pp; wszystkie4/4 | completed, primary6/6 |
 | E035 | niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, każda4/4; próg≥2pp9/10 | completed, primary spełniony |
 | E036 | koszt MAC/czas/pamięć przy matched params | MAC T/U1,105–1,823; przepustowość b128 0,702–0,948 | completed, audyt opisowy |
+| E037 | UNIFORM dopasowany MAC (U' z większą liczbą parametrów) | T−U' CMA tylko5/15 dodatnich; bramka1/15; U' wygrywa C100/Tiny | completed, primary negatywny |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -276,15 +290,18 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 
 ## Następny krok
 
-**Aktualizacja po E036 (ma pierwszeństwo nad planem historycznym poniżej):**
-E034 i E035 potwierdziły jakość na drugiej architekturze i niezależnych
-zbiorach, ale E036 pokazał, że przewaga jest przy stałych **parametrach**,
-nie przy stałych MAC/czasie. Zakres twierdzeń artykułu musi to jawnie
-ograniczać. Kolejny krok: przygotowanie materiału publikacyjnego i decyzja,
-czy raportować TILT jako zamrożoną regułę z kosztem, czy szukać profilu
-lepszego na jednostkę MAC (to wymaga nowego protokołu i zgody).
-Nie uruchomiono nowego treningu. E031 pozostaje mieszany, E033 negatywny;
-search/AUTO50/miary grupowania/layer4 zamknięte. Testy po E035 są użyte.
+**Aktualizacja po E037 (ma pierwszeństwo nad planem historycznym poniżej):**
+E034/E035 pokazują przewagę TILT przy stałej liczbie parametrów na dev
+i teście, ale E036/E037 pokazują, że TILT ma1,1–1,8× MAC, a UNIFORM
+z większą liczbą parametrów przy tym samym MAC wygrywa na CIFAR-100/Tiny.
+**Twierdzenie artykułu trzeba ograniczyć do budżetu parametrów; nie ma
+podstaw do „compute-matched” ani „lepszej alokacji na FLOP”.** Kolejny
+krok: decyzja o ramie publikacji — uczciwe pokazanie obu porównań
+(parameter-matched i MAC-matched) oraz kosztu, bez search i bez strojenia
+na użytym teście. Alternatywa to nowy, jawnie kosztowy cel alokacji, ale
+to nowy protokół i wymaga zgody; search pozostaje zamknięty.
+Testy po E035 są użyte; rezerwa CIFAR100 nieużyta. Nowy trening tylko po
+wyraźnej zgodzie. E031 mieszany, E033 negatywny, layer4 zamknięty.
 
 **Audyt luki alokacji:** [literature/AUDYT_ALOKACJA_FOLDING.md](literature/AUDYT_ALOKACJA_FOLDING.md)
 — Wang i in. (2025) wprost zostawiają optymalizację sparsity per warstwa jako

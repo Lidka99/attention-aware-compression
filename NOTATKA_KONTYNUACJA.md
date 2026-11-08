@@ -1,6 +1,28 @@
 # Kontynuacja — 2026-11-08
 
-## Najnowsze: E036 — koszt alokacji, TILT nie jest darmowy
+## Najnowsze: E037 — przy dopasowanym MAC TILT przegrywa
+
+[WYNIKI E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
+Run `runs/E037/20261108T031759Z_855c0b33`:4GPU/exit0,292,28s,
+180 ocen U'+60kontroli, audyt PASS. Bez testu i bez treningu; U/T reuse E035.
+
+UNIFORM dopasowany do MAC TILT (U') ma1,10–1,82× więcej parametrów.
+T−U' po CMA **dodatni tylko5/15**, bramka tylko R/C10/30 (+0,37pp).
+Na CIFAR-100/Tiny U' wygrywa do+23,69pp; na CIFAR-10 TILT jest nieco
+lepszy przy30/50% (+0,37/+0,48 ResNet, +0,03/+0,74 PreAct), ale
+ResNet/C10/70 przegrywa −2,01pp. Po repair kierunek ten sam.
+
+**Wniosek:** parameter-matched przewaga TILT z E034/E035 jest realna,
+ale w dużej mierze wynika z większego MAC. Nie mamy dowodu lepszej
+alokacji na jednostkę obliczeń; nie pisać „compute-matched”. Artykuł
+musi pokazać oba porównania i koszt. E037 jest dev-only, test po E035
+nietknięty. [Wykresy](reports/2026-11-08_wykresy/README.md).
+
+Dalej: decyzja o ramie publikacji (parameter-matched + MAC-matched + koszt)
+albo nowy jawnie kosztowy cel alokacji; ten drugi wymaga nowego protokołu
+i zgody, search pozostaje zamknięty. Nowy trening tylko po zgodzie.
+
+## E036 — koszt alokacji, TILT nie jest darmowy
 
 [WYNIKI E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
 Run `runs/E036/20261107T231027Z_27bac186`:4GPU/exit0,789,50s,140 modeli,

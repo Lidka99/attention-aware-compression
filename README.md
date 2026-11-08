@@ -3,6 +3,13 @@
 Reproducible experiments on attention-aware channel merging and CNN compression.
 
 **Aktualny stan (2026-11-08):** [STATUS_BADAN.md](STATUS_BADAN.md).
+**E037 — kontrola przy dopasowanym MAC ukończona, primary negatywny:**
+gdy UNIFORM dostaje1,10–1,82× więcej parametrów w tym samym MAC, wygrywa
+z TILT na CIFAR-100 i Tiny (do+23,69pp); T−U' dodatni tylko5/15, bramka
+tylko ResNet/CIFAR-10/30. To zawęża twierdzenie do budżetu **parametrów**,
+nie obliczeń. Bez treningu i testu. [Wyniki E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
+[Wykresy](reports/2026-11-08_wykresy/README.md).
+
 **E036 — koszt alokacji ukończony:** przy dopasowanych parametrach TILT ma
 **1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948× przepustowości
 batch128**; latencja batch1 w granicach narzutu. To ogranicza twierdzenie do
@@ -33,6 +40,8 @@ baseline. Nie deklarujemy uniwersalności ani publikowalności.
 ## Od czego zacząć
 
 - [STATUS_BADAN.md](STATUS_BADAN.md) — cel, wyniki, następny krok.
+- [E037 — kontrola przy dopasowanym MAC](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md)
+  (primary negatywny; U' z większą liczbą parametrów wygrywa na C100/Tiny).
 - [E036 — koszt alokacji](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md)
   (MAC/przepustowość/pamięć przy matched params; TILT nie jest darmowy).
 - [E035 — niezależna ocena](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md)
@@ -92,6 +101,7 @@ baseline. Nie deklarujemy uniwersalności ani publikowalności.
 | E034 | PreActResNet18 (druga architektura) | Phase 1 completed, primary6/6 — [WYNIKI](experiments/2026-11-05_E034_preactresnet18/WYNIKI.md) |
 | E035 | Niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, wielkość9/10 — [WYNIKI](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md) |
 | E036 | koszt MAC/czas/pamięć przy matched params | MAC T/U1,105–1,823; przepustowość b128 0,702–0,948 — [WYNIKI](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md) |
+| E037 | UNIFORM dopasowany MAC | T−U' CMA tylko5/15 dodatnich; bramka1/15; U' wygrywa C100/Tiny — [WYNIKI](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md) |
 
 Pełne raporty: `WYNIKI.md` i `OPIS.md` w folderach eksperymentów.
 [Sposób dokumentowania](docs/DOKUMENTOWANIE.md).
