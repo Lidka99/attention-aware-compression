@@ -1,0 +1,9 @@
+{
+  "run": "runs/E038/20261108T215451Z_a5912565",
+  "analysis_sha256": "9d74e1f60e6ead7b38778fa69fdeea7510aa32a6cc484e39ca2e36508911c581",
+  "script_sha256": "0136e203367bd7df1085e56dd0f64fb138338e5845dfa34a55dc8dd33714c933",
+  "files": {
+    "e038_interakcja.png": "07dc3e59cfdb415fb35f3cd12b1393a6472af4ef2fb28f1680940c6efa4de56a",
+    "e038_interakcja.pdf": "e6b8e9e23b3821b991c9ade9c00dbab88fcc160b0aff5ee3fefe6e8412539546"
+  }
+}

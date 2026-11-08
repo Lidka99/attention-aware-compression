@@ -1,0 +1,285 @@
+{
+  "status": "passed",
+  "utc": "2026-11-08T21:51:03.350170+00:00",
+  "rows": [
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "profile": "U",
+      "params": 7808058,
+      "mac": 386254264,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "profile": "T",
+      "params": 7804213,
+      "mac": 426809702,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "profile": "U",
+      "params": 5584580,
+      "mac": 276383716,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "profile": "T",
+      "params": 5582548,
+      "mac": 377027192,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "profile": "U",
+      "params": 3345905,
+      "mac": 166551280,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "profile": "T",
+      "params": 3345642,
+      "mac": 298036232,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "profile": "U",
+      "params": 7846668,
+      "mac": 386292784,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "profile": "T",
+      "params": 7841653,
+      "mac": 426847052,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "profile": "U",
+      "params": 5581542,
+      "mac": 275335732,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "profile": "T",
+      "params": 5580606,
+      "mac": 376140124,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "profile": "U",
+      "params": 3334845,
+      "mac": 161853708,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "profile": "T",
+      "params": 3334612,
+      "mac": 295084380,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "profile": "U",
+      "params": 7845193,
+      "mac": 103503916,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "profile": "T",
+      "params": 7840865,
+      "mac": 114774868,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "profile": "U",
+      "params": 5623142,
+      "mac": 75359828,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "profile": "T",
+      "params": 5622878,
+      "mac": 102243284,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "profile": "U",
+      "params": 3366925,
+      "mac": 45395196,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "profile": "T",
+      "params": 3366572,
+      "mac": 82002612,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b30",
+      "profile": "U",
+      "params": 7806560,
+      "mac": 386254264,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b30",
+      "profile": "T",
+      "params": 7806023,
+      "mac": 426862982,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b50",
+      "profile": "U",
+      "params": 5583314,
+      "mac": 276383716,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b50",
+      "profile": "T",
+      "params": 5582715,
+      "mac": 375336300,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b70",
+      "profile": "U",
+      "params": 3344925,
+      "mac": 166551280,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b70",
+      "profile": "T",
+      "params": 3344550,
+      "mac": 291180886,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b30",
+      "profile": "U",
+      "params": 7845170,
+      "mac": 386292784,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b30",
+      "profile": "T",
+      "params": 7843463,
+      "mac": 426900332,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b50",
+      "profile": "U",
+      "params": 5580280,
+      "mac": 275335732,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b50",
+      "profile": "T",
+      "params": 5579192,
+      "mac": 374691076,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b70",
+      "profile": "U",
+      "params": 3333871,
+      "mac": 161853708,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b70",
+      "profile": "T",
+      "params": 3333509,
+      "mac": 289778168,
+      "shapes_equal": true,
+      "residual_forward_finite": true
+    }
+  ],
+  "code_hashes": {
+    "experiments/2026-11-08_E038_operator_alokacja/audit.py": "df6a77d00b04bffdd9f77050231454d07db28f90e8bcd8b6fa517bf90d65ec73",
+    "experiments/2026-11-08_E038_operator_alokacja/experiment.py": "e3abb24fa9d22a30a399b7486080395893b3b7411debdeb7ef87fc08a9fbc56f",
+    "experiments/2026-11-08_E038_operator_alokacja/pruning.py": "de93259b09c7da0806df7cd569ddd37d81a52ba2082d1703028996ddd931a1ce",
+    "experiments/2026-11-08_E038_operator_alokacja/runtime.py": "04c7e4e62e87851254c43f179f8f328a1ee8f60b24f589b925a22278eb1cb408",
+    "experiments/2026-11-08_E038_operator_alokacja/OPIS.md": "aedf98ecacfed9e73066b7644e3d6832f1cbee1a91e85071040cdac447134095"
+  },
+  "frozen_sha256": "a8baf5ffb0474e4208e2b43239190d88d9187cac09c5bdcca28da63d22f651a8",
+  "data_open_attempts": []
+}
