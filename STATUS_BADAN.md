@@ -10,6 +10,22 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 
 ## Najważniejszy wynik
 
+**E039 ukończony — uporządkowany TILT bije średnią4 ustalonych przestawień
+w9/9 komórek, każda4/4 seedy.** CMA30/50/70: C10+1,69/+7,67/+21,16pp,
+C100+1,25/+7,40/+10,67pp, Tiny+6,29/+12,78/+10,00pp. Repair także9/9.
+Parametry dopasowane, ale SHUFFLED ma0,433–0,910×MAC(T): **nie izoluje
+kolejności od compute**. Run `runs/E039/20261108T223038Z_9d2d039e`,
+4GPU/exit0,684,24s;432 oceny+72kontrole, audyt PASS, bez testu/treningu.
+[Wyniki E039](experiments/2026-11-08_E039_przestawienia_tilt/WYNIKI.md).
+
+**E038 ukończony — TILT pomaga także pruningowi, brak ogólnej specyficzności
+dla foldingu.** Przy identycznych profilach FOLD/MAG2 i50% parametrów:
+I=ΔF−ΔMAG **−2,80/−4,375/−3,025/−1,97/+3,84pp** (R/C10,C100,Tiny,P/C10,C100);
+primary tylko1/5. Średni ΔMAG dodatni15/15 CMA; FOLD/T nadal lepszy
+od MAG2/T15/15. Run `runs/E038/20261108T215451Z_a5912565`,4GPU/exit0,
+340,86s;360MAG+120FOLD+60teacher, audyt PASS, bitowa kontrola MAG120/120.
+[Wyniki E038](experiments/2026-11-08_E038_operator_alokacja/WYNIKI.md).
+
 **E037 ukończony — brak ogólnej przewagi TILT przy zbliżonym MAC.** Kontrola
 na dev, bez treningu i testu. UNIFORM dopasowany do MAC TILT (U') ma
 **1,10–1,82× więcej parametrów**; U' bije U we wszystkich15 komórkach.
@@ -273,6 +289,8 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E035 | niezależne testy CIFAR10/100 i val Tiny | CMA kierunek15/15, każda4/4; próg≥2pp9/10 | completed, primary spełniony |
 | E036 | koszt MAC/czas/pamięć przy matched params | MAC T/U1,105–1,823; przepustowość b128 0,702–0,948 | completed, audyt opisowy |
 | E037 | UNIFORM dopasowany MAC (U' z większą liczbą parametrów) | T−U' CMA tylko5/15 dodatnich; bramka1/15; U' wygrywa C100/Tiny | completed, primary negatywny |
+| E038 | FOLD/MAG2 × U/T, identyczne szerokości i BN | TILT pomaga MAG15/15; I przy50% dodatni1/5, brak ogólnej specyficzności foldingu | completed, primary negatywny |
+| E039 | cztery stałe przestawienia odchyleń TILT | T−mean4 CMA9/9 i4/4; MAC przestawień0,433–0,910×T | completed, primary spełniony |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -297,6 +315,14 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 - Analiza: `runs/E016/analizy/20261027T230435Z_s1/analysis.md`.
 
 ## Następny krok
+
+**Aktualizacja po E038/E039 (pierwszeństwo nad planami poniżej):** obie
+kontrole wzmacniają materiał empiryczny, ale zawężają nowość. TILT jest
+użytecznym profilem także dla pruningu; kolejność/kształt ma znaczenie
+w porównaniu parameter-matched, nadal sprzężone z MAC. Następny krok:
+redakcja metody i artykułu z jawnymi E035–E039 oraz najbliższym related work,
+bez twierdzenia o specyficznym mechanizmie foldingu, optimum lub przewadze
+compute-matched. Testów nie używano ponownie; nowy trening wymaga zgody.
 
 **Aktualizacja po E037 (ma pierwszeństwo nad planem historycznym poniżej):**
 E034/E035 pokazują przewagę TILT przy stałej liczbie parametrów na dev

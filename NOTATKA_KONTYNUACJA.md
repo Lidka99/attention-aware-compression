@@ -1,6 +1,33 @@
 # Kontynuacja — 2026-11-08
 
-## Najnowsze: E037 — brak ogólnej przewagi TILT przy zbliżonym MAC
+## Najnowsze: E038/E039 — dwie kontrole wzmacniające ukończone
+
+Zgoda użytkowniczki2026-11-08 na kontrole; obie na istniejących wagach,
+dev-only, bez treningu/testu/rezerwy. Protokół/kod/wejścia SHA256 przed
+oceną, snapshoty w runach. Cztery GPU, seed42–45→GPU0–3, obie4×exit0.
+
+- **E038:** `runs/E038/20261108T215451Z_a5912565`,340,86s,
+  360MAG+120FOLD+60teacher, audyt PASS i dodatkowa bitowa kontrola MAG120/120.
+  Przy50% I=ΔF−ΔMAG:−2,80/−4,375/−3,025/−1,97/+3,84pp
+  (R/C10,C100,Tiny,P/C10,C100). Primary specyficzności1/5; średni
+  zysk MAG dodatni15/15 CMA. FOLD/T nadal lepszy od MAG2/T15/15.
+  [Wyniki E038](experiments/2026-11-08_E038_operator_alokacja/WYNIKI.md).
+- **E039:** `runs/E039/20261108T223038Z_9d2d039e`,684,24s,
+  432SHUFFLED+72kontrole, audyt PASS. TILT−średnia4 ustalonych przestawień
+  po CMA: C10+1,69/+7,67/+21,16pp, C100+1,25/+7,40/+10,67pp,
+  Tiny+6,29/+12,78/+10,00pp przy30/50/70%;9/9 i każda4/4.
+  Repair także9/9 i4/4. SHUFFLED ma0,433–0,910×MAC(TILT), więc kontrola
+  **nie izoluje kolejności od compute**. Permutowane odchylenia przed
+  clippingiem; finalny histogram ratio nie jest zachowany.
+  [Wyniki E039](experiments/2026-11-08_E039_przestawienia_tilt/WYNIKI.md).
+
+Dalej: redakcja metody i artykułu z E035–E039. Nowość zawęzić do
+kontrolowanego badania alokacji przy budżecie parametrów; efekt pomaga
+także pruningowi. Bez twierdzenia o unikalnym mechanizmie foldingu,
+optymalności i compute-matched przewadze. Nowy trening wymaga zgody.
+GPU po runach wolne. Wykresy, protokoły i replay w folderach E038/E039.
+
+## E037 — brak ogólnej przewagi TILT przy zbliżonym MAC
 
 [WYNIKI E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
 Run `runs/E037/20261108T031759Z_855c0b33`:4GPU/exit0,292,28s,
