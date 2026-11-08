@@ -1,0 +1,9 @@
+{
+  "run": "runs/E039/20261108T223038Z_9d2d039e",
+  "analysis_sha256": "1a52b207c464ab382254a5576f0c82966fd6afe5ab2426a49451e015e95c3209",
+  "script_sha256": "7cec2dd0f49ab0f5b32b0ac32fcfd818a81d2c249dfc755ae48a2ce9398d08b2",
+  "files": {
+    "e039_kolejnosc.pdf": "1f13c23bff2de9070412635686a8c596bbaf6d53a345a1cec6f6e854a30ae9fc",
+    "e039_kolejnosc.png": "57a722301c005f1a7b4297145b9644ba3c418ecb37b6051b9050e247fec76c1e"
+  }
+}

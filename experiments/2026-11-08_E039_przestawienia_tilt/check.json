@@ -1,0 +1,265 @@
+{
+  "status": "passed",
+  "utc": "2026-11-08T22:25:59.084843+00:00",
+  "rows": [
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "permutation": 101,
+      "params": 7807548,
+      "mac": 378960392
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "permutation": 102,
+      "params": 7808014,
+      "mac": 387982104
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "permutation": 103,
+      "params": 7807363,
+      "mac": 351705944
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "permutation": 104,
+      "params": 7807140,
+      "mac": 376644984
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "permutation": 101,
+      "params": 5584515,
+      "mac": 274423516
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "permutation": 102,
+      "params": 5584529,
+      "mac": 288466338
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "permutation": 103,
+      "params": 5584102,
+      "mac": 230239750
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "permutation": 104,
+      "params": 5583892,
+      "mac": 240543870
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "permutation": 101,
+      "params": 3345802,
+      "mac": 163613914
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "permutation": 102,
+      "params": 3345777,
+      "mac": 193679744
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "permutation": 103,
+      "params": 3345763,
+      "mac": 131248254
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "permutation": 104,
+      "params": 3345808,
+      "mac": 140533666
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "permutation": 101,
+      "params": 7846356,
+      "mac": 378866000
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "permutation": 102,
+      "params": 7846653,
+      "mac": 388394736
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "permutation": 103,
+      "params": 7845845,
+      "mac": 351554960
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "permutation": 104,
+      "params": 7845426,
+      "mac": 374271024
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "permutation": 101,
+      "params": 5581434,
+      "mac": 273417568
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "permutation": 102,
+      "params": 5580930,
+      "mac": 285905008
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "permutation": 103,
+      "params": 5581270,
+      "mac": 229157412
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "permutation": 104,
+      "params": 5581275,
+      "mac": 239597844
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "permutation": 101,
+      "params": 3334406,
+      "mac": 161771776
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "permutation": 102,
+      "params": 3334568,
+      "mac": 193895340
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "permutation": 103,
+      "params": 3334540,
+      "mac": 127834040
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "permutation": 104,
+      "params": 3334392,
+      "mac": 136825436
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "permutation": 101,
+      "params": 7844906,
+      "mac": 102070008
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "permutation": 102,
+      "params": 7844784,
+      "mac": 104351388
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "permutation": 103,
+      "params": 7845189,
+      "mac": 95324024
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "permutation": 104,
+      "params": 7845097,
+      "mac": 101047584
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "permutation": 101,
+      "params": 5623010,
+      "mac": 75913796
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "permutation": 102,
+      "params": 5622928,
+      "mac": 76665288
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "permutation": 103,
+      "params": 5623134,
+      "mac": 65318996
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "permutation": 104,
+      "params": 5622933,
+      "mac": 65649436
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "permutation": 101,
+      "params": 3366912,
+      "mac": 46632512
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "permutation": 102,
+      "params": 3366740,
+      "mac": 52130332
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "permutation": 103,
+      "params": 3366472,
+      "mac": 38918856
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "permutation": 104,
+      "params": 3366772,
+      "mac": 38908500
+    }
+  ],
+  "code_hashes": {
+    "experiments/2026-11-08_E039_przestawienia_tilt/audit.py": "dc5c8305ed72dea772f80d5990ee0465fb64d7996f6d6d2a7445f6dcf8719866",
+    "experiments/2026-11-08_E039_przestawienia_tilt/experiment.py": "7bffa01a5370b929fef0b450a76069ee9f070ef973200d7ab9bfa9044ba07e1b",
+    "experiments/2026-11-08_E039_przestawienia_tilt/OPIS.md": "63d493aefddf0a0835dc999503858635943f4cf0caa6c36ea8920d6a7fe2e4f5"
+  },
+  "frozen_sha256": "e497f60ab46f84bc82328a32b626aab5bb1f4b8ecf74d407218b76a9c6b90598",
+  "data_open_attempts": []
+}
