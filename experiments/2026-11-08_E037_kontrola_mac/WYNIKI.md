@@ -1,10 +1,10 @@
-# E037 — przy dopasowanym MAC przewaga TILT znika
+# E037 — brak ogólnej przewagi TILT przy zbliżonym MAC
 
 Status: **completed, primary negatywny**, 2026-11-08. Kontrola na dev,
-bez treningu i bez testu. **Gdy UNIFORM dostaje więcej parametrów, ale ten
-sam MAC, wygrywa z TILT w10/15 komórek, a w pozostałych różnice są małe.**
-To nie unieważnia E034/E035, ale istotnie zawęża twierdzenie: zysk TILT
-przy stałych parametrach jest w dużej mierze kosztem obliczeń.
+bez treningu i bez ponownej oceny testu. **Po poszerzeniu UNIFORM do budżetu
+MAC TILT, U' wygrywa średnio w10/15 komórek; TILT wygrywa w5/15.**
+U' ma jednocześnie więcej parametrów. Wynik nie rozdziela wpływu kosztu
+obliczeń od większej pojemności modelu i nie wyjaśnia przyczynowo zysku TILT.
 
 ## Wykonanie i integralność
 
@@ -17,18 +17,21 @@ przy stałych parametrach jest w dużej mierze kosztem obliczeń.
 - `check.json` i `analysis/verification.json` **PASS**:15/15 U' ma
   MAC≤MAC(T), parametry i klastry zgodne, brak dostępu do testu
   (`data_open_attempts=[]`), metryki skończone, wagi niezmienione.
-  Po finalnym runie dodano tylko tabelę `averages` w `analyze`; kod oceny
+  Po finalnym runie poprawiono w `analyze` nazwę klucza czasu
+  (`wall_seconds`→`elapsed_seconds`) i dodano tabelę `averages`; kod oceny
   i zapisane metryki pozostały bez zmian (`source/` runu ma wersję z runu).
 - Conda attention, Python3.11.15, Torch2.12.0+cu130, CUDA13.0,
   4×RTX2080Ti; FP32/TF32 off, deterministyczne, batch128.
 - U' jest profilem **UNIFORM**: wszystkie grupy mają tę samą redukcję,
-  dobraną tak, by zmieścić się w MAC TILT. Ma **1,10–1,82× więcej
-  parametrów** niż T. To kontrola compute, nie kontrola rozmiaru.
+  dobraną tak, by zmieścić się w MAC TILT. Liczba parametrów U' wynosi
+  **1,10–1,82× liczby parametrów T**. To kontrola compute, nie rozmiaru.
 
 ## Główny wynik
 
 Top-1 dev [%] po CMA; różnice [pp]. U'=UNIFORM dopasowany MAC.
 Pełne NLL i per-seed: `analysis/analysis.json`, `analysis/per_seed.csv`.
+
+![E037: TILT−U' z punktami per seed i średnią±SD](figures/e037_t_minus_up.png)
 
 | Para | Red. | U'/T param. | MAC U'/T | U | T | U' | T−U' | U'−U | T−U' repair |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -63,23 +66,26 @@ UNIFORM może użyć większej liczby parametrów, by zmieścić się w MAC TILT
 W takim porównaniu U' bije U we wszystkich15 komórkach, a TILT wygrywa
 tylko na CIFAR-10 i to głównie przy30/50%.
 
-**Wniosek:** przewaga TILT przy stałych parametrach jest realna, ale
-w dużej mierze wynika z większego kosztu obliczeń. Nie mamy dowodu, że
-alokacja per warstwa jest lepsza **na jednostkę MAC**. Nie wolno pisać
-o „darmowej” lub „compute-matched” przewadze. Artykuł musi pokazywać
-oba porównania: parameter-matched (TILT wygrywa) i MAC-matched
-(UNIFORM z większą liczbą parametrów wygrywa na CIFAR-100/Tiny).
+**Wniosek:** przewaga TILT przy stałych parametrach nie przenosi się ogólnie
+na porównanie ze szerszym UNIFORM przy zbliżonym MAC. Nie wykazano więc
+ogólnej przewagi TILT przy ograniczeniu MAC. Jednocześnie ten eksperyment
+zmienia liczbę parametrów U', zatem nie dowodzi, jaka część zysku TILT
+„wynika z compute”. Artykuł musi pokazywać oba porównania: parameter-matched
+(TILT wygrywa) i MAC-matched (szerszy UNIFORM wygrywa na CIFAR-100/Tiny),
+z jawnym wskazaniem różnych budżetów parametrów.
 
 To nie jest unieważnienie E034/E035: przy zadanym rozmiarze sieci TILT
-nadal jest lepszy. Jest to jednak ostrzeżenie, że wdrożeniowy sens ma
-tylko wtedy, gdy liczy się budżet parametrów, a nie czas obliczeń.
+nadal jest lepszy w zbadanych warunkach. Przydatność wdrożeniowa zależy
+od jednoczesnych ograniczeń parametrów, MAC, pamięci i czasu; E037 nie
+mierzył opóźnienia U' i nie rozstrzyga wszystkich tych ograniczeń naraz.
 
 ## Ograniczenia
 
 - Dev był używany wcześniej; test po E035 jest użyty i **nie był otwierany**.
   To kontrola mechanizmu, nie niezależna walidacja potwierdzająca.
 - U' ma więcej parametrów niż T; porównanie dotyczy MAC, nie rozmiaru.
-  MAC to nie latency: E036 pokazał, że batch1 jest zdominowany narzutem.
+  MAC to nie latency: E036 nie wykazał jednoznacznego kierunku zmiany
+  opóźnienia batch1 ani przyczynowej roli narzutu uruchomienia.
 - Jeden serwer,4seedy, dwie pokrewne architektury, jeden przepis treningu.
 - Profile U' są ograniczone do jednakowej redukcji we wszystkich grupach
   i maks.90% szerokości; nie jest to optymalizacja profilu.
@@ -91,6 +97,9 @@ tylko wtedy, gdy liczy się budżet parametrów, a nie czas obliczeń.
 `20261108T030702Z_a7428da3` failed: monitor użył funkcji sprawdzającej
 bezczynność GPU, gdy workery już liczyły (600MiB/31–47%). Poprawiono
 telemetrię; bez zmian profili, danych i kryteriów. Run zachowany bez wyników.
+Historyczny manifest i statusy workerów pozostały `running`, gdyż błąd
+objął także sekcję końcową launchera. Audyt potwierdził brak tych procesów;
+nie traktować statusu historycznego jako aktywnego zadania.
 
 ## Odtworzenie
 
@@ -107,4 +116,5 @@ CUDA_VISIBLE_DEVICES='' "$PY" -B "$E/experiment.py" analyze --run "$R"
 CUDA_VISIBLE_DEVICES='' "$PY" -B "$E/audit.py" "$R"
 ```
 
-Wykresy: [raport przekrojowy](../../reports/2026-11-08_wykresy/README.md).
+Wykresy lokalne: [figures/README.md](figures/README.md) — PNG/PDF, punkty
+per seed w CSV oraz SHA256 źródeł. [Audyt zapisów E034–E037](../../reports/2026-11-08_wykresy/AUDYT_WYKONANIA.md).

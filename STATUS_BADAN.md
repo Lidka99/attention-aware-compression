@@ -10,7 +10,7 @@ sieci zachowuje więcej jakości **bez fine-tuningu**, i pokazać ją na tle
 
 ## Najważniejszy wynik
 
-**E037 ukończony — przy dopasowanym MAC przewaga TILT znika.** Kontrola
+**E037 ukończony — brak ogólnej przewagi TILT przy zbliżonym MAC.** Kontrola
 na dev, bez treningu i testu. UNIFORM dopasowany do MAC TILT (U') ma
 **1,10–1,82× więcej parametrów**; U' bije U we wszystkich15 komórkach.
 T−U' po CMA jest dodatni tylko **5/15**, a bramkę przechodzi tylko
@@ -18,20 +18,28 @@ R/C10/30 (+0,37pp). Na CIFAR-100/Tiny U' wygrywa do+23,69pp; na CIFAR-10
 TILT pozostaje nieco lepszy przy30/50%, ale ResNet/C10/70 przegrywa
 −2,01pp. Run `runs/E037/20261108T031759Z_855c0b33`:4GPU/exit0,292,28s,
 180 ocen+60kontroli, audyt PASS. **E034/E035 pozostają ważne dla stałego
-budżetu parametrów, ale zysk TILT jest w dużej mierze kosztem MAC;
-nie wolno pisać „compute-matched” ani „darmowa alokacja”.**
+budżetu parametrów. U' ma więcej parametrów, więc E037 nie izoluje
+wpływu compute od pojemności modelu i nie dowodzi przyczyny zysku TILT.**
 [Wyniki E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
-[Wykresy](reports/2026-11-08_wykresy/README.md).
+[Wykresy w folderach eksperymentów i audyt zapisów](reports/2026-11-08_wykresy/README.md).
 
 **E036 ukończony — przewaga TILT nie jest darmowa.** Audyt kosztu na
 istniejących wagach, bez treningu i danych. Przy dopasowanych parametrach
 TILT ma **1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948×
-przepustowości batch128** (−5,2% do−29,8%); latencja batch1 jest w granicach
-narzutu. Peak batch128 na Tiny/50–70% wyższy o68–82%. Run
+przepustowości batch128** (−5,2% do−29,8%); średnie ilorazy latencji batch1
+0,965–1,046, SD0,019–0,100, bez dowodu równoważności. Peak batch128 na
+Tiny/50–70% wyższy o68–82%. Run
 `runs/E036/20261107T231027Z_27bac186`:4GPU/exit0,789,50s,840 plików czasów,
 audyt PASS. **Nie wolno pisać „matched FLOPs/compute”**: budżet parametrów
 nie jest budżetem obliczeń. To ogranicza zakres twierdzenia, nie unieważnia
 wyników jakości. [Wyniki E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
+
+**Ponowny audyt zapisów:** kompletność runów E034–E037 i przeliczone
+kontrasty potwierdzone; checkpointy E0348/8 zgodne z SHA256. Poprawiono
+błędne SD latencji i parametry w tabeli E036 oraz nadmiernie przyczynową
+interpretację E037. Surowych wyników nie zmieniano. Nieaktualne `running`
+w historycznych przerwanych runach nie oznacza aktywnych procesów.
+[Dowody i odtworzenie audytu](reports/2026-11-08_wykresy/AUDYT_WYKONANIA.md).
 
 **E035 ukończony — niezależny test, primary CMA15/15; każda komórka4/4.**
 Pięć par,4seedy,30/50/70%, U/TILT, bez treningu. Oficjalne testy CIFAR10/100

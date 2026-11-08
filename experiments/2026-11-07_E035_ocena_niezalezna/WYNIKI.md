@@ -5,6 +5,11 @@ dodatnich seedów. Osobny próg≥2pp przy50/70%:9/10.** Bez nowego treningu.
 Wyjątek wielkości efektu: ResNet18/CIFAR-100/50%, **+1,3025pp**.
 Wtórny kierunek repair_bn:14/15; ResNet18/CIFAR-100/70% tylko2/4 dodatnie.
 
+**Wykresy w tym eksperymencie:** [figures/README.md](figures/README.md)
+— osobne punkty seedów, dev vs niezależna ocena, PNG/PDF, CSV i SHA256.
+
+![E035: sparowane różnice na testach CIFAR i oficjalnym val Tiny](figures/e035_sparowane_delta.png)
+
 ## Wykonanie, bramka i pochodzenie
 
 - Protokół [OPIS.md](OPIS.md) zamrożony w **f42c0b8**, przed otwarciem danych

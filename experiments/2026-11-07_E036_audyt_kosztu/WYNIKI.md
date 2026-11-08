@@ -10,10 +10,12 @@ liczbę parametrów, ale TILT nie jest dopasowany pod liczbę operacji.**
   poprawka księgowania pamięci `32c0920` przed finalnym runem.
 - Run `runs/E036/20261107T231027Z_27bac186`: **completed**,4×exit0,
   **789,50s (13,16min)**. Cztery GPU, seed42–45→GPU0–3, jeden proces/seed.
-- Pomiary:5par×7modeli (teacher+6profili)×2batche×3serie×200forwardów.
-  Po140 modeli i210 pomiarów na seed; **840 plików czasów**.
+- Pomiary:5par×7modeli (teacher+6profili)×2batche×3serie×200forwardów na seed.
+  35 modeli i210 pomiarów na seed; łącznie140 modeli, **840 plików czasów**
+  i168000 zmierzonych zdarzeń (bez warmupu).
 - CPU check35 modeli: ręczna geometria i hooki dały **identyczne MAC**
-  dla każdej warstwy conv/linear; 13 grup/plany i stany PRE zgodne z E035.
+  dla każdej warstwy conv/linear; 12 grup ResNet/13 PreAct, plany i stany
+  PRE zgodne z E035.
 - `analysis/verification.json` **PASS**:420 kontroli,140 zgodności hashy
   stanu, pełna siatka, czasy dodatnie/skończone, brak dostępu do `data/`,
   brak nowych metryk jakości. `analysis/analysis.json` i CSV w tym katalogu.
@@ -28,7 +30,9 @@ liczbę parametrów, ale TILT nie jest dopasowany pod liczbę operacji.**
 Przy tym samym budżecie parametrów TILT ma **więcej MAC** i niższą
 przepustowość batch128. Pełne wartości: [TABLES.md](TABLES.md).
 
-| Para | Red. | MAC T/U | Przepust. b128 T/U | Latencja b1 T/U | Peak b128 U/T [MB] | Jakość T−U [pp] |
+![E036: MAC i przepustowość z surowych pomiarów](figures/e036_mac_i_przepustowosc.png)
+
+| Para | Red. | MAC T/U | Przepust. b128 T/U | Latencja b1 T/U | Peak b128 U/T [MiB] | Jakość T−U [pp] |
 |---|---:|---:|---:|---:|---:|---:|
 | R/C10 | 30% | 1,105 | 0,948 | 1,018 | 195,9/205,8 | +0,81 |
 | R/C10 | 50% | 1,364 | 0,782 | 0,997 | 168,2/197,9 | +3,41 |
@@ -47,8 +51,11 @@ przepustowość batch128. Pełne wartości: [TABLES.md](TABLES.md).
 | P/C100 | 70% | 1,790 | 0,885 | 1,018 | 204,4/187,3 | +22,74 |
 
 Zakresy: **MAC T/U 1,105–1,823** (+10,5% do+82,3%); przepustowość b128
-**0,702–0,948** (−5,2% do−29,8%); latencja b1 **0,965–1,046**, czyli
-w granicach narzutu uruchomienia. Parametry T/U **0,9994–1,0000**.
+**0,702–0,948** (−5,2% do−29,8%); średni iloraz latencji b1 **0,965–1,046**.
+SD sparowanych ilorazów b1 po4 seedach wynosi **0,019–0,100** — małe
+różnice średnich nie dowodzą równoważności ani dominacji narzutu.
+Parametry T/U **0,9994–1,0000**. Audyt poprawił ręcznie błędne SD i
+parametry w TABLES.md; liczby w JSON/runie pozostały bez zmian.
 
 ## Interpretacja
 
@@ -60,7 +67,7 @@ parametrów w region o większym koszcie obliczeń na kanał.
 
 Pamięć nie daje prostej kompensacji. Na CIFAR przy30/50% TILT ma wyższy
 peak batch128, przy70% niższy; na Tiny przy50/70% peak TILT jest wyraźnie
-wyższy (**176,0 vs104,5MB** i **167,4 vs92,0MB**). To wynik kształtów
+wyższy (**176,0 vs104,5MiB** i **167,4 vs92,0MiB**). To wynik kształtów
 aktywacji, nie liczby parametrów; nie interpretować jako uniwersalnej reguły.
 
 **Wniosek dla artykułu:** przewaga jakości TILT z E034/E035 jest realna
@@ -74,7 +81,8 @@ To ograniczenie zakresu twierdzenia, nie unieważnienie wyników jakości.
 - Jeden serwer i cztery przypisania seed/GPU; nie jest to niezależna
   replikacja sprzętowa ani podstawa wnioskowania o populacji GPU.
 - Steady-state device-forward bez loadera, transferów host–device i aplikacji;
-  batch1 jest zdominowany przez narzut. Zegary nieblokowane, możliwy dryf.
+  nie izolowano narzutu launchera/kernel launch. Zegary nieblokowane,
+  możliwy dryf; wyniki b1 mają znaczny rozrzut między seedami/GPU.
 - Syntetyczne wejście `randn` jest wystarczające dla kosztu sprzętowego,
   ale nie reprezentuje rozkładu danych; nie mierzono wpływu rzadkości/sparsity.
 - Dwie pokrewne architektury, istniejące checkpointy, jeden przepis treningu.
@@ -108,3 +116,6 @@ CUDA_VISIBLE_DEVICES='' "$PY" -B "$E/audit.py" "$R"
 ```
 
 Pełny run tworzy nowy katalog; analyze/audit należy skierować do wybranego runu.
+
+Wykresy lokalne: [figures/README.md](figures/README.md) — poprawne SD z raw
+timings, punkty per seed, PNG/PDF i SHA256 źródeł. [Audyt wykonania](../../reports/2026-11-08_wykresy/AUDYT_WYKONANIA.md).

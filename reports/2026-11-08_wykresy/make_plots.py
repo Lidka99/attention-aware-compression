@@ -43,7 +43,7 @@ def plot_e035():
         ax.grid(alpha=.25)
     axes[0].set_ylabel('Top-1 [%]')
     axes[-1].legend(fontsize=7, loc='best')
-    fig.suptitle('E035: TILT vs UNIFORM na dev i oficjalnym teście (CMA)', fontsize=12)
+    fig.suptitle('E035: dev vs niezależna ocena (testy CIFAR, oficjalny val Tiny; CMA)', fontsize=12)
     fig.tight_layout(rect=(0, 0, 1, .93))
     fig.savefig(OUT / 'e035_quality_dev_test.png', dpi=160)
     plt.close(fig)

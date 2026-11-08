@@ -1,0 +1,141 @@
+{
+  "eksperyment": "E034",
+  "run": "runs/E034/fold_20261106T003625Z_9ec4f2ea",
+  "opis": "Surowa różnica CMA T-U i top-1 CMA; dev, bez testu.",
+  "skrypt": {
+    "sciezka": "experiments/2026-11-05_E034_preactresnet18/figures/generuj_wykresy.py",
+    "sha256": "1300e5b48f27b3e1065554bd2e8451dea1cccd1ee5f505f6eccb1318e23cdf43"
+  },
+  "zrodla": [
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/analysis_20261106T004001Z/analysis.json",
+      "sha256": "ba862bcdf31507184b9270da9ee2f8627911f188d09e7c80c8dc97a742c0fbe8",
+      "bajty": 19735
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar10/b30/summary.json",
+      "sha256": "e8a754b638514e4a7ba863bbde803afc6565667674a8ea4d0d6fa44b75e67d11",
+      "bajty": 90225
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar10/b50/summary.json",
+      "sha256": "67ef7ba57331359130fbdfd3743483e3478f9995b28c0de1b53e130aaae4a92a",
+      "bajty": 89910
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar10/b70/summary.json",
+      "sha256": "f50b2cd0f6de595efc3b984f52eb655c0603f9e0ffb9482ad0b4dc09be4bb8d8",
+      "bajty": 89185
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar100/b30/summary.json",
+      "sha256": "6d76f5ba24246462433cb18f4d4c03d8a52a85a5d9284c57e83bbf1e7474451a",
+      "bajty": 90214
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar100/b50/summary.json",
+      "sha256": "e7384994729ed56e3c0a2fd57c8bb30597fbae3901da59d8be9b63b76e3423bf",
+      "bajty": 89930
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_42/cifar100/b70/summary.json",
+      "sha256": "74816c3dd91ee0c12884f383299e527a1590ed143790156878c63c460e52a0fb",
+      "bajty": 89261
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar10/b30/summary.json",
+      "sha256": "d2a7fdf92c0428cb0e2a81abc0cbf4888704dc7a91b85b31a015aa3ecb03a130",
+      "bajty": 90211
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar10/b50/summary.json",
+      "sha256": "5636fe38c9c8a6c360e947ad7c8e5e0c4e5eeffab2dadc0ba2060278b4c88516",
+      "bajty": 89857
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar10/b70/summary.json",
+      "sha256": "8d1c86952fa4f901326ecb63697a2f0678a111cfa56791eff97b101fef7cc37f",
+      "bajty": 89229
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar100/b30/summary.json",
+      "sha256": "ca95151a5eba729e0ed79080bca477971e15e74a67c977b66e7e9e33ec7ee95e",
+      "bajty": 90217
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar100/b50/summary.json",
+      "sha256": "c70997d77d7ed38258b97f10b7c39b21e8f58e9edd0b1fb6acbbd341bbd66556",
+      "bajty": 89854
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_43/cifar100/b70/summary.json",
+      "sha256": "6f9183a9ad4f1b3e7390b4f2c2a4aa16714401f6322d4cdcd9018af3e4e1231f",
+      "bajty": 89188
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar10/b30/summary.json",
+      "sha256": "15379ac2b570cd70c9d2f90a2a4243e849c5297d8bedbf91a25b709eadf42990",
+      "bajty": 90257
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar10/b50/summary.json",
+      "sha256": "6b4f69461a061333e57011f17f0274de4a197cc172e349e7204e4dbeb7df8c79",
+      "bajty": 89931
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar10/b70/summary.json",
+      "sha256": "fb3b5aa96378da4141d014dc8c7969a0a88077c2b52b822b2f11c272bdd7173a",
+      "bajty": 89270
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar100/b30/summary.json",
+      "sha256": "5c7f1f4498298508dd4652a39e272d59fcdb7b2530aa747d4708aa9766a0e446",
+      "bajty": 90199
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar100/b50/summary.json",
+      "sha256": "5c4e40454bcf1229c8c99eb46073cf477710f21c700e50e90855731b08d29c5a",
+      "bajty": 89826
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_44/cifar100/b70/summary.json",
+      "sha256": "f360fc478d37d0cb05d2dfd30ac7f1bb29e9c12b552eabd464be8f047420b007",
+      "bajty": 89148
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar10/b30/summary.json",
+      "sha256": "5529ce0d362daa2af648d2fbb60ba53b57fa2e579daad4f282db0ce64eef26c7",
+      "bajty": 90201
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar10/b50/summary.json",
+      "sha256": "d17f3dda6cc5263e99770fa180c6ed63564a9464ebe885320f0e0deee43c8b23",
+      "bajty": 89879
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar10/b70/summary.json",
+      "sha256": "436361acf6ce074bab6b35e2dd4861ab7bec4a55123db611bc706067b28afe8d",
+      "bajty": 89233
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar100/b30/summary.json",
+      "sha256": "85abf22f9411f29e23db11dea9ee643fa56f7a9e97224b48547eebdb0ae4e903",
+      "bajty": 90199
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar100/b50/summary.json",
+      "sha256": "05b8c79660fcfe56f95505e9b620477449e26f77af2198f144b108558383824d",
+      "bajty": 89863
+    },
+    {
+      "sciezka": "runs/E034/fold_20261106T003625Z_9ec4f2ea/seed_45/cifar100/b70/summary.json",
+      "sha256": "35aa69c13b24dcbb81adde600b5574255489f53265e37ab28d0fe771b4bcf4bf",
+      "bajty": 89219
+    }
+  ],
+  "zabezpieczenie": {
+    "wejscia_niezmienione": true,
+    "sprawdzone_po_generowaniu": true,
+    "wyniki_tylko_w_figures": true
+  }
+}

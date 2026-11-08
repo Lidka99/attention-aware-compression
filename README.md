@@ -4,17 +4,23 @@ Reproducible experiments on attention-aware channel merging and CNN compression.
 
 **Aktualny stan (2026-11-08):** [STATUS_BADAN.md](STATUS_BADAN.md).
 **E037 — kontrola przy dopasowanym MAC ukończona, primary negatywny:**
-gdy UNIFORM dostaje1,10–1,82× więcej parametrów w tym samym MAC, wygrywa
+gdy UNIFORM dostaje1,10–1,82× parametrów TILT przy zbliżonym MAC, wygrywa
 z TILT na CIFAR-100 i Tiny (do+23,69pp); T−U' dodatni tylko5/15, bramka
 tylko ResNet/CIFAR-10/30. To zawęża twierdzenie do budżetu **parametrów**,
-nie obliczeń. Bez treningu i testu. [Wyniki E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
-[Wykresy](reports/2026-11-08_wykresy/README.md).
+nie obliczeń. Zmieniają się jednak także parametry, więc nie izoluje to
+przyczyny zysku TILT. Bez treningu i ponownej oceny testu.
+[Wyniki E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
+[Wykresy lokalne PNG/PDF i audyt zapisów](reports/2026-11-08_wykresy/README.md).
 
 **E036 — koszt alokacji ukończony:** przy dopasowanych parametrach TILT ma
 **1,105–1,823× MAC** UNIFORM (+10,5% do+82,3%) i **0,702–0,948× przepustowości
-batch128**; latencja batch1 w granicach narzutu. To ogranicza twierdzenie do
+batch128**; ilorazy latencji batch1 mają SD0,019–0,100. To ogranicza twierdzenie do
 stałego budżetu **parametrów**, nie „matched compute”. Bez treningu i danych.
 [Wyniki E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
+
+Ponowny [audyt E034–E037](reports/2026-11-08_wykresy/AUDYT_WYKONANIA.md)
+potwierdził kompletne artefakty i zgodność obliczeń. Skorygowano SD latencji
+i parametry w ręcznej tabeli E036 oraz interpretację E037; raw wyniki bez zmian.
 
 **E035 — niezależna ocena ukończona:** primary kierunek CMA **15/15**, każda
 komórka4/4 dodatnie. Oficjalne testy CIFAR10/100 i val Tiny po10k, pięć par

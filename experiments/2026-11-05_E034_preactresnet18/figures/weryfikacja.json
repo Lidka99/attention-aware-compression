@@ -1,0 +1,58 @@
+{
+  "eksperyment": "E034",
+  "zakres": "dev; test i rezerwa nieużywane",
+  "seedy": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "komorki": 6,
+  "punkty_per_seed": 24,
+  "zgodnosc_z_analysis_json": {
+    "max_abs_diff_sredniej_pp": 4.440892098500626e-15,
+    "max_abs_diff_sd_pp": 3.552713678800501e-15
+  },
+  "srednie_T_minus_U_pp": {
+    "cifar10/b30": {
+      "mean": 0.985000000000003,
+      "sd": 0.24623836689950102,
+      "positive": 4,
+      "n": 4
+    },
+    "cifar10/b50": {
+      "mean": 4.880000000000003,
+      "sd": 1.1562006746235722,
+      "positive": 4,
+      "n": 4
+    },
+    "cifar10/b70": {
+      "mean": 13.189999999999998,
+      "sd": 2.6356782808226096,
+      "positive": 4,
+      "n": 4
+    },
+    "cifar100/b30": {
+      "mean": 4.434999999999999,
+      "sd": 1.4690019287484566,
+      "positive": 4,
+      "n": 4
+    },
+    "cifar100/b50": {
+      "mean": 7.225,
+      "sd": 0.7383540252931949,
+      "positive": 4,
+      "n": 4
+    },
+    "cifar100/b70": {
+      "mean": 23.095,
+      "sd": 2.3951826652679338,
+      "positive": 4,
+      "n": 4
+    }
+  },
+  "zabezpieczenie_wejsc": {
+    "liczba_plikow": 25,
+    "hash_zgodny_przed_i_po": true
+  }
+}

@@ -4,6 +4,11 @@ Status: **Phase 1 completed, primary spełniony na obu zbiorach**, 2026-11-06.
 Wszystkie 6 bramek CMA i 6 wtórnych bramek `repair_bn` spełnione.
 TILT−UNIFORM dodatni na 4/4 seedach w każdej komórce.
 
+**Wykresy w tym eksperymencie:** [figures/README.md](figures/README.md)
+— punkty per seed, średnie±SD, PNG/PDF, CSV i SHA256 źródeł.
+
+![E034: sparowane różnice TILT−UNIFORM po CMA](figures/e034_cma_t_minus_u.png)
+
 ## Wykonanie i kontrola
 
 - Trening: `runs/E034/train_20261105T014209Z_21b44f52`, 8 checkpointów,

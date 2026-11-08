@@ -1,6 +1,6 @@
 # Kontynuacja — 2026-11-08
 
-## Najnowsze: E037 — przy dopasowanym MAC TILT przegrywa
+## Najnowsze: E037 — brak ogólnej przewagi TILT przy zbliżonym MAC
 
 [WYNIKI E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
 Run `runs/E037/20261108T031759Z_855c0b33`:4GPU/exit0,292,28s,
@@ -12,11 +12,18 @@ Na CIFAR-100/Tiny U' wygrywa do+23,69pp; na CIFAR-10 TILT jest nieco
 lepszy przy30/50% (+0,37/+0,48 ResNet, +0,03/+0,74 PreAct), ale
 ResNet/C10/70 przegrywa −2,01pp. Po repair kierunek ten sam.
 
-**Wniosek:** parameter-matched przewaga TILT z E034/E035 jest realna,
-ale w dużej mierze wynika z większego MAC. Nie mamy dowodu lepszej
-alokacji na jednostkę obliczeń; nie pisać „compute-matched”. Artykuł
-musi pokazać oba porównania i koszt. E037 jest dev-only, test po E035
-nietknięty. [Wykresy](reports/2026-11-08_wykresy/README.md).
+**Wniosek:** parameter-matched przewaga TILT z E034/E035 nie przenosi się
+ogólnie na porównanie ze szerszym UNIFORM przy zbliżonym MAC. U' ma jednak
+więcej parametrów, więc ten test nie rozdziela wpływu compute i pojemności.
+Artykuł musi pokazać oba budżety i koszt. E037 jest dev-only; w E037 nie
+oceniano testu ponownie. [Wykresy lokalne](reports/2026-11-08_wykresy/README.md).
+
+Ponowny audyt zapisów E034–E037 potwierdził kompletność i kontrasty;
+E0348/8 checkpointów ma zgodne SHA. Poprawiono ręcznie błędne SD b1 i
+parametry w E036 TABLES.md (raw bez zmian). Prawdziwe SD ilorazów b1
+0,019–0,100, nie0,000–0,002. E037 failed `030702Z_a7428da3` i dwa workery
+failed E036 mają historyczny `running`, ale PID-y nie działają;
+zachowano stare pliki. [Raport audytu](reports/2026-11-08_wykresy/AUDYT_WYKONANIA.md).
 
 Dalej: decyzja o ramie publikacji (parameter-matched + MAC-matched + koszt)
 albo nowy jawnie kosztowy cel alokacji; ten drugi wymaga nowego protokołu
@@ -31,7 +38,8 @@ Run `runs/E036/20261107T231027Z_27bac186`:4GPU/exit0,789,50s,140 modeli,
 Przy dopasowanych parametrach TILT vs UNIFORM:
 - MAC **1,105–1,823×** (+10,5% do+82,3%);
 - przepustowość batch128 **0,702–0,948×** (−5,2% do−29,8%);
-- latencja batch1 w granicach narzutu (0,965–1,046);
+- średnie ilorazy latencji batch1 0,965–1,046, SD0,019–0,100;
+  bez dowodu dominacji narzutu lub równoważności;
 - peak batch128 na Tiny/50–70% wyższy o68–82%.
 
 To konsekwencja szerokich wczesnych grup o wysokiej rozdzielczości:

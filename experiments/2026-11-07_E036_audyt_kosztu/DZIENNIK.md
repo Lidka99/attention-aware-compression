@@ -13,3 +13,10 @@
 - Finalny run `20261107T231027Z_27bac186` completed,4×exit0,789,50s;
   140 modeli,840 plików czasów. Analyze i audit PASS; raporty WYNIKI/
   PODSUMOWANIE/TABLES oraz STATUS/NOTATKA/README zaktualizowane.
+
+- Ponowny audyt: pełne840 plików×200 czasów, zgodność agregacji.
+  Poprawiono błędne ręczne SD ilorazu latencji b1 i parametry w TABLES;
+  prawidłowe SD po4seedach0,019–0,100. Generator tables_from_raw.py
+  i figures/ liczą z raw, bez zmiany runu. Dwa workery przerwanego
+  runu mają historyczny `running`, ale procesy nie działają; zachowano
+  zapis. Wniosek o dominacji narzutu b1 usunięto jako nieizolowany.

@@ -1,0 +1,331 @@
+figura,panel,seria,seed,redukcja,wartosc,jednostka,srednia,sd,typ
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),,30,93.495,%,93.495,0.1215181742,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),42,30,93.44,%,93.495,0.1215181742,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),43,30,93.64,%,93.495,0.1215181742,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),44,30,93.54,%,93.495,0.1215181742,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),45,30,93.36,%,93.495,0.1215181742,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),,50,89.435,%,89.435,0.6302116047,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),42,50,88.74,%,89.435,0.6302116047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),43,50,89.6,%,89.435,0.6302116047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),44,50,89.18,%,89.435,0.6302116047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),45,50,90.22,%,89.435,0.6302116047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),,70,77.305,%,77.305,1.722275626,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),42,70,77.4,%,77.305,1.722275626,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),43,70,79.04,%,77.305,1.722275626,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),44,70,77.84,%,77.305,1.722275626,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM (U),45,70,74.94,%,77.305,1.722275626,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),,30,94.52,%,94.52,0.1973153145,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),42,30,94.3,%,94.52,0.1973153145,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),43,30,94.74,%,94.52,0.1973153145,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),44,30,94.42,%,94.52,0.1973153145,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),45,30,94.62,%,94.52,0.1973153145,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),,50,93.43,%,93.43,0.3218695388,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),42,50,93.28,%,93.43,0.3218695388,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),43,50,93.6,%,93.43,0.3218695388,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),44,50,93.06,%,93.43,0.3218695388,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),45,50,93.78,%,93.43,0.3218695388,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),,70,88.215,%,88.215,0.4116228047,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),42,70,88,%,88.215,0.4116228047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),43,70,87.92,%,88.215,0.4116228047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),44,70,88.12,%,88.215,0.4116228047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,TILT (T),45,70,88.82,%,88.215,0.4116228047,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),,30,94.155,%,94.155,0.4467288514,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),42,30,93.58,%,94.155,0.4467288514,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),43,30,94.64,%,94.155,0.4467288514,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),44,30,94.08,%,94.155,0.4467288514,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),45,30,94.32,%,94.155,0.4467288514,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),,50,92.955,%,92.955,0.3641885958,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),42,50,92.62,%,92.955,0.3641885958,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),43,50,93.26,%,92.955,0.3641885958,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),44,50,92.66,%,92.955,0.3641885958,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),45,50,93.28,%,92.955,0.3641885958,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),,70,90.225,%,90.225,0.5039510558,mean
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),42,70,89.52,%,90.225,0.5039510558,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),43,70,90.7,%,90.225,0.5039510558,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),44,70,90.42,%,90.225,0.5039510558,seed
+e037_top1_u_t_up,ResNet/CIFAR-10,UNIFORM dopasowany MAC (U'),45,70,90.26,%,90.225,0.5039510558,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),,30,66.34,%,66.34,0.3798245209,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),42,30,66.82,%,66.34,0.3798245209,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),43,30,65.92,%,66.34,0.3798245209,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),44,30,66.42,%,66.34,0.3798245209,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),45,30,66.2,%,66.34,0.3798245209,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),,50,53.855,%,53.855,1.509293433,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),42,50,53.96,%,53.855,1.509293433,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),43,50,53.46,%,53.855,1.509293433,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),44,50,55.82,%,53.855,1.509293433,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),45,50,52.18,%,53.855,1.509293433,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),,70,31.4,%,31.4,3.033721587,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),42,70,33.24,%,31.4,3.033721587,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),43,70,31.06,%,31.4,3.033721587,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),44,70,34.04,%,31.4,3.033721587,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM (U),45,70,27.26,%,31.4,3.033721587,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),,30,66.96,%,66.96,0.4746928832,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),42,30,66.68,%,66.96,0.4746928832,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),43,30,67.42,%,66.96,0.4746928832,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),44,30,67.3,%,66.96,0.4746928832,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),45,30,66.44,%,66.96,0.4746928832,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),,50,55.55,%,55.55,1.105441088,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),42,50,56.14,%,55.55,1.105441088,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),43,50,54.16,%,55.55,1.105441088,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),44,50,56.68,%,55.55,1.105441088,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),45,50,55.22,%,55.55,1.105441088,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),,70,33.02,%,33.02,1.908227799,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),42,70,33.28,%,33.02,1.908227799,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),43,70,30.96,%,33.02,1.908227799,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),44,70,35.5,%,33.02,1.908227799,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,TILT (T),45,70,32.34,%,33.02,1.908227799,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),,30,69.67,%,69.67,0.2346628788,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),42,30,69.48,%,69.67,0.2346628788,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),43,30,69.46,%,69.67,0.2346628788,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),44,30,69.92,%,69.67,0.2346628788,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),45,30,69.82,%,69.67,0.2346628788,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),,50,65.66,%,65.66,0.5743402012,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),42,50,64.88,%,65.66,0.5743402012,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),43,50,65.8,%,65.66,0.5743402012,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),44,50,66.26,%,65.66,0.5743402012,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),45,50,65.7,%,65.66,0.5743402012,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),,70,56.71,%,56.71,0.9976639381,mean
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),42,70,57,%,56.71,0.9976639381,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),43,70,55.74,%,56.71,0.9976639381,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),44,70,57.98,%,56.71,0.9976639381,seed
+e037_top1_u_t_up,ResNet/CIFAR-100,UNIFORM dopasowany MAC (U'),45,70,56.12,%,56.71,0.9976639381,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),,30,34.8075,%,34.8075,0.7007793281,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),42,30,34.87,%,34.8075,0.7007793281,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),43,30,34.95,%,34.8075,0.7007793281,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),44,30,33.86,%,34.8075,0.7007793281,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),45,30,35.55,%,34.8075,0.7007793281,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),,50,19.925,%,19.925,1.80446668,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),42,50,17.65,%,19.925,1.80446668,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),43,50,20.53,%,19.925,1.80446668,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),44,50,19.57,%,19.925,1.80446668,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),45,50,21.95,%,19.925,1.80446668,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),,70,8.4325,%,8.4325,0.585,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),42,70,8.14,%,8.4325,0.585,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),43,70,9.22,%,8.4325,0.585,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),44,70,7.87,%,8.4325,0.585,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM (U),45,70,8.5,%,8.4325,0.585,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),,30,38.5875,%,38.5875,1.026689664,mean
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),42,30,37.22,%,38.5875,1.026689664,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),43,30,38.61,%,38.5875,1.026689664,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),44,30,38.82,%,38.5875,1.026689664,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),45,30,39.7,%,38.5875,1.026689664,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),,50,29.3325,%,29.3325,1.285233442,mean
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),42,50,27.65,%,29.3325,1.285233442,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),43,50,29.48,%,29.3325,1.285233442,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),44,50,29.42,%,29.3325,1.285233442,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),45,50,30.78,%,29.3325,1.285233442,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),,70,16.18,%,16.18,1.033860081,mean
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),42,70,14.77,%,16.18,1.033860081,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),43,70,17.22,%,16.18,1.033860081,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),44,70,16.18,%,16.18,1.033860081,seed
+e037_top1_u_t_up,ResNet/Tiny,TILT (T),45,70,16.55,%,16.18,1.033860081,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),,30,39.9125,%,39.9125,0.641735927,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),42,30,39.87,%,39.9125,0.641735927,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),43,30,39.02,%,39.9125,0.641735927,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),44,30,40.38,%,39.9125,0.641735927,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),45,30,40.38,%,39.9125,0.641735927,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),,50,34.17,%,34.17,0.662721661,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),42,50,34.47,%,34.17,0.662721661,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),43,50,33.85,%,34.17,0.662721661,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),44,50,33.43,%,34.17,0.662721661,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),45,50,34.93,%,34.17,0.662721661,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),,70,23.24,%,23.24,1.567014146,mean
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),42,70,21.81,%,23.24,1.567014146,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),43,70,23.83,%,23.24,1.567014146,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),44,70,22.14,%,23.24,1.567014146,seed
+e037_top1_u_t_up,ResNet/Tiny,UNIFORM dopasowany MAC (U'),45,70,25.18,%,23.24,1.567014146,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),,30,93.59,%,93.59,0.3117691454,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),42,30,93.22,%,93.59,0.3117691454,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),43,30,93.76,%,93.59,0.3117691454,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),44,30,93.46,%,93.59,0.3117691454,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),45,30,93.92,%,93.59,0.3117691454,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),,50,88.995,%,88.995,1.131532884,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),42,50,89.5,%,88.995,1.131532884,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),43,50,89.54,%,88.995,1.131532884,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),44,50,89.64,%,88.995,1.131532884,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),45,50,87.3,%,88.995,1.131532884,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),,70,78.595,%,78.595,2.775001502,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),42,70,79.94,%,78.595,2.775001502,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),43,70,78.38,%,78.595,2.775001502,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),44,70,74.82,%,78.595,2.775001502,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM (U),45,70,81.24,%,78.595,2.775001502,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),,30,94.575,%,94.575,0.2229349681,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),42,30,94.3,%,94.575,0.2229349681,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),43,30,94.84,%,94.575,0.2229349681,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),44,30,94.62,%,94.575,0.2229349681,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),45,30,94.54,%,94.575,0.2229349681,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),,50,93.875,%,93.875,0.2690105326,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),42,50,93.68,%,93.875,0.2690105326,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),43,50,94.26,%,93.875,0.2690105326,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),44,50,93.7,%,93.875,0.2690105326,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),45,50,93.86,%,93.875,0.2690105326,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),,70,91.785,%,91.785,0.3810074365,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),42,70,92.22,%,91.785,0.3810074365,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),43,70,91.98,%,91.785,0.3810074365,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),44,70,91.4,%,91.785,0.3810074365,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,TILT (T),45,70,91.54,%,91.785,0.3810074365,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),,30,94.55,%,94.55,0.1064581295,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),42,30,94.42,%,94.55,0.1064581295,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),43,30,94.68,%,94.55,0.1064581295,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),44,30,94.56,%,94.55,0.1064581295,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),45,30,94.54,%,94.55,0.1064581295,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),,50,93.135,%,93.135,0.7131853429,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),42,50,92.92,%,93.135,0.7131853429,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),43,50,93.32,%,93.135,0.7131853429,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),44,50,94,%,93.135,0.7131853429,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),45,50,92.3,%,93.135,0.7131853429,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),,70,90,%,90,1.163099308,mean
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),42,70,88.54,%,90,1.163099308,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),43,70,90.24,%,90,1.163099308,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),44,70,89.86,%,90,1.163099308,seed
+e037_top1_u_t_up,PreAct/CIFAR-10,UNIFORM dopasowany MAC (U'),45,70,91.36,%,90,1.163099308,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),,30,66.87,%,66.87,1.560384568,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),42,30,69.06,%,66.87,1.560384568,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),43,30,65.56,%,66.87,1.560384568,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),44,30,66.88,%,66.87,1.560384568,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),45,30,65.98,%,66.87,1.560384568,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),,50,56.845,%,56.845,1.222606505,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),42,50,57.4,%,56.845,1.222606505,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),43,50,57.9,%,56.845,1.222606505,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),44,50,55.1,%,56.845,1.222606505,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),45,50,56.98,%,56.845,1.222606505,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),,70,23.425,%,23.425,2.93431991,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),42,70,21.06,%,23.425,2.93431991,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),43,70,27.2,%,23.425,2.93431991,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),44,70,24.3,%,23.425,2.93431991,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM (U),45,70,21.14,%,23.425,2.93431991,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),,30,71.305,%,71.305,0.8139410298,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),42,30,71.9,%,71.305,0.8139410298,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),43,30,71.96,%,71.305,0.8139410298,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),44,30,71.14,%,71.305,0.8139410298,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),45,30,70.22,%,71.305,0.8139410298,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),,50,64.07,%,64.07,0.92757749,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),42,50,64.78,%,64.07,0.92757749,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),43,50,64.96,%,64.07,0.92757749,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),44,50,63.22,%,64.07,0.92757749,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),45,50,63.32,%,64.07,0.92757749,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),,70,46.52,%,46.52,1.861110779,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),42,70,46.96,%,46.52,1.861110779,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),43,70,48.96,%,46.52,1.861110779,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),44,70,44.86,%,46.52,1.861110779,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,TILT (T),45,70,45.3,%,46.52,1.861110779,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),,30,72.12,%,72.12,0.8541662602,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),42,30,71.72,%,72.12,0.8541662602,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),43,30,73.4,%,72.12,0.8541662602,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),44,30,71.64,%,72.12,0.8541662602,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),45,30,71.72,%,72.12,0.8541662602,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),,50,68.585,%,68.585,1.201485192,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),42,50,69.56,%,68.585,1.201485192,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),43,50,68.56,%,68.585,1.201485192,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),44,50,69.32,%,68.585,1.201485192,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),45,50,66.9,%,68.585,1.201485192,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),,70,57.46,%,57.46,1.364893158,mean
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),42,70,55.92,%,57.46,1.364893158,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),43,70,57.44,%,57.46,1.364893158,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),44,70,59.24,%,57.46,1.364893158,seed
+e037_top1_u_t_up,PreAct/CIFAR-100,UNIFORM dopasowany MAC (U'),45,70,57.24,%,57.46,1.364893158,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',,30,0.365,pp,0.365,0.2589079631,mean
+e037_t_minus_up,ResNet/CIFAR-10,T-U',42,30,0.72,pp,0.365,0.2589079631,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',43,30,0.1,pp,0.365,0.2589079631,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',44,30,0.34,pp,0.365,0.2589079631,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',45,30,0.3,pp,0.365,0.2589079631,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',,50,0.475,pp,0.475,0.1398809017,mean
+e037_t_minus_up,ResNet/CIFAR-10,T-U',42,50,0.66,pp,0.475,0.1398809017,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',43,50,0.34,pp,0.475,0.1398809017,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',44,50,0.4,pp,0.475,0.1398809017,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',45,50,0.5,pp,0.475,0.1398809017,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',,70,-2.01,pp,-2.01,0.6434283177,mean
+e037_t_minus_up,ResNet/CIFAR-10,T-U',42,70,-1.52,pp,-2.01,0.6434283177,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',43,70,-2.78,pp,-2.01,0.6434283177,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',44,70,-2.3,pp,-2.01,0.6434283177,seed
+e037_t_minus_up,ResNet/CIFAR-10,T-U',45,70,-1.44,pp,-2.01,0.6434283177,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',,30,-2.71,pp,-2.71,0.5519661825,mean
+e037_t_minus_up,ResNet/CIFAR-100,T-U',42,30,-2.8,pp,-2.71,0.5519661825,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',43,30,-2.04,pp,-2.71,0.5519661825,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',44,30,-2.62,pp,-2.71,0.5519661825,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',45,30,-3.38,pp,-2.71,0.5519661825,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',,50,-10.11,pp,-10.11,1.243060739,mean
+e037_t_minus_up,ResNet/CIFAR-100,T-U',42,50,-8.74,pp,-10.11,1.243060739,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',43,50,-11.64,pp,-10.11,1.243060739,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',44,50,-9.58,pp,-10.11,1.243060739,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',45,50,-10.48,pp,-10.11,1.243060739,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',,70,-23.69,pp,-23.69,0.9418421665,mean
+e037_t_minus_up,ResNet/CIFAR-100,T-U',42,70,-23.72,pp,-23.69,0.9418421665,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',43,70,-24.78,pp,-23.69,0.9418421665,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',44,70,-22.48,pp,-23.69,0.9418421665,seed
+e037_t_minus_up,ResNet/CIFAR-100,T-U',45,70,-23.78,pp,-23.69,0.9418421665,seed
+e037_t_minus_up,ResNet/Tiny,T-U',,30,-1.325,pp,-1.325,1.010626868,mean
+e037_t_minus_up,ResNet/Tiny,T-U',42,30,-2.65,pp,-1.325,1.010626868,seed
+e037_t_minus_up,ResNet/Tiny,T-U',43,30,-0.41,pp,-1.325,1.010626868,seed
+e037_t_minus_up,ResNet/Tiny,T-U',44,30,-1.56,pp,-1.325,1.010626868,seed
+e037_t_minus_up,ResNet/Tiny,T-U',45,30,-0.68,pp,-1.325,1.010626868,seed
+e037_t_minus_up,ResNet/Tiny,T-U',,50,-4.8375,pp,-4.8375,1.329946741,mean
+e037_t_minus_up,ResNet/Tiny,T-U',42,50,-6.82,pp,-4.8375,1.329946741,seed
+e037_t_minus_up,ResNet/Tiny,T-U',43,50,-4.37,pp,-4.8375,1.329946741,seed
+e037_t_minus_up,ResNet/Tiny,T-U',44,50,-4.01,pp,-4.8375,1.329946741,seed
+e037_t_minus_up,ResNet/Tiny,T-U',45,50,-4.15,pp,-4.8375,1.329946741,seed
+e037_t_minus_up,ResNet/Tiny,T-U',,70,-7.06,pp,-7.06,1.136925679,mean
+e037_t_minus_up,ResNet/Tiny,T-U',42,70,-7.04,pp,-7.06,1.136925679,seed
+e037_t_minus_up,ResNet/Tiny,T-U',43,70,-6.61,pp,-7.06,1.136925679,seed
+e037_t_minus_up,ResNet/Tiny,T-U',44,70,-5.96,pp,-7.06,1.136925679,seed
+e037_t_minus_up,ResNet/Tiny,T-U',45,70,-8.63,pp,-7.06,1.136925679,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',,30,0.025,pp,0.025,0.1170469991,mean
+e037_t_minus_up,PreAct/CIFAR-10,T-U',42,30,-0.12,pp,0.025,0.1170469991,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',43,30,0.16,pp,0.025,0.1170469991,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',44,30,0.06,pp,0.025,0.1170469991,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',45,30,0,pp,0.025,0.1170469991,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',,50,0.74,pp,0.74,0.7733908025,mean
+e037_t_minus_up,PreAct/CIFAR-10,T-U',42,50,0.76,pp,0.74,0.7733908025,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',43,50,0.94,pp,0.74,0.7733908025,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',44,50,-0.3,pp,0.74,0.7733908025,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',45,50,1.56,pp,0.74,0.7733908025,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',,70,1.785,pp,1.785,1.440960328,mean
+e037_t_minus_up,PreAct/CIFAR-10,T-U',42,70,3.68,pp,1.785,1.440960328,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',43,70,1.74,pp,1.785,1.440960328,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',44,70,1.54,pp,1.785,1.440960328,seed
+e037_t_minus_up,PreAct/CIFAR-10,T-U',45,70,0.18,pp,1.785,1.440960328,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',,30,-0.815,pp,-0.815,0.8060397013,mean
+e037_t_minus_up,PreAct/CIFAR-100,T-U',42,30,0.18,pp,-0.815,0.8060397013,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',43,30,-1.44,pp,-0.815,0.8060397013,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',44,30,-0.5,pp,-0.815,0.8060397013,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',45,30,-1.5,pp,-0.815,0.8060397013,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',,50,-4.515,pp,-4.515,1.196369508,mean
+e037_t_minus_up,PreAct/CIFAR-100,T-U',42,50,-4.78,pp,-4.515,1.196369508,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',43,50,-3.6,pp,-4.515,1.196369508,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',44,50,-6.1,pp,-4.515,1.196369508,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',45,50,-3.58,pp,-4.515,1.196369508,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',,70,-10.94,pp,-10.94,2.757148285,mean
+e037_t_minus_up,PreAct/CIFAR-100,T-U',42,70,-8.96,pp,-10.94,2.757148285,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',43,70,-8.48,pp,-10.94,2.757148285,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',44,70,-14.38,pp,-10.94,2.757148285,seed
+e037_t_minus_up,PreAct/CIFAR-100,T-U',45,70,-11.94,pp,-10.94,2.757148285,seed
+e037_up_params_mac,ResNet/CIFAR-10,Parametry U'/T,,30,1.099834794,×,1.099834794,0,mean
+e037_up_params_mac,ResNet/CIFAR-10,MAC U'/T,,30,0.9977818405,×,0.9977818405,0,mean
+e037_up_params_mac,ResNet/CIFAR-10,Parametry U'/T,,50,1.363249004,×,1.363249004,0,mean
+e037_up_params_mac,ResNet/CIFAR-10,MAC U'/T,,50,0.9919546546,×,0.9919546546,0,mean
+e037_up_params_mac,ResNet/CIFAR-10,Parametry U'/T,,70,1.787605787,×,1.787605787,0,mean
+e037_up_params_mac,ResNet/CIFAR-10,MAC U'/T,,70,0.9849138812,×,0.9849138812,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,Parametry U'/T,,30,1.099748357,×,1.099748357,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,MAC U'/T,,30,0.9977892034,×,0.9977892034,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,Parametry U'/T,,50,1.370561369,×,1.370561369,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,MAC U'/T,,50,0.9943952377,×,0.9943952377,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,Parametry U'/T,,70,1.803666813,×,1.803666813,0,mean
+e037_up_params_mac,ResNet/CIFAR-100,MAC U'/T,,70,0.9948807592,×,0.9948807592,0,mean
+e037_up_params_mac,ResNet/Tiny,Parametry U'/T,,30,1.106455091,×,1.106455091,0,mean
+e037_up_params_mac,ResNet/Tiny,MAC U'/T,,30,0.998449556,×,0.998449556,0,mean
+e037_up_params_mac,ResNet/Tiny,Parametry U'/T,,50,1.368908057,×,1.368908057,0,mean
+e037_up_params_mac,ResNet/Tiny,MAC U'/T,,50,0.9883294046,×,0.9883294046,0,mean
+e037_up_params_mac,ResNet/Tiny,Parametry U'/T,,70,1.820574757,×,1.820574757,0,mean
+e037_up_params_mac,ResNet/Tiny,MAC U'/T,,70,0.9985729235,×,0.9985729235,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,Parametry U'/T,,30,1.099378646,×,1.099378646,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,MAC U'/T,,30,0.9976572998,×,0.9976572998,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,Parametry U'/T,,50,1.362943478,×,1.362943478,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,MAC U'/T,,50,0.9964234155,×,0.9964234155,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,Parametry U'/T,,70,1.750478241,×,1.750478241,0,mean
+e037_up_params_mac,PreAct/CIFAR-10,MAC U'/T,,70,0.992829392,×,0.992829392,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,Parametry U'/T,,30,1.099294406,×,1.099294406,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,MAC U'/T,,30,0.9976646727,×,0.9976646727,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,Parametry U'/T,,50,1.370643814,×,1.370643814,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,MAC U'/T,,50,0.9982408762,×,0.9982408762,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,Parametry U'/T,,70,1.766319515,×,1.766319515,0,mean
+e037_up_params_mac,PreAct/CIFAR-100,MAC U'/T,,70,0.997750569,×,0.997750569,0,mean

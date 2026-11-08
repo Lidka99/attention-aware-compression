@@ -1,0 +1,133 @@
+{
+  "eksperyment": "E035",
+  "faza_niezalezna": "test; Tiny = oficjalny val (cache_val)",
+  "seedy": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "komorki": 15,
+  "wiersze_analysis": 720,
+  "kontrasty_CMA": 30,
+  "punkty_per_seed_test": 60,
+  "dodatnie_srednie_test": 15,
+  "dodatnie_srednie_dev": 15,
+  "tiny_val_potwierdzony": true,
+  "zgodnosc_z_analysis_json": {
+    "max_abs_diff_sredniej_pp": 6.217248937900877e-15,
+    "max_abs_diff_sd_pp": 6.661338147750939e-15,
+    "max_abs_diff_absolute_lub_per_seed_pp": 1.4210854715202004e-14
+  },
+  "srednie_T_minus_U_test_pp": {
+    "resnet_cifar10/b30": {
+      "mean": 0.8100000000000023,
+      "sd": 0.05944184833375762,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_cifar10/b50": {
+      "mean": 3.4125000000000085,
+      "sd": 0.2564338771171468,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_cifar10/b70": {
+      "mean": 10.987500000000004,
+      "sd": 1.435835993419869,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_cifar100/b30": {
+      "mean": 0.8275000000000041,
+      "sd": 0.2862836588653501,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_cifar100/b50": {
+      "mean": 1.302500000000002,
+      "sd": 0.7833847500855923,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_cifar100/b70": {
+      "mean": 2.0599999999999996,
+      "sd": 2.4948079418397477,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "resnet_tiny/b30": {
+      "mean": 3.537499999999996,
+      "sd": 1.0846620057265155,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "oficjalny val"
+    },
+    "resnet_tiny/b50": {
+      "mean": 9.36,
+      "sd": 1.0829896890860378,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "oficjalny val"
+    },
+    "resnet_tiny/b70": {
+      "mean": 7.482500000000001,
+      "sd": 1.2594807130983257,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "oficjalny val"
+    },
+    "preact_cifar10/b30": {
+      "mean": 0.9600000000000009,
+      "sd": 0.1944222209522439,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "preact_cifar10/b50": {
+      "mean": 4.949999999999992,
+      "sd": 1.5033961553762176,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "preact_cifar10/b70": {
+      "mean": 13.5775,
+      "sd": 2.445299913439385,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "preact_cifar100/b30": {
+      "mean": 4.487499999999997,
+      "sd": 2.136155034947921,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "preact_cifar100/b50": {
+      "mean": 7.642500000000002,
+      "sd": 1.2266043915351543,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    },
+    "preact_cifar100/b70": {
+      "mean": 22.7375,
+      "sd": 3.0017703109998246,
+      "positive": 4,
+      "n": 4,
+      "etykieta": "test"
+    }
+  },
+  "zabezpieczenie_wejsc": {
+    "liczba_plikow": 122,
+    "hash_zgodny_przed_i_po": true
+  }
+}

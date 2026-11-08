@@ -1,0 +1,226 @@
+figura,panel,seria,seed,redukcja,wartosc,jednostka,srednia,sd,typ
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,,30,1.104996739,×,1.104996739,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,,30,0.9478100783,×,0.9478100783,0.001460690471,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,42,30,1.104996739,×,1.104996739,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,42,30,0.9462986612,×,0.9478100783,0.001460690471,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,43,30,1.104996739,×,1.104996739,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,43,30,0.9480613533,×,0.9478100783,0.001460690471,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,44,30,1.104996739,×,1.104996739,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,44,30,0.9471635619,×,0.9478100783,0.001460690471,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,45,30,1.104996739,×,1.104996739,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,45,30,0.9497167366,×,0.9478100783,0.001460690471,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,,50,1.364144015,×,1.364144015,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,,50,0.782159286,×,0.782159286,0.001045325049,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,42,50,1.364144015,×,1.364144015,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,42,50,0.7809670572,×,0.782159286,0.001045325049,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,43,50,1.364144015,×,1.364144015,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,43,50,0.7820404158,×,0.782159286,0.001045325049,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,44,50,1.364144015,×,1.364144015,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,44,50,0.7821137351,×,0.782159286,0.001045325049,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,45,50,1.364144015,×,1.364144015,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,45,50,0.7835159359,×,0.782159286,0.001045325049,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,,70,1.789456268,×,1.789456268,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,,70,0.8850379541,×,0.8850379541,0.002796019525,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,42,70,1.789456268,×,1.789456268,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,42,70,0.8846854591,×,0.8850379541,0.002796019525,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,43,70,1.789456268,×,1.789456268,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,43,70,0.8888642373,×,0.8850379541,0.002796019525,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,44,70,1.789456268,×,1.789456268,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,44,70,0.8821489147,×,0.8850379541,0.002796019525,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,MAC T/U,45,70,1.789456268,×,1.789456268,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-10,Przepustowość b128 T/U,45,70,0.8844532051,×,0.8850379541,0.002796019525,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,,30,1.10498324,×,1.10498324,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,,30,0.9476805245,×,0.9476805245,0.001647358993,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,42,30,1.10498324,×,1.10498324,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,42,30,0.9458692394,×,0.9476805245,0.001647358993,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,43,30,1.10498324,×,1.10498324,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,43,30,0.9493247281,×,0.9476805245,0.001647358993,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,44,30,1.10498324,×,1.10498324,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,44,30,0.9467288701,×,0.9476805245,0.001647358993,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,45,30,1.10498324,×,1.10498324,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,45,30,0.9487992603,×,0.9476805245,0.001647358993,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,,50,1.366114457,×,1.366114457,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,,50,0.7802920431,×,0.7802920431,0.0004766609589,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,42,50,1.366114457,×,1.366114457,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,42,50,0.7809453933,×,0.7802920431,0.0004766609589,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,43,50,1.366114457,×,1.366114457,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,43,50,0.7801754238,×,0.7802920431,0.0004766609589,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,44,50,1.366114457,×,1.366114457,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,44,50,0.78024403,×,0.7802920431,0.0004766609589,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,45,50,1.366114457,×,1.366114457,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,45,50,0.7798033252,×,0.7802920431,0.0004766609589,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,,70,1.823154895,×,1.823154895,0,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,,70,0.8753695898,×,0.8753695898,0.001306000653,mean
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,42,70,1.823154895,×,1.823154895,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,42,70,0.8760723522,×,0.8753695898,0.001306000653,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,43,70,1.823154895,×,1.823154895,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,43,70,0.875095092,×,0.8753695898,0.001306000653,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,44,70,1.823154895,×,1.823154895,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,44,70,0.8736628115,×,0.8753695898,0.001306000653,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,MAC T/U,45,70,1.823154895,×,1.823154895,0,seed
+e036_mac_i_przepustowosc,ResNet/CIFAR-100,Przepustowość b128 T/U,45,70,0.8766481034,×,0.8753695898,0.001306000653,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,,30,1.108893967,×,1.108893967,0,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,,30,0.946073362,×,0.946073362,0.0004716282555,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,42,30,1.108893967,×,1.108893967,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,42,30,0.9460557497,×,0.946073362,0.0004716282555,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,43,30,1.108893967,×,1.108893967,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,43,30,0.9462592268,×,0.946073362,0.0004716282555,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,44,30,1.108893967,×,1.108893967,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,44,30,0.945433228,×,0.946073362,0.0004716282555,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,45,30,1.108893967,×,1.108893967,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,45,30,0.9465452436,×,0.946073362,0.0004716282555,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,,50,1.356734572,×,1.356734572,0,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,,50,0.7022582766,×,0.7022582766,0.02288686243,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,42,50,1.356734572,×,1.356734572,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,42,50,0.7048072912,×,0.7022582766,0.02288686243,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,43,50,1.356734572,×,1.356734572,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,43,50,0.6756908869,×,0.7022582766,0.02288686243,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,44,50,1.356734572,×,1.356734572,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,44,50,0.7311591866,×,0.7022582766,0.02288686243,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,45,50,1.356734572,×,1.356734572,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,45,50,0.6973757418,×,0.7022582766,0.02288686243,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,,70,1.80641608,×,1.80641608,0,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,,70,0.7421671325,×,0.7421671325,0.02314401803,mean
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,42,70,1.80641608,×,1.80641608,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,42,70,0.7512282814,×,0.7421671325,0.02314401803,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,43,70,1.80641608,×,1.80641608,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,43,70,0.7135689128,×,0.7421671325,0.02314401803,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,44,70,1.80641608,×,1.80641608,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,44,70,0.7358713355,×,0.7421671325,0.02314401803,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,MAC T/U,45,70,1.80641608,×,1.80641608,0,seed
+e036_mac_i_przepustowosc,ResNet/Tiny,Przepustowość b128 T/U,45,70,0.7680000003,×,0.7421671325,0.02314401803,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,,30,1.105134679,×,1.105134679,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,,30,0.9465496568,×,0.9465496568,0.002663936213,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,42,30,1.105134679,×,1.105134679,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,42,30,0.9468242923,×,0.9465496568,0.002663936213,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,43,30,1.105134679,×,1.105134679,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,43,30,0.9484081009,×,0.9465496568,0.002663936213,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,44,30,1.105134679,×,1.105134679,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,44,30,0.9427005449,×,0.9465496568,0.002663936213,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,45,30,1.105134679,×,1.105134679,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,45,30,0.9482656891,×,0.9465496568,0.002663936213,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,,50,1.3580261,×,1.3580261,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,,50,0.7893678742,×,0.7893678742,0.001148250372,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,42,50,1.3580261,×,1.3580261,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,42,50,0.7887615584,×,0.7893678742,0.001148250372,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,43,50,1.3580261,×,1.3580261,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,43,50,0.7907784174,×,0.7893678742,0.001148250372,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,44,50,1.3580261,×,1.3580261,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,44,50,0.7881673887,×,0.7893678742,0.001148250372,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,45,50,1.3580261,×,1.3580261,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,45,50,0.7897641322,×,0.7893678742,0.001148250372,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,,70,1.748295696,×,1.748295696,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,,70,0.8825158068,×,0.8825158068,0.00238198594,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,42,70,1.748295696,×,1.748295696,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,42,70,0.8811105072,×,0.8825158068,0.00238198594,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,43,70,1.748295696,×,1.748295696,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,43,70,0.8853168569,×,0.8825158068,0.00238198594,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,44,70,1.748295696,×,1.748295696,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,44,70,0.8800534539,×,0.8825158068,0.00238198594,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,MAC T/U,45,70,1.748295696,×,1.748295696,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-10,Przepustowość b128 T/U,45,70,0.8835824093,×,0.8825158068,0.00238198594,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,,30,1.105121166,×,1.105121166,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,,30,0.9467747179,×,0.9467747179,0.0007086423487,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,42,30,1.105121166,×,1.105121166,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,42,30,0.9461883387,×,0.9467747179,0.0007086423487,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,43,30,1.105121166,×,1.105121166,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,43,30,0.9463168353,×,0.9467747179,0.0007086423487,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,44,30,1.105121166,×,1.105121166,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,44,30,0.9477483925,×,0.9467747179,0.0007086423487,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,45,30,1.105121166,×,1.105121166,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,45,30,0.9468453052,×,0.9467747179,0.0007086423487,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,,50,1.360851617,×,1.360851617,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,,50,0.7865390604,×,0.7865390604,0.001503740532,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,42,50,1.360851617,×,1.360851617,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,42,50,0.7852452553,×,0.7865390604,0.001503740532,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,43,50,1.360851617,×,1.360851617,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,43,50,0.788698092,×,0.7865390604,0.001503740532,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,44,50,1.360851617,×,1.360851617,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,44,50,0.7862988652,×,0.7865390604,0.001503740532,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,45,50,1.360851617,×,1.360851617,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,45,50,0.7859140293,×,0.7865390604,0.001503740532,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,,70,1.790370895,×,1.790370895,0,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,,70,0.8849139945,×,0.8849139945,0.001569093866,mean
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,42,70,1.790370895,×,1.790370895,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,42,70,0.886589362,×,0.8849139945,0.001569093866,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,43,70,1.790370895,×,1.790370895,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,43,70,0.8855886423,×,0.8849139945,0.001569093866,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,44,70,1.790370895,×,1.790370895,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,44,70,0.8829134945,×,0.8849139945,0.001569093866,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,MAC T/U,45,70,1.790370895,×,1.790370895,0,seed
+e036_mac_i_przepustowosc,PreAct/CIFAR-100,Przepustowość b128 T/U,45,70,0.8845644794,×,0.8849139945,0.001569093866,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),,30,1.017812641,×,1.017812641,0.02348949059,mean
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),42,30,1.045594519,×,1.017812641,0.02348949059,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),43,30,1.016353454,×,1.017812641,0.02348949059,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),44,30,1.02100465,×,1.017812641,0.02348949059,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),45,30,0.988297939,×,1.017812641,0.02348949059,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),,50,0.996508009,×,0.996508009,0.1002021855,mean
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),42,50,0.9080567191,×,0.996508009,0.1002021855,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),43,50,0.960762751,×,0.996508009,0.1002021855,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),44,50,0.9770351835,×,0.996508009,0.1002021855,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),45,50,1.140177382,×,0.996508009,0.1002021855,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),,70,1.04597472,×,1.04597472,0.07526317542,mean
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),42,70,0.9955088892,×,1.04597472,0.07526317542,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),43,70,1.144654163,×,1.04597472,0.07526317542,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),44,70,1.06398043,×,1.04597472,0.07526317542,seed
+e036_batch1_ratio,ResNet/CIFAR-10,Latencja b1 T/U (mediana),45,70,0.9797553977,×,1.04597472,0.07526317542,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),,30,1.027116457,×,1.027116457,0.07230705361,mean
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),42,30,1.126703892,×,1.027116457,0.07230705361,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),43,30,1.027210824,×,1.027116457,0.07230705361,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),44,30,0.9972634621,×,1.027116457,0.07230705361,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),45,30,0.9572876481,×,1.027116457,0.07230705361,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),,50,1.011739222,×,1.011739222,0.0204435504,mean
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),42,50,1.026769866,×,1.011739222,0.0204435504,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),43,50,0.99852308,×,1.011739222,0.0204435504,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),44,50,0.990197251,×,1.011739222,0.0204435504,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),45,50,1.031466692,×,1.011739222,0.0204435504,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),,70,0.9814779143,×,0.9814779143,0.06566650332,mean
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),42,70,1.020575211,×,0.9814779143,0.06566650332,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),43,70,0.8847006538,×,0.9814779143,0.06566650332,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),44,70,1.024071861,×,0.9814779143,0.06566650332,seed
+e036_batch1_ratio,ResNet/CIFAR-100,Latencja b1 T/U (mediana),45,70,0.9965639309,×,0.9814779143,0.06566650332,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),,30,1.017610219,×,1.017610219,0.02423693527,mean
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),42,30,0.9854928904,×,1.017610219,0.02423693527,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),43,30,1.023960392,×,1.017610219,0.02423693527,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),44,30,1.017105997,×,1.017610219,0.02423693527,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),45,30,1.043881598,×,1.017610219,0.02423693527,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),,50,1.008846521,×,1.008846521,0.04207327814,mean
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),42,50,1.069260902,×,1.008846521,0.04207327814,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),43,50,0.9874889494,×,1.008846521,0.04207327814,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),44,50,0.9744567288,×,1.008846521,0.04207327814,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),45,50,1.004179505,×,1.008846521,0.04207327814,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),,70,1.038320469,×,1.038320469,0.01922965866,mean
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),42,70,1.023340378,×,1.038320469,0.01922965866,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),43,70,1.043959523,×,1.038320469,0.01922965866,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),44,70,1.022872466,×,1.038320469,0.01922965866,seed
+e036_batch1_ratio,ResNet/Tiny,Latencja b1 T/U (mediana),45,70,1.063109508,×,1.038320469,0.01922965866,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),,30,0.9646973563,×,0.9646973563,0.05480796779,mean
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),42,30,0.9771230222,×,0.9646973563,0.05480796779,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),43,30,0.9952166359,×,0.9646973563,0.05480796779,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),44,30,1.002401662,×,0.9646973563,0.05480796779,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),45,30,0.884048105,×,0.9646973563,0.05480796779,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),,50,0.9845565058,×,0.9845565058,0.02169399213,mean
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),42,50,0.9783921322,×,0.9845565058,0.02169399213,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),43,50,1.012708291,×,0.9845565058,0.02169399213,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),44,50,0.9605312563,×,0.9845565058,0.02169399213,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),45,50,0.9865943443,×,0.9845565058,0.02169399213,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),,70,1.015143244,×,1.015143244,0.02427914025,mean
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),42,70,1.025591444,×,1.015143244,0.02427914025,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),43,70,1.043286507,×,1.015143244,0.02427914025,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),44,70,1.003676028,×,1.015143244,0.02427914025,seed
+e036_batch1_ratio,PreAct/CIFAR-10,Latencja b1 T/U (mediana),45,70,0.9880189969,×,1.015143244,0.02427914025,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),,30,0.9938834585,×,0.9938834585,0.07296936999,mean
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),42,30,0.9997855802,×,0.9938834585,0.07296936999,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),43,30,0.9744534873,×,0.9938834585,0.07296936999,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),44,30,0.9126993115,×,0.9938834585,0.07296936999,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),45,30,1.088595455,×,0.9938834585,0.07296936999,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),,50,1.005557752,×,1.005557752,0.07086202503,mean
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),42,50,0.9129771554,×,1.005557752,0.07086202503,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),43,50,1.031942691,×,1.005557752,0.07086202503,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),44,50,0.9961937418,×,1.005557752,0.07086202503,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),45,50,1.081117418,×,1.005557752,0.07086202503,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),,70,1.017915845,×,1.017915845,0.08362934832,mean
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),42,70,1.01824364,×,1.017915845,0.08362934832,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),43,70,1.12554918,×,1.017915845,0.08362934832,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),44,70,1.006177192,×,1.017915845,0.08362934832,seed
+e036_batch1_ratio,PreAct/CIFAR-100,Latencja b1 T/U (mediana),45,70,0.921693366,×,1.017915845,0.08362934832,seed
