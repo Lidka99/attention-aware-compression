@@ -299,9 +299,13 @@ def worker(run, gpu):
         write(out / 'status.json', status)
 
 
-def gpu_info():
-    text = subprocess.check_output(['nvidia-smi', '--query-gpu=index,name,memory.used,utilization.gpu',
+def telemetry():
+    return subprocess.check_output(['nvidia-smi', '--query-gpu=index,name,memory.used,utilization.gpu',
                                     '--format=csv,noheader,nounits'], text=True)
+
+
+def gpu_info():
+    text = telemetry()
     assert len(text.strip().splitlines()) == 4
     for i, line in enumerate(text.strip().splitlines()):
         r = [v.strip() for v in line.split(',')]
@@ -351,7 +355,7 @@ def run():
             while True:
                 codes = [p.poll() for p in processes]
                 monitor.write(json.dumps(dict(utc=utc(), elapsed=time.monotonic() - start, exit_codes=codes,
-                                              gpu=gpu_info())) + '\n'); monitor.flush()
+                                              gpu=telemetry())) + '\n'); monitor.flush()
                 assert all(c in (None, 0) for c in codes), codes
                 if all(c == 0 for c in codes):
                     break
@@ -376,7 +380,7 @@ def run():
             row['exit_code'] = p.poll()
         for log in logs:
             log.close()
-        manifest.update(finished_utc=utc(), elapsed_seconds=time.monotonic() - start, gpu_end=gpu_info())
+        manifest.update(finished_utc=utc(), elapsed_seconds=time.monotonic() - start, gpu_end=telemetry())
         write(path / 'manifest.json', manifest)
         print(manifest['status'], rel(path), flush=True)
 
