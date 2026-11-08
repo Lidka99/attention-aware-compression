@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "utc": "2026-11-08T03:04:33.644816+00:00",
+  "rows": [
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b30",
+      "T_mac": 426809702,
+      "U_mac": 386254264,
+      "Uprime_mac": 425862970,
+      "Uprime_params": 8583345,
+      "T_params": 7804213
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b50",
+      "T_mac": 377027192,
+      "U_mac": 276383716,
+      "Uprime_mac": 373993878,
+      "Uprime_params": 7610403,
+      "T_params": 5582548
+    },
+    {
+      "pair": "resnet_cifar10",
+      "tag": "b70",
+      "T_mac": 298036232,
+      "U_mac": 166551280,
+      "Uprime_mac": 293540022,
+      "Uprime_params": 5980689,
+      "T_params": 3345642
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b30",
+      "T_mac": 426847052,
+      "U_mac": 386292784,
+      "Uprime_mac": 425903380,
+      "Uprime_params": 8623845,
+      "T_params": 7841653
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b50",
+      "T_mac": 376140124,
+      "U_mac": 275335732,
+      "Uprime_mac": 374031948,
+      "Uprime_params": 7648563,
+      "T_params": 5580606
+    },
+    {
+      "pair": "resnet_cifar100",
+      "tag": "b70",
+      "T_mac": 295084380,
+      "U_mac": 161853708,
+      "Uprime_mac": 293573772,
+      "Uprime_params": 6014529,
+      "T_params": 3334612
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b30",
+      "T_mac": 114774868,
+      "U_mac": 103503916,
+      "Uprime_mac": 114596916,
+      "Uprime_params": 8675565,
+      "T_params": 7840865
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b50",
+      "T_mac": 102243284,
+      "U_mac": 75359828,
+      "Uprime_mac": 101050044,
+      "Uprime_params": 7697203,
+      "T_params": 5622878
+    },
+    {
+      "pair": "resnet_tiny",
+      "tag": "b70",
+      "T_mac": 82002612,
+      "U_mac": 45395196,
+      "Uprime_mac": 81885588,
+      "Uprime_params": 6129096,
+      "T_params": 3366572
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b30",
+      "T_mac": 426862982,
+      "U_mac": 386254264,
+      "Uprime_mac": 425862970,
+      "Uprime_params": 8581775,
+      "T_params": 7806023
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b50",
+      "T_mac": 375336300,
+      "U_mac": 276383716,
+      "Uprime_mac": 373993878,
+      "Uprime_params": 7608925,
+      "T_params": 5582715
+    },
+    {
+      "pair": "preact_cifar10",
+      "tag": "b70",
+      "T_mac": 291180886,
+      "U_mac": 166551280,
+      "Uprime_mac": 289092942,
+      "Uprime_params": 5854562,
+      "T_params": 3344550
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b30",
+      "T_mac": 426900332,
+      "U_mac": 386292784,
+      "Uprime_mac": 425903380,
+      "Uprime_params": 8622275,
+      "T_params": 7843463
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b50",
+      "T_mac": 374691076,
+      "U_mac": 275335732,
+      "Uprime_mac": 374031948,
+      "Uprime_params": 7647085,
+      "T_params": 5579192
+    },
+    {
+      "pair": "preact_cifar100",
+      "tag": "b70",
+      "T_mac": 289778168,
+      "U_mac": 161853708,
+      "Uprime_mac": 289126332,
+      "Uprime_params": 5888042,
+      "T_params": 3333509
+    }
+  ],
+  "frozen_sha256": "48832cdcc76cb3f4c99243ea707f3066a9bf219a6c855dad6689a2469924dec6",
+  "code_sha256": "81c02b5080c6074ac9a5fc6d2954cbb38b7116e0c355cd4b233eace9d7dff1e7",
+  "data_open_attempts": []
+}
