@@ -1,4 +1,70 @@
-# Kontynuacja — 2026-11-08
+# Kontynuacja — 2026-11-22
+
+**E045 ukończony — łagodny UNIFORM na Tiny dev.** [Wyniki](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md):
+pełny 51,2200%, b10 **46,3625%** (−4,8575 pp, 10,35% P/10,67% MAC),
+b20 **40,5800%** (−10,6400 pp, 20,33% P/19,97% MAC). Run
+`runs/E045/20261122T031350Z_a58b56a3`: 4GPU/exit0, 12 nowych ocen,
+8 odniesień U/b30 i U/b50 z E035 dev, audyt PASS. Bez oceny val. Szkic 0.6
+zawiera krzywą. 50% nie jest wymogiem; kolejny krok w [prompcie](PROMPT_NOWY_CZAT.md).
+
+**E044 ukończony.** [Wyniki](experiments/2026-11-22_E044_l06_tiny/WYNIKI.md):
+L06−U **+2,100 pp (4/4)** w b50, **+0,255 pp (3/4)** w b30. Główne
+kryterium spełnione; strata do pełnego modelu w b50 29,0375 pp. Tiny poza
+doborem w E042, val użyty wcześniej w E035. Run `runs/E044/20261122T022955Z_6c1d2fc5`,
+28/28, 4GPU/exit0, 124,97 s, audyt PASS. [Szkic](SZKIC_ARTYKULU.md)
+oddziela potwierdzenie E043 od transferu E044.
+
+**E043 ukończony na rezerwie CIFAR-100.** [Wyniki](experiments/2026-11-21_E043_l06_potwierdzenie_transfer/WYNIKI.md):
+zamrożony L06−UNIFORM po CMA **+1,215 pp (3/4)** w b50 — główny próg
+spełniony. W b30 **+0,945 pp (4/4)**, o 0,055 pp poniżej progu +1,00 pp.
+Strata L06 do nieskompresowanego 19,970/7,420 pp. Run
+`runs/E043/20261122T000341Z_9e23e96f`: 28/28, 4GPU/exit0, 108,08 s, audyt PASS.
+**Rezerwa CIFAR-100 jest już użyta.** E043 potwierdza tanią referencję b50
+na odłożonych obrazach dla tych samych checkpointów. Jeśli badać selektor,
+porównać z L06 w osobnym protokole na niewidzianych danych; nie rozszerzać E042.
+
+**E042 ukończony, dodatni pilot pod P i MAC UNIFORM.**
+[Wyniki](experiments/2026-11-21_E042_zapas_pod_uniform/WYNIKI.md): jeden
+profil wybrany z 24 na dev (L06) bije mocniejszą referencję U o
+**+1,175 pp na C100 (3/4)** i **+1,475 pp na C10 (4/4)**. Na C100 tylko
+5/24 dodatnich średnich; mediana −1,265 pp. T-proj nie pomaga. To zapas,
+nie wdrażalny selektor. Run `runs/E042/20261121T212257Z_207ae03f`,
+216 ocen, 723,49 s, 4GPU/exit0, audyt PASS, bez treningu i użycia testu/rezerwy.
+Dalej: [osobny test wyboru/transferu](PLAN_PUBLIKACJI.md), ze stałym L06
+jako referencją; [szkic](SZKIC_ARTYKULU.md) ma figury jakości, profili i kosztu.
+Wcześniejsze zapisy poniżej zachowują swoje historyczne werdykty.
+
+## Poprzednie rozstrzygnięcie: E041
+
+**E041 ukończony — łączna bramka P/MAC niespełniona, wynik zależy od zbioru.**
+[Wyniki](experiments/2026-11-15_E041_kontrola_p_mac/WYNIKI.md): TILT−mean4
+CMA C10+0,11250pp(2/4), C100+2,10375pp(4/4); repair+0,12750/+1,96375pp.
+Kontrola104 naC10 bije TILT o0,3850pp,4/4. P/MAC dopasowane≤0,1%.
+Run `runs/E041/20261116T040008Z_9e34f1e9`,4GPU/exit0,227,054s,
+168ocen/96nowych kontrolnych, audyt PASS. Bez treningu/testu/rezerwy/wag.
+**Tiny od początku nie wchodził do pilota** — nie ma tu jego wyniku
+negatywnego. Ewentualne rozszerzenie nie zmienia bramki obu CIFAR-ów.
+Próbę zamknięto; następny krok to ocena/redakcja wąskiej pracy empirycznej.
+
+TILT to lokalna nazwa/adaptacja znanej rodziny: ATP2025 i Linear Decay2020.
+Źródła i zakres wkładu: [ocena](OCENA_WKLADU_I_ILUSTRACJI.md).
+E041 pozostaje w szkicu jako kontrola przy kosztach historycznego TILT.
+
+## Wcześniejsze rozstrzygnięcie: E040
+
+**E040 negatywny, powrót do artykułu.**
+[Wyniki](experiments/2026-11-09_E040_interakcje_po_bn/WYNIKI.md),
+[krótko](experiments/2026-11-09_E040_interakcje_po_bn/PODSUMOWANIE.md).
+MAE predykcji szkody par/add: C10 1,9997/1,1330pp, C100 3,8406/1,6472pp;
+iloraz1,765/2,332, poprawa0/4seedów na każdym. To nie różnice top1.
+Run `runs/E040/20261111T032100Z_07ac54f7`:4GPU/exit0,3032,72s,
+audyt PASS, prawidłowy `stopped_C`. **Dev nie oceniano**, bo bramka C zawiodła.
+Bez treningu, nowych plików wag, testu E035 i rezerwy C100. Stany były w RAM
+i są zwolnione; GPU wolne. Zakończyć tę próbę bez dalszych wariantów.
+Następny krok: [pełny szkic artykułu E035–E039](PLAN_PUBLIKACJI.md),
+z zachowaniem negatywnego E040 i jego ograniczeń.
+Search E024–E028, AUTO50 i miary grupowania pozostają zamknięte.
+Poniższa historia i wyniki E035–E039 zachowane.
 
 ## Najnowsze: E038/E039 — dwie kontrole wzmacniające ukończone
 

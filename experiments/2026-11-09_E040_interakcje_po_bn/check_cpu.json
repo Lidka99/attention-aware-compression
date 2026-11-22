@@ -1,0 +1,251 @@
+{
+  "status": "passed",
+  "utc": "2026-11-11T03:18:20.665170+00:00",
+  "seconds": 61.20185677194968,
+  "code_hashes": {
+    "experiments/2026-11-09_E040_interakcje_po_bn/audit.py": "52d3245c39d1f0603d1365eaa11b5d2fa8aec824d401b959f58708bb5122cbd0",
+    "experiments/2026-11-09_E040_interakcje_po_bn/check_cpu.py": "36a40b3080923c7769966e0d8d1b067bf9aae6edece2427a00b279a5aa13c34e",
+    "experiments/2026-11-09_E040_interakcje_po_bn/design.py": "745318c7438367c61fd2167e2ec97d83a0095be9a65b593219a836e4661b499c",
+    "experiments/2026-11-09_E040_interakcje_po_bn/experiment.py": "85410ba83e528487c244eee84c830c2037e7792d1874083787a79d08df9653c1",
+    "experiments/2026-11-09_E040_interakcje_po_bn/support.py": "9952d0ac748ba82e24e8c641a150bf63ac848ba83c55a8a488f1f92df3a241d2",
+    "experiments/2026-11-09_E040_interakcje_po_bn/OPIS.md": "2592c4c9d2e90d11038befeaa626e1e4f88e7632ac00b0439716702d69cfc5d1",
+    "experiments/2026-11-09_E040_interakcje_po_bn/UZUPELNIENIE_WYKONAWCZE.md": "0d59a466c0033a52f7e5dca85eac9b7cce977388eccc22209b7f20728849336d"
+  },
+  "geometry": [
+    {
+      "dataset": "cifar10",
+      "profile": "U",
+      "operator": "MAG2",
+      "widths": [
+        45,
+        45,
+        45,
+        90,
+        90,
+        90,
+        181,
+        181,
+        181,
+        362,
+        362,
+        362
+      ],
+      "params": 5584580,
+      "mac": 276383716,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar10",
+      "profile": "ANCHOR",
+      "operator": "MAG2",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        76,
+        204,
+        204,
+        204,
+        409,
+        307,
+        307
+      ],
+      "params": 5246333,
+      "mac": 275824206,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar10",
+      "profile": "ANCHOR",
+      "operator": "FOLD",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        76,
+        204,
+        204,
+        204,
+        409,
+        307,
+        307
+      ],
+      "params": 5246333,
+      "mac": 275824206,
+      "group_mapping": true
+    },
+    {
+      "dataset": "cifar10",
+      "profile": "TILT_PROJ",
+      "operator": "MAG2",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        102,
+        204,
+        204,
+        153,
+        409,
+        307,
+        307
+      ],
+      "params": 4882317,
+      "mac": 276237070,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar10",
+      "profile": "TILT_PROJ",
+      "operator": "FOLD",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        102,
+        204,
+        204,
+        153,
+        409,
+        307,
+        307
+      ],
+      "params": 4882317,
+      "mac": 276237070,
+      "group_mapping": true
+    },
+    {
+      "dataset": "cifar100",
+      "profile": "U",
+      "operator": "MAG2",
+      "widths": [
+        45,
+        45,
+        45,
+        90,
+        90,
+        90,
+        180,
+        180,
+        180,
+        361,
+        361,
+        361
+      ],
+      "params": 5581542,
+      "mac": 275335732,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar100",
+      "profile": "ANCHOR",
+      "operator": "MAG2",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        76,
+        102,
+        204,
+        204,
+        153,
+        409,
+        409,
+        307
+      ],
+      "params": 5426105,
+      "mac": 273062716,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar100",
+      "profile": "ANCHOR",
+      "operator": "FOLD",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        76,
+        102,
+        204,
+        204,
+        153,
+        409,
+        409,
+        307
+      ],
+      "params": 5426105,
+      "mac": 273062716,
+      "group_mapping": true
+    },
+    {
+      "dataset": "cifar100",
+      "profile": "TILT_PROJ",
+      "operator": "MAG2",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        102,
+        204,
+        204,
+        153,
+        307,
+        307,
+        307
+      ],
+      "params": 4487553,
+      "mac": 269508220,
+      "exact_E038": true
+    },
+    {
+      "dataset": "cifar100",
+      "profile": "TILT_PROJ",
+      "operator": "FOLD",
+      "widths": [
+        38,
+        51,
+        51,
+        102,
+        102,
+        102,
+        204,
+        204,
+        153,
+        307,
+        307,
+        307
+      ],
+      "params": 4487553,
+      "mac": 269508220,
+      "group_mapping": true
+    }
+  ],
+  "design_counts": {
+    "cifar10": {
+      "feasible": 1857,
+      "masks": 564
+    },
+    "cifar100": {
+      "feasible": 1759,
+      "masks": 565
+    }
+  },
+  "sources_unchanged": true,
+  "data_open_attempts": [],
+  "actual_images_used": false,
+  "BN_calibration_used": false,
+  "gpu_used": false
+}

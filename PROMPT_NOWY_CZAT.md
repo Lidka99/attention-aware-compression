@@ -1,3 +1,50 @@
+# Prompt do nowego czatu — po E045 (2026-11-22)
+
+## Do skopiowania
+
+```text
+Kontynuuj badania nad foldingiem CNN bez fine-tuningu w repozytorium
+/home/users/s224574/attention/badania_atencja_cnn. Najpierw przeczytaj
+AGENTS.md, STATUS_BADAN.md, NOTATKA_KONTYNUACJA.md, sekcję „Po E045”
+w PLAN_PUBLIKACJI.md i raport E045. Aktualny SZKIC_ARTYKULU.md ma wersję 0.6.
+
+Priorytetem jest zachowanie trafności; 50% redukcji parametrów nie jest
+wymogiem. Na Tiny dev po CMA pełny model ma 51,2200%. W E045 UNIFORM przy
+10,35% redukcji P i 10,67% redukcji MAC osiąga 46,3625% (strata 4,8575 pp,
+per seed 4,38/4,85/4,60/5,60 pp). Przy 20,33% P i 19,97% MAC to 40,5800%
+(strata 10,6400 pp). U/b30 i U/b50 na wykresie pochodzą z tego samego dev E035.
+E045: runs/E045/20261122T031350Z_a58b56a3, 12/12 ocen na 4 GPU, audyt PASS.
+
+L06 wybrano na dev w E042. W E043 poprawia top‑1 względem U o +1,215 pp
+przy ~50% redukcji P na rezerwie CIFAR-100 i +0,945 pp przy ~30%.
+W E044 na Tiny uzyskał +2,100 pp (4/4) i +0,255 pp (3/4), na wcześniej
+użytym val. To dowody dla zamrożonego profilu pod oboma pułapami, nie wynik
+automatycznego selektora. E045 nie badał L06 przy b10/b20.
+
+Najbliższe pytanie: czy w b10 można zmniejszyć stratę jednym zamrożonym
+profilem, np. L06, bez przekraczania rzeczywistych P i MAC U z E045?
+Na początek zaproponuj jeden mały protokół i wykonaj kontrolę CPU geometrii.
+Dotychczasowy limit k≤floor(0,9n) wymusza na Tiny ≥19,21% redukcji P;
+jeśli zmieniasz górny limit, zapisz to jawnie jako zmianę reguły projekcji.
+Nie mierz trafności przed ustaleniem porównania i kryteriów. Jeśli geometria
+nie przejdzie, opisz ograniczenie bez poszerzania puli.
+
+Używaj istniejących checkpointów E019, seedów 42–45, tego samego A4096/CMA
+i odniesienia do pełnego modelu; pomiary GPU w Conda attention na czterech
+kartach, jeden seed na GPU. Rozdzielaj Tiny dev, wcześniej użyty val E035/E044
+i wykorzystaną rezerwę CIFAR-100 z E043. Nowy trening oraz nowa ocena na
+nieużytych danych testowych wymagają odrębnej zgody. Nie wznawiaj search
+E024–E028 ani nie rozbudowuj E042. Zapisz protokół w nowym folderze eksperymentu.
+```
+
+## Archiwum promptu sprzed E034
+
+> **Notatka historyczna — doprecyzowanie 2026-11-11.** Poniżej zachowano prompt
+> sprzed zakończenia E034. Bieżący stan: STATUS_BADAN.md i NOTATKA_KONTYNUACJA.md.
+> „Adresujemy otwarty problem” oznacza podjęcie badania, nie wykazane rozwiązanie
+> ogólnej optymalizacji alokacji. Po E035–E040 zakres wkładu opisuje
+> [OCENA_WKLADU_I_ILUSTRACJI.md](OCENA_WKLADU_I_ILUSTRACJI.md).
+
 Pracuj w /home/users/s224574/attention/badania_atencja_cnn.
 
 Najpierw przeczytaj: AGENTS.md, STATUS_BADAN.md, NOTATKA_KONTYNUACJA.md,

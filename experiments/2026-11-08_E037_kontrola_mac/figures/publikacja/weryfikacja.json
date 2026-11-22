@@ -1,0 +1,104 @@
+{
+  "eksperyment": "E035/E037 (dev, po CMA)",
+  "zakres": "dev only; test nie był otwierany",
+  "runy": {
+    "E035": "20261107T183831Z_8b0b14e0",
+    "E037": "20261108T031759Z_855c0b33",
+    "E036_check": "experiments/2026-11-07_E036_audyt_kosztu/check.json"
+  },
+  "seedy": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "pary": [
+    "ResNet / CIFAR-10",
+    "ResNet / CIFAR-100",
+    "ResNet / Tiny ImageNet",
+    "PreAct / CIFAR-10",
+    "PreAct / CIFAR-100"
+  ],
+  "komorki": 15,
+  "wiersze_analysis_CMA": 60,
+  "punkty_per_seed": 60,
+  "kontroli_teacher": 20,
+  "kompletnosc": {
+    "summary_E035": 60,
+    "summary_E037": 60,
+    "controls_E035": 20,
+    "pary": 5,
+    "budzety": [
+      "b30",
+      "b50",
+      "b70"
+    ]
+  },
+  "dev_only": true,
+  "data_open_attempts": 0,
+  "official_test_used_wszystkie_false": true,
+  "zgodnosc_z_analysis_json": {
+    "max_abs_diff_top1_pp": 0.0,
+    "max_abs_diff_sredniej_T_minus_Up_pp": 4.9960036108132044e-15,
+    "max_abs_diff_sd_T_minus_Up_pp": 4.9960036108132044e-15
+  },
+  "zgodnosc_z_WYNIKI_md": {
+    "max_abs_diff_top1_pp": 0.005000000000009663,
+    "max_abs_diff_ilorazu_parametrow": 0.0,
+    "max_abs_diff_ilorazu_mac": 0.0,
+    "tolerancja_pp": 0.0051
+  },
+  "zgodnosc_hashy": {
+    "analysis_sha256": "051b5133737efe4c0e1c0e3a6ed949089bc9e5b51780a436fcbea3d04dfb66de",
+    "verification_analysis_sha256": "051b5133737efe4c0e1c0e3a6ed949089bc9e5b51780a436fcbea3d04dfb66de",
+    "frozen_sha256": "48832cdcc76cb3f4c99243ea707f3066a9bf219a6c855dad6689a2469924dec6",
+    "verification_frozen_sha256": "48832cdcc76cb3f4c99243ea707f3066a9bf219a6c855dad6689a2469924dec6",
+    "source_hashes_E037": 60,
+    "frozen_hashes_E035_summary_i_controls": 80,
+    "wszystkie_zgodne": true
+  },
+  "koszty": {
+    "teacher_params_mln_zakres": [
+      11.17217,
+      11.279112
+    ],
+    "teacher_mac_mln_zakres": [
+      148.148224,
+      555.4688
+    ],
+    "params_pct_teacher_zakres": [
+      29.71481520438853,
+      76.91709240940244
+    ],
+    "mac_pct_teacher_zakres": [
+      29.13821766407042,
+      77.47299623382592
+    ]
+  },
+  "top1_zakres_per_para": {
+    "ResNet / CIFAR-10": [
+      77.305,
+      95.44
+    ],
+    "ResNet / CIFAR-100": [
+      31.4,
+      75.14
+    ],
+    "ResNet / Tiny ImageNet": [
+      8.432500000000001,
+      51.22
+    ],
+    "PreAct / CIFAR-10": [
+      78.595,
+      95.29
+    ],
+    "PreAct / CIFAR-100": [
+      23.425,
+      76.965
+    ]
+  },
+  "zabezpieczenie_wejsc": {
+    "liczba_plikow": 144,
+    "hash_zgodny_przed_i_po": true
+  }
+}

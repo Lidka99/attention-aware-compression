@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "pair": "resnet_cifar10",
+      "profile": "U",
+      "params": 5584580,
+      "mac": 276383716
+    },
+    {
+      "pair": "resnet_cifar10",
+      "profile": "T-proj",
+      "params": 5583812,
+      "mac": 276276756
+    },
+    {
+      "pair": "resnet_cifar10",
+      "profile": "W1p",
+      "params": 5584580,
+      "mac": 276383716
+    },
+    {
+      "pair": "resnet_cifar10",
+      "profile": "M14p",
+      "params": 5579745,
+      "mac": 276109024
+    },
+    {
+      "pair": "resnet_cifar10",
+      "profile": "L01",
+      "params": 5580460,
+      "mac": 276114454
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "U",
+      "params": 5581542,
+      "mac": 275335732
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "T-proj",
+      "params": 5577102,
+      "mac": 275222472
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "W1p",
+      "params": 5581542,
+      "mac": 275335732
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "M14p",
+      "params": 5581526,
+      "mac": 275115804
+    },
+    {
+      "pair": "resnet_cifar100",
+      "profile": "L01",
+      "params": 5576574,
+      "mac": 275176220
+    }
+  ],
+  "run": "runs/E042/check_20261121T211904Z_0ee66ea7",
+  "pid": 1519991,
+  "started_utc": "2026-11-21T21:19:04.346927+00:00",
+  "code_hashes": {
+    "experiments/2026-11-21_E042_zapas_pod_uniform/analiza.py": "b47f637d22e9d1d43434f20b5a49fd7806852799d34a966f421b6139981b27a4",
+    "experiments/2026-11-21_E042_zapas_pod_uniform/experiment.py": "571bce673a940704ed50dec054fe67e1faf4d5043be72c38a0173aa99ac74521",
+    "experiments/2026-11-21_E042_zapas_pod_uniform/geometria.py": "4f961a12239f239d53ddc81f60300786e974bdd4986e26676ddd5d9fb49a3905",
+    "experiments/2026-11-21_E042_zapas_pod_uniform/OPIS.md": "57f4d55c6be89f5be10c1d5aa65f64ae007d28ea0589140e22e8109fe9e254a9"
+  },
+  "frozen_sha256": "2069b0d002ddc892be39bc6b24d66f4d059f1ee143f829d43a19a869c54da7c4",
+  "quality_evaluated": false,
+  "finished_utc": "2026-11-21T21:20:57.378882+00:00",
+  "seconds": 113.0321909240447,
+  "data_opened": [
+    "data/cifar100/splits.json",
+    "runs/E011/20261024T192205Z_018f3f2_seeds42-45_b2da2012/splits.json"
+  ],
+  "data_open_attempts": []
+}

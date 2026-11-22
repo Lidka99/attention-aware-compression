@@ -4,6 +4,12 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 
 | Eksperyment | Stan | Dokumentacja |
 |---|---|---|
+| E045 — łagodny UNIFORM na Tiny | Completed, 4GPU/exit0; dev b10 46,36% (−4,86 pp), b20 40,58% (−10,64 pp) | [Wyniki i krzywa](2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md), [protokół](2026-11-22_E045_lagodny_uniform_tiny/OPIS.md) |
+| E044 — transfer L06 na Tiny ImageNet | Completed, 4GPU/exit0; b50 +2,100 pp (4/4), b30 +0,255 pp (3/4) | [Wyniki](2026-11-22_E044_l06_tiny/WYNIKI.md), [protokół](2026-11-22_E044_l06_tiny/OPIS.md) |
+| E043 — potwierdzenie i transfer zamrożonego L06 | Completed, 4GPU/exit0; rezerwa C100: b50 +1,215 pp (3/4, próg spełniony); b30 +0,945 pp (4/4, poniżej progu) | [Wyniki](2026-11-21_E043_l06_potwierdzenie_transfer/WYNIKI.md), [protokół](2026-11-21_E043_l06_potwierdzenie_transfer/OPIS.md) |
+| E042 — zapas przy P/MAC UNIFORM | Completed, 4GPU/exit0; najlepszy z 24 na dev: C100 +1,175 pp (3/4, próg spełniony), kontrola C10 +1,475 pp (4/4) | [Wyniki](2026-11-21_E042_zapas_pod_uniform/WYNIKI.md), [protokół](2026-11-21_E042_zapas_pod_uniform/OPIS.md) |
+| E041 — kontrola P i MAC | Completed,4GPU/exit0; T−mean4 C10+0,11250pp(2/4), C100+2,10375pp(4/4); primary niespełnione łącznie, Tiny niebadany | [Wyniki](2026-11-15_E041_kontrola_p_mac/WYNIKI.md), [protokół](2026-11-15_E041_kontrola_p_mac/OPIS.md) |
+| E040 — interakcje szkody po BN | Completed,4GPU/exit0; primary negatywny, MAE par gorsze0/4poprawy; stop przed dev | [Wyniki](2026-11-09_E040_interakcje_po_bn/WYNIKI.md), [protokół](2026-11-09_E040_interakcje_po_bn/OPIS.md) |
 | E038 — operator×alokacja | Completed,4GPU; TILT pomaga także MAG2, primary specyficzności niespełniony | [Wyniki](2026-11-08_E038_operator_alokacja/WYNIKI.md), [protokół](2026-11-08_E038_operator_alokacja/OPIS.md) |
 | E039 — przestawienia TILT | Completed,4GPU; kierunek9/9 i4/4, MAC nie jest dopasowany | [Wyniki](2026-11-08_E039_przestawienia_tilt/WYNIKI.md), [protokół](2026-11-08_E039_przestawienia_tilt/OPIS.md) |
 | E001 — EfficientNet-B0 od zera | Trening i audyt zakończone | [Wyniki](2026-09-26_E001_efficientnet_b0_od_zera/WYNIKI.md), [protokół audytu](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_OPIS_v1.md), [raport i wykresy](2026-09-26_E001_efficientnet_b0_od_zera/AUDYT_WYNIKI.md) |

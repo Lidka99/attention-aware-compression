@@ -1,0 +1,133 @@
+{
+  "run": "runs/E040/20261111T032100Z_07ac54f7",
+  "input_audit_sha256": "46b82db3a0c1b045fb305cc23cdf127377c6b90517a1ec1a11b1d1a07cc86950",
+  "input_prediction_csv_sha256": "08678daa12afe982d10b45959eee8bdac93ff1aa8c81caf89bbcd0bf48c8c14e",
+  "script_sha256": "6da2002e84088f39ddc4ae5b3506f11f834757e54cfc996fd1085b45182ebf74",
+  "summary": [
+    {
+      "dataset": "cifar10",
+      "mae1_pp": 1.132965087890625,
+      "sd1_pp": 0.3114425629936547,
+      "mae2_pp": 1.999664306640625,
+      "sd2_pp": 0.775628428182626,
+      "ratio": 1.7649831649831649
+    },
+    {
+      "dataset": "cifar100",
+      "mae1_pp": 1.647186279296875,
+      "sd1_pp": 0.36941294069951114,
+      "mae2_pp": 3.84063720703125,
+      "sd2_pp": 1.0789319878964982,
+      "ratio": 2.3316350162112087
+    }
+  ],
+  "costs": [
+    {
+      "dataset": "cifar10",
+      "method": "FOLD/ADD_POST",
+      "params_min": 4832814,
+      "params_max": 5321473,
+      "mac_min": 271204942,
+      "mac_max": 275824206
+    },
+    {
+      "dataset": "cifar10",
+      "method": "FOLD/PAIR_POST",
+      "params_min": 4884325,
+      "params_max": 5408656,
+      "mac_min": 249147274,
+      "mac_max": 274717450
+    },
+    {
+      "dataset": "cifar10",
+      "method": "FOLD/PAIR_PRE",
+      "params_min": 5006801,
+      "params_max": 5558749,
+      "mac_min": 261367690,
+      "mac_max": 273596494
+    },
+    {
+      "dataset": "cifar10",
+      "method": "MAG2/ADD_POST",
+      "params_min": 4681294,
+      "params_max": 5513358,
+      "mac_min": 267371086,
+      "mac_max": 274541194
+    },
+    {
+      "dataset": "cifar10",
+      "method": "MAG2/PAIR_POST",
+      "params_min": 4564632,
+      "params_max": 5372802,
+      "mac_min": 258136330,
+      "mac_max": 276131374
+    },
+    {
+      "dataset": "cifar100",
+      "method": "FOLD/ADD_POST",
+      "params_min": 5445556,
+      "params_max": 5563557,
+      "mac_min": 270883924,
+      "mac_max": 274754260
+    },
+    {
+      "dataset": "cifar100",
+      "method": "FOLD/PAIR_POST",
+      "params_min": 5352136,
+      "params_max": 5569615,
+      "mac_min": 264886356,
+      "mac_max": 273424348
+    },
+    {
+      "dataset": "cifar100",
+      "method": "FOLD/PAIR_PRE",
+      "params_min": 4720948,
+      "params_max": 5379152,
+      "mac_min": 265673812,
+      "mac_max": 272927644
+    },
+    {
+      "dataset": "cifar100",
+      "method": "MAG2/ADD_POST",
+      "params_min": 5550258,
+      "params_max": 5563557,
+      "mac_min": 270883924,
+      "mac_max": 274578004
+    },
+    {
+      "dataset": "cifar100",
+      "method": "MAG2/PAIR_POST",
+      "params_min": 5550258,
+      "params_max": 5563557,
+      "mac_min": 261778516,
+      "mac_max": 274578004
+    }
+  ],
+  "telemetry": {
+    "0": {
+      "max_util": 63,
+      "max_memory_mib": 1182,
+      "positive_samples": 140
+    },
+    "1": {
+      "max_util": 61,
+      "max_memory_mib": 1182,
+      "positive_samples": 134
+    },
+    "2": {
+      "max_util": 68,
+      "max_memory_mib": 1182,
+      "positive_samples": 141
+    },
+    "3": {
+      "max_util": 58,
+      "max_memory_mib": 1182,
+      "positive_samples": 138
+    }
+  },
+  "figures": {
+    "e040_mae.png": "4cd5cd56b3836d509e84d4026b1ce81f2e446cf62bf84079277c87de989657f9",
+    "e040_mae.pdf": "00e1bcf669e19320e8d11a2fafbaaea9314d55bf6b820549480e77ebb4ba02c7"
+  },
+  "table_sha256": "77cc0c4e855a7e7112e7a62b5561bb760ee5c99eecf842325d4d2216810f3b89"
+}

@@ -1,0 +1,83 @@
+{
+  "checks": {
+    "all_15_cells_positive_4_of_4": true,
+    "all_cells_have_4_seeds": true,
+    "all_cluster_widths_equal_frozen": true,
+    "all_plans_equal_frozen": true,
+    "all_teacher_cma_present": true,
+    "analysis_json_consistent": "max abs diff <= 1e-9",
+    "cifar100_reserve_unused": true,
+    "frozen_equal_run_copy": true,
+    "frozen_sha256_equal_manifest": true,
+    "magnitude_gate_9_of_10": true,
+    "tiny_uses_official_val": true,
+    "wyniki_md_means_consistent": "tolerance 5e-4 pp"
+  },
+  "counts": {
+    "budgets": 3,
+    "cells": 15,
+    "cma_contrasts": 15,
+    "cma_profile_points": 120,
+    "cma_teacher_points": 20,
+    "controls": 20,
+    "pairs": 5,
+    "seeds": 4,
+    "summaries": 60
+  },
+  "max_abs_diff_vs_analysis_json": 7.105427357601002e-15,
+  "note": "Szerokości pochodzą z E035/frozen.json. 30/50/70% to nominalna redukcja parametrów; k/n to osobna miara kanałów. U i T nie są utożsamiane.",
+  "phase": "test",
+  "run": "runs/E035/20261107T183831Z_8b0b14e0",
+  "shared_plans": [
+    {
+      "budget": "b30",
+      "budget_pct": 30,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 12,
+      "pairs": "resnet_cifar10;resnet_cifar100",
+      "profile": "U"
+    },
+    {
+      "budget": "b30",
+      "budget_pct": 30,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 13,
+      "pairs": "preact_cifar10;preact_cifar100",
+      "profile": "U"
+    },
+    {
+      "budget": "b30",
+      "budget_pct": 30,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 12,
+      "pairs": "resnet_cifar10;resnet_cifar100",
+      "profile": "T"
+    },
+    {
+      "budget": "b30",
+      "budget_pct": 30,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 13,
+      "pairs": "preact_cifar10;preact_cifar100",
+      "profile": "T"
+    },
+    {
+      "budget": "b50",
+      "budget_pct": 50,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 12,
+      "pairs": "resnet_cifar100;resnet_tiny",
+      "profile": "U"
+    },
+    {
+      "budget": "b70",
+      "budget_pct": 70,
+      "comment": "Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry.",
+      "groups_n": 12,
+      "pairs": "resnet_cifar100;resnet_tiny",
+      "profile": "U"
+    }
+  ],
+  "status": "PASS",
+  "tiny_split": "oficjalny val (cache_val); pozostałe pary: oficjalny test"
+}

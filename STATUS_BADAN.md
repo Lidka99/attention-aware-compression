@@ -1,6 +1,69 @@
-# Status badań — 2026-11-08
+# Status badań — 2026-11-22
 
-**Kontynuacja w nowym czacie:** [NOTATKA_KONTYNUACJA.md](NOTATKA_KONTYNUACJA.md).
+**Kontynuacja w nowym czacie:** [prompt](PROMPT_NOWY_CZAT.md) · [notatka](NOTATKA_KONTYNUACJA.md).
+
+**E045 ukończony — łagodny UNIFORM na Tiny dev.**
+[Wyniki i figura](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md):
+pełny **51,2200%**, b10 **46,3625%** (strata **4,8575 pp** przy redukcji
+**10,35% P / 10,67% MAC**), b20 **40,5800%** (strata **10,6400 pp** przy
+**20,33% P / 19,97% MAC**). Porównywalne U/b30 i U/b50 z E035 **dev**.
+`runs/E045/20261122T031350Z_a58b56a3`: 12/12 nowych ocen, 4GPU/exit0, 62,78 s,
+4/4 pełne modele zgodne z E035, audyt PASS. [Szkic 0.6](SZKIC_ARTYKULU.md).
+Priorytet: zachowanie jakości; 50% redukcji P nie jest wymogiem.
+
+**E044 ukończony — dodatni transfer L06 na Tiny w b50.**
+[Wyniki](experiments/2026-11-22_E044_l06_tiny/WYNIKI.md): L06−U
+**+2,100 pp (4/4)**, bootstrap po obrazach [+1,67; +2,52] pp, warunkowo na
+czterech modelach. W b30 **+0,255 pp (3/4)**. L06 b50 ma 21,740% wobec
+50,7775% pełnego modelu. Tiny poza wyborem L06, val użyty wcześniej w E035.
+`runs/E044/20261122T022955Z_6c1d2fc5`: 28/28, 4GPU/exit0, 124,97 s, audyt PASS.
+[Szkic](SZKIC_ARTYKULU.md): E043 potwierdzenie na rezerwie, E044 transfer.
+
+**E043 ukończony — L06 potwierdzony w b50, próg transferu b30 niespełniony.**
+[Wyniki](experiments/2026-11-21_E043_l06_potwierdzenie_transfer/WYNIKI.md):
+rezerwa CIFAR-100, L06−U po CMA **+1,215 pp (3/4)** przy ~50% i
+**+0,945 pp (4/4)** przy ~30% redukcji P (próg +1,00 pp). L06−T-proj
+**+1,065/+0,950 pp**, w obu 4/4. Strata L06 do nieskompresowanego:
+**19,970/7,420 pp**. `runs/E043/20261122T000341Z_9e23e96f`, 28/28 ocen,
+4GPU/exit0, 108,08 s, audyt PASS, 16/16 stanów b50/teacher zgodnych z E042.
+**Rezerwa CIFAR-100 jest użyta.** L06 to referencja przy b50; ewentualny
+test selektora wymaga osobnego protokołu i niewidzianych danych.
+
+**E042 ukończony — jest zapas pod pułapami UNIFORM.** [Wyniki](experiments/2026-11-21_E042_zapas_pod_uniform/WYNIKI.md):
+L06 vs U po CMA na dev **C100 +1,175 pp (3/4, próg spełniony)**,
+**C10 +1,475 pp (4/4, kontrola)**. Rzeczywiste P/MAC w [99,9%, 100%] U.
+Na C100 tylko 5/24 profili z dodatnią średnią; mediana −1,265 pp.
+Run `runs/E042/20261121T212257Z_207ae03f`: 216 ocen, 723,49 s, 4GPU/exit0,
+audyt PASS, bez treningu, testu i rezerwy. To najlepszy profil z ustalonej
+puli wybrany na dev. Zamrożony profil oceniono następnie w E043;
+[plan](PLAN_PUBLIKACJI.md), [nowe figury i szkic](SZKIC_ARTYKULU.md).
+
+**E041 ukończony — wynik mieszany przy dopasowanych P i MAC.**
+[Wyniki](experiments/2026-11-15_E041_kontrola_p_mac/WYNIKI.md):
+TILT−średnia4kontroli po CMA: C10 **+0,11250pp,2/4**, C100
+**+2,10375pp,4/4**. Łączne primary niespełnione przez CIFAR-10;
+repair analogicznie+0,12750/+1,96375pp. Kontrola104 naC10 lepsza
+od TILT o0,3850pp,4/4. **Tiny nie był objęty tym pilotem.**
+Run `runs/E041/20261116T040008Z_9e34f1e9`:4GPU/exit0,227,054s,
+168ocen, w tym96nowych kontrolnych; audyt i przeliczenie30kontrastów PASS.
+Bez treningu, testu/rezerwy i nowych plików wag. Próbę zamknięto zgodnie
+z protokołem; ewentualny Tiny to osobne rozszerzenie, nie zmiana bramki.
+
+E041 jest kontrolą w [polskim szkicu artykułu](SZKIC_ARTYKULU.md). ATP (2025) i
+Linear Decay (2020) są precedensami liniowego profilu: TILT to lokalna
+nazwa/adaptacja, nie nowa ogólna zasada alokacji. Szczegóły i źródła:
+[aktualizacja oceny wkładu](OCENA_WKLADU_I_ILUSTRACJI.md).
+
+Ograniczona próba mocniejszej metody E040 została rozstrzygnięta negatywnie.
+[Wyniki E040](experiments/2026-11-09_E040_interakcje_po_bn/WYNIKI.md):
+model par po BN ma1,765/2,332×MAE modelu addytywnego na C10/C100,
+na każdym zbiorze0/4seedów z poprawą; bramka predykcji niespełniona.
+Run `runs/E040/20261111T032100Z_07ac54f7`,4GPU/exit0,3032,72s,
+1558konstrukcji/1550CMA, audyt PASS. **Stop przed dev**, bez treningu,
+testu/rezerwy i nowych plików wag; stany RAM zwolnione, GPU wolne.
+Nie badano przewagi top1. Próba zamknięta bez kolejnych wariantów.
+[Plan artykułu](PLAN_PUBLIKACJI.md),
+[historyczny projekt i related work](NOTATKA_PROJEKTOWA_2026-11-09.md).
 
 ## Cel
 
@@ -69,9 +132,9 @@ ResNet/C100/70 nadal tylko2/4 dodatnie; NLL CMA gorsze TILT przyC100/50/70.
 Przy70 T top1 ResNet/C10032,68%, Tiny15,88%, PreAct/C10045,7425% — duże
 straty bezwzględne. Kierunek potwierdzony, nie uniwersalność/optimum.
 Protokół f42c0b8, kod5a7ec92; run `runs/E035/20261107T183831Z_8b0b14e0`.
-**Testy CIFAR i val Tiny odtąd użyte; rezerwa CIFAR100 nieużyta.** Tiny
-wcześniej otwierano do kształtu E005/E007, bez oceny modeli. Dawne wpisy
-„test/rezerwa nietknięte” poniżej opisują historyczny stan przed E035.
+**Testy CIFAR i val Tiny odtąd użyte; E035 nie użył rezerwy CIFAR-100.**
+Rezerwę wykorzystano później w E043. Tiny wcześniej otwierano do kształtu
+E005/E007, bez oceny modeli. Wpisy „test/rezerwa nietknięte” są historyczne.
 [Wyniki E035](experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md).
 Następny krok: opracowanie zakresu twierdzeń i materiału publikacyjnego;
 nie dostrajać na obejrzanym teście. Nowy trening wymaga osobnej zgody.
@@ -291,6 +354,12 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E037 | UNIFORM dopasowany MAC (U' z większą liczbą parametrów) | T−U' CMA tylko5/15 dodatnich; bramka1/15; U' wygrywa C100/Tiny | completed, primary negatywny |
 | E038 | FOLD/MAG2 × U/T, identyczne szerokości i BN | TILT pomaga MAG15/15; I przy50% dodatni1/5, brak ogólnej specyficzności foldingu | completed, primary negatywny |
 | E039 | cztery stałe przestawienia odchyleń TILT | T−mean4 CMA9/9 i4/4; MAC przestawień0,433–0,910×T | completed, primary spełniony |
+| E040 | model par szkody folding+BN pod P i MAC | MAE par/add1,765/2,332 na C10/C100,0/4poprawy; stop przed dev | completed, primary negatywny, kierunek zamknięty |
+| E041 | cztery kontrole profilu, dopasowane P i MAC≤0,1% | T−mean4 CMA C10+0,11250pp(2/4), C100+2,10375pp(4/4); Tiny niebadany | completed, primary niespełnione łącznie |
+| E042 | zapas jakości przy jednoczesnych pułapach UNIFORM, po 24 profile | najlepszy−U C100 +1,175 pp (3/4); kontrola C10 +1,475 pp (4/4) | completed, dodatni pilot dev |
+| E043 | zamrożony L06 na rezerwie CIFAR-100, potwierdzenie b50 i transfer b30 | b50 +1,215 pp (3/4); b30 +0,945 pp (4/4), poniżej +1 pp | completed, główne kryterium spełnione |
+| E044 | zamrożony L06 na istniejącym Tiny ImageNet | b50 +2,100 pp (4/4); b30 +0,255 pp (3/4) | completed, główne kryterium spełnione |
+| E045 | łagodny UNIFORM, Tiny dev i krzywa jakość–koszt | b10 46,3625% (strata 4,8575 pp), b20 40,5800% (strata 10,6400 pp) | completed, opisowy |
 
 ## E016 — wynik S1 (2026-10-27)
 
@@ -334,8 +403,8 @@ krok: decyzja o ramie publikacji — uczciwe pokazanie obu porównań
 (parameter-matched i MAC-matched) oraz kosztu, bez search i bez strojenia
 na użytym teście. Alternatywa to nowy, jawnie kosztowy cel alokacji, ale
 to nowy protokół i wymaga zgody; search pozostaje zamknięty.
-Testy po E035 są użyte; rezerwa CIFAR100 nieużyta. Nowy trening tylko po
-wyraźnej zgodzie. E031 mieszany, E033 negatywny, layer4 zamknięty.
+Testy po E035 są użyte, rezerwa CIFAR-100 użyta po E043. Nowy trening
+tylko po wyraźnej zgodzie. E031 mieszany, E033 negatywny, layer4 zamknięty.
 
 **Audyt luki alokacji:** [literature/AUDYT_ALOKACJA_FOLDING.md](literature/AUDYT_ALOKACJA_FOLDING.md)
 — Wang i in. (2025) wprost zostawiają optymalizację sparsity per warstwa jako

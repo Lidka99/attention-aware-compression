@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "phase": "operator_cpu",
+  "pid": 1353486,
+  "started_utc": "2026-11-15T23:49:14.413033+00:00",
+  "gpu_used": false,
+  "images_opened": false,
+  "quality_evaluated": false,
+  "rows": [
+    {
+      "pair": "resnet_cifar10",
+      "permutation": 101,
+      "params": 5582026,
+      "mac": 377022116,
+      "state_sha256": "1f1a8cd1ff477f25b70353c96cb814ddccb3aef504104bc4162300ee47cf3417"
+    },
+    {
+      "pair": "resnet_cifar10",
+      "permutation": 102,
+      "params": 5580111,
+      "mac": 376732824,
+      "state_sha256": "8edf5316f6609b42d0b4d5fb600592be4f568e2f305e2dbe12138994fc360349"
+    },
+    {
+      "pair": "resnet_cifar10",
+      "permutation": 103,
+      "params": 5581914,
+      "mac": 376652978,
+      "state_sha256": "04a636629570ecea8f22203ac6b8b490a22b00de0cefa96937ee501e63cf61de"
+    },
+    {
+      "pair": "resnet_cifar10",
+      "permutation": 104,
+      "params": 5580075,
+      "mac": 376789232,
+      "state_sha256": "3710e024daafcc286e42a6c8a36be69965820f701efc80a0421033bb2dc5df3f"
+    },
+    {
+      "pair": "resnet_cifar100",
+      "permutation": 101,
+      "params": 5577074,
+      "mac": 376047164,
+      "state_sha256": "86d9a07b4ad2468a1f3e14e775b224c206309d4bd0a5957cfcd6d3119d61699b"
+    },
+    {
+      "pair": "resnet_cifar100",
+      "permutation": 102,
+      "params": 5576151,
+      "mac": 375958028,
+      "state_sha256": "122888e95a8bf26f6143173e105e885d7a5215d24b4a0f334b936db76bf3ee00"
+    },
+    {
+      "pair": "resnet_cifar100",
+      "permutation": 103,
+      "params": 5580010,
+      "mac": 375973184,
+      "state_sha256": "cca2c5173e502725017d95ce453fd477984ac97fc54c7e27c375ef879d53ca37"
+    },
+    {
+      "pair": "resnet_cifar100",
+      "permutation": 104,
+      "params": 5576072,
+      "mac": 375797072,
+      "state_sha256": "4da693e683d3b4dec25fd371e456a5a1e447b6d50c78e60462f8d81856b45e0e"
+    }
+  ],
+  "code_hashes": {
+    "experiments/2026-11-15_E041_kontrola_p_mac/experiment.py": "5c61a3ec6cc0392c3dd280fd1da2848bf8c2f44d8928d6a852c4d19660045d95",
+    "experiments/2026-11-15_E041_kontrola_p_mac/geometry.py": "611fbca19808d7dd6537a67c011d95de4e951a820fe5ee034b50d1b54d1d291b",
+    "experiments/2026-11-15_E041_kontrola_p_mac/OPIS.md": "445bbace63a58c989db353147463c157ce30ffe5d47e56894f3bcf255a6ff06d"
+  },
+  "frozen_sha256": "ddaacb15afe677681d832c85a87d9f02fd5bf10d429dd64b39bb07be56c36e16",
+  "data_open_attempts": [],
+  "check_run": "runs/E041/check_20261115T234914Z_ab01e2db"
+}

@@ -1,0 +1,7 @@
+budget,budget_pct,profile,pairs,groups_n,comment
+b30,30,U,resnet_cifar10;resnet_cifar100,12,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
+b30,30,U,preact_cifar10;preact_cifar100,13,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
+b30,30,T,resnet_cifar10;resnet_cifar100,12,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
+b30,30,T,preact_cifar10;preact_cifar100,13,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
+b50,50,U,resnet_cifar100;resnet_tiny,12,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
+b70,70,U,resnet_cifar100;resnet_tiny,12,"Identyczne wektory szerokości; nie identyczne modele, bo różnią się klasyfikator/parametry."
