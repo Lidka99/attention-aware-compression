@@ -1,0 +1,48 @@
+{
+  "seeds": [42, 43, 44, 45],
+  "wave_order": ["cifar100", "tiny"],
+  "epochs": 240,
+  "batch_per_gpu": 128,
+  "global_batch_per_model": 128,
+  "gradient_accumulation": 1,
+  "workers_per_gpu": 2,
+  "eval_every": 5,
+  "optimizer": "SGD",
+  "nesterov": true,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "lr": 0.1,
+  "min_lr": 0.001,
+  "warmup_epochs": 5,
+  "amp_fp16": true,
+  "randaugment_ops": 2,
+  "randaugment_magnitude": 7,
+  "mix_probability": 0.75,
+  "mixup_alpha": 0.2,
+  "cutmix_alpha": 1.0,
+  "unmixed_tail_epochs": 10,
+  "label_smoothing": 0.05,
+  "wall_seconds": 86400,
+  "smoke_wall_seconds": 600,
+  "datasets": {
+    "cifar100": {
+      "input_size": 32,
+      "stem_stride": 1,
+      "classes": 100,
+      "parameters": 11220132,
+      "mac": 555468800,
+      "baseline_pct": [74.94, 75.1, 75.04, 75.86],
+      "target_pct": 77.5
+    },
+    "tiny": {
+      "input_size": 64,
+      "stem_stride": 2,
+      "classes": 200,
+      "parameters": 11271432,
+      "mac": 555520000,
+      "crop_scale": [0.65, 1.0],
+      "baseline_pct": [51.08, 50.6, 50.65, 50.95],
+      "target_pct": 59.0
+    }
+  }
+}

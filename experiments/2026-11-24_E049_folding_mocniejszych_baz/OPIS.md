@@ -1,0 +1,18 @@
+# 2026-11-24_E049_folding_mocniejszych_baz — czy zmiana alokacji chroni jakość po wzmocnieniu bazy?
+
+## Zamrożone pytanie główne
+
+Na **CIFAR-100 i Tiny ImageNet** sprawdzamy, czy zamrożony L06 przy łagodnej kompresji zmniejsza stratę top‑1 pod jednoczesnymi pułapami P i MAC równomiernego foldingu. Używamy wszystkich czterech nowych `last.pt` na zbiór z audytowanego E048. Bramki trafności modeli pełnych z E048 raportujemy osobno; brak ich spełnienia nie zmienia planu E049 ani nie powoduje wyboru lepszych seedów.
+
+1. **Główne b10:** nominalnie 10% redukcji P, równomierny profil U dobrany całkowitoliczbowo jak w E045 (dopuszczalne `k ≤ n`). Pułapy to oba rzeczywiste koszty U. L06 używa przesunięć `(2, −15, −14, 13, −1, −5, −6, 9, −12, −13, 17, −6)` pp udziału zachowanych kanałów w kolejności upstream; przesunięcia wybrano w E042 i nie zmieniano ich w E048/E049. Po zaokrągleniu projekcja E041 z `HIGH=n` i korekta najwyżej dwóch grup. **T-proj**: taki sam rzut liniowego profilu z nachyleniem `0,30`, z dopuszczeniem zerowej redukcji przed projekcją. L06 i T-proj muszą mieścić się w 99,9–100% kosztu U w obu miarach. Każdy z trzech profili oszczędza co najmniej 9,5% zarówno P, jak i MAC względem **własnego** pełnego modelu.
+2. **Rozstrzygnięcie b10** liczymy oddzielnie na oficjalnym teście CIFAR-100 i oficjalnym *val* Tiny. Kontrast główny L06−U: średnio ≥+1,00 pp i ≥3/4 dodatnich par; użyteczność: średnia strata L06 do własnego pełnego modelu ≤3,00 pp. Teza o poprawie z zachowaniem jakości na obu zbiorach wymaga spełnienia obu warunków na **każdym** zbiorze. L06−T-proj raportujemy, nie podstawiamy go w miejsce głównego kontrastu. Progi są opisowe, nie są testem istotności.
+3. **Powtórzenie E035:** b30/b50/b70, U i zamrożony TILT z nachyleniem `0,30`, wyłącznie dopasowanie liczby P (T/U w 99,9–100%). MAC i strata do pełnego jawnie. Wyniki opisowe, niezależne od bramki b10. Na nowym Tiny stem zachowuje mapę 32×32 na początku, więc absolutne MAC różnią się od E019/E035, nawet gdy P są zbliżone.
+
+## Operator, dane i raport
+
+- Upstream `694691556e8314a835178a741938dd3d4d80c171`, adapter szerokości z E029 i zachowanie biasu FC. Dla nowych modeli kontrolujemy pełny forward oraz P/MAC Conv/Linear; geometrie obu układów rozwiązuje się i sprawdza na CPU przed punktacją. Cztery seedy przypisane 1:1 do czterech RTX 2080 Ti. Jeden proces na GPU, bez treningu wag i konkurencyjnego zadania GPU.
+- A4096 i widoki z E035 z odpowiedniego train; dla wszystkich profili i modelu pełnego reset BN oraz CMA po 32 batchach po 128 obrazów. FP32, bez TF32. Kontrola pełnego modelu przed CMA. Nie używamy etykiet do odtworzenia statystyk ani optymalizacji szerokości.
+- Najpierw dev i kontrole techniczne na wszystkich seedach. Zwolnienie benchmarków następuje po potwierdzeniu kompletnych ocen dev i zgodności geometrii; **nie zależy od tego, jaką trafność uzyskano na dev**. Po zwolnieniu punktujemy identyczne stany po CMA. Oficjalny test CIFAR-100 i oficjalny val Tiny są **wcześniej użytymi benchmarkami projektu**, rozłącznymi z train/dev nowych treningów; żadnego dobierania profilu, epoki ani progu na ich wynikach. Rezerwa CIFAR-100 i ImageNetV2 poza zakresem.
+- Per seed i dla średniej: top‑1, NLL, bezwzględne P i MAC/obraz, redukcje względem pełnego, strata do pełnego po CMA oraz różnice sparowane. Werdykt praktyczny odrębny od integralności biegu. Przeliczalna tabela i krótki tekst w katalogu runu. Figury bazują na wynikach ukończonych, bez łączenia dev z benchmarkiem.
+
+[Odtworzenie](URUCHOMIENIE.md). E049 ocenia **transfer jednego zamrożonego profilu**, a nie nowy ogólny optymalizator. Mniejszy koszt liczbowy nie jest pomiarem przyspieszenia, a poprawa pełnego Tiny z E048 dotyczy łącznej zmiany stema i przepisu.
