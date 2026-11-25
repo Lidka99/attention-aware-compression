@@ -1,6 +1,39 @@
-# Status badań — 2026-11-22
+# Status badań — 2026-11-24
 
 **Kontynuacja w nowym czacie:** [prompt](PROMPT_NOWY_CZAT.md) · [notatka](NOTATKA_KONTYNUACJA.md).
+
+**Aktualny priorytet po decyzji użytkowniczki: mocniejsze modele na CIFAR-100 i Tiny ImageNet.**
+[E048](experiments/2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md) trwa:
+`runs/E048/train_20261124T232822Z_89dfc621`, cztery GPU i cztery seedy na zbiór,
+najpierw CIFAR-100, potem Tiny. CPU check i smoke obu fal PASS; pełna trafność
+jeszcze nieznana. Cel dev: ≥77,50% / ≥59,00%. Na Tiny stem 3×3/s2 bez maxpool
+zwiększa rozdzielczość pierwszego etapu, ale podnosi koszt modelu pełnego z
+148,15 do 555,52 mln MAC/obraz. Mierzymy te koszty jawnie.
+
+[E049](experiments/2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md) jest w kolejce
+`runs/E049/eval_20261124T234559Z_b4ca081b` po technicznym audycie E048, bez zależności
+od tego, czy E048 przekroczy cele jakości. CPU potwierdził 20/20 konstrukcji na
+checkpointach smoke. Główny kontrast: zamrożony L06/b10−U przy dwóch pułapach
+na obu zbiorach; kontrole T-proj i powtórzenie porównań U/T przy b30/b50/b70.
+[Teza i warunki jej obrony](PLAN_PUBLIKACJI.md#aktualny-kierunek-po-decyzji-2026-11-24).
+
+**E047 ukończony — L06/b10 potwierdzony na zewnętrznej próbie ImageNetV2.**
+2 000 obrazów, 200 klas Tiny, **+1,3500 pp (4/4)** vs U, sparowany 95%
+bootstrap **[+0,700; +2,025] pp** warunkowo na modelach. Pełny/U/L06:
+**30,3375/26,9875/28,3375%**; strata U/L06 **3,3500/2,0000 pp**. Te same
+modele i pułapy co w E046. `runs/E047/20261122T053804Z_ae2dec73`: 4GPU/exit0,
+56,25 s, 12/12 stanów E046 sprawdzone przed punktacją, audyt PASS.
+[Wyniki](experiments/2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md) ·
+[figura b10](experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/README.md) ·
+[szkic 0.9 do recenzji wewnętrznej](SZKIC_ARTYKULU.md). ImageNetV2 E047 odtąd użyty.
+
+**E046 ukończony — L06 daje +1,1425 pp (4/4) przy b10 na Tiny dev.**
+Top‑1 **47,5050%**, sparowana strata **3,7150 pp** wobec 4,8575 pp dla U.
+**10 104 855 P / 132 302 192 MAC** pod oboma pułapami E045; geometria z
+jawną granicą `k ≤ n`. `runs/E046/20261122T045655Z_0b0c53b7`:
+4GPU/exit0, 62,10 s, 8/8 odtworzeń E045 i 4 oceny L06, audyt PASS.
+[Wyniki](experiments/2026-11-22_E046_l06_b10_tiny/WYNIKI.md) ·
+[hierarchia dowodów](PLAN_PUBLIKACJI.md) · [szkic 0.7](SZKIC_ARTYKULU.md).
 
 **E045 ukończony — łagodny UNIFORM na Tiny dev.**
 [Wyniki i figura](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md):
@@ -360,6 +393,8 @@ replikacji.** TILT+0.30 vs UNIFORM: **+0,81 / +1,96 / +1,60 pp** przy
 | E043 | zamrożony L06 na rezerwie CIFAR-100, potwierdzenie b50 i transfer b30 | b50 +1,215 pp (3/4); b30 +0,945 pp (4/4), poniżej +1 pp | completed, główne kryterium spełnione |
 | E044 | zamrożony L06 na istniejącym Tiny ImageNet | b50 +2,100 pp (4/4); b30 +0,255 pp (3/4) | completed, główne kryterium spełnione |
 | E045 | łagodny UNIFORM, Tiny dev i krzywa jakość–koszt | b10 46,3625% (strata 4,8575 pp), b20 40,5800% (strata 10,6400 pp) | completed, opisowy |
+| E046 | zamrożony L06 przy b10 pod dwoma pułapami, Tiny dev | 47,5050%; zysk +1,1425 pp (4/4), strata do pełnego 3,7150 pp | completed, dodatni pilot dev |
+| E047 | replikacja L06/b10 na ImageNetV2 (200 klas Tiny) | +1,3500 pp (4/4), CI [+0,700; +2,025] pp; strata do pełnego 2,0000 pp | completed, kryterium potwierdzenia spełnione |
 
 ## E016 — wynik S1 (2026-10-27)
 

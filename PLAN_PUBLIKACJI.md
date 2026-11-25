@@ -1,6 +1,98 @@
 # Alokacja budżetu w foldingu — plan publikacji
 
+## Aktualny kierunek po decyzji 2026-11-24
+
+**Główne pytanie do artykułu:** czy na mocniejszych modelach CIFAR-100 i Tiny
+ImageNet można zachować więcej top‑1, zmieniając wyłącznie alokację kanałów
+po treningu, przy tych samych limitach liczby parametrów i MAC?
+
+1. [E048](experiments/2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md) sprawdza
+   jakość pełnych modeli. To warunek praktycznej interpretacji, nie algorytmiczna
+   nowość. Na Tiny zmienia się łącznie stem, koszt pełnego modelu i receptura.
+2. [E049](experiments/2026-11-24_E049_folding_mocniejszych_baz/OPIS.md) sprawdza
+   z góry ustalony kontrast L06−UNIFORM przy b10 pod oboma pułapami. Aby oprzeć
+   na nim tezę o zachowaniu jakości na **obu** zbiorach, żądamy po około 10%
+   redukcji obu kosztów, średniego zysku ≥1 pp z co najmniej trzema dodatnimi
+   parami oraz ≤3 pp średniej straty do modelu pełnego na każdym
+   zbiorze. T-proj to prosty nierównomierny punkt odniesienia w tym samym budżecie.
+3. Właściwe zestawienie do tekstu: `pełny / U / L06 / T-proj`, rzeczywiste
+   P/MAC, strata do pełnego i sparowany zysk; osobno porównanie TILT przy
+   dopasowanym P, z jego kosztem MAC. Powtórzona ocena benchmarków jest
+   rozłączna z train/dev E048, lecz benchmarki używano historycznie.
+
+Jeśli wynik przejdzie bramkę, wkładem jest udokumentowany transfer
+zamrożonej alokacji pod dwoma ograniczeniami, bez dostrajania wag. Nie
+jest to dowód na uniwersalny selektor. Do głównego tekstu wybieramy te
+porównania i ograniczenia, które rozstrzygają to pytanie; historie prób
+eksploracyjnych zostają w repozytorium. Werdykt przy niespełnieniu progu
+pozostaje jawny, a kolejny protokół odpowiada wskazanemu przez dane problemowi.
+
+## Po E047: zewnętrzne potwierdzenie łagodnej kompresji — 2026-11-22
+
+[E047](experiments/2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md) potwierdza
+wynik zamrożonego L06/b10 na **2 000 nowych obrazach ImageNetV2
+MatchedFrequency** dla 200 klas Tiny. Przy identycznych stanach E046
+i obu pułapach UNIFORM: **+1,3500 pp (4/4)**, 95% sparowany bootstrap
+**[+0,700; +2,025] pp** warunkowo na tych checkpointach. Strata do pełnego
+modelu spada z **3,3500 do 2,0000 pp** (top‑1 pełny/U/L06:
+30,3375/26,9875/28,3375%). To nowe źródło obrazów z tymi samymi klasami.
+
+**Układ głównego tekstu:** E035 daje dowód dla TILT przy stałym P,
+E036/E037/E041 pokazują ograniczenia kosztu, a **E046 → E047** jest
+głównym przykładem zachowania trafności przy dwóch pułapach i łagodnej
+kompresji. E043 zachowuje rolę potwierdzenia na rezerwie CIFAR-100 przy
+b50, E044 — transferu na użyty val Tiny. Wykres lub tabela b10 mają
+oddzielne panele dla Tiny dev i ImageNetV2; nie łączyć ich w jedną krzywą
+ani nie wnioskować o absolutnej trafności oficjalnego testu Tiny.
+**Gotowy [szkic 0.9 do recenzji wewnętrznej](SZKIC_ARTYKULU.md).** Krótszy
+abstrakt rozdziela TILT przy dopasowanym P, koszt MAC i L06 przy b10.
+[Figura b10 i odtworzenie](experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/README.md).
+W recenzji ocenić zakres tezy o alokacji i czytelność porównań kosztu;
+po recenzji dopasować materiał do formatu zgłoszenia.
+
+## Po E046: teza i hierarchia dowodów — 2026-11-22
+
+*Potwierdzenie b10 opisane poniżej wykonano jako E047.*
+
+**Kierunek: studium empiryczne alokacji szerokości w foldingu CNN bez
+fine-tuningu, z rekalibracją BN.** TILT pokazuje, że rozdział budżetu
+między grupy ma znaczenie przy stałym P. Kontrole kosztu wyjaśniają, kiedy
+ten zysk nie przekłada się na przewagę przy podobnych MAC. L06 daje osobny
+wynik: nierówna alokacja może zmniejszyć stratę także przy obu pułapach
+UNIFORM, w tym przy około 10% redukcji na Tiny dev.
+
+**Związek z literaturą.** [Wang i in. 2025, s. 13](https://arxiv.org/pdf/2502.10216v2#page=13)
+wprost zostawiają optymalizację sparsity per warstwa jako future work.
+[*Cut Less, Fold More*, rys. 1](https://arxiv.org/pdf/2602.18116v1#page=5)
+i [rys. 8](https://arxiv.org/pdf/2602.18116v1#page=19) porównują operator
+foldingu z MAG1/MAG2 przy jednolitym ratio per warstwa. U nas główną
+zmienną jest **gdzie przeznaczyć budżet zachowanych kanałów**, przy tym
+samym operatorze. To empiryczna odpowiedź na część pytania o alokację, nie
+walidacja ogólnego algorytmu wyboru szerokości. Liniowy kształt TILT ma
+precedensy; wkładem jest jego adaptacja, porównanie oraz pomiar kompromisów.
+
+| Rola w artykule | Eksperymenty | Co uzasadniają |
+|---|---|---|
+| Główny dowód przy stałym P | **E035**, wsparty E034 | Po CMA TILT > U w 15/15 konfiguracji, każda 4/4 seedów, w ówczesnej niezależnej fazie; E034 sprawdza drugą architekturę. |
+| Niezbędne kontrole kosztu | **E036/E037, E041** | TILT ma 1,105–1,823× MAC U; przy zbliżonym MAC wygrywa średnio w 5/15 konfiguracji. E041 dopasowuje oba koszty do historycznego TILT, z wynikiem zależnym od zbioru. |
+| Dowód istnienia i potwierdzenie pod pułapami U | **E043**, E044 ze wskazaniem ról danych | L06/b50 +1,215 pp na odłożonej rezerwie CIFAR-100 i +2,100 pp na użytym wcześniej val Tiny. Przy b30 zyski są mniejsze; kontrast CIFAR-100 nie spełnia progu +1 pp. |
+| Łagodna kompresja i jakość bezwzględna | **E045/E046** | Wspólny Tiny dev: pełny 51,2200%, U/b10 46,3625%, L06/b10 47,5050%, czyli +1,1425 pp (4/4). Strata L06 3,7150 pp przy 10,41% mniej P i 10,70% mniej MAC. |
+| Dowody pomocnicze i dodatek | E029–E031, E038–E040, E042, E024–E028 | Zgodność operatora (nie pełna reprodukcja CLFM), efekt TILT też dla MAG2, ograniczenie kontroli kolejności, pochodzenie L06 z pilota dev i granice próbowanych selektorów. E038 należy krótko omówić w tekście głównym. |
+
+TILT pozostaje punktem odniesienia dla warunku stałego P. T-proj jest
+innym, rzutowanym na pułapy U wariantem: na rezerwie w E043 uzyskał wobec
+U +0,150 pp w b50 i −0,005 pp w b30. E046 nie oceniał żadnego TILT/b10.
+
+**Najbliższy krok redakcyjny:** ułożyć artykuł wokół E035 → E036/E037 →
+E043 oraz E045/E046. Pokazać top‑1 i stratę do pełnego obok rzeczywistych
+P/MAC; krzywa Tiny dev może zawierać punkt E046, a E044 pozostaje na osobnym
+panelu val. Jeżeli potrzebujemy mocniejszego dowodu dla b10, najbardziej
+wartościowe będzie niezależne potwierdzenie jednego zamrożonego porównania
+na niewidzianych danych za odrębną zgodą. [Szkic 0.7](SZKIC_ARTYKULU.md).
+
 ## Po E045: zachowanie jakości przy łagodnym budżecie — 2026-11-22
+
+*Stan historyczny: opisane niżej pytanie sprawdzono jako E046.*
 
 [E045](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md) dodaje
 na Tiny **dev** krzywą 0/10/20/30/50% dla UNIFORM przy tej samej CMA.

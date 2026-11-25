@@ -1,6 +1,116 @@
-# Prompt do nowego czatu — po E045 (2026-11-22)
+# Prompt do nowego czatu — E048, E049 i wkład artykułu
 
-## Do skopiowania
+## Do skopiowania — bieżący stan
+
+```text
+Kontynuuję pracę nad artykułem o foldingu CNN w repozytorium
+/home/users/s224574/attention/badania_atencja_cnn. Mam około tygodnia do
+przedstawienia artykułu promotorowi. Potrzebuję konkretnego, uczciwego
+wkładu na CIFAR-100 i Tiny ImageNet; CIFAR-10 nie wystarczy. Rozmawiaj ze
+mną po polsku, rzeczowo i krytycznie. Manuskrypt jest po angielsku.
+
+Najpierw przeczytaj STATUS_BADAN.md i AGENTS.md, aktualny rozdział
+PLAN_PUBLIKACJI.md oraz WYNIKI.md E048/E049. Źródło manuskryptu: paper/main.tex
+i paper/abstract.tex; istnieje paper/main.pdf. Nie odtwarzaj całej historii.
+
+Sprawdź faktyczny stan istniejących uruchomień:
+- E048: runs/E048/train_20261124T232822Z_89dfc621 — trening od zera na 4 GPU,
+  4 seedy na zbiór, 240 epok na seed; najpierw CIFAR-100, następnie Tiny.
+- E049: runs/E049/eval_20261124T234559Z_b4ca081b — oczekuje na ukończenie
+  E048; uruchamia się automatycznie po audycie 8/8 checkpointów i zwolnieniu GPU.
+Odczytaj manifest.json i w razie potrzeby sprawdź konkretny PID oraz logi.
+Nie uruchamiaj drugiej kopii ani konkurencyjnych zadań GPU. Jeśli są wyniki,
+odczytaj audit.json, a dla E049 także WYNIKI.md i per_seed.csv w katalogu runu.
+
+E048: cele dev to ≥77,50% na CIFAR-100 i ≥59,00% na Tiny, z poprawą na ≥3/4
+par seedów względem dawnych baz (75,235% i 50,82%). Tiny ma nowy stem i inną
+recepturę; koszt pełnego modelu rośnie z 148,15 do 555,52 mln MAC/obraz.
+
+E049: porównanie pełny / UNIFORM / L06 / T-proj przy b10 na obu zbiorach.
+Ten sam operator foldingu i kalibracja BN, bez dostrajania wag. Główna bramka
+na każdym zbiorze: ≥9,5% mniej P i MAC względem własnego pełnego modelu,
+L06−U średnio ≥1 pp i ≥3/4 dodatnich par oraz strata L06 do pełnego ≤3 pp.
+T-proj to dodatkowy nierównomierny punkt odniesienia pod tymi samymi pułapami.
+Porównania U/TILT przy b30/b50/b70 mają dopasowane P, nie MAC. Benchmarki były
+używane wcześniej; nie stroimy profili ani progów na ich wynikach.
+
+Zacznij od krótkiego meldunku o E048/E049. Jeśli trening jeszcze trwa,
+kontynuujmy dyskusję: zaproponuj jedno zdanie o wkładzie i układ głównej
+tabeli dla promotora. Rozróżnij lepszą bazę od wkładu empirycznego: czy raz
+wybrany profil zachowuje więcej top‑1 przy obu limitach, także względem
+T-proj? L06 nie jest uniwersalnym optymalizatorem. Jeśli wyniki są gotowe,
+oceń uczciwie, który wariant tezy potwierdzają, i co konkretnie trzeba poprawić
+w abstrakcie, tabelach i wykresach. Do artykułu wybieramy porównania potrzebne
+do rozstrzygnięcia tezy i pokazujemy jej istotne ograniczenia.
+```
+
+## Historyczny prompt po E047 — angielski manuskrypt LaTeX po szkicu 0.9
+
+```text
+Pracuj w /home/users/s224574/attention/badania_atencja_cnn. Celem jest
+pełny angielski artykuł LaTeX do recenzji wewnętrznej, z gotowymi figurami
+i tabelami. Artykuł, podpisy, osie, legendy i tabele pisz po angielsku;
+ze mną rozmawiaj po polsku. Wykonaj poniższe kroki.
+
+1. Przeczytaj STATUS_BADAN.md, AGENTS.md, SZKIC_ARTYKULU.md (0.9),
+   sekcję „Po E047” w PLAN_PUBLIKACJI.md i szkic w paper/abstract.tex.
+   Szczegóły sprawdzaj w raportach WYNIKI i audytowanych artefaktach runs/.
+   Ten etap opiera się na istniejących wynikach; nowy trening lub ocena
+   nowych danych wymaga osobnej zgody.
+
+2. Zredaguj abstrakt i wstęp wokół wkładu. Wang et al. (2025, s. 13)
+   zostawiają dobór kompresji per warstwa jako dalszą pracę; w głównych
+   porównaniach CNN w Cut Less, Fold More (rys. 1 i 8) ratio jest jednolite.
+   My badamy, jak alokacja szerokości sprzężonych grup kanałów zmienia
+   trafność przy tym samym operatorze foldingu i rekalibracji A4096/CMA.
+   To badanie empiryczne bez dostrajania wag, z kalibracją na danych.
+   TILT to adaptacja znanej reguły liniowej; L06 to odrębny profil z puli
+   E042, wybrany na CIFAR-100 dev i zamrożony przed dalszymi ocenami.
+   Nie deklaruj pierwszeństwa, ogólnego optymalizatora ani data-free.
+
+3. Napisz kompletny paper/main.tex z bibliografią paper/references.bib.
+   Dołącz paper/abstract.tex, opisz metody, wyniki, dyskusję, ograniczenia
+   i wnioski. Poprowadź wyniki w tej kolejności:
+   - E035: przy dopasowanej liczbie parametrów (P) TILT poprawia top-1
+     względem UNIFORM w 15/15 konfiguracji po CMA (4/4 seedy w każdej). To faza
+     niezależna: oficjalne testy CIFAR i Tiny val.
+   - E036/E037/E041: TILT ma 1.105–1.823× MAC UNIFORM przy dopasowanych P.
+     Na dev szerszy UNIFORM U′ o zbliżonym MAC wygrywa w 10/15 konfiguracji
+     i ma więcej parametrów. E041 dopasowuje oba koszty do TILT i daje
+     wynik zależny od zbioru. Rozróżnij liczbę MAC i zmierzoną latencję.
+   - E046/E047: przy b10 L06 mieści się pod oboma pułapami UNIFORM,
+     redukując względem pełnego modelu P o 10.41%, a MAC o 10.70%.
+     Zysk wynosi +1.1425 pp na Tiny dev i +1.3500 pp na ImageNetV2
+     MatchedFrequency (4/4 w obu). Na ImageNetV2 sparowana strata do
+     pełnego modelu spada z 3.35 do 2.00 pp. Sparowany 95% przedział
+     bootstrap [+0.700, +2.025] pp dla zysku dotyczy obrazów przy ustalonych
+     modelach. To 2,000 nowych obrazów tych samych 200 klas, ocenionych
+     na tych samych czterech checkpointach co w E046. E043/E044 są
+     uzupełnieniem: osobno traktuj
+     rezerwę CIFAR-100, wcześniej użyty Tiny val, Tiny dev i ImageNetV2.
+
+4. Wygeneruj trzy figury: (a) sparowane różnice TILT–UNIFORM przy
+   dopasowanych P z E035; (b) top-1 i rzeczywiste koszty U/TILT/U′ na
+   wspólnym dev E037; (c) b10 z osobnymi panelami Tiny dev i ImageNetV2,
+   z punktami po seedach i przedziałem E047. Wykorzystaj istniejące
+   generatory z figures/publikacja/ E035 i E037 oraz z
+   experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/.
+   Angielskie figury zapisz w katalogach eksperymentów jako wektorowy
+   PDF i PNG. Dołącz je do artykułu i podaj instrukcje odtworzenia.
+
+5. Przygotuj i dołącz tabele LaTeX w paper/tables/ oraz zapisz dane
+   tabel jako CSV: TILT–UNIFORM (E035), kontrole kosztu i b10. Dla b10
+   podaj Full/UNIFORM/L06, rzeczywiste P i MAC per image, top-1 oraz
+   sparowaną stratę do pełnego modelu, osobno dla obu prób. Dla E046/E047
+   bierz liczby z analysis/summary.json i analysis/per_seed.csv.
+
+6. Sprawdź zgodność liczb, podpisów, cytowań i odsyłaczy. Skompiluj PDF
+   i sprawdź czytelność figur i tabel. Jeśli brakuje silnika LaTeX, podaj
+   stan kompilacji i polecenie do odtworzenia. Na końcu daj ścieżki do
+   gotowych źródeł LaTeX, PDF, figur i tabel.
+```
+
+## Historyczny prompt po E045
 
 ```text
 Kontynuuj badania nad foldingiem CNN bez fine-tuningu w repozytorium

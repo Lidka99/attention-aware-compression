@@ -1,11 +1,35 @@
-# Kontynuacja — 2026-11-22
+# Kontynuacja — 2026-11-24
+
+**Aktualnie: E048 działa (CIFAR-100 → Tiny na czterech RTX 2080 Ti), E049
+automatycznie czeka na audyt E048.** Użytkowniczka zatwierdziła trening od
+zera i ponowne porównania na obu zbiorach. Sprawdź manifesty i faktyczne
+procesy, nie uruchamiaj powtórnie w ciemno. [Stan E048](experiments/2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md),
+[stan E049](experiments/2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md).
+Po zakończeniu: ocenić audyty i dopiero wtedy zmienić główną tezę PDF.
+
+**E047 ukończony, potwierdzenie b10.** ImageNetV2 MatchedFrequency dla 200
+klas Tiny, 2 000 nowych obrazów. L06 vs U **+1,3500 pp (4/4)**, bootstrap
+**[+0,700; +2,025] pp** warunkowo na czterech modelach, strata **2,0000 pp**
+wobec **3,3500 pp** dla U. Run `runs/E047/20261122T053804Z_ae2dec73`:
+4 GPU, audyt PASS, te same 12 stanów co w E046. Dane E047 są odtąd użyte.
+[Wyniki i figura b10](experiments/2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md) ·
+[szkic 0.9 do recenzji wewnętrznej](SZKIC_ARTYKULU.md).
+
+**E046 ukończony na Tiny dev.** L06/b10 **47,5050%**, zysk nad U
+**+1,1425 pp (4/4)**, strata do pełnego **3,7150 pp**. Oba pułapy E045
+dotrzymane przy jawnie rozszerzonej granicy projekcji `k ≤ n`. Run
+`runs/E046/20261122T045655Z_0b0c53b7`, 4 GPU, 8 odtworzeń E045 i 4 nowe
+oceny, audyt PASS. [Wyniki](experiments/2026-11-22_E046_l06_b10_tiny/WYNIKI.md).
+W artykule TILT/E035 pozostaje dowodem przy stałym P; E046 pokazuje osobny
+wynik L06 przy łagodnej kompresji pod dwoma pułapami. [Plan](PLAN_PUBLIKACJI.md)
+i [szkic 0.7](SZKIC_ARTYKULU.md).
 
 **E045 ukończony — łagodny UNIFORM na Tiny dev.** [Wyniki](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md):
 pełny 51,2200%, b10 **46,3625%** (−4,8575 pp, 10,35% P/10,67% MAC),
 b20 **40,5800%** (−10,6400 pp, 20,33% P/19,97% MAC). Run
 `runs/E045/20261122T031350Z_a58b56a3`: 4GPU/exit0, 12 nowych ocen,
-8 odniesień U/b30 i U/b50 z E035 dev, audyt PASS. Bez oceny val. Szkic 0.6
-zawiera krzywą. 50% nie jest wymogiem; kolejny krok w [prompcie](PROMPT_NOWY_CZAT.md).
+8 odniesień U/b30 i U/b50 z E035 dev, audyt PASS. Bez oceny val. Szkic
+zawiera krzywą. 50% nie jest wymogiem.
 
 **E044 ukończony.** [Wyniki](experiments/2026-11-22_E044_l06_tiny/WYNIKI.md):
 L06−U **+2,100 pp (4/4)** w b50, **+0,255 pp (3/4)** w b30. Główne

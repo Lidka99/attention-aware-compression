@@ -4,6 +4,10 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 
 | Eksperyment | Stan | Dokumentacja |
 |---|---|---|
+| E049 — powtórzenie foldingu na E048 | CPU 20/20 PASS; run oczekuje na audyt E048 | [Stan](2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md), [protokół](2026-11-24_E049_folding_mocniejszych_baz/OPIS.md) |
+| E048 — mocniejsze ResNet18 na CIFAR-100 i Tiny | W toku, 4 GPU; CPU i smoke obu zbiorów PASS | [Stan](2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md), [protokół](2026-11-24_E048_mocniejsze_modele_bazowe/OPIS.md) |
+| E047 — zewnętrzne potwierdzenie L06/b10 | Completed, audyt PASS; ImageNetV2: +1,3500 pp (4/4), CI [+0,700; +2,025] pp | [Wyniki](2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md), [protokół](2026-11-22_E047_l06_b10_imagenetv2/OPIS.md) |
+| E046 — zamrożony L06/b10 na Tiny | Completed, audyt PASS; dev 47,5050%, +1,1425 pp (4/4), strata 3,7150 pp, pod P/MAC UNIFORM | [Wyniki](2026-11-22_E046_l06_b10_tiny/WYNIKI.md), [protokół](2026-11-22_E046_l06_b10_tiny/OPIS.md) |
 | E045 — łagodny UNIFORM na Tiny | Completed, 4GPU/exit0; dev b10 46,36% (−4,86 pp), b20 40,58% (−10,64 pp) | [Wyniki i krzywa](2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md), [protokół](2026-11-22_E045_lagodny_uniform_tiny/OPIS.md) |
 | E044 — transfer L06 na Tiny ImageNet | Completed, 4GPU/exit0; b50 +2,100 pp (4/4), b30 +0,255 pp (3/4) | [Wyniki](2026-11-22_E044_l06_tiny/WYNIKI.md), [protokół](2026-11-22_E044_l06_tiny/OPIS.md) |
 | E043 — potwierdzenie i transfer zamrożonego L06 | Completed, 4GPU/exit0; rezerwa C100: b50 +1,215 pp (3/4, próg spełniony); b30 +0,945 pp (4/4, poniżej progu) | [Wyniki](2026-11-21_E043_l06_potwierdzenie_transfer/WYNIKI.md), [protokół](2026-11-21_E043_l06_potwierdzenie_transfer/OPIS.md) |
