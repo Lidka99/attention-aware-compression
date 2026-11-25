@@ -1,38 +1,24 @@
 # Alokacja budżetu w foldingu CNN: jakość przy stałej liczbie parametrów i po ograniczeniu MAC
 
-**Szkic roboczy 0.6 — 2026-11-22.** E043: potwierdzenie na odłożonych
-danych, E044: transfer na Tiny ImageNet, E045: jakość bezwzględna przy
-łagodniejszych budżetach. Odnośniki do raportów E służą identyfikowalności.
+**Szkic 0.9 — do recenzji wewnętrznej.** TILT przy stałej liczbie parametrów,
+kontrole kosztu i figura łagodnej kompresji na Tiny dev oraz ImageNetV2.
 
 ## Abstrakt
 
-Alokacja kompresji między warstwy pozostaje jednym z ograniczeń model
-foldingu. Badamy wpływ prostego, liniowego profilu redukcji kanałów na jakość
-modeli kompresowanych bez fine-tuningu, z rekalibracją Batch Normalization.
-Profil należy do znanej w literaturze rodziny alokacji zależnych od
-głębokości; dostosowujemy go do sprzężonych grup kanałów i globalnego
-budżetu parametrów. W kontrolowanym badaniu dwóch pokrewnych architektur,
-trzech zbiorów danych i czterech seedów zamrożony profil poprawia średnią
-trafność względem alokacji jednolitej we wszystkich 15 badanych
-konfiguracjach po podstawowej rekalibracji BN, z dodatnią różnicą na każdym
-seedzie. Korzyść ma jednak koszt: przy niemal identycznej liczbie parametrów
-iloraz MAC(TILT)/MAC(UNIFORM) wynosi 1,105–1,823, a TILT osiąga
-0,702–0,948 przepustowości
-referencji dla batch size 128. Na danych rozwojowych nie wykazujemy ogólnej
-przewagi nad szerszym modelem o alokacji jednolitej przy zbliżonym MAC.
-Pod jednoczesnymi pułapami P i MAC profilu jednolitego tylko 5 z 24 geometrii
-poprawia średnią trafność ResNet18 na CIFAR-100 dev. Na odłożonych obrazach
-CIFAR-100 najlepszy profil z pilota, zamrożony przed oceną, daje **+1,215 pp
-przy około 50%** i **+0,945 pp przy około 30% redukcji parametrów** względem
-UNIFORM (3/4 i 4/4 dodatnich różnic); przy łagodniejszej kompresji średnia
-pozostaje poniżej ustalonego progu +1 pp. Po przeniesieniu tej samej reguły
-na Tiny ImageNet, poza wyborem profilu, zysk wynosi **+2,100 pp (4/4)**
-przy 50% na wcześniej użytym val; przy 30% wynosi +0,255 pp. Względnej
-poprawie przy 50% nadal towarzyszy strata do nieskompresowanego modelu:
-19,970 pp na CIFAR-100 i 29,0375 pp na Tiny. Profil liniowy pomaga także
-magnitude pruningowi. Wkładem jest empiryczna charakterystyka
-kompromisu jakość–koszt w foldingu, bez twierdzenia o optymalności ani
-zweryfikowanym automatycznym doborze profilu.
+Badamy alokację szerokości kanałów w foldingu CNN bez dostrajania wag,
+z rekalibracją Batch Normalization. Przy dopasowanej liczbie parametrów
+liniowy TILT poprawia top‑1 względem UNIFORM w 15/15 konfiguracji oceny
+niezależnej od doboru profilu (4/4 seedy w każdej), przy 1,105–1,823× MAC
+UNIFORM. Na dev przy zbliżonym MAC TILT ustępuje szerszemu UNIFORM
+(1,10–1,82× parametrów TILT) w 10/15 konfiguracji.
+
+Przy obu pułapach UNIFORM profil L06, wybrany na CIFAR dev z puli losowych
+przesunięć i zamrożony przed potwierdzeniem, daje przy łagodnej kompresji
++1,14 pp na Tiny dev oraz **+1,35 pp (4/4)** na 2 000 obrazach ImageNetV2
+tych samych 200 klas, przy tych samych checkpointach (95% sparowany
+przedział po obrazach [+0,700; +2,025] pp). Na ImageNetV2 strata do
+pełnego modelu maleje z **3,35 do 2,00 pp** przy redukcji 10,41% parametrów
+i 10,70% MAC.
 
 ## 1. Pytanie badawcze i zakres wkładu
 
@@ -47,19 +33,18 @@ także szczególne konfiguracje bloków CNN i LLaMA [1, s. 11–12].
 fine-tuningu? Ile kosztuje zysk liniowego profilu i czy inny rozdział
 szerokości daje zysk także pod jednoczesnymi pułapami P i MAC UNIFORM?
 
-Badanie opiera się na trzech tezach o ograniczonym zakresie:
+Trzy główne wyniki rozdzielają warunki porównania:
 
-1. **Jakość przy budżecie parametrów.** Zamrożony profil liniowy daje
-   powtarzalną poprawę top1 względem UNIFORM w badanych konfiguracjach.
-2. **Kompromis jakości i zasobów.** Poprawie towarzyszą wyższe MAC i niższa
-   przepustowość batch128. Przy zbliżonym MAC TILT nie wygrywa ogólnie ze
-   szerszym UNIFORM. Przy dwóch pułapach UNIFORM dodatni wynik zamrożonego
-   L06 z pilota replikuje się na odłożonych obrazach CIFAR-100 przy ≈50%
-   redukcji P. Ten sam wektor przesunięć poprawia też trafność na Tiny przy
-   ≈50%, przy czym val Tiny był wcześniej użyty. Średnie zyski przy ≈30%
-   są mniejsze. Typowy profil z puli dev nie poprawia wyniku na CIFAR-100.
-3. **Zależność od operatora.** Profil pomaga również pruningowi, więc
-   korzyści nie można ogólnie przypisywać mechanizmowi unikalnemu dla foldingu.
+1. **Dopasowana liczba parametrów (E035).** Liniowy TILT daje powtarzalną
+   poprawę top‑1 względem UNIFORM w badanych konfiguracjach.
+2. **Koszt tej poprawy (E036/E037/E041).** TILT wymaga więcej MAC i ma niższą
+   przepustowość batch128. Przy zbliżonym MAC w większości porównań wygrywa
+   szerszy UNIFORM. Przy dopasowaniu P i MAC do kosztów TILT jego wynik
+   względem innych profili zależy od zbioru.
+3. **Zachowanie trafności pod pułapami UNIFORM (E046/E047).** Zamrożony
+   L06 zmniejsza stratę przy łagodnym b10 na Tiny dev; zysk odtwarza się na
+   ImageNetV2 przy tych samych modelach i klasach. E043/E044 uzupełniają
+   ten wynik pomiarami przy większej redukcji.
 
 Wkładem jest kontrolowane badanie tych zależności dla foldingu. Sama liniowa
 reguła, nierówna alokacja i rozróżnienie parametrów od kosztu obliczeń mają
@@ -231,8 +216,9 @@ Kontrole E037–E039, E041 i E042 dotyczą wcześniej użytego dev. E043 użył
 innych 5 000 obrazów CIFAR-100, z rezerwy odłożonej z oficjalnego train
 przed treningiem checkpointów; zbiór jest rozłączny z A4096 i dev.
 E044 ponownie wykorzystał oficjalny val Tiny z E035, aby sprawdzić transfer
-na konfigurację nieużytą przy wyborze L06. Nie łączymy tych faz w jedną
-ocenę niezależną.
+na konfigurację nieużytą przy wyborze L06. E045 i E046 używają Tiny dev
+wydzielonego z train. E047 ocenia te same modele E046 na zewnętrznej
+próbie ImageNetV2. Nie łączymy tych faz w jedną ocenę niezależną.
 
 Wyniki podajemy jako sparowane różnice po czterech seedach, osobno dla
 każdej pary model–zbiór i budżetu. SD jest próbne (`ddof=1`). Cztery seedy
@@ -240,7 +226,7 @@ nie stają się 60 niezależnymi powtórzeniami przez zestawienie 15 konfiguracj
 Raportowane bramki są opisowe, nie stanowią testów istotności.
 
 Uruchomienia kompresji/oceny podzielono na cztery GPU, jeden seed na
-urządzenie, z konfiguracjami wykonywanymi kolejno. E035–E039 i E043–E044 korzystają
+urządzenie, z konfiguracjami wykonywanymi kolejno. E035–E039 i E043–E047 korzystają
 z 4×RTX2080Ti, Conda `attention`, Python3.11.15, Torch2.12.0+cu130,
 CUDA13.0, FP32 i wyłączonego TF32. Audyt czasu E036 mierzy device-forward
 na wejściach syntetycznych, osobno dla batch1 i batch128; nie jest pomiarem
@@ -289,6 +275,31 @@ Przy ≈30% raportujemy wynik wtórny. Dla głównego kontrastu dodatkowo
 podajemy sparowany bootstrap po obrazach (stratyfikacja po klasach,
 10 000 losowań, wspólne indeksy dla seedów), warunkowo na tych modelach.
 [Zamrożony protokół](experiments/2026-11-22_E044_l06_tiny/OPIS.md).
+
+### 3.8. Zamrożony profil przy łagodnym budżecie
+
+W E046 na tym samym Tiny dev i A4096/CMA co w E045 oceniamy jeden L06 przy
+około 10% redukcji P. Te same przesunięcia stosujemy do U/b10, a następnie
+rzutujemy na [99,9%, 100%] obu rzeczywistych kosztów U/b10. Jawnie zmieniamy
+górną granicę szerokości z `floor(0,9n)` na `n`: stara domena na Tiny
+wymuszałaby co najmniej 19,21% redukcji P. Zamrożony profil nie jest
+wybierany na Tiny. Sprawdzamy konstrukcje na CPU i przed oceną L06
+odtwarzamy dokładnie stany po CMA i trafienia pełnych modeli oraz U/b10
+z E045. [Protokół](experiments/2026-11-22_E046_l06_b10_tiny/OPIS.md).
+
+### 3.9. Zewnętrzne potwierdzenie przy b10
+
+E047 wykorzystuje ImageNetV2 MatchedFrequency, rewizję `imagenetv2-b-33`
+[9], zawężoną do wszystkich 200 `wnid` Tiny (10 obrazów na klasę).
+Weryfikujemy przyporządkowanie etykiet względem manifestu autorów i brak
+duplikatów według z góry ustalonego audytu RGB/pHash względem 110 000
+obrazów Tiny train/dev/val. Obrazy RGB skalujemy w całości do 64×64
+biliniowo i normalizujemy jak w E046. Przed oceną odtwarzamy dokładnie
+stany i koszty pełnego, U/b10 i L06/b10 po tej samej A4096/CMA na Tiny train
+(12/12 zgodnych). Kryterium to dodatnia średnia, ≥3/4 dodatnich kontrastów
+i dolna granica 95% przedziału >0 pp. Bootstrap sparowany wewnątrz klas,
+10 000 losowań, wspólne obrazy dla wszystkich modeli, warunkowo na tych
+checkpointach. [Protokół](experiments/2026-11-22_E047_l06_b10_imagenetv2/OPIS.md).
 
 ## 4. Wyniki
 
@@ -344,7 +355,7 @@ Na Tiny przy 50/70% peak pamięci batch128 jest wyższy dla TILT o około
 
 Źródło: [E036](experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md).
 
-### 4.3. Kontrola przy zbliżonym MAC — dev
+### 4.3. Kontrole kosztu przy różnych alokacjach — dev
 
 Definiujemy U' jako UNIFORM o szerokości dobranej do MAC profilu TILT.
 Różnica MAC nie przekracza 2%; iloraz P(U')/P(TILT) wynosi jednak
@@ -358,6 +369,15 @@ pojemność U'. Nie wyznaczamy tu optymalnej granicy jakość–MAC.
 Źródło: [E037](experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md).
 [Figura jakość–P/MAC dla U/T/U' w tej samej fazie dev](experiments/2026-11-08_E037_kontrola_mac/figures/publikacja/e035_e037_jakosc_p_mac.pdf)
 zawiera także punkt kosztu i odniesienia dla modelu nieskompresowanego.
+
+W E041 cztery z góry ustalone przestawienia rzutowano na **oba koszty
+TILT** (99,9–100% jego P i MAC). Na dev ResNet18 przy około 50% redukcji
+P przewaga TILT nad średnią kontroli wyniosła po CMA **+0,11 pp (2/4)**
+na CIFAR-10 i **+2,10 pp (4/4)** na CIFAR-100. Na CIFAR-10 najlepsza
+kontrola wygrywa z TILT o 0,39 pp na 4/4 seedach; na CIFAR-100 przewaga
+TILT nad najlepszą kontrolą wynosi 0,86 pp. Łączne kryterium nie zostało
+spełnione. [Raport E041](experiments/2026-11-15_E041_kontrola_p_mac/WYNIKI.md) ·
+[Figura](experiments/2026-11-15_E041_kontrola_p_mac/figures/20261116T040008Z_9e34f1e9/e041_kontrasty.pdf).
 
 ### 4.4. Operator kompresji — dev
 
@@ -386,16 +406,6 @@ badanych konfiguracji na dev, każda 4/4 seedy. Przestawienia mają jednak
 0,433–0,910 MAC profilu TILT. Nie izoluje to kolejności od kosztu obliczeń.
 Źródło: [E039](experiments/2026-11-08_E039_przestawienia_tilt/WYNIKI.md).
 
-W E041 cztery z góry ustalone przestawienia rzutowano na koszty TILT
-(99,9–100% jego P i MAC). Na dev ResNet18 przy około 50% redukcji P
-różnica TILT−średnia czterech kontroli wyniosła po CMA **+0,11 pp (2/4 seedów)**
-na CIFAR-10 i **+2,10 pp (4/4)** na CIFAR-100. Łączne kryterium kierunku
-nie zostało spełnione; na CIFAR-10 kontrola 104 wygrywa o 0,39 pp na
-4/4 seedach. Na CIFAR-100 przewaga nad najmocniejszą kontrolą to 0,86 pp,
-nie 2,10 pp. To kontrola jednego budżetu i dwóch zbiorów (bez Tiny),
-przy MAC profilu TILT, a nie test granicy jakości pod niższym MAC profilu U.
-Źródło: [E041](experiments/2026-11-15_E041_kontrola_p_mac/WYNIKI.md).
-
 Wcześniejsze próby search nie uzyskały stabilnej przewagi nad TILT na obu
 CIFAR-ach. Na CIFAR-100 wybór według disagreement dał +0,935 pp, poniżej
 ustalonego progu +1 pp; na CIFAR-10 +0,220 pp. Maksimum odwiedzonej puli
@@ -412,7 +422,6 @@ Zatrzymano próbę przed dev; nie oceniono przewagi top1. Wynik dotyczy tej
 konkretnej parametryzacji, nie dowodzi ogólnej niemożności modelowania interakcji.
 Źródło: [E040](experiments/2026-11-09_E040_interakcje_po_bn/WYNIKI.md).
 Figury uzupełniające: [przestawienia E039](experiments/2026-11-08_E039_przestawienia_tilt/figures/e039_kolejnosc.pdf),
-[dopasowanie obu kosztów E041](experiments/2026-11-15_E041_kontrola_p_mac/figures/20261116T040008Z_9e34f1e9/e041_kontrasty.pdf),
 [błąd predykcji E040](experiments/2026-11-09_E040_interakcje_po_bn/wykresy/e040_mae.pdf).
 
 ### 4.6. Zapas przy P i MAC UNIFORM — pilot na dev
@@ -420,10 +429,10 @@ Figury uzupełniające: [przestawienia E039](experiments/2026-11-08_E039_przesta
 W obu zbiorach najtrafniejszą referencją był U. Najlepszy kandydat (L06)
 podniósł top‑1 na CIFAR-100 z 53,855 do **55,030%**, czyli o
 **1,175 ± 0,992 pp (3/4 seedów)**, a na kontrolnym CIFAR-10 z 89,435 do
-**90,910%**, o **1,475 ± 0,542 pp (4/4)**. L06 pochodzi z tej samej
-propozycji przesunięć, ale ma różne końcowe szerokości. Podczas wyboru
-zwycięzcy używano dev na obu zbiorach, więc nie jest to niezależna replikacja
-z góry wskazanego profilu. T-proj nie poprawił średniej trafności U.
+**90,910%**, o **1,475 ± 0,542 pp (4/4)**. W obu zbiorach L06 pochodzi z
+tego samego losowego wektora przesunięć; końcowe szerokości po projekcji
+są różne. Wybór oparto na dev. Na tych danych liniowy TILT rzutowany na
+pułapy U (T-proj) nie poprawił średniej trafności U.
 
 Na CIFAR-100 **5/24** kandydatów poprawiło średnią, z medianą **−1,265 pp**
 i tylko jednym kandydatem powyżej zamrożonego progu. Zużycie obu zasobów
@@ -467,29 +476,34 @@ top‑1 (29,000%) przy 102,24 mln MAC, powyżej pułapu U. Przy 30% zatrzymujemy
 więcej jakości bezwzględnej, ale przewaga alokacji jest mniejsza.
 [Wyniki i audyt](experiments/2026-11-22_E044_l06_tiny/WYNIKI.md).
 
-### 4.9. Łagodniejsze budżety UNIFORM — Tiny dev
+### 4.9. Łagodna kompresja pod oboma pułapami — Tiny dev i ImageNetV2
 
-E045 dodaje dwa ustalone punkty na tym samym **dev** co E035: około 10%
-i 20% redukcji P, przy zachowaniu operatora, A4096, CMA i seedów. W
-UNIFORM dopuszczono szerokości powyżej 90% wartości początkowej i wybrano
-największy wspólny udział zachowanych kanałów mieszczący się po
-dyskretyzacji w limicie parametrów.
-Punkty U/b30 i U/b50 pochodzą z E035 dev. Pełny model odtwarza stan
-i trafienia E035 na wszystkich seedach; tej krzywej nie łączymy z val E044.
+![Wynik b10: krzywa Tiny dev z L06 oraz top‑1 i różnice po seedach na ImageNetV2](experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/b10_tiny_imagenetv2.png)
 
-| Redukcja P / MAC [%] | Top‑1 [%] | Sparowana strata do pełnego modelu ± SD [pp] |
-|---:|---:|---:|
-| 0 / 0 | 51,2200 | 0 |
-| 10,35 / 10,67 | 46,3625 | 4,8575 ± 0,531 |
-| 20,33 / 19,97 | 40,5800 | 10,6400 ± 1,621 |
-| 30,44 / 30,13 | 34,8075 | 16,4125 ± 0,627 |
-| 50,15 / 49,13 | 19,9250 | 31,2950 ± 1,781 |
+**A — Tiny dev.** Krzywa UNIFORM od pełnego modelu do b50: pełny, b10
+i b20 z E045, b30 i b50 z E035 dev. Punkt L06/b10 z E046 leży przy
+rzeczywistej redukcji 10,41% P i 10,70% MAC. **B — ImageNetV2.** Te same
+modele na 2 000 nowych obrazach. U góry średni top‑1, u dołu różnice
+L06−U dla czterech seedów oraz średnia z 95% przedziałem sparowanego
+bootstrapu po obrazach, warunkowo na checkpointach.
+[PDF wektorowy, źródła i generator](experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/README.md).
 
-![E045: jakość bezwzględna i koszt łagodnej kompresji na Tiny dev](experiments/2026-11-22_E045_lagodny_uniform_tiny/wykresy/20261122T031350Z_a58b56a3/e045_krzywa.png)
+| Model | P | MAC/obraz | Tiny dev: top‑1 [%] | Tiny dev: strata [pp] | ImageNetV2: top‑1 [%] | ImageNetV2: strata [pp] |
+|---|---:|---:|---:|---:|---:|---:|
+| Pełny | 11 279 112 | 148 148 224 | 51,2200 | 0 | 30,3375 | 0 |
+| UNIFORM b10 | 10 111 430 | 132 336 196 | 46,3625 | 4,8575 ± 0,5309 | 26,9875 | 3,3500 ± 0,7853 |
+| L06/b10 | 10 104 855 | 132 302 192 | **47,5050** | **3,7150 ± 0,5132** | **28,3375** | **2,0000 ± 0,2483** |
 
-W tym układzie złagodzenie kompresji silnie poprawia bezwzględną trafność;
-przy b10 strata nadal wynosi 4,38–5,60 pp zależnie od seeda. Te punkty
-opisują kompromis UNIFORM. [Wyniki i audyt](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md).
+Strata to top‑1 pełnego minus top‑1 skompresowanego na tym samym seedzie
+(średnia ± próbne SD). Na Tiny dev L06 zyskuje **+1,1425 ± 0,8820 pp**
+względem U (4/4; od +0,05 do +1,94 pp). Dla kontekstu U/b20 osiąga tam
+40,5800%, ze stratą 10,6400 pp. [E045](experiments/2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md) ·
+[E046](experiments/2026-11-22_E046_l06_b10_tiny/WYNIKI.md).
+
+Na ImageNetV2 L06 zyskuje **+1,3500 ± 0,9704 pp** (4/4; od +0,45 do
++2,50 pp). Sparowany 95% przedział po obrazach: **[+0,700; +2,025] pp**;
+zamrożone kryterium potwierdzenia jest spełnione. P i MAC są zgodne z
+E046 i mieszczą się pod pułapami U/b10. [E047: trafienia i audyt](experiments/2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md).
 
 ## 5. Dyskusja i ograniczenia
 
@@ -504,7 +518,9 @@ zysk przy obu pułapach U replikuje się na odłożonych obrazach przy 50%
 redukcji P. Przy 30% wynik pozostaje dodatni, ale nie spełnia progu.
 E044 wspiera transfer L06 na Tiny przy 50%, lecz przy 30% zysk jest mały
 i różni się między seedami. L06 stanowi tanią referencję do badania
-przyszłych selektorów. E043–E044 oceniają zamrożony profil.
+przyszłych selektorów. E046 przenosi zamrożone przesunięcia na b10 i pokazuje
+na Tiny dev, że zysk pod dwoma pułapami nie wymaga agresywnej kompresji.
+E047 potwierdza tę obserwację na ImageNetV2 dla tych samych 200 klas i modeli.
 
 Znane precedensy liniowych profili [3–4] zawężają nowość pracy do badania
 konkretnej adaptacji i jej kompromisów w foldingu. Ani przesunięcie
@@ -517,21 +533,27 @@ Poprawa względna może współistnieć z niską jakością bezwzględną. Przy
 i 45,7425% na PreActResNet18/CIFAR-100. Odpowiadające modele oryginalne
 po CMA mają 74,3725%, 50,7775% i 76,4700%. E045 pokazuje praktyczny koszt
 na łagodniejszym krańcu: około 10% mniej P i MAC na Tiny dev nadal kosztuje
-średnio 4,86 pp, a około 20% redukcji P — 10,64 pp.
+średnio 4,86 pp dla U, a około 20% redukcji P — 10,64 pp dla U. L06
+ogranicza stratę przy b10 do 3,72 pp, ale jej nie eliminuje.
 
-Badanie obejmuje dwie pokrewne architektury i trzy niewielkie zbiory;
-cztery seedy w danej parze pochodzą z ustalonego przepisu treningu.
+Główne badanie obejmuje dwie pokrewne architektury i trzy zbiory;
+cztery seedy w danej parze pochodzą z ustalonego przepisu treningu. E047
+poszerza zakres obrazów testowych przy jednej architekturze i jednym b10,
+nie zakres klas ani treningów. Na nowej próbie spada także trafność modelu
+pełnego (z 51,2200 do 30,3375%); mniejsza strata w pp nie oznacza lepszej
+jakości bezwzględnej. ImageNetV2 stanowi inny rozkład niż oficjalny Tiny.
 Nie porównujemy z pełnymi współczesnymi pipeline'ami kompresji ani nie
 deklarujemy SOTA. Pomiary czasu dotyczą jednego serwera i nie obejmują
 pełnego kosztu wdrożenia. Ocena MAC nie zastępuje pomiaru latencji.
 
 Po E035 jego testy są danymi użytymi, a po E043 użyta jest także rezerwa
-CIFAR-100. Kontrole na dev (E037–E039, E041–E042) i diagnostyka E040 na C
+CIFAR-100. Kontrole na dev (E037–E039, E041–E042, E045–E046) i diagnostyka E040 na C
 mają charakter rozwojowy. E043 testuje odłożone obrazy przy tych samych
 checkpointach co E042. E044 zmienia konfigurację, lecz korzysta z val
-Tiny znanego z E035. Żaden z tych pomiarów nie izoluje pojedynczej
-przyczyny różnic między zadaniami; bootstrap E044 obejmuje zmienność
-po obrazach, nie po treningach modeli.
+Tiny znanego z E035. Próba ImageNetV2 jest użyta po E047. Żaden z tych
+pomiarów nie izoluje pojedynczej przyczyny różnic między zadaniami;
+bootstrap E044 i E047 obejmuje zmienność po obrazach, nie po treningach
+modeli.
 
 ## 6. Wnioski
 
@@ -544,7 +566,10 @@ U. Przy ≈30% przyrost wynosi 0,945 pp na tych samych checkpointach.
 Na Tiny, poza konfiguracjami wyboru L06, zysk wynosi 2,100 pp w b50
 i 0,255 pp w b30 na wcześniej użytym val. W pilocie większość badanych profili
 obniżała trafność, a strata bezwzględna L06 pozostaje duża, zwłaszcza w b50.
-Dodatni przyrost liniowej alokacji obserwujemy także dla MAG2. Wyniki
+Na Tiny dev, przy b10, L06 zmniejsza stratę do pełnego o 1,1425 pp pod oboma
+pułapami U; pozostaje 3,7150 pp straty. Na nowych obrazach ImageNetV2 zysk
+wynosi 1,3500 pp, a pozostała strata 2,0000 pp. Dodatni przyrost liniowej
+alokacji obserwujemy także dla MAG2. Wyniki
 charakteryzują wpływ wyboru profilu przy kilku warunkach kosztu, nie
 ustanawiają ogólnego optymalizatora ani nowej zasady liniowego rozdziału budżetu.
 
@@ -580,7 +605,10 @@ ustanawiają ogólnego optymalizatora ani nowej zasady liniowego rozdziału bud�
 8. Tang, Wang, Thiele, Saukh. *GRAIL: Post-Hoc Compensation by Linear
     Reconstruction for Compressed Networks*.
     [2602.23795v2](https://www.alphaxiv.org/abs/2602.23795v2).
-    Kompensacja i ustawienia CNN/ViT: §3.1, s. 3–4; §4.1, s. 6.
+     Kompensacja i ustawienia CNN/ViT: §3.1, s. 3–4; §4.1, s. 6.
+9. Recht, Roelofs, Schmidt, Shankar. *Do ImageNet Classifiers Generalize to
+   ImageNet?* [1902.10811v2](https://www.alphaxiv.org/abs/1902.10811v2), 2019.
+   MatchedFrequency: s. 9; dobór obrazów i kontrola duplikatów: dod. C.1.
 
 ## Materiał redakcyjny i otwarte zadania
 
@@ -597,6 +625,9 @@ ustanawiają ogólnego optymalizatora ani nowej zasady liniowego rozdziału bud�
       obu kosztów, top‑1 pełnego modelu i sparowanymi wynikami b50/b30.
 - [x] Osobny kontrast transferu E044 na val Tiny przy obu pułapach.
 - [x] Krzywa E045: bezwzględna trafność i strata przy łagodnych budżetach UNIFORM na dev.
+- [x] E046: sparowana strata L06 przy b10 na tym samym Tiny dev, przy obu pułapach U.
+- [x] E047: zewnętrzna replikacja b10 na ImageNetV2 z tymi samymi stanami modeli.
+- [x] Figura b10: Tiny dev z punktem L06 i osobny panel ImageNetV2 z różnicami sparowanymi.
 - [x] Pseudokod całkowitoliczbowych korekt i zamrożenie α=0,30 przed E035.
 - [x] Pokrewne prace: Relative Repairability i GRAIL; [tabela różnic](NOTATKA_PROJEKTOWA_2026-11-09.md).
 - [x] Receptury treningu źródłowego i rozmiary batch per GPU/global

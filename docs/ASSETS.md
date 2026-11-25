@@ -1,5 +1,18 @@
 # Zasoby — do ustalenia przed E001
 
+## Próba zewnętrzna E047 — 2026-11-22
+
+ImageNetV2 MatchedFrequency (`imagenetv2-b-33`), 2 000 obrazów dla 200 klas
+Tiny, użyte w E047. [Wydanie autorów](https://huggingface.co/datasets/vaishaal/ImageNetV2/tree/d626240be2538720e83103a0e1178d24aca8b12c),
+SHA‑256 archiwum `f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c`.
+[Protokół](../experiments/2026-11-22_E047_l06_b10_imagenetv2/OPIS.md) ·
+[Manifest i skróty](../runs/E047/cpu_20261122T053249Z_169cdc5b/manifest.json) ·
+[Identyfikatory i etykiety](../runs/E047/cpu_20261122T053249Z_169cdc5b/cohort.json).
+Obrazy pochodzą z Flickr i nie podlegają licencji MIT kodu repozytorium
+[autorów](https://github.com/modestyachts/ImageNetV2#license).
+
+## Historyczny szablon E001
+
 | Zasób | Wymagany zapis | Status |
 |---|---|---|
 | Model CNN z SE/ECA | Implementacja, wersja, pełny graf, kolejność kanałów | UNSET |
