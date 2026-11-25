@@ -5,8 +5,10 @@ Wejście: E035/frozen.json oraz metadane i metryki runu
 runs/E035/20261107T183831Z_8b0b14e0 (test: summary.json, controls.json,
 analysis.json, manifest.json, test_data.json). Nie czytamy obrazów ani
 checkpointów. Wyjście: PNG/PDF, CSV, weryfikacja.json, sources.json i README.md
-wyłącznie w tym podkatalogu. Opis: OPIS.md i WYNIKI.md E035.
+wyłącznie w tym podkatalogu. --english-paper zapisuje tylko parę PDF/PNG
+do manuskryptu. Opis: OPIS.md i WYNIKI.md E035.
 """
+import argparse
 import csv
 import hashlib
 import json
@@ -172,16 +174,16 @@ def style():
     )
 
 
-def save(fig, stem):
+def save(fig, stem, english=False):
     png = OUT / f"{stem}.png"
     pdf = OUT / f"{stem}.pdf"
-    fig.savefig(png, dpi=200, bbox_inches="tight", facecolor="white", metadata={"Software": None})
+    fig.savefig(png, dpi=300 if english else 200, bbox_inches="tight", facecolor="white", metadata={"Software": None})
     fig.savefig(
         pdf,
         bbox_inches="tight",
         facecolor="white",
         metadata={
-            "Creator": "E035 ilustracje publikacyjne",
+            "Creator": "E035 manuscript figure" if english else "E035 ilustracje publikacyjne",
             "Producer": "Matplotlib",
             "CreationDate": None,
             "ModDate": None,
@@ -191,7 +193,39 @@ def save(fig, stem):
     return png, pdf
 
 
+def draw_paper_delta(summaries):
+    style()
+    plt.rcParams.update({"axes.titlesize": 10, "xtick.labelsize": 9, "ytick.labelsize": 9})
+    fig, axes = plt.subplots(1, 3, figsize=(7.6, 3.25), sharex=True, sharey=True)
+    fig.subplots_adjust(left=0.28, right=0.98, bottom=0.25, top=0.88, wspace=0.19)
+    positions = np.arange(len(PAIRS))
+    offsets = np.array((-0.36, -0.19, 0.19, 0.36))
+    for ax, tag in zip(axes, TAGS):
+        ax.set_title(f"{PCT[tag]}% parameter cut", pad=6, fontweight="bold")
+        ax.set(xlim=(-1.2, 28.2), xticks=(0, 10, 20), ylim=(4.56, -0.56))
+        ax.set_yticks(positions, [LABELS[pair].replace(" / ", "\n") for pair in PAIRS])
+        ax.axvline(0, color="0.40", linestyle="--", linewidth=0.9)
+        for y, pair in zip(positions, PAIRS):
+            d = summaries[pair, tag]["delta"]
+            ax.scatter(d, y + offsets, color="#0072B2", s=17, alpha=0.78, linewidths=0, zorder=3,
+                       label="Checkpoint difference" if y == 0 else None)
+            ax.scatter(d.mean(), y, color="#D55E00", marker="D", s=25, edgecolors="white",
+                       linewidths=0.5, zorder=4, label="Mean" if y == 0 else None)
+        ax.tick_params(length=2.5, axis="x")
+        ax.tick_params(length=0, axis="y")
+        ax.spines[["top", "right", "left"]].set_visible(False)
+        ax.grid(axis="x", visible=False)
+    fig.supxlabel("Linear Depth Tilt minus uniform folding (top-1, pp)", y=0.116, fontsize=10)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.005),
+               frameon=False, fontsize=9, columnspacing=1.3)
+    return fig
+
+
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--english-paper", action="store_true", help="Wygeneruj angielską figurę manuskryptu.")
+    args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     if OUT.name != "publikacja" or OUT.parent.name != "figures" or "E035" not in E035.name:
         raise RuntimeError(f"Nieoczekiwany katalog wyjściowy: {OUT}")
@@ -372,6 +406,12 @@ def main():
         raise RuntimeError("E035 magnitude_pass_n nie jest 9/10")
     if sum(1 for key, value in summaries.items() if value["magnitude"]) != 9:
         raise RuntimeError("Przeliczona bramka wielkości efektu nie daje 9/10")
+
+    if args.english_paper:
+        print("PASS: E035 held-out CMA contrasts and parameter matching (15 settings, four checkpoints each).")
+        for path in save(draw_paper_delta(summaries), "e035_tilt_minus_uniform_en", english=True):
+            print(path.relative_to(ROOT))
+        return
 
     # Dokładne równości planów między parami (bez zaokrągleń).
     shared = []

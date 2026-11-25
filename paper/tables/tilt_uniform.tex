@@ -1,0 +1,35 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{\textbf{Matched parameters.} Top-1 after CMA on the official CIFAR tests and Tiny ImageNet validation set. Budgets are nominal reductions in total parameters. $U$ is \Uniform{} and $T$ is \TiltName{} (\Tilt{}); the $T-U$ column gives the paired mean and sample SD across checkpoints, in percentage points (pp). The last column counts strictly positive differences.}
+\label{tab:tilt-uniform}
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+ &  &  & \multicolumn{3}{c}{Top-1 (\%)} &  &  \\
+\cmidrule(lr){4-6}
+Architecture & Dataset & $P$ cut & Full & $U$ & $T$ & $T-U$ (pp) & Positive \\
+\midrule
+ResNet18 & CIFAR-10 & 30\% & 94.8050 & 93.0400 & 93.8500 & $+0.8100\pm 0.0594$ & 4/4 \\
+ &  & 50\% & 94.8050 & 89.2800 & 92.6925 & $+3.4125\pm 0.2564$ & 4/4 \\
+ &  & 70\% & 94.8050 & 76.7925 & 87.7800 & $+10.9875\pm 1.4358$ & 4/4 \\
+\addlinespace[2pt]
+ResNet18 & CIFAR-100 & 30\% & 74.3725 & 65.7675 & 66.5950 & $+0.8275\pm 0.2863$ & 4/4 \\
+ &  & 50\% & 74.3725 & 53.4275 & 54.7300 & $+1.3025\pm 0.7834$ & 4/4 \\
+ &  & 70\% & 74.3725 & 30.6200 & 32.6800 & $+2.0600\pm 2.4948$ & 4/4 \\
+\addlinespace[2pt]
+ResNet18 & Tiny ImageNet & 30\% & 50.7775 & 34.5575 & 38.0950 & $+3.5375\pm 1.0847$ & 4/4 \\
+ &  & 50\% & 50.7775 & 19.6400 & 29.0000 & $+9.3600\pm 1.0830$ & 4/4 \\
+ &  & 70\% & 50.7775 & 8.3975 & 15.8800 & $+7.4825\pm 1.2595$ & 4/4 \\
+\addlinespace[2pt]
+PreActResNet18 & CIFAR-10 & 30\% & 94.9025 & 93.1275 & 94.0875 & $+0.9600\pm 0.1944$ & 4/4 \\
+ &  & 50\% & 94.9025 & 88.5400 & 93.4900 & $+4.9500\pm 1.5034$ & 4/4 \\
+ &  & 70\% & 94.9025 & 77.6875 & 91.2650 & $+13.5775\pm 2.4453$ & 4/4 \\
+\addlinespace[2pt]
+PreActResNet18 & CIFAR-100 & 30\% & 76.4700 & 66.4975 & 70.9850 & $+4.4875\pm 2.1362$ & 4/4 \\
+ &  & 50\% & 76.4700 & 55.9050 & 63.5475 & $+7.6425\pm 1.2266$ & 4/4 \\
+ &  & 70\% & 76.4700 & 23.0050 & 45.7425 & $+22.7375\pm 3.0018$ & 4/4 \\
+\bottomrule
+\end{tabular}
+\end{table}

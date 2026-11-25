@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folding CNN — wynik na CIFAR-10</title>
+<style>
+  :root { color: #172535; background: #eef2f6; font-family: system-ui, sans-serif; }
+  body { margin: 0; line-height: 1.45; }
+  main { max-width: 62rem; margin: 2rem auto; padding: 2.25rem 3rem; background: #fff; }
+  h1 { margin: .25rem 0 .5rem; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.14; }
+  h2 { font-size: 1.12rem; margin: 0 0 .25rem; }
+  p { margin: 0 0 .9rem; }
+  .label { color: #0b675c; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+  .context, footer { color: #48586a; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.2rem 0; }
+  .metrics div { border: 1px solid #acdacf; border-radius: .5rem; padding: .65rem .85rem; background: #f2faf7; }
+  .metrics strong { display: block; font-size: 1.75rem; color: #0b675c; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; margin-bottom: 1.15rem; }
+  th, td { padding: .5rem .45rem; border-bottom: 1px solid #cbd6e1; text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  thead { background: #edf2f7; }
+  .selected { font-weight: 700; color: #0b675c; }
+  .explanation { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  footer { border-top: 1px solid #cbd6e1; padding-top: .65rem; font-size: .84rem; }
+  a { color: #205a91; }
+  @media (max-width: 700px) {
+    main { margin: 0; padding: 1rem; }
+    .metrics, .explanation { grid-template-columns: 1fr; }
+    th, td { padding-inline: .25rem; }
+  }
+  @page { size: A4 landscape; margin: 12mm; }
+  @media print {
+    :root { background: #fff; }
+    main { max-width: none; margin: 0; padding: 0; }
+    .metrics, table, .explanation, footer { break-inside: avoid; }
+  }
+</style>
+<main>
+  <div class="label">Folding CNN · PreActResNet18 na CIFAR-10</div>
+  <h1>O połowę mniej parametrów przy stracie 1,41 pp top‑1</h1>
+  <p class="context">Oficjalny test CIFAR-10 (10&nbsp;000 obrazów). Średnia z czterech checkpointów.
+    Dla obu profili ten sam operator foldingu, bez dostrajania wag po kompresji.
+    Wszystkie wyniki po tej samej procedurze rekalibracji Batch Normalization.</p>
+
+  <div class="metrics">
+    <div><strong>93,49%</strong>top‑1 TILT, pełny model: 94,90%</div>
+    <div><strong>−50,03%</strong>parametrów względem pełnego modelu</div>
+    <div><strong>−32,42%</strong>MAC na obraz względem pełnego modelu</div>
+  </div>
+
+  <table aria-label="Trafność i koszt PreActResNet18 przy redukcji około 50% parametrów">
+    <thead>
+      <tr><th scope="col">Wariant</th><th scope="col">Top‑1</th><th scope="col">Strata do pełnego</th><th scope="col">Parametry [mln]</th><th scope="col">MAC/obraz [mln]</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Pełny model po BN</th><td>94,90%</td><td>0 pp</td><td>11,17</td><td>555,4</td></tr>
+      <tr><th scope="row">UNIFORM (równomierna redukcja kanałów)</th><td>88,54%</td><td>6,36 pp</td><td>5,58</td><td>276,4</td></tr>
+      <tr class="selected"><th scope="row">TILT (nierównomierna redukcja)</th><td>93,49%</td><td>1,41 pp</td><td>5,58</td><td>375,3</td></tr>
+    </tbody>
+  </table>
+
+  <div class="explanation">
+    <section>
+      <h2>Co daje zmiana alokacji?</h2>
+      <p>TILT zyskuje <strong>4,95 pp względem UNIFORM</strong> przy niemal tej samej liczbie parametrów
+        (4/4 dodatnich par, SD różnicy: 1,50 pp). Zużywa przy tym <strong>35,8% więcej MAC od UNIFORM</strong>.
+        Na wspólnym dev przewaga wynosi 4,88 pp nad UNIFORM o tej samej liczbie parametrów,
+        a 0,74 pp nad szerszym UNIFORM przy zbliżonej liczbie MAC.</p>
+    </section>
+    <section>
+      <h2>Gdzie ten wynik się nie przenosi?</h2>
+      <p>Na oficjalnym val Tiny ImageNet pełny ResNet18 ma 50,78% top‑1, a TILT przy tej samej nominalnej redukcji
+        parametrów osiąga <strong>29,00%</strong> (strata 21,78 pp). Nieskompresowany model miał tam 50,45%
+        jeszcze przed rekalibracją BN.</p>
+    </section>
+  </div>
+
+  <footer>
+    MAC to liczba operacji mnożenia z akumulacją w warstwach Conv/Linear, nie pomiar latencji.
+    Źródła: <a href="../../experiments/2026-11-07_E035_ocena_niezalezna/WYNIKI.md">E035 · trafność na testach i Tiny val</a>,
+    <a href="../../experiments/2026-11-07_E036_audyt_kosztu/WYNIKI.md">E036 · audyt kosztu</a>,
+    <a href="../../experiments/2026-11-08_E037_kontrola_mac/WYNIKI.md">E037 · kontrola MAC na dev</a>,
+    <a href="../../experiments/2026-11-08_E037_kontrola_mac/figures/publikacja/punkty_publikacja.csv">tabela liczników P/MAC</a>.
+    <br>Kontekst literaturowy (pełny ResNet18, inne receptury): CIFAR-10 94,72%
+    <a href="https://arxiv.org/abs/2502.10216v2">(Wang i in., tab. 6)</a>;
+    Tiny ImageNet val 61,96% <a href="https://arxiv.org/abs/1812.03965v1">(Keshari i in., tab. 4, bez dropout)</a>.
+  </footer>
+</main>
+</html>

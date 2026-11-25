@@ -1,0 +1,35 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{\textbf{Cost and accuracy on development data.} Top-1 uses the same development split and CMA protocol for uniform folding ($U$), \TiltName{} ($T$), and the wider uniform model $U'$. The anchor is the nominal parameter reduction of $U$ and $T$, not of $U'$. The $U'-T$ column is the mean paired difference; positive values favor $U'$. Section~\ref{sec:allocation-cost} summarizes forward-pass timing ratios.}
+\label{tab:cost-controls}
+\begin{tabular}{@{}llrrrrrrrr@{}}
+\toprule
+ &  &  & \multicolumn{3}{c}{Top-1 (\%)} &  & \multicolumn{3}{c}{Cost ratios} \\
+\cmidrule(lr){4-6}\cmidrule(lr){8-10}
+Architecture & Dataset & Anchor & $U$ & $T$ & $U'$ & $U'-T$ (pp) & \shortstack{MACs\\$T/U$} & \shortstack{Params.\\$U'/T$} & \shortstack{MACs\\$U'/T$} \\
+\midrule
+ResNet18 & CIFAR-10 & 30\% & 93.495 & 94.520 & 94.155 & $-0.365$ & 1.105 & 1.100 & 0.998 \\
+ &  & 50\% & 89.435 & 93.430 & 92.955 & $-0.475$ & 1.364 & 1.363 & 0.992 \\
+ &  & 70\% & 77.305 & 88.215 & 90.225 & $+2.010$ & 1.789 & 1.788 & 0.985 \\
+\addlinespace[2pt]
+ResNet18 & CIFAR-100 & 30\% & 66.340 & 66.960 & 69.670 & $+2.710$ & 1.105 & 1.100 & 0.998 \\
+ &  & 50\% & 53.855 & 55.550 & 65.660 & $+10.110$ & 1.366 & 1.371 & 0.994 \\
+ &  & 70\% & 31.400 & 33.020 & 56.710 & $+23.690$ & 1.823 & 1.804 & 0.995 \\
+\addlinespace[2pt]
+ResNet18 & Tiny ImageNet & 30\% & 34.807 & 38.587 & 39.913 & $+1.325$ & 1.109 & 1.106 & 0.998 \\
+ &  & 50\% & 19.925 & 29.333 & 34.170 & $+4.837$ & 1.357 & 1.369 & 0.988 \\
+ &  & 70\% & 8.433 & 16.180 & 23.240 & $+7.060$ & 1.806 & 1.821 & 0.999 \\
+\addlinespace[2pt]
+PreActResNet18 & CIFAR-10 & 30\% & 93.590 & 94.575 & 94.550 & $-0.025$ & 1.105 & 1.099 & 0.998 \\
+ &  & 50\% & 88.995 & 93.875 & 93.135 & $-0.740$ & 1.358 & 1.363 & 0.996 \\
+ &  & 70\% & 78.595 & 91.785 & 90.000 & $-1.785$ & 1.748 & 1.750 & 0.993 \\
+\addlinespace[2pt]
+PreActResNet18 & CIFAR-100 & 30\% & 66.870 & 71.305 & 72.120 & $+0.815$ & 1.105 & 1.099 & 0.998 \\
+ &  & 50\% & 56.845 & 64.070 & 68.585 & $+4.515$ & 1.361 & 1.371 & 0.998 \\
+ &  & 70\% & 23.425 & 46.520 & 57.460 & $+10.940$ & 1.790 & 1.766 & 0.998 \\
+\bottomrule
+\end{tabular}
+\end{table}

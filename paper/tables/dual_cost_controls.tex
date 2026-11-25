@@ -1,0 +1,18 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{\textbf{Both costs matched to \Tilt{}.} Four prespecified controls on ResNet18 at \bfifty{}, each using 99.9--100\% of \Tilt{}'s parameters and MACs. $\bar C$ is the mean of the four controls within each checkpoint. The positive count refers to $T-\bar C$. The best control is identified descriptively by mean development top-1.}
+\label{tab:dual-tilt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Top-1 (\%)} &  &  &  &  \\
+\cmidrule(lr){2-3}
+Dataset & $T$ & $\bar C$ & $T-\bar C$ (pp) & Positive & Best control & $T-$best (pp) \\
+\midrule
+CIFAR-10 & 93.4300 & 93.31750 & $+0.11250\pm 0.2184$ & 2/4 & 104 & $-0.3850$ \\
+CIFAR-100 & 55.5500 & 53.44625 & $+2.10375\pm 0.7602$ & 4/4 & 103 & $+0.8600$ \\
+\bottomrule
+\end{tabular}
+\end{table}

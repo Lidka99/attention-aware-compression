@@ -1,0 +1,3 @@
+experiment,sample,images,l06_minus_uniform_pp,paired_sd_pp,positive_pairs,image_bootstrap_ci95_low_pp,image_bootstrap_ci95_high_pp,seed_42_gain_pp,seed_43_gain_pp,seed_44_gain_pp,seed_45_gain_pp
+E046,Tiny ImageNet dev,10000,1.1425,0.882019463126,4,,,0.05,1.77,0.81,1.94
+E047,ImageNetV2,2000,1.35,0.970395108534,4,0.7,2.025,2.5,0.45,0.65,1.8

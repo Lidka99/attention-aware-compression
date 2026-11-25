@@ -6,8 +6,10 @@ Wejście: metryki dev E035 (U/T) i E037 (U'), plany P/MAC frozen.json E037,
 kontrolne koszty nauczyciela z audytu E036 (check.json). Nie czytamy obrazów,
 checkpointów ani wag; brak treningu, GPU i nowej oceny modeli.
 Wyjście wyłącznie w tym podkatalogu: PDF/PNG, punkty_publikacja.csv,
-sources.json i weryfikacja.json. Opis i podpis: README.md.
+sources.json i weryfikacja.json. --english-paper zapisuje tylko PDF/PNG
+do manuskryptu. Opis i podpis: README.md.
 """
+import argparse
 import csv
 import hashlib
 import json
@@ -172,6 +174,9 @@ def formatter(value, _position):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--english-paper", action="store_true", help="Wygeneruj angielską figurę manuskryptu.")
+    english = parser.parse_args().english_paper
     OUT.mkdir(parents=True, exist_ok=True)
     if OUT.name != "publikacja" or OUT.parent.name != "figures" or "E037" not in EXP.name:
         raise RuntimeError(f"Nieoczekiwany katalog wyjściowy: {OUT}")
@@ -471,14 +476,20 @@ def main():
 
     # Rysunek: 5 par x 2 panele, oś x = koszt / koszt nauczyciela.
     style()
+    if english:
+        plt.rcParams.update({"axes.titlesize": 11, "axes.labelsize": 10, "legend.fontsize": 9,
+                             "xtick.labelsize": 9, "ytick.labelsize": 9})
     fig, axes = plt.subplots(
         5,
         2,
-        figsize=(7.4, 8.6),
+        figsize=(7.4, 7.1) if english else (7.4, 8.6),
         sharex="col",
         sharey="row",
     )
-    fig.subplots_adjust(left=0.165, right=0.985, top=0.900, bottom=0.105, hspace=0.30, wspace=0.10)
+    if english:
+        fig.subplots_adjust(left=0.24, right=0.985, top=0.874, bottom=0.095, hspace=0.34, wspace=0.13)
+    else:
+        fig.subplots_adjust(left=0.165, right=0.985, top=0.900, bottom=0.105, hspace=0.30, wspace=0.10)
 
     for index, pair in enumerate(PAIRS):
         ax_p = axes[index, 0]
@@ -486,18 +497,22 @@ def main():
         all_values = []
         for tag in TAGS:
             cell = cells[(pair, tag)]
-            all_values.extend(
-                cell[f"top1_{profile}_mean"] for profile in PROFILES
-            )
-        all_values.append(teacher[pair]["mean"])
+            for profile in PROFILES:
+                mu = cell[f"top1_{profile}_mean"]
+                sd = cell[f"top1_{profile}_sd"] if english else 0
+                all_values.extend((mu - sd, mu + sd))
+        mu = teacher[pair]["mean"]
+        sd = teacher[pair]["sd"] if english else 0
+        all_values.extend((mu - sd, mu + sd))
         lo, hi = min(all_values), max(all_values)
         span = max(hi - lo, 1.0)
         for ax in (ax_p, ax_m):
             ax.set_ylim(lo - 0.06 * span, hi + 0.06 * span)
             ax.set_xlim(24, 102)
             ax.set_xticks([30, 50, 70, 90, 100])
-            ax.xaxis.set_major_formatter(FuncFormatter(formatter))
-            ax.yaxis.set_major_formatter(FuncFormatter(formatter))
+            if not english:
+                ax.xaxis.set_major_formatter(FuncFormatter(formatter))
+                ax.yaxis.set_major_formatter(FuncFormatter(formatter))
             ax.axvline(100, color="0.82", lw=0.45, ls=":", zorder=0)
             ax.spines["top"].set_visible(False)
             ax.spines["right"].set_visible(False)
@@ -545,41 +560,48 @@ def main():
             )
 
         if index == 0:
-            ax_p.set_title("Top-1 vs P", pad=5)
-            ax_m.set_title("Top-1 vs MAC", pad=5)
-        ax_p.set_ylabel(LABELS[pair][0], labelpad=3, fontsize=7.0)
+            ax_p.set_title("Accuracy vs. parameters" if english else "Top-1 vs P", pad=7 if english else 5)
+            ax_m.set_title("Accuracy vs. MACs" if english else "Top-1 vs MAC", pad=7 if english else 5)
+        if english:
+            ax_p.set_ylabel("\n".join(LABELS[pair][1:]), rotation=0, ha="right", va="center",
+                            labelpad=5, fontsize=9.0)
+        else:
+            ax_p.set_ylabel(LABELS[pair][0], labelpad=3, fontsize=7.0)
         if index == 4:
-            ax_p.set_xlabel("P: % nauczyciela", labelpad=4)
-            ax_m.set_xlabel("MAC: % nauczyciela", labelpad=4)
+            ax_p.set_xlabel("Parameters (% of full model)" if english else "P: % nauczyciela", labelpad=4)
+            ax_m.set_xlabel("MACs/image (% of full model)" if english else "MAC: % nauczyciela", labelpad=4)
         if index < 4:
             ax_p.tick_params(labelbottom=False)
             ax_m.tick_params(labelbottom=False)
 
         teacher_p = teacher_cost[pair][0]
         teacher_m = teacher_cost[pair][1]
-        ax_p.text(
-            0.025,
-            0.965,
-            f"P_t={pl(teacher_p / 1e6, 1)} mln\nMAC_t={pl(teacher_m / 1e6, 0)} mln",
-            transform=ax_p.transAxes,
-            ha="left",
-            va="top",
-            fontsize=5.6,
-            color="0.45",
-            linespacing=1.05,
-        )
+        if not english:
+            ax_p.text(
+                0.025,
+                0.965,
+                f"P_t={pl(teacher_p / 1e6, 1)} mln\nMAC_t={pl(teacher_m / 1e6, 0)} mln",
+                transform=ax_p.transAxes,
+                ha="left",
+                va="top",
+                fontsize=5.6,
+                color="0.45",
+                linespacing=1.05,
+            )
 
     fig.text(
         0.022,
         0.50,
-        "Top-1 dev [%] po CMA",
+        "Development top-1 after CMA (%)" if english else "Top-1 dev [%] po CMA",
         rotation=90,
         va="center",
         ha="center",
-        fontsize=8,
+        fontsize=10 if english else 8,
     )
+    english_labels = {"U": "U (uniform)", "T": "T (Linear Depth Tilt)", "Up": "U′ (wider uniform)"}
     handles = [
-        Line2D([0], [0], color=PROFILE_META[profile]["color"], ls=PROFILE_META[profile]["ls"], lw=1.2, label=PROFILE_META[profile]["label"])
+        Line2D([0], [0], color=PROFILE_META[profile]["color"], ls=PROFILE_META[profile]["ls"], lw=1.2,
+               label=english_labels[profile] if english else PROFILE_META[profile]["label"])
         for profile in PROFILES
     ]
     handles.extend(
@@ -587,7 +609,8 @@ def main():
         for tag in TAGS
     )
     handles.append(
-        Line2D([0], [0], marker="*", color="0.55", mec="0.25", mew=0.4, ls="None", ms=8.0, label="nauczyciel")
+        Line2D([0], [0], marker="*", color="0.55", mec="0.25", mew=0.4, ls="None", ms=8.0,
+               label="Full" if english else "nauczyciel")
     )
     fig.legend(
         handles=handles,
@@ -599,6 +622,11 @@ def main():
         columnspacing=1.0,
         handletextpad=0.4,
     )
+    if english:
+        print("PASS: E037 development top-1 and actual costs checked for U, T and U′.")
+        for path in save(fig, "e037_accuracy_cost_en"):
+            print(path.relative_to(ROOT))
+        return
     fig.text(
         0.5,
         0.008,
