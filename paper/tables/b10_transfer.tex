@@ -3,7 +3,7 @@
 \centering
 \small
 \setlength{\tabcolsep}{7pt}
-\caption{\textbf{Mild compression under both caps on newly trained ResNet18 models.} Top-1 and loss to the full model are paired means across four checkpoints on the same 10,000 images per dataset. All entries use A4096/CMA, including the full-model reference. T-proj is the linear profile projected onto both caps. The official test and validation splits had previously been evaluated in this project. The full Tiny model uses 555.52 million MACs/image, versus 148.15 million for the earlier stem.}
+\caption{\textbf{Nominal 10\% parameter cut under both UNIFORM budgets on newly trained ResNet18 models.} Each pair starts from the same checkpoint and uses the same BN recalibration, including the full-model reference. Top-1 and loss are means across four checkpoints on 10,000 images per dataset. Projected TILT adjusts the linear profile to both budgets. The official test and validation splits had previously been evaluated in this project.}
 \label{tab:b10-transfer}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
@@ -13,14 +13,14 @@ Model & Top-1 (\%) & Loss to full (pp) & Parameters & MACs/image \\
 \addlinespace[2pt]
 Full model & 79.6800 & 0.0000 & 11,220,132 & 555,468,800 \\
 UNIFORM & 77.4075 & 2.2725 & 10,055,630 & 494,537,444 \\
-T-proj & 77.3525 & 2.3275 & 10,051,974 & 494,077,516 \\
+Projected TILT & 77.3525 & 2.3275 & 10,051,974 & 494,077,516 \\
 Frozen offsets & \textbf{78.0225} & 1.6575 & 10,052,748 & 494,053,376 \\
 \midrule
 \multicolumn{5}{@{}l}{\textbf{Tiny ImageNet (official validation)}} \\
 \addlinespace[2pt]
 Full model & 61.2175 & 0.0000 & 11,271,432 & 555,520,000 \\
 UNIFORM & 55.9725 & 5.2450 & 10,104,230 & 494,585,944 \\
-T-proj & 54.8475 & 6.3700 & 10,100,626 & 494,294,552 \\
+Projected TILT & 54.8475 & 6.3700 & 10,100,626 & 494,294,552 \\
 Frozen offsets & \textbf{56.6475} & 4.5700 & 10,104,048 & 494,104,576 \\
 \bottomrule
 \end{tabular}

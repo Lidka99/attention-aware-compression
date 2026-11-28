@@ -46,16 +46,16 @@ reused for E049.
 After CMA, mean $T-U$ gains range from $+0.8100$ to $+22.7375$ pp;
 each of the 15 settings has four positive pairs
 (Table~\ref{tab:tilt-uniform}). The study's larger-cut criterion
-(mean gain of at least 2 pp and at least three positive pairs at
-\bfifty{} or \bseventy{}) is met in 9 of 10 settings. ResNet18 on
-CIFAR-100 at \bfifty{} is the exception ($+1.3025$ pp). At \bseventy{}
-on that pair, two of the checkpoint gains are only $+0.20$ and $+0.36$
+(mean gain of at least 2 pp and at least three positive pairs at the
+50\% or 70\% parameter cut) is met in 9 of 10 settings. ResNet18 on
+CIFAR-100 at 50\% is the exception ($+1.3025$ pp). At 70\% on that pair,
+two of the checkpoint gains are only $+0.20$ and $+0.36$
 pp despite a $+2.0600$ pp mean. With \texttt{repair\_bn} the directional
 criterion (positive mean and at least three positive pairs) is met in
-14 of 15 settings; ResNet18/CIFAR-100 at \bseventy{} has 2/4 positive
+14 of 15 settings; ResNet18/CIFAR-100 at 70\% has 2/4 positive
 pairs. After CMA, negative log-likelihood is higher with
-\Tilt{} on ResNet18/CIFAR-100 at \bfifty{} and \bseventy{}. Absolute
-accuracy can remain low: on the earlier Tiny model at \bseventy{}, it is
+\Tilt{} on ResNet18/CIFAR-100 at the 50\% and 70\% cuts. Absolute
+accuracy can remain low: on the earlier Tiny model at the 70\% cut, it is
 15.8800\% with \Tilt{} versus 50.7775\% in the full model.
 
 \input{tables/tilt_uniform}
@@ -71,7 +71,7 @@ realized MACs are within 2\% of $M(T)$, and $P(\Uprime{})$ need not match
 $P(T)$. The comparison uses common development images, checkpoints, and
 BN recalibration, with $U$ and $T$ scores from the development phase of
 E035. The largest advantage for \Uprime{} is 23.69 pp on
-ResNet18/CIFAR-100 at \bseventy{}. The parameter count of \Uprime{} is
+ResNet18/CIFAR-100 at the 70\% parameter cut. The parameter count of \Uprime{} is
 1.10--1.82 times that of $T$ (MAC ratio 0.985--0.999; see
 Figure~\ref{fig:comparable-macs} and Table~\ref{tab:cost-controls}).
 
@@ -100,7 +100,7 @@ establish equivalent latency or a consistent single-image ordering.
 \FloatBarrier
 
 \paragraph{Matching both costs to \Tilt{} (E041).}
-The four controls for ResNet18 at \bfifty{} start from fixed permutations
+The four ResNet18 controls at a nominal 50\% parameter cut start from fixed permutations
 of earlier \Tilt{} width deviations. We solve a least-squares projection
 in the retained fractions $k_g/n_g$ by sequential least-squares
 programming, targeting $P=0.9995 C_P$ and $M=0.9995 C_M$ for cost caps
@@ -131,10 +131,11 @@ with $\alpha=0.30$ against $P(U)$ using the lower bound $r_g\ge 0$ and
 adjust widths if needed to match $P(U)$ to within 0.1\%. Both budgets
 were fixed before scoring. Each dataset uses the same A4096/CMA across
 profiles; on Tiny the minimum crop area fraction is 0.65
-(Appendix~\ref{app:offsets}). The b10 targets for this diagnostic are at
-least 9.5\% parameter reduction, mean gain of at least 1 pp over $U$ with
-at least three positive pairs, and mean loss to the full model of at most
-3 pp. CIFAR-100 meets all targets; Tiny has a 3.6075 pp mean loss. At b10,
+(Appendix~\ref{app:offsets}). For the nominal 10\% cut, the targets are a
+parameter reduction of at least 9.5\%, a mean gain of at least 1 pp over
+$U$ with at least three positive pairs, and a mean loss to the full model
+of at most 3 pp. CIFAR-100 meets all targets; Tiny has a 3.6075 pp mean
+loss. At this cut,
 the linear profile reduces parameters by about 10.4\% and MACs by 3.35\%
 relative to the corresponding full model. The 5\% cut is descriptive:
 Tiny achieves 61.3250\%, with a loss of 1.2875 pp and about 1.69\% fewer
@@ -142,15 +143,15 @@ MACs than the full model. Table~\ref{tab:tilt-mild-dev} reports both cuts.
 
 \input{tables/tilt_mild_dev}
 
-\paragraph{Local width redistribution at 10\% (E052).}
+\paragraph{Local width redistribution at the 10\% parameter cut (E052).}
 Six profiles shift width from two stage-3 hidden groups to stage 4,
 reduce parameters by at least 9.5\%, match $P(U)$ to within 0.1\%, and
-respect the parameter and MAC caps of the b10 linear profile. With the
-E051 operator and calibration, we
-select a single profile per dataset by mean negative log-likelihood over
-four checkpoints on a fixed subset of 8,000 training images disjoint from
-calibration and development. The same profile (S04) is selected on both
-datasets and is the only new profile evaluated on development data. It
+respect the parameter and MAC caps of \Tilt{} at this cut. With the E051
+operator and calibration, we select a single profile per dataset by
+mean negative log-likelihood over four checkpoints on a fixed subset of
+8,000 training images disjoint from calibration and development. The
+same adjustment is selected on both datasets and is the only new profile
+evaluated on development data. It
 reduces both stage-3 hidden widths from 256 to 243 and increases the
 stage-4 output width from 474 to 482 relative to $T$. Top-1 is 79.8850\%
 on CIFAR-100 ($+0.1350$ pp over $T$, 2/4) and 59.2050\% on Tiny ImageNet
@@ -163,7 +164,7 @@ this experiment.
 \label{app:offsets}
 
 \paragraph{Selection and transfer (E042).}
-At \bfifty{}, we form 24 feasible profiles per dataset before scoring:
+At the nominal 50\% parameter cut, we form 24 feasible profiles per dataset before scoring:
 eight within-stage exchanges, four across-stage exchanges, and twelve
 proposals with random offsets in retention fractions. We use the
 projection described in Appendix~\ref{app:costs} with caps $P(U)$ and
@@ -171,13 +172,11 @@ $M(U)$. The width domain is
 $\lfloor 0.1 n_g\rfloor\le k_g\le\lfloor 0.9 n_g\rfloor$; both counts
 must be within 0.1\% of their caps from below. We select one candidate by
 mean post-CMA top-1 over the four checkpoints on labeled CIFAR-100
-development data. The selected random-offset proposal (L06) is the
-\emph{\FrozenProfile{}}, labeled \emph{\FrozenShort{}} in tables. It gains
-1.175 pp (3/4) over $U$ on the selection split; five candidates beat $U$
-on average and the median
-contrast is $-1.265$ pp. CIFAR-10 serves as a control and does not select
-L06. Uniform folding and $T$ projected onto the same caps ($T_{\rm proj}$)
-are separate references.
+development data. The selected random-offset proposal, \emph{\FrozenShort{}},
+gains 1.175 pp (3/4) over $U$ on the selection split. Five candidates beat
+$U$ on average and the median contrast is $-1.265$ pp. CIFAR-10 serves as
+a control. The references are uniform folding and Projected TILT
+($T_{\rm proj}$), which adjusts the TILT widths to the same two caps.
 
 We freeze the proposed offsets in retention fractions, in percentage
 points in upstream group order:
@@ -187,9 +186,10 @@ points in upstream group order:
 At a new budget, we add $n_g o_g/100$ to the realized uniform width
 $k_g^U$, round to nearest (ties to even), clip to the legal range, and
 project to the two caps. Thus the offsets stay fixed and the integer
-widths are fitted to the architecture and costs. At \bfifty{} on the
-CIFAR-100 reserve we reuse the selected widths exactly. At \bten{}, $U$
-has the largest common retention under $P(U)\le\lfloor 0.9P(\mathbf n)\rfloor$.
+widths are fitted to the architecture and costs. On the CIFAR-100
+reserve at the 50\% cut, we reuse the selected widths exactly. At the
+nominal 10\% cut, $U$ has the largest common retention under
+$P(U)\le\lfloor 0.9P(\mathbf n)\rfloor$.
 We allow $k_g\le n_g$ so that uncut groups are possible. The earlier
 upper bound would require at least a 19.21\% parameter cut on the older
 Tiny model. To form the mild $T_{\rm proj}$ proposal, we first fit the
@@ -197,16 +197,16 @@ linear profile at $\alpha=0.30$ with $r_g\ge 0$ under $P(U)$, then apply
 the same joint projection. The resulting $T_{\rm proj}$ and frozen
 offsets spend 99.9--100\% of both caps.
 
-\paragraph{New checkpoints at b10 (E049).}
+\paragraph{New checkpoints at the 10\% parameter cut (E049).}
 The held-out images are the previously used official splits, and the
 offsets, geometries, and evaluation targets are fixed before scoring the
 new folded models. All three folded profiles save 10.36--10.41\% of
 parameters and 10.97--11.06\% of MACs from their respective full models.
-The frozen-offset profile improves over $U$ by 0.6150 pp on CIFAR-100
+\FrozenShort{} improves over $U$ by 0.6150 pp on CIFAR-100
 and 0.6750 pp on Tiny (sample SD 0.4487 and 0.4970 pp), and over $T_{\rm proj}$ by
 0.6700 and 1.8000 pp, respectively, with four positive pairs in each
 comparison. On Tiny, $T_{\rm proj}$ trails $U$ by 1.1250 pp. Mean losses
-to the full model for frozen offsets are 1.6575 and 4.5700 pp
+to the full model for \FrozenShort{} are 1.6575 and 4.5700 pp
 (Table~\ref{tab:b10-transfer}). The prespecified targets here are at
 least 9.5\% reductions in both counts, a mean gain of at least 1 pp over
 $U$ with at least three positive pairs, and a loss of at most 3 pp. The
@@ -220,8 +220,8 @@ On development data we increase the minimum random crop area fraction
 for BN recalibration from 0.40 to 0.65, the value used to train the new
 Tiny models. Indices, crop and flip seeds, CMA, weights, and widths stay
 fixed. Top-1 rises by 0.9250 pp for the full model, 1.1275 pp for $U$,
-1.4500 pp for $T_{\rm proj}$ and 1.3200 pp for frozen offsets (4/4 for
-each). The mean gain of frozen offsets over $U$ changes from 0.7250 to
+1.4500 pp for $T_{\rm proj}$ and 1.3200 pp for \FrozenShort{} (4/4 for
+each). The mean gain of \FrozenShort{} over $U$ changes from 0.7250 to
 0.9175 pp (3/4 under either crop), and its loss to the full model falls
 from 4.7975 to 4.4025 pp. We do not evaluate this crop change on the
 official benchmark.
@@ -229,51 +229,46 @@ official benchmark.
 
 \paragraph{Transfer on earlier checkpoints (E043--E047).}
 On a separate 5,000-image CIFAR-100 reserve, held out before training
-and profile selection, L06 gains 1.215 pp (3/4) at \bfifty{} over $U$
-and 1.065 pp (4/4) over $T_{\rm proj}$. Its gain at \bthirty{} over $U$
-is 0.945 pp (4/4), below the prespecified 1 pp target. Corresponding
-losses to the full model are 19.970 and 7.420 pp. On the previously used
-official Tiny validation set (not used to select L06), the transferred
-profile gains 2.100 pp (4/4) at \bfifty{} and 0.255 pp (3/4) at
-\bthirty{} over $U$; the \bfifty{} gap to the full model is 29.0375 pp.
+and profile selection, \FrozenShort{} gains 1.215 pp (3/4) over $U$ at
+the nominal 50\% parameter cut and 1.065 pp (4/4) over $T_{\rm proj}$.
+Its gain over $U$ at 30\% is 0.945 pp (4/4), below the prespecified 1 pp
+target. Corresponding losses to the full model are 19.970 and 7.420 pp.
+On the previously used official Tiny validation set, the profile gains
+2.100 pp (4/4) at 50\% and 0.255 pp (3/4) at 30\% over $U$; the 50\% gap
+to the full model is 29.0375 pp. Tiny did not participate in offset selection.
 
-At \bten{} on the earlier Tiny model, the frozen-offset profile uses
+At the nominal 10\% parameter cut on the earlier Tiny model, \FrozenShort{} uses
 \[
  \mathbf k=(64,52,53,128,127,119,233,256,219,434,512,476).
 \]
 It uses 6,575 fewer parameters and 34,004 fewer MACs per image than
 $U$. We reproduce
 the eight full and uniform states and scores from the earlier Tiny
-development run, and observe a 1.1425 pp gain for frozen offsets (4/4,
+development run, and observe a 1.1425 pp gain for \FrozenShort{} (4/4,
 sample SD 0.8820 pp). The loss to full falls from 4.8575 to 3.7150 pp.
 By comparison, uniform folding at a separate 20\% cut loses 10.6400 pp
 on this split.
 
-We also evaluate these widths on the ImageNetV2 MatchedFrequency sample
-\texttt{imagenetv2-b-33} \citep{recht2019imagenetv2}, restricted to the
-200 Tiny classes (2,000 images, ten per class). Label mapping is checked
-against release metadata; exact RGB and perceptual hash screening against
-110,000 Tiny training, development, and official validation images flags
-no duplicates. We resize the
-whole RGB image bilinearly to $64\times64$ after EXIF orientation and
-apply the Tiny normalization without augmentation. Before scoring we
-verify that the 12 post-CMA states and costs match those from the Tiny
-development run. BN uses Tiny training images without adapting to
-ImageNetV2. Frozen offsets gains 1.3500 pp (4/4, sample SD 0.9704 pp)
-over $U$ and reduces the loss to the full model from 3.35 to 2.00 pp
+We evaluate the same widths on ImageNetV2 MatchedFrequency
+(\texttt{imagenetv2-b-33} \citep{recht2019imagenetv2}), using ten images
+from each of the 200 Tiny classes. Label mapping is checked against
+release metadata. Exact RGB and perceptual hashes flag no duplicates
+against 110,000 Tiny training, development, and validation images. After
+EXIF orientation, we bilinearly resize whole images to $64\times64$ and
+apply Tiny normalization without augmentation. All 12 post-CMA states
+and costs match the Tiny development run; BN still uses Tiny training
+images. \FrozenShort{} gains 1.3500 pp (4/4, sample SD 0.9704 pp) over
+$U$ and reduces the loss to the full model from 3.35 to 2.00 pp
 (Table~\ref{tab:b10}).
 
 \input{tables/b10}
 
-For the ImageNetV2 comparison and the frozen-offset comparison at
-\bfifty{} on Tiny validation, we estimate paired 95\% percentile
-intervals by 10,000 bootstrap draws, resampling images within each class
-with the same resampled indices for all variants and checkpoints. The
-intervals are $[+0.700,+2.025]$ pp on ImageNetV2 and $[+1.67,+2.52]$ pp
-for \bfifty{} on Tiny validation. The former meets the prespecified
+Paired 95\% percentile intervals use 10,000 bootstrap draws within
+classes, with shared image indices across variants and checkpoints. The
+intervals are $[+0.700,+2.025]$ pp on ImageNetV2 and $[+1.67,+2.52]$ pp at
+the 50\% cut on Tiny validation. ImageNetV2 meets the prespecified
 criterion (positive mean, at least three positive pairs, positive lower
-interval limit). Both intervals describe variation across sampled images
-conditional on the four fixed checkpoints; the external image sample
-does not add training replicates or extend the class set. Its absolute
-scores reflect a different image source and preprocessing.
+bound). The intervals are conditional on the four checkpoints. The class
+set is unchanged; absolute scores reflect different image sources and
+preprocessing.
 \FloatBarrier

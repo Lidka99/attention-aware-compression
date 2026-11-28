@@ -593,8 +593,8 @@ def tex_dual(rows):
                     f"{r['positive_pairs']}/4", str(r["best_control_id"]),
                     f"${r['tilt_minus_best_control_pp']:+.4f}$") for r in rows]
     return tex_table(
-        r"\textbf{Both costs matched to \Tilt{}.} Four prespecified controls on ResNet18 at "
-        r"\bfifty{}, each using 99.9--100\% of \Tilt{}'s parameters and MACs. $\bar C$ is the mean of "
+        r"\textbf{Both costs matched to \Tilt{}.} Four prespecified ResNet18 controls at the nominal "
+        r"50\% parameter cut, each using 99.9--100\% of \Tilt{}'s parameters and MACs. $\bar C$ is the mean of "
         r"the four controls within each checkpoint. The positive count refers to $T-\bar C$. "
         r"The best control is identified descriptively by mean development top-1.",
         "dual-tilt", "lrrrrrr",
@@ -619,7 +619,8 @@ def tex_b10(rows):
                             rf"${r['top1_pct']:.4f}\pm {r['top1_sd_pp']:.4f}$",
                             rf"${meanloss:.4f}\pm {sd:.4f}$" if r["model_id"] != "teacher" else "0"))
     return tex_table(
-        r"\textbf{Mild compression under both uniform-folding caps.} Cost counts are identical "
+        r"\textbf{Nominal 10\% parameter cut under both uniform-folding caps on earlier Tiny models.} "
+        r"Cost counts are identical "
         r"across samples. For each checkpoint, top-1 loss is the full model's top-1 minus that of the "
         r"specified model on the same images. Values are mean $\pm$ sample SD across four checkpoints "
         r"after CMA. The ImageNetV2 sample is MatchedFrequency restricted to the 200 Tiny ImageNet classes.",
@@ -639,15 +640,15 @@ def tex_b10_transfer(rows):
         top1 = f"{r['top1_pct']:.4f}"
         if r["model_id"] == "b10_L06":
             top1 = rf"\textbf{{{top1}}}"
-        body.append(tex_row(r["model"], top1, f"{r['loss_to_full_pp']:.4f}",
+        model = "Projected TILT" if r["model_id"] == "b10_Tproj" else r["model"]
+        body.append(tex_row(model, top1, f"{r['loss_to_full_pp']:.4f}",
                             f"{r['parameters']:,}", f"{r['mac_per_image']:,}"))
     return tex_table(
-        r"\textbf{Mild compression under both caps on newly trained ResNet18 models.} "
-        r"Top-1 and loss to the full model are paired means across four checkpoints on the same "
-        r"10,000 images per dataset. All entries use A4096/CMA, including the full-model reference. "
-        r"T-proj is the linear profile projected onto both caps. "
-        r"The official test and validation splits had previously been evaluated in this project. "
-        r"The full Tiny model uses 555.52 million MACs/image, versus 148.15 million for the earlier stem.",
+        r"\textbf{Nominal 10\% parameter cut under both UNIFORM budgets on newly trained ResNet18 models.} "
+        r"Each pair starts from the same checkpoint and uses the same BN recalibration, including "
+        r"the full-model reference. Top-1 and loss are means across four checkpoints on 10,000 images "
+        r"per dataset. Projected TILT adjusts the linear profile to both budgets. "
+        r"The official test and validation splits had previously been evaluated in this project.",
         "b10-transfer", "lrrrr",
         [tex_row("Model", r"Top-1 (\%)", "Loss to full (pp)", "Parameters", "MACs/image")], body, spacing=7,
     )

@@ -44,15 +44,19 @@ architektur rezydualnych.
 
 1. **Rdzeń:** E049, krótka informacja o E035 i jeden zwarty blok o koszcie
    z E037/E041. Przy zyskach zawsze pokazać top‑1 pełnego modelu i MAC.
-2. **Kontekst praktyczny:** b10 na dev w dwóch zdaniach. TILT daje
-   +1,7650 / +1,7125 pp nad UNIFORM (CIFAR‑100/Tiny); S04 odzyskuje na Tiny
-   kolejne 0,2000 pp, do 59,2050%. Strata 3,4075 pp pozostaje powyżej
-   roboczego celu 3 pp tej próby. [E051](tables/tilt_mild_dev.csv) ·
+2. **Nominalna redukcja parametrów o 10% na dev:** TILT daje
+   +1,7650 / +1,7125 pp nad UNIFORM (CIFAR‑100/Tiny). Lokalna korekta
+   szerokości odzyskuje na Tiny kolejne 0,2000 pp, do 59,2050%. Strata
+   3,4075 pp pozostaje powyżej roboczego celu 3 pp tej próby.
+   [E051](tables/tilt_mild_dev.csv) ·
    [E052](../experiments/2026-11-26_E052_lokalne_przesuniecie_b10/WYNIKI.md).
-3. **Na pytania:** dodatki C i D zawierają tabele b5/b10, lokalną próbę S04,
-   crop BN i Frozen offsets, w tym ImageNetV2 na starszych wagach. W głównym
-   tekście zostaje obserwacja, że pod oboma pułapami UNIFORM zyski b10 na
-   nowych wagach były mniejsze (+0,615 / +0,675 pp).
+3. **Frozen offsets przy nominalnej redukcji parametrów o 10%:** profil
+   proponuje stałe przesunięcia w udziale zachowanych kanałów względem
+   UNIFORM i mieści się pod jego pułapami parametrów oraz MAC. Na
+   oficjalnych zbiorach oceny (E049) oba profile wychodzą z tych samych
+   nowych checkpointów. Zysk wynosi +0,615 / +0,675 pp (CIFAR-100/Tiny),
+   na Tiny przy 494,10 zamiast 494,59 mln MAC/obraz. Starsze porównania
+   są opisane osobno w dodatku D.
 
 **Pytanie do promotora:** Czy taki zakres — kontrolowane badanie wpływu
 alokacji i kosztu — wystarcza jako główny wkład artykułu?

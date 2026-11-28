@@ -10,13 +10,8 @@
 \newcommand{\Uniform}{UNIFORM}
 \newcommand{\Tilt}{TILT}
 \newcommand{\TiltName}{Linear Depth Tilt}
-\newcommand{\FrozenProfile}{Frozen Width-Offset Profile}
 \newcommand{\FrozenShort}{Frozen offsets}
 \newcommand{\Uprime}{\ensuremath{U'}}
-\newcommand{\bten}{\texttt{b10}}
-\newcommand{\bthirty}{\texttt{b30}}
-\newcommand{\bfifty}{\texttt{b50}}
-\newcommand{\bseventy}{\texttt{b70}}
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.7}
 \renewcommand{\textfraction}{0.08}
@@ -135,12 +130,12 @@ steps in $b$ and returns the feasible endpoint. For $T$, we correct
 rounding by incrementing one group at a time as needed. Each increment
 maximizes feasible $P$, ties go to the lower group index, and no width
 exceeds $\lfloor0.9n_g\rfloor$. This yields
-$0.999P(U)\leq P(T)\leq P(U)$ in the evaluated settings. The nominal
-cut \bfifty{} refers to the network-wide reduction in parameters.
+$0.999P(U)\leq P(T)\leq P(U)$ in the evaluated settings. Percentage
+cuts refer to the reduction in total parameter count.
 
-For example, at \bfifty{} on the new Tiny ImageNet models, $U$ keeps 45
-of 64 channels in the first group and 361 of 512 in the last. $T$ keeps
-57 and 304, respectively. Both use about 5.62 million parameters.
+At a nominal 50\% parameter cut on the new Tiny ImageNet models, $U$
+keeps 45 of 64 channels in the first group and 361 of 512 in the last.
+$T$ keeps 57 and 304, respectively. Both use about 5.62 million parameters.
 
 \subsection{Batch-normalization recalibration}
 We reset the BN running statistics \citep{ioffe2015bn} and re-estimate
@@ -189,8 +184,8 @@ checkpoints per model--dataset pair are re-evaluated across cuts.
 \label{sec:matched-new}
 
 \Tilt{} improves top-1 on all four paired checkpoints in each of the
-six dataset--budget settings of E049
-(Table~\ref{tab:tilt-new}, Figure~\ref{fig:matched-new}). At \bfifty{},
+six dataset--budget settings of E049 (Table~\ref{tab:tilt-new},
+Figure~\ref{fig:matched-new}). At the nominal 50\% parameter cut,
 the mean gain over $U$ is $+9.7050$ percentage points (pp) on CIFAR-100
 and $+9.4625$ pp on Tiny ImageNet. At this cut, $T$ uses about 1.366 times
 as many MACs as $U$ on both datasets. On Tiny, top-1 is 30.7075\% versus
@@ -228,38 +223,40 @@ changes parameter capacity as well as the width profile
 (Figure~\ref{fig:comparable-macs}).
 
 \paragraph{Both counts matched to \Tilt{} (E041).}
-At \bfifty{} on development data, matching both counts to $T$ within
-0.1\% yields a mixed result. $T$ leads the mean of four prespecified
-alternative profiles by 2.10375 pp on CIFAR-100 (4/4) and 0.11250 pp
+At a nominal 50\% parameter cut on development data, matching both
+counts to $T$ within 0.1\% yields a mixed result. $T$ leads the mean of
+four prespecified alternative profiles by 2.10375 pp on CIFAR-100 (4/4) and 0.11250 pp
 on CIFAR-10 (2/4), where one alternative beats $T$ on all four
 checkpoints. The pilot does not cover Tiny ImageNet
 (Appendix~\ref{app:costs}).
 
-\paragraph{Both costs capped by \Uniform{} (E049).}
-At \bten{} on the official splits, a profile with fixed width offsets
-from $U$ gains 0.6150 pp on CIFAR-100 and 0.6750 pp on Tiny ImageNet
-(4/4 each) under both of $U$'s caps. Both gains fall short of the 1 pp
-target set for this comparison (Appendix~\ref{app:offsets}).
+\paragraph{Frozen offsets under both \Uniform{} budgets (E049).}
+\emph{\FrozenShort{}} proposes fixed changes to the share of channels
+kept by uniform folding in each group, then fits the widths to both
+budgets. At the nominal 10\% parameter cut, each pair starts from the
+same new E048 checkpoint. The profile uses 99.9--100\% of $U$'s parameters
+and MACs and gains 0.6150 pp on CIFAR-100 and 0.6750 pp on Tiny ImageNet
+(4/4 each). On Tiny it uses 494.10 versus 494.59 million MACs per image
+for $U$. Both gains fall below the 1 pp target. Projected TILT fits the
+linear profile to the same budgets and trails $U$ on Tiny by 1.1250 pp
+(Table~\ref{tab:b10-transfer}, Appendix~\ref{app:offsets}).
 
 \subsection{Mild parameter cuts on development data}
 \label{sec:matched-mild}
 
-At \bten{}, \Tilt{} gains 1.7650 pp over $U$ on CIFAR-100 and 1.7125 pp
-on Tiny ImageNet (4/4 each), with losses to the full model of 1.2200 and
-3.6075 pp, respectively. A local width redistribution recovers another
-0.2000 pp on Tiny ImageNet, leaving a 3.4075 pp gap to the full model,
+At the nominal 10\% parameter cut, \Tilt{} gains 1.7650 pp over $U$ on
+CIFAR-100 and 1.7125 pp on Tiny ImageNet (4/4 each), with losses to the
+full model of 1.2200 and 3.6075 pp, respectively. A local redistribution
+recovers another 0.2000 pp on Tiny ImageNet, leaving a 3.4075 pp gap,
 above the 3 pp target set for that experiment (Appendix~\ref{app:mild}).
 
 \section{Discussion and conclusion}
 
-Earlier feature maps have more spatial positions. Retaining more
-channels there can increase MACs even if later groups shrink enough to
-keep the parameter count fixed. The parameter-matched comparison
-therefore measures the effect of changing the width profile together
-with the MAC cost it incurs. The cost controls show that the accuracy
-ranking depends on the budget. MACs
-are operation counts rather than latency or peak memory measurements;
-device-only timing results are in Appendix~\ref{app:costs}.
+Earlier feature maps have more spatial positions, so wider early groups
+can increase MACs at fixed parameter counts. The cost controls show
+that accuracy rankings depend on the budget. MACs count arithmetic
+operations; the device-only latency and throughput measurements are in
+Appendix~\ref{app:costs}.
 
 The evidence covers two related residual architectures and four source
 checkpoints per model--dataset pair. Estimates across different cuts
@@ -269,10 +266,9 @@ profile with magnitude pruning (E038), so the result need not be
 specific to folding. At aggressive cuts, the gain over uniform folding
 can coexist with a large loss to the uncompressed model.
 
-On the studied CNNs, replacing a uniform channel reduction with a
-linear depth profile recovers top-1 at an additional MAC cost. When
-comparing folding profiles, the parameter budget and MAC cost thus need
-to be reported separately.
+On the studied CNNs, \Tilt{} recovers top-1 at matched parameter counts
+and additional MAC cost. At the nominal 10\% cut on the new checkpoints,
+\FrozenShort{} gives a small gain within both uniform folding budgets.
 
 \paragraph{Reproducibility.}
 Generated tables have machine-readable counterparts.
