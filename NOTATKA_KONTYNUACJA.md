@@ -1,11 +1,20 @@
-# Kontynuacja — 2026-11-24
+# Kontynuacja — 2026-11-28
 
-**Aktualnie: E048 działa (CIFAR-100 → Tiny na czterech RTX 2080 Ti), E049
-automatycznie czeka na audyt E048.** Użytkowniczka zatwierdziła trening od
-zera i ponowne porównania na obu zbiorach. Sprawdź manifesty i faktyczne
-procesy, nie uruchamiaj powtórnie w ciemno. [Stan E048](experiments/2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md),
-[stan E049](experiments/2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md).
-Po zakończeniu: ocenić audyty i dopiero wtedy zmienić główną tezę PDF.
+**Aktualnie:** [prompt do skopiowania](PROMPT_NOWY_CZAT.md) ·
+[status](STATUS_BADAN.md) · [manuskrypt](paper/main.pdf) ·
+[notatka dla promotora](paper/NA_WTOREK.md). E048–E052 ukończone. Bieżący
+PDF ma 12 stron; [archiwum](paper/archiwum/przed_skroceniem_17_stron/README.md)
+zawiera poprzednią wersję 17-stronicową.
+
+[E051](experiments/2026-11-26_E051_lagodny_tilt/WYNIKI.md) na dev:
+b10 TILT **79,7500% / 59,0050%** na CIFAR-100 / Tiny, **+1,7650 /
++1,7125 pp** względem UNIFORM (oba 4/4). Strata **1,2200 / 3,6075 pp**
+do pełnego. [E052](experiments/2026-11-26_E052_lokalne_przesuniecie_b10/WYNIKI.md)
+zakończył się odzyskaniem **0,2000 pp** na Tiny. Do celu b10 pozostało
+**0,4075 pp**; pula zamknięta. Główny wynik manuskryptu to E049 przy
+dopasowanym P, z jawnym kosztem MAC.
+
+## Wcześniejsze wyniki i plany
 
 **E047 ukończony, potwierdzenie b10.** ImageNetV2 MatchedFrequency dla 200
 klas Tiny, 2 000 nowych obrazów. L06 vs U **+1,3500 pp (4/4)**, bootstrap

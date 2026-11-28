@@ -1,0 +1,9 @@
+dataset,sample,images,comparison,mean_pp,paired_sd_pp,positive_pairs,seed_42_gain_pp,seed_43_gain_pp,seed_44_gain_pp,seed_45_gain_pp
+CIFAR-100,official test,10000,b10_L06-b10_U,0.615,0.448738973866,4,0.51,1.26,0.22,0.47
+CIFAR-100,official test,10000,b10_L06-b10_Tproj,0.67,0.70677672099,4,0.45,1.7,0.44,0.09
+CIFAR-100,development,5000,b10_L06-b10_U,0.975,0.309138588123,4,0.6,1.34,0.9,1.06
+CIFAR-100,development,5000,b10_L06-b10_Tproj,0.945,0.324704994315,4,0.52,1.3,0.92,1.04
+Tiny ImageNet,official validation,10000,b10_L06-b10_U,0.675,0.496957409309,4,1.36,0.21,0.44,0.69
+Tiny ImageNet,official validation,10000,b10_L06-b10_Tproj,1.8,1.23255831505,4,3.14,0.92,2.54,0.6
+Tiny ImageNet,development,10000,b10_L06-b10_U,0.725,1.22107875804,3,2.23,-0.59,0.15,1.11
+Tiny ImageNet,development,10000,b10_L06-b10_Tproj,1.935,1.08026231382,4,3.24,0.91,2.39,1.2

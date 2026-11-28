@@ -1,0 +1,9 @@
+dataset,sample,images,model_id,model,top1_pct,loss_to_full_pp,parameters,mac_per_image,parameter_reduction_pct,mac_reduction_pct
+CIFAR-100,official test,10000,full,Full model,79.68,0,11220132,555468800,0,0
+CIFAR-100,official test,10000,b10_U,UNIFORM,77.4075,2.2725,10055630,494537444,10.3786836019,10.9693570548
+CIFAR-100,official test,10000,b10_Tproj,T-proj,77.3525,2.3275,10051974,494077516,10.4112678888,11.0521570248
+CIFAR-100,official test,10000,b10_L06,Frozen offsets,78.0225,1.6575,10052748,494053376,10.4043695743,11.0565029035
+Tiny ImageNet,official validation,10000,full,Full model,61.2175,0,11271432,555520000,0,0
+Tiny ImageNet,official validation,10000,b10_U,UNIFORM,55.9725,5.245,10104230,494585944,10.3554011593,10.9688320853
+Tiny ImageNet,official validation,10000,b10_Tproj,T-proj,54.8475,6.37,10100626,494294552,10.3873758011,11.0212860023
+Tiny ImageNet,official validation,10000,b10_L06,Frozen offsets,56.6475,4.57,10104048,494104576,10.357015861,11.055483871

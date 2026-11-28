@@ -1,21 +1,50 @@
-# Status badań — 2026-11-24
+# Status badań — 2026-11-28
 
 **Kontynuacja w nowym czacie:** [prompt](PROMPT_NOWY_CZAT.md) · [notatka](NOTATKA_KONTYNUACJA.md).
 
-**Aktualny priorytet po decyzji użytkowniczki: mocniejsze modele na CIFAR-100 i Tiny ImageNet.**
-[E048](experiments/2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md) trwa:
-`runs/E048/train_20261124T232822Z_89dfc621`, cztery GPU i cztery seedy na zbiór,
-najpierw CIFAR-100, potem Tiny. CPU check i smoke obu fal PASS; pełna trafność
-jeszcze nieznana. Cel dev: ≥77,50% / ≥59,00%. Na Tiny stem 3×3/s2 bez maxpool
-zwiększa rozdzielczość pierwszego etapu, ale podnosi koszt modelu pełnego z
-148,15 do 555,52 mln MAC/obraz. Mierzymy te koszty jawnie.
+**Wersja do rozmowy z promotorem:** [manuskrypt PDF](paper/main.pdf) ·
+[krótka notatka](paper/NA_WTOREK.md). Główny wynik: TILT−UNIFORM przy dopasowanym
+P na CIFAR-100 i Tiny (E049, 30/50/70%, wszystkie pary dodatnie). MAC pokazuje
+cenę zysku. b10 pod oboma pułapami i E050 są kontrolami ograniczeń.
 
-[E049](experiments/2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md) jest w kolejce
-`runs/E049/eval_20261124T234559Z_b4ca081b` po technicznym audycie E048, bez zależności
-od tego, czy E048 przekroczy cele jakości. CPU potwierdził 20/20 konstrukcji na
-checkpointach smoke. Główny kontrast: zamrożony L06/b10−U przy dwóch pułapach
-na obu zbiorach; kontrole T-proj i powtórzenie porównań U/T przy b30/b50/b70.
-[Teza i warunki jej obrony](PLAN_PUBLIKACJI.md#aktualny-kierunek-po-decyzji-2026-11-24).
+PDF ma 12 stron z dodatkami; [wersja 17-stronicowa sprzed skrócenia](paper/archiwum/przed_skroceniem_17_stron/README.md)
+jest zachowana razem ze źródłami.
+
+**E052 ukończony — mały zysk b10, limit straty na Tiny nadal niespełniony.**
+S04 wybrany na rozłącznym podzbiorze train: dev Tiny **59,2050%**
+(**+0,2000 pp** do TILT, 3/4; strata **3,4075 pp**), CIFAR‑100 **79,8850%**
+(**+0,1350 pp**, 2/4). Zysk nad U +1,9125/+1,9000 pp, oba 4/4, przy
+~10,4% mniej P do pełnego i 0,94% mniej MAC do TILT. 4 GPU, obie fale
+exit 0, audyt PASS, 32/32 kontroli E051, pula zamknięta.
+[Wyniki](experiments/2026-11-26_E052_lokalne_przesuniecie_b10/WYNIKI.md).
+
+**E051 ukończony — proste poszerzenie porównania przy dopasowanym P na dev.**
+b10 TILT osiąga **79,7500% / 59,0050%** na CIFAR-100/Tiny, tj. **+1,7650 /
++1,7125 pp** nad U, oba 4/4. Strata do pełnego **1,2200 / 3,6075 pp**,
+więc Tiny nie przechodzi limitu 3 pp. Przy b5 Tiny **61,3250%**, strata
+**1,2875 pp**. TILT w b10 ma ok. 8,55% więcej MAC niż U, choć kosztuje
+3,35% mniej niż pełny. 56 ocen, 32/32 odtworzeń kontroli, 4 GPU/exit 0,
+audyt PASS. [Wyniki](experiments/2026-11-26_E051_lagodny_tilt/WYNIKI.md).
+
+**E050 ukończony — dopasowanie minimalnej skali cropu BN na Tiny (0,40→0,65).**
+Na dev poprawa L06 **+1,3200 pp (4/4)**, ale UNIFORM też poprawia się o
+**+1,1275 pp**. Zysk L06−U wynosi **+0,9175 pp (3/4)**, strata L06 do pełnego
+spada do **4,4025 pp**. Bramki jakości nie przeszły; to kontrola czułości na
+rekalibrację, przy tych samych P/MAC. 32 oceny, 16/16 odtworzeń E049,
+4 GPU/exit 0, bez treningu i benchmarku. [Wyniki](experiments/2026-11-25_E050_wrazliwosc_bn_tiny/WYNIKI.md).
+
+**E049 ukończony — dodatni kierunek b10, bramka praktyczna NIE.**
+Na wcześniej użytych benchmarkach, przy obu pułapach L06−U wynosi
+**+0,6150 / +0,6750 pp (oba 4/4)** na CIFAR-100/Tiny, a strata do pełnego
+**1,6575 / 4,5700 pp**. L06−T-proj **+0,6700 / +1,8000 pp (oba 4/4)**.
+4 GPU/exit 0, audyt PASS. [Wyniki](runs/E049/eval_20261124T234559Z_b4ca081b/WYNIKI.md) ·
+[Teza i progi](PLAN_PUBLIKACJI.md#aktualny-kierunek-po-decyzji-2026-11-24).
+
+**E048 ukończony — oba cele pełnych modeli spełnione.** Na dev przed CMA
+**81,125% / 63,465%** (cele ≥77,50% / ≥59,00%), poprawa 4/4 w obu falach.
+Osiem modeli od zera po 240 epok; 4 GPU, obie fale exit 0, audyt PASS.
+Na Tiny razem zmieniono recepturę i stem (3×3/s2, bez maxpool): koszt pełnego
+**555,52 zamiast 148,15 mln MAC/obraz**. [Audyt](runs/E048/train_20261124T232822Z_89dfc621/audit.json).
 
 **E047 ukończony — L06/b10 potwierdzony na zewnętrznej próbie ImageNetV2.**
 2 000 obrazów, 200 klas Tiny, **+1,3500 pp (4/4)** vs U, sparowany 95%

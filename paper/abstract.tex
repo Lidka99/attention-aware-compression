@@ -1,22 +1,16 @@
 \begin{abstract}
-We study how to allocate a compression budget across coupled channel
-groups in CNN folding. We hold the folding operator and batch-normalization
-recalibration fixed, using training images for recalibration and no
-post-compression weight fine-tuning. At matched parameter counts,
-\TiltName{} (\Tilt{}) shifts retained width toward earlier groups and
-improves top-1 over uniform folding in all 15 held-out settings, on all
-four checkpoints in each. It uses
-1.105--1.823 times as many multiply--accumulate operations (MACs). At
-similar MAC counts, a wider uniform baseline with more parameters beats
-\Tilt{} in 10 of 15 development settings. Under both uniform-folding caps,
-we select the most accurate of 24 feasible profiles on CIFAR-100 development
-data. The \FrozenProfile{} (L06) reuses the winning proposal's offsets
-from uniform channel retention. At approximately 10\% parameter reduction,
-it stays
-within both caps and improves top-1 over uniform folding by 1.14
-percentage points on Tiny ImageNet development data and 1.35 points on
-2,000 ImageNetV2 images from the same 200 classes. Gains are positive on
-each of the same four checkpoints in both samples. The paired 95\%
-image-bootstrap interval for the ImageNetV2 gain is $[+0.700, +2.025]$
-points, conditional on the four checkpoints.
+We measure how channel-width allocation affects the top-1 accuracy of
+folded CNNs at matched parameter counts. We compare a uniform channel
+reduction with a linear depth profile using the same folding operator and
+batch-normalization recalibration, without post-compression weight
+fine-tuning. On newly trained ResNet18 checkpoints, at nominal parameter
+reductions of 30\%, 50\%, and 70\%, the linear profile improves top-1 over
+uniform folding by 3.08--11.65 percentage points on CIFAR-100 and
+3.31--9.49 points on Tiny ImageNet. All four paired checkpoints favor
+the linear profile at each cut on both datasets. The profile uses
+1.105--1.824 times as many multiply--accumulate operations (MACs) as
+uniform folding. At comparable MAC counts, a wider uniform folded model
+with more parameters achieves higher top-1 in 10 of 15 earlier development
+settings. The results quantify an accuracy gain at a fixed parameter
+budget and the arithmetic cost of that gain.
 \end{abstract}

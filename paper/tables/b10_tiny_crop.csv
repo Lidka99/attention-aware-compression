@@ -1,0 +1,5 @@
+model_id,model,crop040_top1_pct,crop065_top1_pct,change_pp,positive_pairs,seed_42_change_pp,seed_43_change_pp,seed_44_change_pp,seed_45_change_pp
+full,Full model,61.6875,62.6125,0.925,4,0.84,0.94,1.01,0.91
+b10_U,UNIFORM,56.165,57.2925,1.1275,4,1.04,1.18,0.7,1.59
+b10_Tproj,T-proj,54.955,56.405,1.45,4,1.54,1.48,1.76,1.02
+b10_L06,Frozen offsets,56.89,58.21,1.32,4,0.97,1.72,1.17,1.42

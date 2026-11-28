@@ -1,47 +1,78 @@
-# Prompt do nowego czatu — E048, E049 i wkład artykułu
+# Prompt do nowego czatu — po E052, manuskrypt do rozmowy
 
 ## Do skopiowania — bieżący stan
 
 ```text
+Kontynuuję pracę nad artykułem o foldingu CNN w tym repozytorium.
+Najpierw przeczytaj STATUS_BADAN.md, AGENTS.md i paper/NA_WTOREK.md.
+Rozmawiaj ze mną po polsku. E048–E052 są ukończone; nie uruchamiaj ich
+ponownie. Główna teza to E049: zmiana rozdziału szerokości przy tym samym
+operatorze i dopasowanym P, z jawnie raportowanym MAC. E052 na Tiny
+odzyskał 0,2000 pp względem TILT/b10, pozostając powyżej celu straty 3 pp.
+Wersja do rozmowy to paper/main.pdf (12 stron z dodatkami); wersja 17 stron
+została zachowana w paper/archiwum/przed_skroceniem_17_stron. Zapisuj
+sprawdzone etapy commitem i pushem zgodnie z AGENTS.md.
+```
+
+## Historyczny prompt po E051 — zrealizowany jako E052
+
+```text
 Kontynuuję pracę nad artykułem o foldingu CNN w repozytorium
-/home/users/s224574/attention/badania_atencja_cnn. Mam około tygodnia do
-przedstawienia artykułu promotorowi. Potrzebuję konkretnego, uczciwego
-wkładu na CIFAR-100 i Tiny ImageNet; CIFAR-10 nie wystarczy. Rozmawiaj ze
-mną po polsku, rzeczowo i krytycznie. Manuskrypt jest po angielsku.
+/home/users/s224574/attention/badania_atencja_cnn. We wtorek 1 grudnia
+przedstawiam artykuł promotorowi. Chcę rzeczywiście zmniejszyć stratę po
+foldingu przy b10, przede wszystkim na Tiny ImageNet. Pracujmy krok po
+kroku, po polsku. Manuskrypt jest po angielsku w paper/main.tex i
+paper/abstract.tex; aktualny PDF to paper/main.pdf, a krótkie liczby dla
+promotora są w paper/NA_WTOREK.md.
 
-Najpierw przeczytaj STATUS_BADAN.md i AGENTS.md, aktualny rozdział
-PLAN_PUBLIKACJI.md oraz WYNIKI.md E048/E049. Źródło manuskryptu: paper/main.tex
-i paper/abstract.tex; istnieje paper/main.pdf. Nie odtwarzaj całej historii.
+Najpierw przeczytaj STATUS_BADAN.md, AGENTS.md i raport E051:
+experiments/2026-11-26_E051_lagodny_tilt/WYNIKI.md. Źródło: audit.json,
+frozen.json i per_seed.csv w runs/E051/dev_20261126T213703Z_20c2a1d5.
+E048–E051 są ukończone. Checkpointy (4 seedy na zbiór) pochodzą z
+runs/E048/train_20261124T232822Z_89dfc621. Przed uruchomieniem sprawdź
+manifesty i GPU; nie dubluj żadnego biegu.
 
-Sprawdź faktyczny stan istniejących uruchomień:
-- E048: runs/E048/train_20261124T232822Z_89dfc621 — trening od zera na 4 GPU,
-  4 seedy na zbiór, 240 epok na seed; najpierw CIFAR-100, następnie Tiny.
-- E049: runs/E049/eval_20261124T234559Z_b4ca081b — oczekuje na ukończenie
-  E048; uruchamia się automatycznie po audycie 8/8 checkpointów i zwolnieniu GPU.
-Odczytaj manifest.json i w razie potrzeby sprawdź konkretny PID oraz logi.
-Nie uruchamiaj drugiej kopii ani konkurencyjnych zadań GPU. Jeśli są wyniki,
-odczytaj audit.json, a dla E049 także WYNIKI.md i per_seed.csv w katalogu runu.
+Punkt wyjścia E051 (tylko dev, ta sama CMA w obrębie zbioru):
+- CIFAR-100, pełny / UNIFORM / Frozen offsets / TILT: 80,9700 / 77,9850 /
+  78,9600 / 79,7500% przy b10. TILT−U +1,7650 pp (4/4), strata 1,2200 pp.
+- Tiny: 62,6125 / 57,2925 / 58,2100 / 59,0050%. TILT−U +1,7125 pp (4/4),
+  strata 3,6075 pp. Cel przy tym samym pełnym modelu: ≥59,6125%, czyli
+  odzyskać jeszcze 0,6075 pp. b5 daje 61,3250%, ale to inny budżet.
+- b10 oznacza około 10% mniej P. L06 to Frozen offsets: mieści się pod
+  oboma pułapami UNIFORM i kosztuje ok. 494,10 mln MAC/obraz na Tiny.
+  TILT kosztuje 536,89 mln (pełny 555,52 mln). E049 na oficjalnych
+  benchmarkach dał dla Frozen offsets +0,615/+0,675 pp vs U, poniżej +1 pp.
 
-E048: cele dev to ≥77,50% na CIFAR-100 i ≥59,00% na Tiny, z poprawą na ≥3/4
-par seedów względem dawnych baz (75,235% i 50,82%). Tiny ma nowy stem i inną
-recepturę; koszt pełnego modelu rośnie z 148,15 do 555,52 mln MAC/obraz.
+Zrób jedną nową, ograniczoną próbę na istniejących wagach. Proponowana
+hipoteza do sprawdzenia: b10 TILT skraca wyłącznie trzy ostatnie grupy;
+łagodniejsza koncentracja cięcia może pomóc. Sprawdź na CPU kilka
+deterministycznych, małych przesunięć szerokości wokół geometrii E051/b10_T
+(maks. 6 nowych profili, TILT jako stała referencja). Zachowaj b10:
+≥9,5% mniej P od pełnego i 99,9–100% P UNIFORM. Żaden nowy profil nie ma
+przekraczać rzeczywistych P ani MAC TILT z E051 na danym zbiorze. To limit
+tej próby, żeby nie kupować dalszej poprawy dodatkowymi obliczeniami.
 
-E049: porównanie pełny / UNIFORM / L06 / T-proj przy b10 na obu zbiorach.
-Ten sam operator foldingu i kalibracja BN, bez dostrajania wag. Główna bramka
-na każdym zbiorze: ≥9,5% mniej P i MAC względem własnego pełnego modelu,
-L06−U średnio ≥1 pp i ≥3/4 dodatnich par oraz strata L06 do pełnego ≤3 pp.
-T-proj to dodatkowy nierównomierny punkt odniesienia pod tymi samymi pułapami.
-Porównania U/TILT przy b30/b50/b70 mają dopasowane P, nie MAC. Benchmarki były
-używane wcześniej; nie stroimy profili ani progów na ich wynikach.
+Przed punktacją zapisz osobny protokół (E052, jeśli numer jest wolny),
+pule, kryteria i jedną regułę wyboru. Wybierz po jednym profilu na zbiór
+wyłącznie na stałym podzbiorze train rozłącznym z A4096 i dev, np. po
+średnim NLL z czterech seedów; potem zamroź wybór i oceń go raz na dev.
+Porównaj z pełnym, UNIFORM, TILT i Frozen offsets. Użyj tego samego
+operatora i A4096/CMA jak w E051 (Tiny: minimalny crop 0,65). Cztery GPU
+w Conda attention, jeden seed na kartę, bez treningu ani dostrajania wag.
+Oficjalne testy/val, rezerwa CIFAR-100 i ImageNetV2 były użyte: nie otwieraj
+ich w tej próbie. Wynik dev pozostaje diagnostyczny.
 
-Zacznij od krótkiego meldunku o E048/E049. Jeśli trening jeszcze trwa,
-kontynuujmy dyskusję: zaproponuj jedno zdanie o wkładzie i układ głównej
-tabeli dla promotora. Rozróżnij lepszą bazę od wkładu empirycznego: czy raz
-wybrany profil zachowuje więcej top‑1 przy obu limitach, także względem
-T-proj? L06 nie jest uniwersalnym optymalizatorem. Jeśli wyniki są gotowe,
-oceń uczciwie, który wariant tezy potwierdzają, i co konkretnie trzeba poprawić
-w abstrakcie, tabelach i wykresach. Do artykułu wybieramy porównania potrzebne
-do rozstrzygnięcia tezy i pokazujemy jej istotne ograniczenia.
+Cel: strata ≤3 pp, średnio ≥1 pp nad UNIFORM i ≥3/4 dodatnich par;
+chcę poprawić Tiny do celu bez pogorszenia średniego 79,7500% na CIFAR-100.
+Pokaż top-1, stratę, sparowane różnice, rzeczywiste P i MAC. Jeśli kontrola
+CPU przejdzie i GPU są wolne, wykonaj pomiar po zamrożeniu protokołu,
+a potem sprawdź manifest, audyt i dane per seed. Jeżeli próba nie przyniesie
+poprawy, podaj wynik wprost, bez poszerzania puli na podstawie dev.
+
+Oś artykułu pozostaje ta sama: alokacja szerokości przy dopasowanym P,
+ten sam operator; MAC jest kosztem, który raportujemy. Najpierw jeden
+wynik, dopiero potem decyzja, co dopisać do PDF. Zacznij od krótkiego
+meldunku i konkretnego pierwszego działania.
 ```
 
 ## Historyczny prompt po E047 — angielski manuskrypt LaTeX po szkicu 0.9

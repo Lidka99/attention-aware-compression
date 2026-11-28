@@ -4,8 +4,11 @@ E001 zakończono: 200 epok treningu. Audyt checkpointu i przebiegu uczenia zako�
 
 | Eksperyment | Stan | Dokumentacja |
 |---|---|---|
-| E049 — powtórzenie foldingu na E048 | CPU 20/20 PASS; run oczekuje na audyt E048 | [Stan](2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md), [protokół](2026-11-24_E049_folding_mocniejszych_baz/OPIS.md) |
-| E048 — mocniejsze ResNet18 na CIFAR-100 i Tiny | W toku, 4 GPU; CPU i smoke obu zbiorów PASS | [Stan](2026-11-24_E048_mocniejsze_modele_bazowe/WYNIKI.md), [protokół](2026-11-24_E048_mocniejsze_modele_bazowe/OPIS.md) |
+| E052 — lokalne przesunięcie b10 | Ukończony, audyt PASS; Tiny dev +0,2000 pp do TILT, strata 3,4075 pp, próg niespełniony | [Wyniki](2026-11-26_E052_lokalne_przesuniecie_b10/WYNIKI.md), [protokół](2026-11-26_E052_lokalne_przesuniecie_b10/OPIS.md) |
+| E051 — łagodny TILT przy dopasowanym P | Ukończony, audyt PASS; b10 na dev +1,7650 / +1,7125 pp do UNIFORM (CIFAR-100/Tiny) | [Wyniki](2026-11-26_E051_lagodny_tilt/WYNIKI.md), [protokół](2026-11-26_E051_lagodny_tilt/OPIS.md) |
+| E050 — czułość kalibracji BN na Tiny | Ukończony, audyt PASS; zmiana cropu podnosi top-1 wszystkich ocenianych profili | [Wyniki](2026-11-25_E050_wrazliwosc_bn_tiny/WYNIKI.md), [protokół](2026-11-25_E050_wrazliwosc_bn_tiny/OPIS.md) |
+| E049 — powtórzenie foldingu na E048 | Ukończony, audyt PASS; przy dopasowanym P 6/6 ustawień na korzyść TILT | [Wyniki](2026-11-24_E049_folding_mocniejszych_baz/WYNIKI.md), [protokół](2026-11-24_E049_folding_mocniejszych_baz/OPIS.md) |
+| E048 — mocniejsze ResNet18 na CIFAR-100 i Tiny | Ukończony, audyt PASS; 8 checkpointów, spełnione oba cele pełnych modeli | [Audyt](../runs/E048/train_20261124T232822Z_89dfc621/audit.json), [protokół](2026-11-24_E048_mocniejsze_modele_bazowe/OPIS.md) |
 | E047 — zewnętrzne potwierdzenie L06/b10 | Completed, audyt PASS; ImageNetV2: +1,3500 pp (4/4), CI [+0,700; +2,025] pp | [Wyniki](2026-11-22_E047_l06_b10_imagenetv2/WYNIKI.md), [protokół](2026-11-22_E047_l06_b10_imagenetv2/OPIS.md) |
 | E046 — zamrożony L06/b10 na Tiny | Completed, audyt PASS; dev 47,5050%, +1,1425 pp (4/4), strata 3,7150 pp, pod P/MAC UNIFORM | [Wyniki](2026-11-22_E046_l06_b10_tiny/WYNIKI.md), [protokół](2026-11-22_E046_l06_b10_tiny/OPIS.md) |
 | E045 — łagodny UNIFORM na Tiny | Completed, 4GPU/exit0; dev b10 46,36% (−4,86 pp), b20 40,58% (−10,64 pp) | [Wyniki i krzywa](2026-11-22_E045_lagodny_uniform_tiny/WYNIKI.md), [protokół](2026-11-22_E045_lagodny_uniform_tiny/OPIS.md) |

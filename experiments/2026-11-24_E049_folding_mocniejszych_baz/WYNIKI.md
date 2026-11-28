@@ -1,4 +1,20 @@
-# E049 — stan przygotowania, 2026-11-24
+# E049 — wyniki foldingu na checkpointach E048
+
+[Pełne wyniki](../../runs/E049/eval_20261124T234559Z_b4ca081b/WYNIKI.md) ·
+[audyt](../../runs/E049/eval_20261124T234559Z_b4ca081b/audit.json) ·
+[per seed](../../runs/E049/eval_20261124T234559Z_b4ca081b/per_seed.csv) ·
+[manifest](../../runs/E049/eval_20261124T234559Z_b4ca081b/manifest.json)
+
+Przy dopasowanym P, na wcześniej użytym teście CIFAR-100 i val Tiny,
+TILT wygrywa z UNIFORM we wszystkich sześciu ustawieniach b30/b50/b70,
+po 4/4 dodatnie pary. W b50 różnice wynoszą **+9,7050 / +9,4625 pp**,
+przy **1,366× MAC** UNIFORM na obu zbiorach. [Tabela i koszty](../../paper/tables/tilt_new.csv).
+
+Pod oboma pułapami UNIFORM w b10 Frozen offsets daje **+0,6150 / +0,6750 pp**
+(po 4/4), poniżej celu +1 pp. Straty do pełnego modelu: **1,6575 / 4,5700 pp**.
+Bieg ukończony, cztery GPU, audyt techniczny PASS.
+
+## Kontrola geometrii przed punktacją
 
 **Geometria 20/20 PASS.** Niezmieniony operator z adapterem odtworzył profile
 na checkpointach smoke E048. Rzeczywiste P/MAC z modeli zgadzają się z planami
@@ -15,8 +31,3 @@ na obu architekturach. Sprawdzenie na CPU, bez punktacji i otwierania benchmark�
 
 [Manifest CPU](../../runs/E049/cpu_20261124T234044Z_7cb0f8c9/manifest.json) ·
 [Geometrie](../../runs/E049/cpu_20261124T234044Z_7cb0f8c9/geometry.json) · [Protokół](OPIS.md).
-
-**Punktacja w kolejce:** [manifest E049](../../runs/E049/eval_20261124T234559Z_b4ca081b/manifest.json).
-Automatyczny start po ukończeniu i technicznym audycie E048. Przed ukończeniem
-nie ma trafności E049. `WYNIKI.md`, `per_seed.csv` i `audit.json` w katalogu
-runu pojawią się po ocenie na dev oraz na wcześniej użytych benchmarkach.

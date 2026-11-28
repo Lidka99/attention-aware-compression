@@ -1,6 +1,20 @@
 # Alokacja budżetu w foldingu — plan publikacji
 
+## Aktualna oś manuskryptu — 2026-11-28
+
+Główne pytanie: czy nierównomierna alokacja odzyskuje top‑1 przy dopasowanym
+globalnym P, tym samym operatorze i bez dostrajania wag? E035 daje wcześniejszy
+wynik, a E049/b30–70 powtarza porównanie na nowych modelach CIFAR-100 i Tiny.
+MAC jest raportowany jako koszt zysku, z kontrolą E037 przy zbliżonym MAC.
+E049/b10 oraz E050 pokazują granice przy obu pułapach; E051–E052 są
+diagnostyką na dev. Szczegóły tych prób są w dodatkach. To empiryczny krok
+w stronę alokacji per warstwa wskazanej przez Wang i in., bez twierdzenia
+o rozwiązaniu zadania globalnej optymalizacji. [PDF](paper/main.pdf) ·
+[notatka dla promotora](paper/NA_WTOREK.md).
+
 ## Aktualny kierunek po decyzji 2026-11-24
+
+*Plan historyczny etapu E048/E049; bramki eksperymentu pozostają bez zmian.*
 
 **Główne pytanie do artykułu:** czy na mocniejszych modelach CIFAR-100 i Tiny
 ImageNet można zachować więcej top‑1, zmieniając wyłącznie alokację kanałów
@@ -20,12 +34,13 @@ po treningu, przy tych samych limitach liczby parametrów i MAC?
    dopasowanym P, z jego kosztem MAC. Powtórzona ocena benchmarków jest
    rozłączna z train/dev E048, lecz benchmarki używano historycznie.
 
-Jeśli wynik przejdzie bramkę, wkładem jest udokumentowany transfer
-zamrożonej alokacji pod dwoma ograniczeniami, bez dostrajania wag. Nie
-jest to dowód na uniwersalny selektor. Do głównego tekstu wybieramy te
-porównania i ograniczenia, które rozstrzygają to pytanie; historie prób
-eksploracyjnych zostają w repozytorium. Werdykt przy niespełnieniu progu
-pozostaje jawny, a kolejny protokół odpowiada wskazanemu przez dane problemowi.
+**Po E049/E050:** kierunek transferu zamrożonego profilu jest dodatni na
+każdym z nowych checkpointów przy obu pułapach. Kryterium praktyczne nie
+przechodzi ani na CIFAR-100 (+0,615 pp, strata 1,6575 pp), ani na Tiny
+(+0,675 pp, strata 4,5700 pp). Artykuł przedstawia ten wynik jako pomiar
+wpływu alokacji pod dwoma ograniczeniami, z jawnym zakresem efektu.
+E050 jest osobną kontrolą BN na Tiny dev. [Manuskrypt](paper/main.pdf) ·
+[wersja do rozmowy z promotorem](paper/NA_WTOREK.md).
 
 ## Po E047: zewnętrzne potwierdzenie łagodnej kompresji — 2026-11-22
 

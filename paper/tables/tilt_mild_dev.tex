@@ -1,0 +1,25 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{\textbf{Mild cuts at matched parameter counts (development diagnostic).} $T$ uses 99.9--100\% of $U$'s parameters; MACs are reported rather than capped. Mean top-1 after the same BN procedure within each dataset; all differences favor $T$ on all four checkpoints. Parameter and MAC reductions are calculated relative to the full model.}
+\label{tab:tilt-mild-dev}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Top-1 (\%)} &  &  & \multicolumn{2}{c}{Reductions for $T$ (\%)} &  \\
+\cmidrule(lr){2-3}\cmidrule(lr){6-7}
+Nominal $P$ cut & $U$ & $T$ & $T-U$ (pp) & $T$ loss (pp) & $P$ & MACs & $M(T)/M(U)$ \\
+\midrule
+\multicolumn{8}{@{}l}{\textbf{CIFAR-100 (full top-1 80.9700\%)}} \\
+\addlinespace[2pt]
+10\% & 77.9850 & 79.7500 & $+1.7650$ & 1.2200 & 10.41 & 3.35 & 1.086 \\
+5\% & 79.5600 & 80.4250 & $+0.8650$ & 0.5450 & 5.25 & 1.69 & 1.043 \\
+\midrule
+\multicolumn{8}{@{}l}{\textbf{Tiny ImageNet (full top-1 62.6125\%)}} \\
+\addlinespace[2pt]
+10\% & 57.2925 & 59.0050 & $+1.7125$ & 3.6075 & 10.40 & 3.35 & 1.086 \\
+5\% & 60.2125 & 61.3250 & $+1.1125$ & 1.2875 & 5.24 & 1.69 & 1.043 \\
+\bottomrule
+\end{tabular}
+\end{table}

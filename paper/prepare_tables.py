@@ -1,4 +1,4 @@
-"""Przelicz i wygeneruj tabele LaTeX oraz CSV artykułu z zapisów E035–E047.
+"""Przelicz i wygeneruj tabele LaTeX oraz CSV artykułu z zapisów E035–E051.
 
 Wejście: audytowane CSV/JSON w runs/, bez obrazów i wag. Ślad źródeł:
 paper/README.md oraz WYNIKI.md odpowiednich eksperymentów; wyjście: paper/tables/.
@@ -26,6 +26,10 @@ RUNS = {
         "E042": "20261121T212257Z_207ae03f",
         "E046": "20261122T045655Z_0b0c53b7",
         "E047": "20261122T053804Z_ae2dec73",
+        "E048": "train_20261124T232822Z_89dfc621",
+        "E049": "eval_20261124T234559Z_b4ca081b",
+        "E050": "dev_20261125T231044Z_d44c66e4",
+        "E051": "dev_20261126T213703Z_20c2a1d5",
     }.items()
 }
 PAIRS = {
@@ -37,6 +41,7 @@ PAIRS = {
 }
 TAGS = ("b30", "b50", "b70")
 SEEDS = (42, 43, 44, 45)
+OFFSET_LABEL = "Frozen offsets"
 
 
 def read_json(path):
@@ -203,7 +208,7 @@ def dual_rows():
 
 def b10_rows():
     results, paired_rows, contrasts = [], [], []
-    models = {"teacher": "Full model", "b10": "Uniform folding", "L06": "Frozen Offset Profile"}
+    models = {"teacher": "Full model", "b10": "Uniform folding", "L06": OFFSET_LABEL}
     for exp, test, n, profile_key, hits_key, n_key, hash_key in (
         ("E046", "Tiny ImageNet dev", 10000, "profile", "correct", "samples", "analyzed_sha256"),
         ("E047", "ImageNetV2", 2000, "model", "hits", "n", "output_sha256"),
@@ -263,6 +268,219 @@ def b10_rows():
     close(contrasts[1]["image_bootstrap_ci95_low_pp"], 0.700)
     close(contrasts[1]["image_bootstrap_ci95_high_pp"], 2.025)
     return results, paired_rows, contrasts
+
+
+TRANSFER_DATASETS = {"cifar100": ("CIFAR-100", "official test", 5000),
+                     "tiny": ("Tiny ImageNet", "official validation", 10000)}
+TRANSFER_MODELS = {"full_pre": "Full model (native BN)", "full": "Full model", "b10_U": "UNIFORM",
+                   "b10_Tproj": "T-proj", "b10_L06": OFFSET_LABEL}
+
+
+def b10_transfer_rows():
+    run = RUNS["E049"]
+    manifest, audit = (read_json(run / name) for name in ("manifest.json", "audit.json"))
+    baseline = read_json(RUNS["E048"] / "audit.json")
+    assert manifest["status"] == "completed" and manifest["exit_codes"] == [0] * 4
+    assert baseline["status"] == audit["status"] == "passed"
+    assert baseline["validated_checkpoints"] == 8 and audit["baseline_audit"] == baseline
+    assert audit["benchmark_previously_used"] and not audit["joint_gate_met"]
+    verify_sha(run / "geometry.json", manifest["geometry_sha256"])
+    verify_sha(run / "frozen.json", manifest["frozen_sha256"])
+    geometry = read_json(run / "geometry.json")
+    assert geometry == read_json(run / "frozen.json")["geometry"]
+    raw = read_csv(run / "per_seed.csv")
+    score = {(r["dataset"], r["split"], r["variant"], int(r["seed"])): r for r in raw}
+    assert len(score) == len(raw) == 176
+    results, per_seed, contrasts = [], [], []
+    for dataset, (name, benchmark, n_dev) in TRANSFER_DATASETS.items():
+        plans = geometry[dataset]["profiles"]
+        outcome = audit["datasets"][dataset]
+        assert outcome["E048_quality_gate_met"]
+        for model in ("b10_U", "b10_Tproj", "b10_L06"):
+            for key in ("parameters", "mac"):
+                cap, observed = plans["b10_U"][key], plans[model][key]
+                assert 999 * cap <= 1000 * observed <= 1000 * cap
+                assert 1000 * observed <= 905 * plans["full"][key]
+        for split, sample, n in (("benchmark", benchmark, 10000), ("dev", "development", n_dev)):
+            counts = {p: [int(score[dataset, split, p, s]["correct"]) for s in SEEDS]
+                      for p in TRANSFER_MODELS}
+            for p, profile in TRANSFER_MODELS.items():
+                plan = plans[p]
+                losses = [100 * (full - acc) / n for full, acc in zip(counts["full"], counts[p])]
+                top1 = 100 * mean(counts[p]) / n
+                close(top1, outcome[split]["top1_mean_pct"][p])
+                close(mean(losses), outcome[split]["loss_to_full_pp"][p])
+                for s, hit, loss in zip(SEEDS, counts[p], losses):
+                    row = score[dataset, split, p, s]
+                    assert int(row["n"]) == n and 0 <= hit <= n
+                    assert tuple(int(row[k]) for k in ("parameters", "mac")) == (plan["parameters"], plan["mac"])
+                    assert row["state_sha256"] == score[dataset, "dev", p, s]["state_sha256"]
+                    close(100 * hit / n, float(row["top1_pct"]))
+                    per_seed.append(dict(dataset=name, sample=sample, images=n, model_id=p, model=profile,
+                                         seed=s, correct=hit, top1_pct=100 * hit / n, loss_to_full_pp=loss,
+                                         parameters=plan["parameters"], mac_per_image=plan["mac"]))
+                if split == "benchmark" and p != "full_pre":
+                    results.append(dict(dataset=name, sample=sample, images=n, model_id=p, model=profile,
+                                        top1_pct=top1, loss_to_full_pp=mean(losses),
+                                        parameters=plan["parameters"], mac_per_image=plan["mac"],
+                                        parameter_reduction_pct=100 * (1 - plan["parameters"] / plans["full"]["parameters"]),
+                                        mac_reduction_pct=100 * (1 - plan["mac"] / plans["full"]["mac"])))
+            for p in ("b10_U", "b10_Tproj"):
+                values = [100 * (a - b) / n for a, b in zip(counts["b10_L06"], counts[p])]
+                saved = outcome[split]["contrasts"][f"b10_L06-{p}"]
+                close(mean(values), saved["mean_pp"])
+                close(stdev(values), saved["sd_pp"])
+                for got, expected in zip(values, saved["per_seed_pp"], strict=True):
+                    close(got, expected)
+                positive = sum(v > 0 for v in values)
+                assert positive == saved["positive_pairs"]
+                contrasts.append(dict(dataset=name, sample=sample, images=n, comparison=f"b10_L06-{p}",
+                                      mean_pp=mean(values), paired_sd_pp=stdev(values), positive_pairs=positive,
+                                      **{f"seed_{s}_gain_pp": v for s, v in zip(SEEDS, values)}))
+            if split == "benchmark":
+                gain = [a - b for a, b in zip(counts["b10_L06"], counts["b10_U"])]
+                loss = sum(counts["full"]) - sum(counts["b10_L06"])
+                gate = (100 * sum(gain) >= len(SEEDS) * n and sum(v > 0 for v in gain) >= 3
+                        and 100 * loss <= 3 * len(SEEDS) * n)
+                assert not gate and gate == outcome["passed"]
+            else:
+                close(100 * mean(counts["full_pre"]) / n, baseline["results"][dataset]["mean_pct"])
+    return results, per_seed, contrasts
+
+
+def b10_crop_rows(transfer):
+    run = RUNS["E050"]
+    m, audit = (read_json(run / name) for name in ("manifest.json", "audit.json"))
+    assert m["status"] == "completed" and m["exit_codes"] == [0] * 4 and m["dev_only"]
+    assert audit["status"] == "passed" and not audit["pilot_gate_met"] and audit["reproduced_E049"] == 16
+    raw = read_csv(run / "per_seed.csv")
+    score = {(r["views"], r["profile"], int(r["seed"])): r for r in raw}
+    control = {(r["model_id"], r["seed"]): r for r in transfer
+               if r["dataset"] == "Tiny ImageNet" and r["sample"] == "development"}
+    assert len(score) == len(raw) == audit["scores"] == 32
+    results = []
+    for p in ("full", "b10_U", "b10_Tproj", "b10_L06"):
+        a, b = ([score[v, p, s] for s in SEEDS] for v in ("crop040", "crop065"))
+        legacy, mild, change = [], [], []
+        for s, old, new in zip(SEEDS, a, b):
+            ref = control[p, s]
+            assert old["parameters_sha256"] == new["parameters_sha256"]
+            for row in (old, new):
+                assert (int(row["n"]), int(row["parameters"]), int(row["mac"])) == (
+                    ref["images"], ref["parameters"], ref["mac_per_image"])
+            assert int(old["correct"]) == ref["correct"]
+            legacy.append(int(old["correct"]) / 100)
+            mild.append(int(new["correct"]) / 100)
+            change.append((int(new["correct"]) - int(old["correct"])) / 100)
+        close(mean(legacy), audit["recipes"]["crop040"]["top1_mean_pct"][p])
+        close(mean(mild), audit["recipes"]["crop065"]["top1_mean_pct"][p])
+        close(mean(change), audit["shift_in_top1_by_profile"][p]["mean_pp"])
+        assert sum(v > 0 for v in change) == audit["shift_in_top1_by_profile"][p]["positive_pairs"] == 4
+        results.append(dict(model_id=p, model=TRANSFER_MODELS[p], crop040_top1_pct=mean(legacy),
+                            crop065_top1_pct=mean(mild), change_pp=mean(change), positive_pairs=4,
+                            **{f"seed_{s}_change_pp": v for s, v in zip(SEEDS, change)}))
+    return results
+
+
+def tilt_new_rows():
+    run = RUNS["E049"]
+    audit = read_json(run / "audit.json")["datasets"]
+    geometry = read_json(run / "geometry.json")
+    rows = [r for r in read_csv(run / "per_seed.csv") if r["split"] == "benchmark"]
+    score = {(r["dataset"], r["variant"], int(r["seed"])): r for r in rows}
+    assert len(score) == len(rows) == 88
+    out = []
+    for ds, (dataset, sample, _) in TRANSFER_DATASETS.items():
+        plans = geometry[ds]["profiles"]
+        expected = audit[ds]["benchmark"]
+        for tag in TAGS:
+            u, t = tag + "_U", tag + "_T"
+            costs = {p: (plans[p]["parameters"], plans[p]["mac"]) for p in ("full", u, t)}
+            assert 999 * costs[u][0] <= 1000 * costs[t][0] <= 1000 * costs[u][0]
+            hits = {}
+            for variant, cost in costs.items():
+                counts = []
+                for seed in SEEDS:
+                    r = score[ds, variant, seed]
+                    assert tuple(int(r[k]) for k in ("parameters", "mac")) == cost
+                    assert int(r["n"]) == 10000 and 0 <= int(r["correct"]) <= 10000
+                    close(int(r["correct"]) / 100, float(r["top1_pct"]))
+                    counts.append(int(r["correct"]))
+                hits[variant] = counts
+                close(mean(counts) / 100, expected["top1_mean_pct"][variant])
+            loss = mean(a - b for a, b in zip(hits["full"], hits[t])) / 100
+            close(loss, expected["loss_to_full_pp"][t])
+            gain = [(a - b) / 100 for a, b in zip(hits[t], hits[u])]
+            saved = expected["contrasts"][f"{t}-{u}"]
+            for value, archived in zip(gain, saved["per_seed_pp"], strict=True):
+                close(value, archived)
+            close(mean(gain), saved["mean_pp"])
+            close(stdev(gain), saved["sd_pp"])
+            assert saved["positive_pairs"] == sum(g > 0 for g in gain) == 4
+            out.append(dict(dataset=dataset, sample=sample, nominal_parameter_reduction_pct=int(tag[1:]),
+                            full_top1_pct=mean(hits["full"]) / 100, uniform_top1_pct=mean(hits[u]) / 100,
+                            tilt_top1_pct=mean(hits[t]) / 100, tilt_minus_uniform_pp=mean(gain),
+                            paired_sd_pp=stdev(gain), positive_pairs=4, tilt_loss_to_full_pp=loss,
+                            full_parameters=costs["full"][0], uniform_parameters=costs[u][0], tilt_parameters=costs[t][0],
+                            full_mac_per_image=costs["full"][1], uniform_mac_per_image=costs[u][1], tilt_mac_per_image=costs[t][1],
+                            tilt_over_uniform_mac=costs[t][1] / costs[u][1],
+                            **{f"seed_{s}_gain_pp": value for s, value in zip(SEEDS, gain)}))
+    assert len(out) == 6
+    return out
+
+
+def tilt_mild_rows():
+    run = RUNS["E051"]
+    m, audit = (read_json(run / name) for name in ("manifest.json", "audit.json"))
+    assert m["status"] == "completed" and m["dev_only"] and m["exit_codes"] == [0] * 4
+    assert audit["status"] == "passed" and audit["reproduced_controls"] == 32
+    assert audit["dev_only"] and not audit["joint_b10_dev_gate_met"]
+    verify_sha(run / "frozen.json", m["frozen_sha256"])
+    geom = read_json(run / "frozen.json")["geometry"]
+    raw = read_csv(run / "per_seed.csv")
+    score = {(r["dataset"], r["variant"], int(r["seed"])): r for r in raw}
+    assert len(score) == len(raw) == audit["scores"] == 56
+    out = []
+    for ds, (name, _, n) in TRANSFER_DATASETS.items():
+        saved = audit["datasets"][ds]
+        p0, mac0 = (geom[ds]["full"][k] for k in ("parameters", "mac"))
+        for budget in (10, 5):
+            u, t = f"b{budget}_U", f"b{budget}_T"
+            p_u, m_u = (geom[ds][u][k] for k in ("parameters", "mac"))
+            p_t, m_t = (geom[ds][t][k] for k in ("parameters", "mac"))
+            assert 999 * p_u <= 1000 * p_t <= 1000 * p_u
+            hits = {}
+            for v in ("full", u, t):
+                hits[v] = []
+                for seed in SEEDS:
+                    r = score[ds, v, seed]
+                    assert int(r["n"]) == n and 0 <= int(r["correct"]) <= n
+                    assert all(int(r[k]) == geom[ds][v][k] for k in ("parameters", "mac"))
+                    hits[v].append(int(r["correct"]))
+                    close(int(r["correct"]) * 100 / n, float(r["top1_pct"]))
+                close(100 * mean(hits[v]) / n, saved["top1_mean_pct"][v])
+            deltas = [100 * (a - b) / n for a, b in zip(hits[t], hits[u])]
+            loss = 100 * (mean(hits["full"]) - mean(hits[t])) / n
+            diff = saved["contrasts"][f"{t}-{u}"]
+            for got, want in zip(deltas, diff["per_seed_pp"], strict=True):
+                close(got, want)
+            close(mean(deltas), diff["mean_pp"])
+            close(stdev(deltas), diff["sample_sd_pp"])
+            close(loss, saved["loss_to_full_pp"][t])
+            assert sum(x > 0 for x in deltas) == diff["positive_pairs"] == 4
+            gate = (1000 * p_t <= 905 * p0 and mean(deltas) >= 1 and loss <= 3) if budget == 10 else None
+            if budget == 10:
+                assert gate == saved["b10_dev_gate_met"] == (ds == "cifar100")
+            out.append(dict(dataset=name, sample="development", images=n, nominal_parameter_reduction_pct=budget,
+                            full_top1_pct=100 * mean(hits["full"]) / n, uniform_top1_pct=100 * mean(hits[u]) / n,
+                            tilt_top1_pct=100 * mean(hits[t]) / n, tilt_minus_uniform_pp=mean(deltas),
+                            tilt_loss_to_full_pp=loss, paired_sd_pp=stdev(deltas), positive_pairs=4, b10_dev_gate_met=gate,
+                            full_parameters=p0, uniform_parameters=p_u, tilt_parameters=p_t,
+                            full_mac_per_image=mac0, uniform_mac_per_image=m_u, tilt_mac_per_image=m_t,
+                            tilt_over_uniform_mac=m_t / m_u, tilt_parameter_reduction_pct=100 * (1 - p_t / p0),
+                            tilt_mac_reduction_pct=100 * (1 - m_t / mac0),
+                            **{f"seed_{seed}_gain_pp": value for seed, value in zip(SEEDS, deltas)}))
+    return out
 
 
 def report(e035, cost, dual, b10, contrasts):
@@ -410,6 +628,83 @@ def tex_b10(rows):
     )
 
 
+def tex_b10_transfer(rows):
+    body = []
+    for i, r in enumerate(rows):
+        if i % 4 == 0:
+            if i:
+                body.append(r"\midrule")
+            body.append(tex_row(rf"\multicolumn{{5}}{{@{{}}l}}{{\textbf{{{r['dataset']} ({r['sample']})}}}}"))
+            body.append(r"\addlinespace[2pt]")
+        top1 = f"{r['top1_pct']:.4f}"
+        if r["model_id"] == "b10_L06":
+            top1 = rf"\textbf{{{top1}}}"
+        body.append(tex_row(r["model"], top1, f"{r['loss_to_full_pp']:.4f}",
+                            f"{r['parameters']:,}", f"{r['mac_per_image']:,}"))
+    return tex_table(
+        r"\textbf{Mild compression under both caps on newly trained ResNet18 models.} "
+        r"Top-1 and loss to the full model are paired means across four checkpoints on the same "
+        r"10,000 images per dataset. All entries use A4096/CMA, including the full-model reference. "
+        r"T-proj is the linear profile projected onto both caps. "
+        r"The official test and validation splits had previously been evaluated in this project. "
+        r"The full Tiny model uses 555.52 million MACs/image, versus 148.15 million for the earlier stem.",
+        "b10-transfer", "lrrrr",
+        [tex_row("Model", r"Top-1 (\%)", "Loss to full (pp)", "Parameters", "MACs/image")], body, spacing=7,
+    )
+
+
+def tex_tilt_new(rows):
+    body = []
+    for i, r in enumerate(rows):
+        if i % 3 == 0:
+            if i:
+                body.append(r"\midrule")
+            cohort = f"{r['dataset']} ({r['sample']}; full top-1 {r['full_top1_pct']:.4f}\\%)"
+            body.append(tex_row(rf"\multicolumn{{6}}{{@{{}}l}}{{\textbf{{{cohort}}}}}"))
+            body.append(r"\addlinespace[2pt]")
+        body.append(tex_row(rf"{r['nominal_parameter_reduction_pct']}\%", f"{r['uniform_top1_pct']:.4f}",
+                            f"{r['tilt_top1_pct']:.4f}", rf"${r['tilt_minus_uniform_pp']:+.4f}$",
+                            f"{r['tilt_loss_to_full_pp']:.4f}", f"{r['tilt_over_uniform_mac']:.3f}"))
+    return tex_table(
+        r"\textbf{Width allocation at matched parameter counts on newly trained ResNet18 checkpoints.} "
+        r"$U$ is uniform folding and $T$ is Linear Depth Tilt. $T$ uses 99.9--100\% of $U$'s parameters. "
+        r"Top-1 and losses are means across four paired checkpoints after the same BN procedure. "
+        r"All six $T-U$ contrasts are positive on all four checkpoints. "
+        r"$M(T)/M(U)$ is the ratio of MACs per image, not a runtime ratio. Both benchmarks had "
+        r"already been used earlier in the project.",
+        "tilt-new", "lrrrrr",
+        [tex_row("", r"\multicolumn{2}{c}{Top-1 (\%)}", "", "", ""), r"\cmidrule(lr){2-3}",
+         tex_row("Nominal $P$ cut", "$U$", "$T$", "$T-U$ (pp)", "$T$ loss to full (pp)", "$M(T)/M(U)$")],
+        body, spacing=6,
+    )
+
+
+def tex_tilt_mild(rows):
+    body = []
+    for i, r in enumerate(rows):
+        if i % 2 == 0:
+            if i:
+                body.append(r"\midrule")
+            cohort = f"{r['dataset']} (full top-1 {r['full_top1_pct']:.4f}\\%)"
+            body.append(tex_row(rf"\multicolumn{{8}}{{@{{}}l}}{{\textbf{{{cohort}}}}}"))
+            body.append(r"\addlinespace[2pt]")
+        body.append(tex_row(rf"{r['nominal_parameter_reduction_pct']}\%", f"{r['uniform_top1_pct']:.4f}",
+                            f"{r['tilt_top1_pct']:.4f}", rf"${r['tilt_minus_uniform_pp']:+.4f}$",
+                            f"{r['tilt_loss_to_full_pp']:.4f}", f"{r['tilt_parameter_reduction_pct']:.2f}",
+                            f"{r['tilt_mac_reduction_pct']:.2f}", f"{r['tilt_over_uniform_mac']:.3f}"))
+    return tex_table(
+        r"\textbf{Mild cuts at matched parameter counts (development diagnostic).} "
+        r"$T$ uses 99.9--100\% of $U$'s parameters; MACs are reported rather than capped. "
+        r"Mean top-1 after the same BN procedure within each dataset; all differences favor $T$ on all four "
+        r"checkpoints. Parameter and MAC reductions are calculated relative to the full model.",
+        "tilt-mild-dev", "lrrrrrrr",
+        [tex_row("", r"\multicolumn{2}{c}{Top-1 (\%)}", "", "", r"\multicolumn{2}{c}{Reductions for $T$ (\%)}", ""),
+         r"\cmidrule(lr){2-3}\cmidrule(lr){6-7}",
+         tex_row("Nominal $P$ cut", "$U$", "$T$", "$T-U$ (pp)", "$T$ loss (pp)", "$P$", "MACs", "$M(T)/M(U)$")],
+        body, spacing=5,
+    )
+
+
 def main():
     if not __debug__:
         raise RuntimeError("Uruchom bez -O: weryfikacja wejść używa assert.")
@@ -420,13 +715,26 @@ def main():
     cost = cost_rows(plans, score)
     dual = dual_rows()
     b10, per_seed, contrasts = b10_rows()
+    transfer, transfer_seeds, transfer_contrasts = b10_transfer_rows()
+    crop = b10_crop_rows(transfer_seeds)
+    tilt_new = tilt_new_rows()
+    tilt_mild = tilt_mild_rows()
     report(e035, cost, dual, b10, contrasts)
+    for r in transfer_contrasts:
+        if r["sample"] != "development":
+            print(f"E049 {r['dataset']} {r['comparison']}: {r['mean_pp']:+.4f} pp, {r['positive_pairs']}/4.")
+    print(f"E050 Tiny dev: L06 shift {crop[-1]['change_pp']:+.4f} pp at the same costs, 4/4.")
+    print("E049 at matched P: 6/6 positive contrasts on new checkpoints, 4/4 each.")
+    print("E051 dev: b10 passes the practical criterion on CIFAR-100 only; b5 reported separately.")
     out = PAPER / "tables"
     if not args.check:
         out.mkdir(exist_ok=True)
     render = {"tilt_uniform": (e035, tex_e035), "cost_controls": (cost, tex_cost),
               "dual_cost_controls": (dual, tex_dual), "b10": (b10, tex_b10),
-              "b10_per_seed": (per_seed, None), "b10_contrasts": (contrasts, None)}
+              "b10_per_seed": (per_seed, None), "b10_contrasts": (contrasts, None),
+              "b10_transfer": (transfer, tex_b10_transfer), "b10_transfer_per_seed": (transfer_seeds, None),
+              "b10_transfer_contrasts": (transfer_contrasts, None), "b10_tiny_crop": (crop, None),
+              "tilt_new": (tilt_new, tex_tilt_new), "tilt_mild_dev": (tilt_mild, tex_tilt_mild)}
     for stem, (data, tex) in render.items():
         outputs = {"csv": csv_text(data)}
         if tex is not None:

@@ -8,6 +8,15 @@ Pracujemy krok po kroku. Wyjaśnienia przekazujemy po polsku zarówno w rozmowie
 
 Ustalenie 2026-09-29: wykresy i audyt istniejącego eksperymentu pozostają w jego folderze. Nowy numer E oznacza nową próbę badawczą; kolejne uruchomienia/audyty mają unikalne katalogi wyników pod runs/<E-ID>/. Zobacz docs/DOKUMENTOWANIE.md. Do drobnych, ograniczonych zadań używaj podagenta general-flash; bez równoległych zmian tych samych plików i konkurencyjnych zadań GPU.
 
+## Commit i push
+
+Ustalenie 2026-11-28: po każdym zakończonym i sprawdzonym etapie ze
+zmianami zrób commit i push na śledzoną gałąź zdalną (obecnie
+`origin/main`). Przed większą redakcją zapisz działającą wersję w
+commicie i upewnij się, że jest na zdalnej gałęzi. Do commita dodawaj
+tylko sprawdzone pliki związane z etapem, bez danych, wag, lokalnych
+runów i sekretów. Po pushu podaj hash commita i potwierdź stan gałęzi.
+
 ## Uruchamianie i opis kodu
 
 Stan 2026-10-30: **E019 completed — kryterium spełnione.** Tiny ImageNet,

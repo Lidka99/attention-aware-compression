@@ -1,0 +1,81 @@
+dataset,sample,images,model_id,model,seed,correct,top1_pct,loss_to_full_pp,parameters,mac_per_image
+CIFAR-100,official test,10000,full_pre,Full model (native BN),42,8004,80.04,-0.39,11220132,555468800
+CIFAR-100,official test,10000,full_pre,Full model (native BN),43,8038,80.38,-0.73,11220132,555468800
+CIFAR-100,official test,10000,full_pre,Full model (native BN),44,8020,80.2,-0.52,11220132,555468800
+CIFAR-100,official test,10000,full_pre,Full model (native BN),45,7989,79.89,-0.15,11220132,555468800
+CIFAR-100,official test,10000,full,Full model,42,7965,79.65,0,11220132,555468800
+CIFAR-100,official test,10000,full,Full model,43,7965,79.65,0,11220132,555468800
+CIFAR-100,official test,10000,full,Full model,44,7968,79.68,0,11220132,555468800
+CIFAR-100,official test,10000,full,Full model,45,7974,79.74,0,11220132,555468800
+CIFAR-100,official test,10000,b10_U,UNIFORM,42,7749,77.49,2.16,10055630,494537444
+CIFAR-100,official test,10000,b10_U,UNIFORM,43,7687,76.87,2.78,10055630,494537444
+CIFAR-100,official test,10000,b10_U,UNIFORM,44,7796,77.96,1.72,10055630,494537444
+CIFAR-100,official test,10000,b10_U,UNIFORM,45,7731,77.31,2.43,10055630,494537444
+CIFAR-100,official test,10000,b10_Tproj,T-proj,42,7755,77.55,2.1,10051974,494077516
+CIFAR-100,official test,10000,b10_Tproj,T-proj,43,7643,76.43,3.22,10051974,494077516
+CIFAR-100,official test,10000,b10_Tproj,T-proj,44,7774,77.74,1.94,10051974,494077516
+CIFAR-100,official test,10000,b10_Tproj,T-proj,45,7769,77.69,2.05,10051974,494077516
+CIFAR-100,official test,10000,b10_L06,Frozen offsets,42,7800,78,1.65,10052748,494053376
+CIFAR-100,official test,10000,b10_L06,Frozen offsets,43,7813,78.13,1.52,10052748,494053376
+CIFAR-100,official test,10000,b10_L06,Frozen offsets,44,7818,78.18,1.5,10052748,494053376
+CIFAR-100,official test,10000,b10_L06,Frozen offsets,45,7778,77.78,1.96,10052748,494053376
+CIFAR-100,development,5000,full_pre,Full model (native BN),42,4049,80.98,-0.34,11220132,555468800
+CIFAR-100,development,5000,full_pre,Full model (native BN),43,4054,81.08,0.04,11220132,555468800
+CIFAR-100,development,5000,full_pre,Full model (native BN),44,4060,81.2,-0.4,11220132,555468800
+CIFAR-100,development,5000,full_pre,Full model (native BN),45,4062,81.24,0.08,11220132,555468800
+CIFAR-100,development,5000,full,Full model,42,4032,80.64,0,11220132,555468800
+CIFAR-100,development,5000,full,Full model,43,4056,81.12,0,11220132,555468800
+CIFAR-100,development,5000,full,Full model,44,4040,80.8,0,11220132,555468800
+CIFAR-100,development,5000,full,Full model,45,4066,81.32,0,11220132,555468800
+CIFAR-100,development,5000,b10_U,UNIFORM,42,3899,77.98,2.66,10055630,494537444
+CIFAR-100,development,5000,b10_U,UNIFORM,43,3864,77.28,3.84,10055630,494537444
+CIFAR-100,development,5000,b10_U,UNIFORM,44,3920,78.4,2.4,10055630,494537444
+CIFAR-100,development,5000,b10_U,UNIFORM,45,3914,78.28,3.04,10055630,494537444
+CIFAR-100,development,5000,b10_Tproj,T-proj,42,3903,78.06,2.58,10051974,494077516
+CIFAR-100,development,5000,b10_Tproj,T-proj,43,3866,77.32,3.8,10051974,494077516
+CIFAR-100,development,5000,b10_Tproj,T-proj,44,3919,78.38,2.42,10051974,494077516
+CIFAR-100,development,5000,b10_Tproj,T-proj,45,3915,78.3,3.02,10051974,494077516
+CIFAR-100,development,5000,b10_L06,Frozen offsets,42,3929,78.58,2.06,10052748,494053376
+CIFAR-100,development,5000,b10_L06,Frozen offsets,43,3931,78.62,2.5,10052748,494053376
+CIFAR-100,development,5000,b10_L06,Frozen offsets,44,3965,79.3,1.5,10052748,494053376
+CIFAR-100,development,5000,b10_L06,Frozen offsets,45,3967,79.34,1.98,10052748,494053376
+Tiny ImageNet,official validation,10000,full_pre,Full model (native BN),42,6331,63.31,-1.26,11271432,555520000
+Tiny ImageNet,official validation,10000,full_pre,Full model (native BN),43,6251,62.51,-1.29,11271432,555520000
+Tiny ImageNet,official validation,10000,full_pre,Full model (native BN),44,6257,62.57,-1.92,11271432,555520000
+Tiny ImageNet,official validation,10000,full_pre,Full model (native BN),45,6317,63.17,-2.22,11271432,555520000
+Tiny ImageNet,official validation,10000,full,Full model,42,6205,62.05,0,11271432,555520000
+Tiny ImageNet,official validation,10000,full,Full model,43,6122,61.22,0,11271432,555520000
+Tiny ImageNet,official validation,10000,full,Full model,44,6065,60.65,0,11271432,555520000
+Tiny ImageNet,official validation,10000,full,Full model,45,6095,60.95,0,11271432,555520000
+Tiny ImageNet,official validation,10000,b10_U,UNIFORM,42,5740,57.4,4.65,10104230,494585944
+Tiny ImageNet,official validation,10000,b10_U,UNIFORM,43,5534,55.34,5.88,10104230,494585944
+Tiny ImageNet,official validation,10000,b10_U,UNIFORM,44,5560,55.6,5.05,10104230,494585944
+Tiny ImageNet,official validation,10000,b10_U,UNIFORM,45,5555,55.55,5.4,10104230,494585944
+Tiny ImageNet,official validation,10000,b10_Tproj,T-proj,42,5562,55.62,6.43,10100626,494294552
+Tiny ImageNet,official validation,10000,b10_Tproj,T-proj,43,5463,54.63,6.59,10100626,494294552
+Tiny ImageNet,official validation,10000,b10_Tproj,T-proj,44,5350,53.5,7.15,10100626,494294552
+Tiny ImageNet,official validation,10000,b10_Tproj,T-proj,45,5564,55.64,5.31,10100626,494294552
+Tiny ImageNet,official validation,10000,b10_L06,Frozen offsets,42,5876,58.76,3.29,10104048,494104576
+Tiny ImageNet,official validation,10000,b10_L06,Frozen offsets,43,5555,55.55,5.67,10104048,494104576
+Tiny ImageNet,official validation,10000,b10_L06,Frozen offsets,44,5604,56.04,4.61,10104048,494104576
+Tiny ImageNet,official validation,10000,b10_L06,Frozen offsets,45,5624,56.24,4.71,10104048,494104576
+Tiny ImageNet,development,10000,full_pre,Full model (native BN),42,6368,63.68,-1.45,11271432,555520000
+Tiny ImageNet,development,10000,full_pre,Full model (native BN),43,6350,63.5,-1.69,11271432,555520000
+Tiny ImageNet,development,10000,full_pre,Full model (native BN),44,6349,63.49,-2.19,11271432,555520000
+Tiny ImageNet,development,10000,full_pre,Full model (native BN),45,6319,63.19,-1.78,11271432,555520000
+Tiny ImageNet,development,10000,full,Full model,42,6223,62.23,0,11271432,555520000
+Tiny ImageNet,development,10000,full,Full model,43,6181,61.81,0,11271432,555520000
+Tiny ImageNet,development,10000,full,Full model,44,6130,61.3,0,11271432,555520000
+Tiny ImageNet,development,10000,full,Full model,45,6141,61.41,0,11271432,555520000
+Tiny ImageNet,development,10000,b10_U,UNIFORM,42,5694,56.94,5.29,10104230,494585944
+Tiny ImageNet,development,10000,b10_U,UNIFORM,43,5626,56.26,5.55,10104230,494585944
+Tiny ImageNet,development,10000,b10_U,UNIFORM,44,5616,56.16,5.14,10104230,494585944
+Tiny ImageNet,development,10000,b10_U,UNIFORM,45,5530,55.3,6.11,10104230,494585944
+Tiny ImageNet,development,10000,b10_Tproj,T-proj,42,5593,55.93,6.3,10100626,494294552
+Tiny ImageNet,development,10000,b10_Tproj,T-proj,43,5476,54.76,7.05,10100626,494294552
+Tiny ImageNet,development,10000,b10_Tproj,T-proj,44,5392,53.92,7.38,10100626,494294552
+Tiny ImageNet,development,10000,b10_Tproj,T-proj,45,5521,55.21,6.2,10100626,494294552
+Tiny ImageNet,development,10000,b10_L06,Frozen offsets,42,5917,59.17,3.06,10104048,494104576
+Tiny ImageNet,development,10000,b10_L06,Frozen offsets,43,5567,55.67,6.14,10104048,494104576
+Tiny ImageNet,development,10000,b10_L06,Frozen offsets,44,5631,56.31,4.99,10104048,494104576
+Tiny ImageNet,development,10000,b10_L06,Frozen offsets,45,5641,56.41,5,10104048,494104576
