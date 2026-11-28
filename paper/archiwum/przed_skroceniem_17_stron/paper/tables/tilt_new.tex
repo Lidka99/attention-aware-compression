@@ -1,0 +1,27 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\caption{\textbf{Width allocation at matched parameter counts on newly trained ResNet18 checkpoints.} $U$ is uniform folding and $T$ is Linear Depth Tilt. $T$ uses 99.9--100\% of $U$'s parameters. Top-1 and losses are means across four paired checkpoints after the same BN procedure. All six $T-U$ contrasts are positive on all four checkpoints. $M(T)/M(U)$ is the ratio of MACs per image, not a runtime ratio. Both benchmarks had already been used earlier in the project.}
+\label{tab:tilt-new}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Top-1 (\%)} &  &  &  \\
+\cmidrule(lr){2-3}
+Nominal $P$ cut & $U$ & $T$ & $T-U$ (pp) & $T$ loss to full (pp) & $M(T)/M(U)$ \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{CIFAR-100 (official test; full top-1 79.6800\%)}} \\
+\addlinespace[2pt]
+30\% & 69.3100 & 72.3875 & $+3.0775$ & 7.2925 & 1.105 \\
+50\% & 51.7100 & 61.4150 & $+9.7050$ & 18.2650 & 1.366 \\
+70\% & 22.3875 & 34.0400 & $+11.6525$ & 45.6400 & 1.823 \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{Tiny ImageNet (official validation; full top-1 61.2175\%)}} \\
+\addlinespace[2pt]
+30\% & 40.4300 & 43.7350 & $+3.3050$ & 17.4825 & 1.105 \\
+50\% & 21.2450 & 30.7075 & $+9.4625$ & 30.5100 & 1.366 \\
+70\% & 5.2000 & 14.6850 & $+9.4850$ & 46.5325 & 1.824 \\
+\bottomrule
+\end{tabular}
+\end{table}

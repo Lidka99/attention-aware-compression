@@ -1,0 +1,25 @@
+% Generated from the audited runs by paper/prepare_tables.py.
+\begin{table}[tbp]
+\centering
+\small
+\setlength{\tabcolsep}{8pt}
+\caption{\textbf{Mild compression under both uniform-folding caps.} Cost counts are identical across samples. For each checkpoint, top-1 loss is the full model's top-1 minus that of the specified model on the same images. Values are mean $\pm$ sample SD across four checkpoints after CMA. The ImageNetV2 sample is MatchedFrequency restricted to the 200 Tiny ImageNet classes.}
+\label{tab:b10}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Model & Parameters & MACs/image & Top-1 (\%) & Paired loss (pp) \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Tiny ImageNet development split (10,000 images)}} \\
+\addlinespace[2pt]
+Full model & 11,279,112 & 148,148,224 & $51.2200\pm 0.1602$ & 0 \\
+Uniform folding & 10,111,430 & 132,336,196 & $46.3625\pm 0.4687$ & $4.8575\pm 0.5309$ \\
+Frozen offsets & 10,104,855 & 132,302,192 & $47.5050\pm 0.4458$ & $3.7150\pm 0.5132$ \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{ImageNetV2 (2,000 images)}} \\
+\addlinespace[2pt]
+Full model & 11,279,112 & 148,148,224 & $30.3375\pm 0.3198$ & 0 \\
+Uniform folding & 10,111,430 & 132,336,196 & $26.9875\pm 1.0711$ & $3.3500\pm 0.7853$ \\
+Frozen offsets & 10,104,855 & 132,302,192 & $28.3375\pm 0.2496$ & $2.0000\pm 0.2483$ \\
+\bottomrule
+\end{tabular}
+\end{table}

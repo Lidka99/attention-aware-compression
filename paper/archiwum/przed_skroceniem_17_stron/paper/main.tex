@@ -1,0 +1,749 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=20mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,graphicx,microtype,placeins}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\Uniform}{UNIFORM}
+\newcommand{\Tilt}{TILT}
+\newcommand{\TiltName}{Linear Depth Tilt}
+\newcommand{\FrozenProfile}{Frozen Width-Offset Profile}
+\newcommand{\FrozenShort}{Frozen offsets}
+\newcommand{\Uprime}{\ensuremath{U'}}
+\newcommand{\bten}{\texttt{b10}}
+\newcommand{\bthirty}{\texttt{b30}}
+\newcommand{\bfifty}{\texttt{b50}}
+\newcommand{\bseventy}{\texttt{b70}}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.65}
+\setcounter{topnumber}{3}
+
+\title{Beyond Uniform Ratios: Channel-Width Allocation\\for CNN Folding at Fixed Parameter Budgets}
+\author{}
+\date{Internal review draft}
+\hypersetup{pdftitle={Beyond Uniform Ratios: Channel-Width Allocation for CNN Folding at Fixed Parameter Budgets}}
+
+\begin{document}
+\maketitle
+\input{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+When folding a trained CNN, how should a fixed parameter budget be
+divided across the network? Folding reduces widths by merging similar
+channels \citep{wang2025fold,saukh2026cut}. In a residual network, branches
+that meet at an addition must agree in width, so the decision concerns
+coupled groups of channels rather than independent layers. We study
+how the allocation of retained channels affects top-1 accuracy when
+the total number of parameters is held approximately fixed.
+
+\citet[p.~13]{wang2025fold} leave per-layer sparsity optimization open.
+Their experiment compressing only the last two residual blocks reproduces
+a prescribed sparsity pattern from earlier work \citep[Fig.~7]{wang2025fold}.
+\emph{Cut Less, Fold More} compares folding with magnitude pruning at
+uniform per-layer ratios in its main CNN experiments. At each ratio,
+the operators use the same widths, matching parameters and the reported
+FLOPs \citep[Figs.~1 and 8; Appendix~F.2, Table~7]{saukh2026cut}.
+We address the allocation question by varying widths across groups while
+keeping the folding operator and batch-normalization (BN) recalibration
+fixed. Recalibration uses training images to re-estimate running
+statistics; there is no post-compression weight fine-tuning.
+
+We compare non-uniform profiles with uniform folding. \emph{\TiltName{}} (\Tilt{})
+assigns smaller target channel reductions to earlier groups and larger ones
+to later groups. It adapts a known linear rule
+\citep{su2020random,huang2025atp} to match the uniform parameter count.
+The \emph{\FrozenProfile{}} instead proposes a signed adjustment to the
+fraction of channels each group would retain under uniform folding. At a
+nominal 50\% parameter cut, we select the best of 24 feasible proposals
+by accuracy on CIFAR-100 development data. We then reuse these fixed
+offsets and recompute the integer widths under both caps at each new
+budget. Tables and figures use the label \emph{\FrozenShort{}}.
+We also project the linear profile onto both caps (T-proj) to provide
+a simpler non-uniform reference.
+
+\paragraph{Empirical contribution.} A simple non-uniform profile improves
+top-1 over uniform folding at matched parameter counts on CIFAR-100 and
+Tiny ImageNet, with positive paired gains at every tested cut on the
+newly trained checkpoints. Earlier held-out comparisons support the
+direction across two residual architectures. We quantify what that
+gain costs in multiply--accumulate operations (MACs): a parameter on a
+larger feature map is used at more spatial positions. Additional cost
+controls establish the limits of the gain when arithmetic cost is
+constrained, including the smaller gains with frozen offsets at mild
+compression.
+
+\section{Related work}
+
+\paragraph{Folding and channel merging.}
+Model folding clusters and combines weights within a single network;
+\citet{wang2025fold} study both data-based and data-free repair of affected
+activation statistics. \citet{saukh2026cut} compare folding and magnitude
+pruning as projections. Their reconstruction guarantee uses a one-rank
+slack and concerns a weight-space approximation, so it does not specify a
+network-wide allocation that maximizes post-recalibration top-1 accuracy.
+Earlier approaches include Neuron Merging, which compensates for removed
+channels in the weights of the next layer \citep{kim2020merging}, and
+Iterative Feature Merging, which merges under a layer-local stopping
+criterion and can leave different proportions of features across layers
+\citep[Sec.~4 and Appendix~C]{chen2023ifm}. These are precedents for
+post-training merging and for non-uniform compression.
+
+\paragraph{Allocating compression.}
+\citet[Appendix~C.2]{su2020random} compare decreasing keep-ratios, including
+Linear Decay, with uniform and ascending allocations in unstructured
+pruning followed by training. ATP uses an arithmetic progression of
+layer sparsities and also reports experiments with vision models and
+structured pruning \citep[Eq.~10 and Appendix~F]{huang2025atp}.
+AutoDFP searches layerwise pruning ratios and channel reconstruction
+coefficients; its uniform-vs-searched ablation is organized by nominal
+parameter retention \citep[Table~I]{li2024autodfp}. In another compression
+family, BALF allocates factorization ranks using activation distortion
+under a global parameter or FLOP budget \citep[Sec.~4.3]{gonzalez2026balf}.
+Our comparison varies coupled CNN widths within a fixed folding and BN
+pipeline and examines the two network-wide costs separately and jointly.
+
+\section{Method}
+\label{sec:method}
+
+\subsection{Channel groups, costs, and folding}
+
+A channel group ties the producer and consumer axes that require a
+common width, including axes coupled by residual additions. We use the
+upstream group order, with 12 groups in ResNet18 and 13 in
+PreActResNet18. Let $n_g$ be the original width of group $g$ and $k_g$ the
+retained width. The vector $\mathbf k$ determines tensor shapes. The
+parameter count $P(\mathbf k)$ includes all model parameters, including
+BN affine parameters and biases, and excludes running-statistic buffers.
+$M(\mathbf k)$ counts MACs per image for convolutional and linear layers
+at the specified input size. For example, a convolution with output
+spatial size $H\times W$, kernel size $h\times w$, and $q$ convolution
+groups contributes $HW hw C_{\rm in} C_{\rm out}/q$ MACs. Bias additions,
+normalization, and other operations are not included in $M$. We check the
+costs of the rebuilt models; $M$ is an architecture cost, distinct from a
+measurement of latency.
+
+We use the upstream folding implementation of \citet{saukh2026cut}
+(\href{https://github.com/osaukh/folding_as_projection/tree/694691556e8314a835178a741938dd3d4d80c171}{commit \texttt{6946915}}).
+An adapter supplies explicit retained widths and preserves the classifier bias. The same
+clustering and weight-merging procedure operates at the specified
+$k_g$ for each allocation. This uses the upstream operator on our models
+and checkpoints rather than reproducing the upstream training study.
+
+\subsection{Uniform folding and Linear Depth Tilt}
+\label{sec:tilt}
+
+\Uniform{} (denoted $U$) specifies a common channel reduction before
+integer rounding. For $G$ coupled groups and $g=0,\ldots,G-1$, the
+\TiltName{} profile (denoted $T$) is based on
+\begin{equation}
+ p_g = \frac{2g}{G-1}-1,\qquad
+ r_g(b,\alpha) = \operatorname{clip}(b+\alpha p_g, 0.10, 0.90),\qquad
+ k_g(b) = \left\lfloor n_g\bigl(1-r_g(b,\alpha)\bigr)\right\rfloor .
+ \label{eq:tilt}
+\end{equation}
+Here $r_g$ is the fraction of channels to remove, and $p_g$ indexes the
+groups from early to late. With $\alpha=0$ the target is uniform. With
+$\alpha>0$, the target reduction increases linearly from $b-\alpha$ to
+$b+\alpha$ before clipping and rounding. This is the depth tilt: earlier
+groups have lower target reductions than later groups. Before clipping,
+Equation~\eqref{eq:tilt} is in the affine family of
+ATP: with $g=i-1$ and $G=L$, setting $b=S$ and $\alpha=\beta(G-1)/2$
+recovers its arithmetic progression \citep[Eq.~10]{huang2025atp}. In our
+adaptation, $b$ is chosen against a cost of the rebuilt network, rather
+than a mean of layer sparsities.
+
+For a nominal parameter reduction $d\in\{0.30,0.50,0.70\}$, we first
+find $U$ with $\alpha=0$ and parameter cap
+$\operatorname{round}((1-d)P(\mathbf n))$. We then use $\alpha=0.30$ and
+cap $P(U)$ for $T$. For both, 60 bisection steps choose $b$ on the feasible
+side of the cap. For $T$ only, we increment one group at a time where
+possible, never exceeding the cap or $\lfloor0.9n_g\rfloor$. The selected
+increment gives the largest feasible $P$ and ties go to the lower group
+index. The actual $P(T)$ lies in $[0.999P(U),P(U)]$ in all 15 held-out
+settings (Table~\ref{tab:tilt-uniform}). Here and below, labels such as
+\bfifty{} denote nominal parameter reductions of the reference, not
+per-group channel reductions. We use the same width plans on development
+and held-out splits without tuning $\alpha$ or widths on held-out data.
+
+\subsection{Matching MACs and imposing both caps}
+\label{sec:caps}
+
+\paragraph{MAC-matched uniform control.} For the wider uniform profile
+\Uprime{}, we choose a common channel reduction to approach $M(T)$ from
+below. With integer widths, $M(\Uprime{})$ is within 2\% of $M(T)$ in each
+setting. $P(\Uprime{})$ is free to differ. We compare all three profiles on
+the same development images, reusing the $U$ and $T$ scores from the
+development phase of the parameter-matched comparison. The profiles
+start from the same checkpoints and use the same BN recalibration protocol.
+
+\paragraph{Matching both costs to \Tilt{}.} We test four controls on
+ResNet18 at \bfifty{} on CIFAR-10 and CIFAR-100 development data. The controls
+start from fixed permutations of earlier \Tilt{} width deviations. To
+derive the realized widths, we find a nearby continuous profile using a
+least-squares distance in retained fractions $k_g/n_g$. For cost caps
+$(C_P,C_M)$, the continuous targets are
+$P=0.9995C_P$ and $M=0.9995C_M$. We use sequential least-squares programming,
+round to integer widths, and if necessary deterministically correct at
+most two groups. The final widths must spend $99.9$--$100\%$ of each cap
+without exceeding either one. This fits a cost-constrained geometry; it
+does not use accuracy as the projection objective. For these controls, the
+caps are $P(T)$ and $M(T)$. The controls are adjusted profiles derived from
+permutations, not exact permutations after projection.
+
+\subsection{\FrozenProfile{} under joint parameter and MAC caps}
+\label{sec:l06}
+
+\paragraph{Constrained selection on development data.} We set the
+caps to the realized parameter count $P(U)$ and MAC count $M(U)$ of uniform
+folding at a nominal 50\% parameter reduction. Before scoring, we fix 24
+distinct feasible profiles per dataset using the projection in
+Section~\ref{sec:caps}: eight width exchanges within stages, four exchanges
+across stages, and twelve proposals with random offsets in the retained
+fractions. The ResNet18 width domain is
+$\lfloor0.1n_g\rfloor\leq k_g\leq\lfloor0.9n_g\rfloor$. For every
+candidate, both realized costs fall within 0.1\% of the respective caps
+and do not exceed them.
+
+Let $\mathcal K_{24}$ be this feasible pool for CIFAR-100 and let
+$A_{\mathrm{dev},s}(\mathbf k)$ be development top-1 on checkpoint $s$
+after folding to widths $\mathbf k$ and recalibrating BN. We select one
+profile across all four checkpoints by solving
+\begin{equation}
+ \mathbf k^\star \in \operatorname*{arg\,max}_{\mathbf k\in\mathcal K_{24}}
+   \frac{1}{4}\sum_{s=42}^{45} A_{\mathrm{dev},s}(\mathbf k).
+ \label{eq:profile-selection}
+\end{equation}
+The selected \FrozenProfile{} comes from the random-offset candidates
+and is archived as \texttt{L06} in the experiment records. Uniform folding ($U$) and the original
+\Tilt{} profile projected onto the same caps
+($T_{\rm proj}$) are separate references. CIFAR-10 is a development
+control and does not select the \FrozenProfile{} used in later evaluations.
+
+\paragraph{Frozen offsets.} From the selected proposal, we retain the
+original offsets in $k_g/n_g$ units (shown here in percentage points in
+upstream group order):
+\begin{equation}
+ \mathbf o=(+2,-15,-14,+13,-1,-5,-6,+9,-12,-13,+17,-6).
+ \label{eq:offsets}
+\end{equation}
+An offset of $-15$ percentage points proposes $55\%$ retention if
+uniform folding would retain $70\%$. A positive offset proposes keeping
+more channels. At a new budget, we add $n_g o_g/100$ to the uniform width
+$k_g^U$, round to nearest (ties to even), and clip to the legal width
+domain before projecting to the two caps. The offsets stay frozen while
+the realized widths are fitted to the target costs. At \bfifty{} on the
+CIFAR-100 reserve we reproduce the selected widths exactly; on Tiny
+ImageNet we recalculate costs for its stem and input resolution.
+
+\paragraph{Mild compression.} For a nominal 10\% parameter reduction
+(\bten{}), we find the largest feasible common retain fraction on the
+integer width grid with $P(U)\le \lfloor0.9P(\mathbf n)\rfloor$.
+The realized costs $P(U)$ and $M(U)$ then define the joint caps. We allow
+$k_g\le n_g$ at this budget: for example, the earlier upper bound
+$\lfloor0.9n_g\rfloor$ would force at least a 19.21\% cut in parameters
+on the earlier Tiny model. The \FrozenProfile{} and T-proj use the same projection and
+lower width bound from Section~\ref{sec:caps}. For the mild T-proj
+control we first form the linear profile with $\alpha=0.30$, allow
+zero reduction in Equation~\eqref{eq:tilt}, and fit its intercept to
+$P(U)$ from below before the joint projection. Both projected profiles
+spend 99.9--100\% of each cap. For the earlier Tiny model, the retained
+widths with frozen offsets were
+\[
+ \mathbf k = (64,52,53,128,127,119,233,256,219,434,512,476).
+\]
+The ImageNetV2 evaluation uses these exact widths without repeating
+profile selection or projection. For each newly trained model variant
+we recompute the geometry from its architecture and caps with the
+offsets unchanged.
+
+\subsection{BN recalibration and fixed checkpoints}
+
+We study existing ResNet18 checkpoints \citep{he2016resnet} for
+CIFAR-10, CIFAR-100 \citep{krizhevsky2009cifar}, and Tiny ImageNet
+\citep{stanfordTinyImageNet}, and PreActResNet18 checkpoints
+\citep{he2016preact} for both CIFAR datasets. CIFAR inputs are
+$32\times32$ and Tiny inputs are $64\times64$. The four source seeds
+are 42--45 for each model--dataset pair. The earlier full models were trained
+from random initialization for 200 epochs using SGD (initial learning
+rate 0.1, momentum 0.9, weight decay $5\times10^{-4}$, cosine scheduling)
+with batches of 128 per independently trained model. The earlier Tiny
+model has a $7\times7$ stride-two stem, max-pooling, and a 200-class head.
+
+For the main transfer experiment (E048--E049), we train four new
+ResNet18 models from scratch on each of CIFAR-100 and Tiny ImageNet,
+with 40,000 and 90,000 training images respectively. We keep the earlier
+CIFAR-100 architecture. On Tiny we use a $3\times3$ stride-two stem
+without max-pooling, so the first residual stage starts with a
+$32\times32$ rather than a $16\times16$ feature map. The full Tiny cost
+rises from 148.15 to 555.52 million MACs/image (3.75$\times$), with
+approximately 11.27 million parameters in both cases. The training recipe
+uses 240 epochs of SGD with Nesterov momentum (0.9), weight decay
+$5\times10^{-4}$, batch size 128, a five-epoch warmup and cosine decay
+from 0.1 to 0.001. It uses crop and flip, RandAugment, label smoothing,
+and MixUp or CutMix on 75\% of batches before the final ten epochs.
+We use the final checkpoint from each run. Each folding comparison
+starts from the same source checkpoint for all profiles.
+
+The primary recalibration is A4096/CMA: reset the BN
+\citep{ioffe2015bn} running statistics, then run 32 batches of 128 images
+with cumulative moving average updates. A4096 is a fixed set of 4,096
+images from the corresponding training split, with fixed crop and
+horizontal-flip views and training normalization. No labels are used
+for this pass. Only BN buffers change; the affine parameters and the
+other weights are frozen. The same procedure is used for the full model
+as a reference. We include the upstream \texttt{repair\_bn} pass from a
+separate copy of the folded state as a secondary control where reported;
+it is a statistics repair related to REPAIR \citep{jordan2023repair}.
+These are data-calibrated, fine-tuning-free comparisons. Archived quality
+runs used four RTX 2080 Ti GPUs, one paired seed per GPU, with deterministic
+FP32 and TF32 disabled.
+
+\section{Evaluation protocol}
+\label{sec:evaluation}
+
+\paragraph{Earlier development and held-out data.} We compare the fixed $U$ and
+$T$ profiles on the official CIFAR-10 and CIFAR-100 test sets and the
+official Tiny ImageNet validation set, with 10,000 images in each. Tiny
+validation had previously been inspected for input shapes but had not
+been used to score a model. Before the held-out evaluation, we reproduced
+the development scores and checked that the calibrated states were
+identical across both phases. The MAC-matched uniform comparison, the
+controls matched to \Tilt{} on both costs, profile selection, and the
+mild-compression study on the earlier Tiny ImageNet checkpoints use development splits.
+These contain 5,000 images for each CIFAR dataset and 10,000 for Tiny,
+drawn from the respective official training partitions and separate from
+training/calibration images.
+
+\paragraph{Replication on newly trained models.} We repeat the
+matched-parameter $U/T$ comparison at \bthirty{}, \bfifty{}, and
+\bseventy{} as planned descriptive comparisons on the new checkpoints.
+The official CIFAR-100 test and Tiny ImageNet validation
+splits (10,000 images each) were used earlier in the project. They are
+disjoint from training and development, and we do not use them to
+select the widths or checkpoints.
+
+\paragraph{Mild cuts at matched parameter counts (E051).} We compare
+uniform folding with the linear profile at nominal cuts of 5\% and 10\%
+on development data. We use the same slope as at larger cuts and allow
+zero removal in a group. We choose the intercept against $P(U)$ and
+apply integer corrections if needed to match $P(U)$ to within 0.1\%.
+This uses the linear profile before any joint-cap projection, with both
+budgets fixed before scoring. All comparisons within each dataset use
+the same A4096/CMA, with the E050 crop setting on Tiny and the earlier
+CIFAR-100 setting. The practical criterion for the 10\% cut retains the
+1 pp mean improvement, three positive pairs, and 3 pp mean loss limit;
+it applies to the parameter-matched result with at least 9.5\% fewer
+parameters. The 5\% point is descriptive. This diagnostic does not
+rescore the official benchmarks.
+
+\paragraph{Additional test with both costs capped.} The benchmark run
+compares $U$, T-proj, and the \FrozenProfile{} at \bten{}. The offsets,
+width profiles, and criteria were fixed before scoring the new folded
+models. The practical criterion for \bten{}
+requires at least 9.5\% reductions in both costs relative to the full
+model, a mean gain over $U$ of at least 1 pp with frozen offsets and
+positive gains on at least three of four checkpoints, and a mean loss
+to the full model of at most 3 pp, on each dataset. We report the
+contrast with T-proj separately.
+
+\paragraph{Sensitivity to calibration views.} After the main transfer
+comparison, we run a diagnostic on Tiny development data (E050). For all
+four profiles, we increase the minimum random crop area fraction used
+for BN recalibration from 0.40 to 0.65, the value used to train the new
+Tiny models. The 4,096 image indices, random seeds for views, CMA pass,
+folded weights, and widths stay fixed. We do not score this calibration
+variant on the official benchmark.
+
+\paragraph{Earlier evaluations of the \FrozenProfile{}.} On CIFAR-100, we
+evaluate the frozen proposal on a separate 5,000-image reserve set aside
+from the official training partition before source model training,
+disjoint from development and calibration images. We use the same
+checkpoints as for profile selection. We transfer the proposal to Tiny
+ImageNet, which did not participate in profile selection. At larger
+parameter reductions we reuse the official Tiny ImageNet validation
+images from the held-out $U/T$ comparison. The mild-compression
+evaluation of the earlier Tiny models instead uses the 10,000-image Tiny
+ImageNet development split.
+These scores refer to distinct sampling roles.
+
+\paragraph{External ImageNetV2 sample.} The ImageNetV2 MatchedFrequency
+release \texttt{imagenetv2-b-33} \citep{recht2019imagenetv2} is restricted
+to all 200 class identifiers used in Tiny ImageNet. We verify the label
+mapping against the release metadata and compare candidate images
+against the 110,000 Tiny training, development, and official validation
+images using an exact RGB and perceptual hash screen. No duplicates are
+flagged by that screen, leaving 2,000 images, ten per class. We resize the
+whole RGB image bilinearly to $64\times64$ after EXIF orientation and
+apply the same normalization as in the Tiny ImageNet development
+evaluation, without augmentation. Before scoring on ImageNetV2, we
+verified that all 12 post-CMA model states (three variants per checkpoint)
+and their costs matched those used for mild compression on the Tiny
+ImageNet development split. BN continues to use Tiny training images,
+without adapting to ImageNetV2.
+
+\paragraph{Paired outcomes and uncertainty.} For each setting we subtract
+accuracies within a checkpoint on the same images and then average across
+checkpoints. We report sample standard deviation (SD) of the paired
+differences when given, and the number of strictly positive pairs. Loss to
+the full model is its post-CMA accuracy minus that of the folded model.
+Direction and magnitude thresholds are prespecified decision criteria;
+the 15 cells of the held-out $U/T$ comparison reuse checkpoints and are
+not 60 independent trials. For ImageNetV2, we estimate a paired percentile
+interval by 10,000 bootstrap draws, resampling images within each class
+and using identical image indices for all variants and checkpoints in
+each draw. This measures image-sample variability conditional on the four
+fixed checkpoints and the specified classes. We use the same bootstrap
+design for the comparison of the \FrozenProfile{} with uniform folding at
+\bfifty{} on the official Tiny ImageNet validation set.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Allocation at matched parameter counts on new checkpoints}
+\label{sec:matched-new}
+
+\paragraph{Full models.} The new checkpoints achieve 81.125\% and
+63.465\% on CIFAR-100 and Tiny ImageNet development data before CMA,
+exceeding the targets of 77.50\% and 59.00\%. On the corresponding
+benchmarks, the full models attain 80.1275\% and 62.8900\% before CMA,
+and 79.6800\% and 61.2175\% after CMA. The post-CMA scores are the
+references for the folding comparisons. The higher full-model accuracy
+on Tiny accompanies changes in both the training recipe and the stem;
+we do not isolate their individual effects.
+
+\paragraph{Non-uniform allocation increases top-1.} At nominal
+parameter cuts of 30\%, 50\%, and 70\%, the mean $T-U$ differences are
+$+3.0775$, $+9.7050$, and $+11.6525$ percentage points (pp) on CIFAR-100
+and $+3.3050$, $+9.4625$, and $+9.4850$ pp on Tiny ImageNet
+(Table~\ref{tab:tilt-new}, Figure~\ref{fig:matched-new}). Each of the six
+comparisons favors \Tilt{} on all four paired checkpoints. For example,
+at \bfifty{} on CIFAR-100, top-1 rises from 51.7100\% to 61.4150\% at
+about 5.58 million parameters for either profile. The mean loss to the
+full model is still 18.2650 pp at that cut. At \bfifty{} on Tiny,
+\Tilt{} reaches 30.7075\% with 376.03 million MACs/image, versus
+21.2450\% with 275.37 million for $U$ and 61.2175\% for the full model.
+Across the six settings, $T$ uses 1.105--1.824 times as many MACs as $U$.
+
+\input{tables/tilt_new}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../experiments/2026-11-24_E049_folding_mocniejszych_baz/wykresy/20261124T234559Z_b4ca081b/e049_matched_parameters_en.pdf}
+  \caption{\textbf{Effect of reallocating a fixed parameter budget on new checkpoints.}
+  Points show paired top-1 differences after the same BN recalibration;
+  diamonds are means. The labels at right are MAC ratios for \Tilt{}
+  relative to uniform folding. CIFAR-100 uses the official test set and
+  Tiny ImageNet uses the official validation set, both reused from
+  earlier comparisons.}
+  \label{fig:matched-new}
+\end{figure}
+\FloatBarrier
+
+\subsection{Mild cuts on development data}
+\label{sec:matched-mild}
+
+At a nominal 10\% cut, \Tilt{} increases mean top-1 from 77.9850\% to
+79.7500\% on CIFAR-100 and from 57.2925\% to 59.0050\% on Tiny ImageNet
+(Table~\ref{tab:tilt-mild-dev}). All four checkpoints on each dataset
+favor \Tilt{}. The respective losses to the full models are 1.2200 pp
+and 3.6075 pp. The practical criterion is met on CIFAR-100; Tiny ImageNet
+misses the loss limit by 0.6075 pp. The linear profile also exceeds the
+mean top-1 of frozen offsets at this cut by 0.7900 and 0.7950 pp,
+respectively, with a higher MAC count. Compared with the full model,
+\Tilt{} saves about 10.4\% of parameters but only 3.35\% of MACs.
+
+At the separate 5\% cut, \Tilt{} achieves 80.4250\% and 61.3250\%,
+respectively, with losses of 0.5450 and 1.2875 pp. This milder cut saves
+only 1.69\% of MACs relative to the full models. All scores in this
+comparison are on development images, not the official benchmarks.
+\input{tables/tilt_mild_dev}
+\FloatBarrier
+
+\paragraph{Local width redistribution at 10\% (E052).}
+We considered six profiles that shift width from two stage-3 hidden groups
+to stage 4, with parameter counts within 0.1\% of \Uniform{} and both
+parameter and MAC counts capped by \Tilt{}. We kept the folding operator
+and BN recalibration fixed. For each dataset, we selected one profile by
+mean negative log-likelihood across four checkpoints on 8,000 training
+images disjoint from the calibration and development sets. The same
+profile was selected for both datasets. On the development splits, it
+reached 79.8850\% on CIFAR-100 ($+0.1350$ pp over \Tilt{}, 2/4 positive
+pairs) and 59.2050\% on Tiny ImageNet ($+0.2000$ pp, 3/4), using 0.94\%
+fewer MACs than \Tilt{} on both datasets. The Tiny ImageNet loss to the
+full model fell to 3.4075 pp, still above the 3 pp limit.
+
+\subsection{Earlier held-out comparisons at matched parameter counts}
+
+\Tilt{} improves CMA top-1 over \Uniform{} in all 15 settings
+on the official CIFAR test sets and Tiny validation set, with positive
+paired differences on all four checkpoints in every setting
+(Figure~\ref{fig:matched-parameters}, Table~\ref{tab:tilt-uniform}). Mean
+gains range from $+0.8100$ to $+22.7375$ percentage points (pp). A distinct magnitude
+criterion of at least $2$ pp in the mean and at least three positive
+pairs at \bfifty{} or \bseventy{} is met in 9 of 10 settings; the exception
+is ResNet18/CIFAR-100 at \bfifty{} ($+1.3025$ pp). The effect on
+ResNet18/CIFAR-100 at \bseventy{} is uneven, with differences of $+0.20$
+and $+0.36$ pp on two of four checkpoints despite a $+2.0600$ pp mean.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../experiments/2026-11-07_E035_ocena_niezalezna/figures/publikacja/e035_tilt_minus_uniform_en.pdf}
+  \caption{\textbf{\TiltName{} (\Tilt{}) vs. uniform folding at matched
+  parameter counts.} Each point is a within-checkpoint difference after CMA;
+  diamonds are means over the four checkpoints. Budgets are nominal
+  parameter reductions. CIFAR scores are from the official test splits;
+  Tiny ImageNet uses the official validation split. The vertical line
+  marks equal top-1.}
+  \label{fig:matched-parameters}
+\end{figure}
+\input{tables/tilt_uniform}
+
+With the original \texttt{repair\_bn}, the directional criterion
+(positive mean and at least three positive pairs) is met in 14 of 15
+settings rather than 15. The exception is ResNet18/CIFAR-100 at
+\bseventy{} (2/4). On that model and dataset the mean negative
+log-likelihood after CMA is also higher for \Tilt{} at \bfifty{} and
+\bseventy{}. Relative top-1 improvement does not imply high absolute
+accuracy: at \bseventy{}, ResNet18/Tiny achieves 15.8800\% with \Tilt{}
+versus 50.7775\% for the full model.
+
+\subsection{Cost of the allocation gain}
+\label{sec:allocation-cost}
+
+\paragraph{Arithmetic and measured runtime.} Counting operations for the
+parameter-matched width profiles on the earlier checkpoints gives
+$M(T)/M(U)=1.105$--$1.823$
+(Table~\ref{tab:cost-controls}). Earlier feature maps have more spatial
+positions, so retaining a wider channel group there can use more MACs
+even if later layers shrink enough to offset its additional parameters.
+We measured device-only forward passes on synthetic inputs, excluding
+loading and host--device transfers. At batch size 128, the mean
+throughput ratio of \Tilt{} to \Uniform{} ranges from 0.702 to 0.948
+across settings. At batch size 1, mean latency ratios range from 0.965 to
+1.046 (across-checkpoint SDs of ratios: 0.019--0.100). Those timings do
+not establish equivalent latency or a consistent single-image latency
+ordering. They are measurements on one hardware setup.
+
+\paragraph{Uniform folding at comparable MACs.} On common development
+images, \Uprime{} outperforms \Tilt{} in 10 of 15 settings. The advantage
+of \Uprime{} reaches $23.69$ pp on ResNet18/CIFAR-100 at \bseventy{}.
+Its parameter count is $1.10$--$1.82$ times that of \Tilt{}, even though
+the MAC ratio $M(\Uprime{})/M(T)$ is between 0.985 and 0.999 after
+rounding to three decimals. Figure~\ref{fig:comparable-macs} displays the same
+development scores against both costs. Increasing uniform width changes
+parameter capacity as well as MACs; the result limits the practical
+claim about \Tilt{} at comparable MACs without isolating the role of
+either cost in its gain at matched parameter counts.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../experiments/2026-11-08_E037_kontrola_mac/figures/publikacja/e037_accuracy_cost_en.pdf}
+  \caption{\textbf{Accuracy and cost on common development splits.}
+  At comparable MACs, the wider uniform baseline \Uprime{} beats
+  \TiltName{} in 10 of 15 settings and has more parameters. Rows are
+  model--dataset pairs. Both columns show the same CMA top-1 scores,
+  with axes showing actual parameters (left) or MACs per
+  image (right) as percentages of the corresponding full model costs.
+  Markers identify the nominal parameter cuts of $U$ and $T$, and the
+  associated MAC targets of \Uprime{}. Points and bars are means and
+  sample SD across four checkpoints. Within each row, the top-1 scale is
+  shared; scales differ between rows.}
+  \label{fig:comparable-macs}
+\end{figure}
+\input{tables/cost_controls}
+
+\paragraph{Simultaneous matching to \Tilt{}.} With both costs
+matched to \Tilt{}, its advantage over the mean of the four prespecified
+alternative profiles is $+0.11250$ pp (2/4) on CIFAR-10 and $+2.10375$ pp
+(4/4) on CIFAR-100 (Table~\ref{tab:dual-tilt}). One CIFAR-10 control
+(104) beats \Tilt{} by $0.3850$ pp on average and wins on all four
+checkpoints. On CIFAR-100, \Tilt{} beats even the strongest of the four
+control means, by $0.8600$ pp. The combined directional criterion
+requiring a positive mean and at least three positive pairs on each
+dataset is not met. Tiny ImageNet was outside this pilot's scope. This
+comparison separates the profile from increases in either static cost
+for those controls; it does not establish that \Tilt{} generally wins
+when both costs are matched.
+\input{tables/dual_cost_controls}
+\FloatBarrier
+
+\subsection{Additional comparisons under both uniform-folding caps}
+\label{sec:b10-transfer}
+
+\paragraph{Frozen offsets at a mild cut.} On the newly trained models,
+all three folded profiles save 10.36--10.41\% of parameters and
+10.97--11.06\% of MACs relative to their own full model
+(Table~\ref{tab:b10-transfer}). The \FrozenProfile{} improves over
+uniform folding by $+0.6150$ pp on CIFAR-100 and $+0.6750$ pp on Tiny
+ImageNet (sample SDs $0.4487$ and $0.4970$ pp), with four positive
+differences on each dataset. It also improves over T-proj by $+0.6700$
+and $+1.8000$ pp, respectively, with four positive differences in each
+case. On Tiny, T-proj itself trails $U$ by 1.1250 pp. The mean loss to
+the full model is 1.6575 pp on CIFAR-100 and 4.5700 pp on Tiny,
+recovering 27.1\% and 12.9\% of the corresponding mean $U$ losses.
+Both datasets miss the 1 pp gain threshold, and Tiny also misses the
+3 pp loss threshold (Figure~\ref{fig:b10-transfer}).
+
+\input{tables/b10_transfer}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../experiments/2026-11-24_E049_folding_mocniejszych_baz/wykresy/20261124T234559Z_b4ca081b/e049_b10_joint_caps_en.pdf}
+  \caption{\textbf{Paired outcomes under both uniform-folding caps on new checkpoints.}
+  A: paired top-1 gain with frozen offsets over the indicated reference.
+  The +1 pp decision threshold applies to the comparison with uniform
+  folding. B: paired top-1 loss of the frozen-offset model relative to
+  the full model after the same BN recalibration, with the loss limit
+  at 3 pp. Circles are checkpoints; diamonds are means.
+  CIFAR-100 uses the official test set and Tiny ImageNet uses the
+  official validation set, both reused from earlier comparisons.}
+  \label{fig:b10-transfer}
+\end{figure}
+
+\paragraph{BN sensitivity on Tiny development data.} The milder crop
+improves the full model, $U$, T-proj, and the frozen-offset model by
+$+0.9250$, $+1.1275$, $+1.4500$, and $+1.3200$ pp, respectively, on all
+four seeds for each profile. Parameters and MACs are unchanged. The mean
+gain with frozen offsets over $U$ rises from $+0.7250$ to $+0.9175$ pp
+(three positive pairs under either calibration), while the loss to the
+full model decreases from 4.7975 to 4.4025 pp. This control improves
+absolute scores without meeting either practical accuracy threshold on dev.
+\FloatBarrier
+
+\subsection{Joint-cap evidence on earlier checkpoints}
+
+\paragraph{Profile selection.} At \bfifty{} on CIFAR-100 development
+data, the profile selected by Equation~\eqref{eq:profile-selection}
+improves top-1 over the stronger reference, $U$, by $1.175$ pp (3/4).
+Only 5 of the 24 candidates beat $U$ on average, and the median contrast
+to $U$ is $-1.265$ pp. This gain is measured on the split used for
+selection. Subsequent experiments assess the frozen proposal without
+reselecting offsets.
+
+\paragraph{Mild compression on the earlier Tiny ImageNet models.} The
+\FrozenProfile{} at \bten{} has 10,104,855 parameters and 132,302,192 MACs
+per image, below $U$ by 6,575 parameters and 34,004 MACs per image. These
+counts are 10.41\% and 10.70\% lower than the full model, respectively.
+We first reproduced the eight full-model and uniform-folding states and
+scores previously obtained on this split. The \FrozenProfile{}
+improves mean top-1 from 46.3625\% to 47.5050\%: $+1.1425$ pp (sample SD
+$0.8820$ pp), with four positive pairs. The mean loss to the full model
+falls from 4.8575 to 3.7150 pp (Table~\ref{tab:b10},
+Figure~\ref{fig:b10}A). For context, \Uniform{} at a nominal
+20\% parameter reduction loses 10.6400 pp on this same split.
+
+\paragraph{External confirmation on ImageNetV2.} In the independent
+image sample from the same 200 classes, \Uniform{} attains 26.9875\%
+and the \FrozenProfile{} attains 28.3375\%. The gain of $+1.3500$ pp (sample SD 0.9704 pp)
+is positive on all four checkpoints. The loss from the full model (30.3375\%)
+decreases from 3.35 to 2.00 pp. The paired 95\% image-bootstrap interval
+for the gain, $[+0.700,+2.025]$ pp, excludes zero (Figure~\ref{fig:b10}B).
+The prespecified confirmation criterion (positive mean, at least three
+positive pairs, and positive lower interval limit) is met. Each model has
+the same parameter and MAC counts as in the evaluation on the Tiny
+ImageNet development split (Table~\ref{tab:b10}). The interval pertains
+to image variation at the fixed checkpoints, and the lower absolute
+accuracy on ImageNetV2 also affects the full model.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../experiments/2026-11-22_E047_l06_b10_imagenetv2/wykresy/20261122T053804Z_ae2dec73/b10_tiny_imagenetv2_en.pdf}
+  \caption{\textbf{Accuracy gains under both uniform-folding caps on the earlier Tiny models.}
+  A: Tiny ImageNet development split. B: external ImageNetV2
+  MatchedFrequency sample restricted to the 200 Tiny ImageNet classes.
+  Upper plots show mean post-CMA top-1 across the same four checkpoints
+  with separate accuracy scales. Lower plots show the paired top-1 gains
+  for the profile with frozen offsets over uniform
+  folding, with means marked by diamonds. The bar in B
+  gives the paired 95\% image-bootstrap interval conditional on the four
+  checkpoints. Table~\ref{tab:b10} gives the actual costs for both panels.}
+  \label{fig:b10}
+\end{figure}
+\input{tables/b10}
+
+\paragraph{Supporting results at larger cuts.} On the
+CIFAR-100 reserve, the \FrozenProfile{} gains $+1.215$ pp (3/4) at \bfifty{} over $U$ and
+$+1.065$ pp (4/4) over $T_{\rm proj}$. At \bthirty{}, the $+0.945$ pp gain
+over $U$ (4/4) falls below the prespecified $+1.00$ pp practical threshold.
+The profile remains 19.970 and 7.420 pp below the full model at the two budgets,
+respectively. On the previously used official Tiny validation set, the
+transferred profile gains $+2.100$ pp (4/4) at \bfifty{} and $+0.255$ pp (3/4)
+at \bthirty{}. The 95\% paired image interval at \bfifty{} is
+$[+1.67,+2.52]$ pp conditional on the four checkpoints, but the absolute
+gap to the full model is still 29.0375 pp. These complementary evaluations
+test the frozen offsets at larger cuts, with different roles for the
+reserved CIFAR images and reused Tiny validation images.
+\FloatBarrier
+
+\section{Discussion and limitations}
+
+The fixed-parameter comparison shows that a uniform ratio is not the
+best of the tested allocations for retaining top-1. This comparison does
+not isolate the effects of width allocation and arithmetic cost: retaining
+more early channels changes the number of MACs at the same parameter
+count. At comparable MACs (Figure~\ref{fig:comparable-macs}), the wider
+uniform control often has higher top-1. The mixed results for controls
+matched to \Tilt{} on both costs (Table~\ref{tab:dual-tilt}) show that
+allocation effects can persist after controlling the counts, with
+direction and size dependent on the profiles and setting. Frozen offsets
+yield modest gains under both uniform-folding caps, below the practical
+target on both datasets with the new checkpoints. The Tiny calibration control
+shows that a change in BN views can raise the top-1 of all profiles
+substantially more than it changes the allocation gain.
+
+The \FrozenProfile{} was selected using labeled development data. Its
+optimality is limited to the 24 candidates and the selection setting.
+The tests span two related residual architectures and four
+checkpoints per setting. An earlier matched-width control also finds
+positive mean gains from the linear profile with magnitude pruning (E038),
+so the evidence does not imply an allocation benefit unique to folding.
+The ImageNetV2 evaluation changes the image source for the earlier Tiny
+models at one mild budget; it does not add training
+replicates or extend the class set. The different image distribution and
+input preprocessing do not permit attributing the absolute accuracy gap
+between sources to one cause. The image-level intervals do not capture uncertainty across
+newly trained models, and development, reserve, reused validation, and
+external evaluations should not be pooled as independent replications.
+
+The reported resource caps constrain static counts. Even two networks
+with nearly the same counts can have different activation shapes, peak
+memory, or achieved latency. The device-only forward-pass measurements
+cover one environment, not deployment performance, and the \bten{} study
+does not measure a latency gain. Finally, larger relative gains at
+aggressive cuts can coexist with substantial absolute errors. These results therefore
+characterize controlled comparisons with a uniform folding baseline;
+they do not rank whole compression pipelines or establish a universal
+allocation rule.
+
+\section{Conclusion}
+
+With the folding operator and BN recalibration fixed, a simple linear
+width allocation improves top-1 over uniform folding at matched parameter
+counts on CIFAR-100 and Tiny ImageNet without weight fine-tuning. This
+demonstrates room to improve on uniform ratios for a fixed parameter
+budget. The linear profile uses more MACs and does not consistently beat
+a wider uniform model at comparable MACs. Under both uniform-folding
+caps a frozen offset profile yields smaller gains, below the practical
+target on the new models. We leave direct optimization of retained
+accuracy under joint resource constraints to future work.
+
+\paragraph{Reproducibility.} The repository links the experiment identifiers
+to frozen plans, run manifests, and audited CSV and JSON files. The tables
+have machine-readable counterparts. The notes in \texttt{paper/README.md}
+map claims to the archived results and document how to regenerate the
+tables, figures, and PDF.
+
+\begingroup
+\small
+\raggedright
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\endgroup
+\end{document}

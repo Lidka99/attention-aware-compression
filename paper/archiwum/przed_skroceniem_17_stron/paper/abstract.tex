@@ -1,0 +1,23 @@
+\begin{abstract}
+How should a fixed parameter budget be allocated across the layers of a
+folded CNN? We compare uniform folding with a simple linear depth profile
+that retains a larger fraction of channels in earlier groups. We hold
+the folding operator and batch-normalization recalibration fixed, without
+post-compression weight fine-tuning. On newly trained ResNet18 models
+at nominal parameter cuts of 30\%, 50\%, and 70\%, the linear profile
+improves top-1 over uniform folding by 3.08--11.65 percentage points on
+CIFAR-100 and 3.31--9.49 points on Tiny ImageNet. All four checkpoints
+favor the linear profile at every cut. Earlier held-out comparisons show
+positive gains in all 15 settings across two residual architectures.
+At a nominal 10\% cut on development data, the linear profile improves
+top-1 by 1.765 and 1.713 points, with respective losses of 1.22 and 3.61
+points to the full models. There is an arithmetic cost: at 30--70\% cuts
+the linear profile uses
+1.105--1.824 times as many multiply--accumulate operations (MACs) at
+matched parameter counts. At comparable MAC counts, a wider uniform
+baseline with more parameters beats it in 10 of 15 earlier development
+settings. An additional test with both costs capped finds smaller gains
+for a frozen offset profile, below the prespecified practical threshold.
+The results identify gains from changing a uniform allocation at a fixed
+parameter budget and quantify the computational trade-off.
+\end{abstract}
